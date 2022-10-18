@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "outDir": "./builds/server",
+    "rootDir": ".",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "pretty": true,
+    "removeComments": true,
+    "strict": false,
+    "noEmitOnError": true,
+    "watch": false,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@aggregates": ["src/shared/aggregates"],
+      "@dtos": ["src/shared/dtos"],
+      "@interfaces": ["src/shared/interfaces"],
+      "@middlewares": ["src/shared/middlewares"],
+      "@services": ["src/shared/services"],
+      "@core/*": ["src/core/*"],
+      "@core": ["src/core"],
+      "@config": ["src/core/config"],
+      "@exceptions": ["src/core/exceptions"],
+      "@artist": ["src/modules/artist"]
+    }
+  },
+  "exclude": ["node_modules", "builds/server/node_modules"],
+  "typeRoots": ["node_modules/@types"],
+  "include": ["src/**/*"]
+}

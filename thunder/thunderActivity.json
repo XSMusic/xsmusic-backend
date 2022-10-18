@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "ba08172a-d07b-4cf9-ae12-f2b61fe68ae6",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.thunderclient.com/welcome?url=http://localhost:6969",
+    "url": "https://www.thunderclient.com/welcome?url=http://localhost:6969",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-17T09:47:13.202Z",
+    "modified": "2022-10-17T09:47:13.203Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "url",
+        "value": "http://localhost:6969",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "391c2ee4-c813-40bc-9c21-8bbe426c8a24",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{URL}}/artists/getAll",
+    "url": "{{URL}}/artists/getAll",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-17T09:50:29.654Z",
+    "modified": "2022-10-17T10:01:56.227Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
