@@ -25,6 +25,7 @@
       "@core": ["src/core"],
       "@config": ["src/core/config"],
       "@exceptions": ["src/core/exceptions"],
+      "@utils": ["src/shared/utils"],
       "@artist": ["src/modules/artist"]
     }
   },

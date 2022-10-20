@@ -28,9 +28,28 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-17T09:50:29.654Z",
-    "modified": "2022-10-17T10:01:56.227Z",
+    "modified": "2022-10-19T19:56:51.073Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "97d49809-03b7-4eec-8592-20fedbc7b28d",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{URL}}/artists/getAll",
+    "url": "{{URL}}/artists/getAll",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-19T19:57:31.623Z",
+    "modified": "2022-10-19T20:28:36.994Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"page\": 1, \"pageSize\": 20, \"site\":  \"app\", \"order\": [\"name\", \"desc\"]}",
+      "form": []
+    },
     "tests": []
   }
 ]

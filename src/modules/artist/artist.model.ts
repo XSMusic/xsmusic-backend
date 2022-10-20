@@ -1,0 +1,23 @@
+import { ArtistMongoI } from "@artist";
+import * as mongoose from "mongoose";
+
+const schema = new mongoose.Schema(
+  {
+    name: { type: String, default: "" },
+    birthdate: { type: String, default: "" },
+    styles: { type: Array, default: [] },
+    country: { type: String, default: "es" },
+    image: { type: String, default: "" },
+    gender: { type: String, default: "male" },
+    info: { type: String, default: "" },
+    slug: { type: String, default: "" },
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: { createdAt: "created", updatedAt: "updated" },
+    id: false,
+  }
+);
+
+export const Artist = mongoose.model<ArtistMongoI>("Artist", schema);

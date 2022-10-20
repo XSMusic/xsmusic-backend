@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "_id": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "colName": "Api",
+    "created": "2022-10-19T19:53:19.341Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+        "name": "Artist",
+        "containerId": "",
+        "created": "2022-10-19T19:53:28.501Z",
+        "sortNum": 10000
+      }
+    ]
+  }
+]

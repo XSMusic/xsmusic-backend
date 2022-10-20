@@ -6,25 +6,24 @@ import re
 import uuid
 
 
-url = "https://djrankings.org/"
-headers = {
-    "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36",
-}
-response = requests.get(url, headers=headers)
-soup = BeautifulSoup(response.text, features="lxml")
-container = soup.find(name="tbody")
-tr = container.find_all('tr')
-artists = []
-
-
 def slugify(s):
-  s = s.lower().strip()
-  s = re.sub(r'[^\w\s-]', '', s)
-  s = re.sub(r'[\s_-]+', '-', s)
-  s = re.sub(r'^-+|-+$', '', s)
-  return s
+    s = s.lower().strip()
+    s = re.sub(r'[^\w\s-]', '', s)
+    s = re.sub(r'[\s_-]+', '-', s)
+    s = re.sub(r'^-+|-+$', '', s)
+    return s
+
 
 def get_name_styles():
+    url = "https://djrankings.org/"
+    headers = {
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36",
+    }
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, features="lxml")
+    container = soup.find(name="tbody")
+    tr = container.find_all('tr')
+    artists = []
     name_ok = ''
     style_ok = ''
     country_ok = ''
@@ -59,11 +58,12 @@ def get_name_styles():
             country_b = country_a.split(
                 '.png" style="float:left;margin-right:5px;"/>')
             country_ok = country_b[0]
+    return artists
 
 
-get_name_styles()
+def save_file(artists):
+    f = open(os.path.dirname(os.path.abspath(__file__)) + '/artists.json', "w")
+    artists_dumps = json.dumps(artists, indent=2)
+    f.write(artists_dumps)
+    f.close()
 
-f = open(os.path.dirname(os.path.abspath(__file__)) + '/artists.json', "w")
-artistsDumps = json.dumps(artists, indent=2)
-f.write(artistsDumps)
-f.close()

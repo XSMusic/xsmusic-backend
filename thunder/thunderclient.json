@@ -1,1 +1,87 @@
-[]
+[
+  {
+    "_id": "d9ad32c7-4274-4bf2-8914-bd94817edaf1",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: getAll",
+    "url": "{{URL}}/artists/getAll",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-10-19T20:28:53.830Z",
+    "modified": "2022-10-19T20:28:53.830Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"page\": 1, \"pageSize\": 20, \"site\":  \"app\", \"order\": [\"name\", \"desc\"]}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "4201c14d-2b42-4bc1-bd03-089368ae4d23",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: create",
+    "url": "{{URL}}/artists/create",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-10-19T20:29:43.049Z",
+    "modified": "2022-10-19T21:06:30.587Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"name\": \"perro\"}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "590faf97-9f58-4ebd-a285-ae4bca4d39d6",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: update",
+    "url": "{{URL}}/artists/update",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2022-10-19T21:00:58.078Z",
+    "modified": "2022-10-19T21:17:22.559Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"_id\": \"635067696648da7385a2c699\",\n  \"name\": \"perrako\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "518243ab-0df1-45e1-97fe-bb36282490fd",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: deleteOne",
+    "url": "{{URL}}/artists/one/63505e52d7eb9b354ce86b65",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-10-19T21:09:42.554Z",
+    "modified": "2022-10-19T21:15:39.782Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "6803bb06-de4a-49fd-ab64-7a9cba7ed47b",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: deleteAll",
+    "url": "{{URL}}/artists/all",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-10-19T21:17:49.502Z",
+    "modified": "2022-10-19T21:18:07.432Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
