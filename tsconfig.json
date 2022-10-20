@@ -24,9 +24,12 @@
       "@core/*": ["src/core/*"],
       "@core": ["src/core"],
       "@config": ["src/core/config"],
-      "@exceptions": ["src/core/exceptions"],
+      "@exceptions": ["src/shared/exceptions"],
       "@utils": ["src/shared/utils"],
-      "@artist": ["src/modules/artist"]
+      "@artist": ["src/modules/artist"],
+      "@auth": ["src/modules/auth"],
+      "@menu": ["src/modules/menu"],
+      "@user": ["src/modules/user"]
     }
   },
   "exclude": ["node_modules", "builds/server/node_modules"],
