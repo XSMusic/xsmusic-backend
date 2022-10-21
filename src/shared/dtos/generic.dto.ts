@@ -1,4 +1,4 @@
-import { IsArray, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class IdDto {
   @IsString() id: string;
@@ -18,6 +18,7 @@ export class GetAllDto {
   @IsNumber() pageSize: number;
   @IsArray() order: string[];
   @IsOptional() @IsString() site: string;
+  @IsOptional() @IsArray() filter: string[];
 }
 
 export class SiteDto {

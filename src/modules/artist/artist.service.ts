@@ -3,41 +3,53 @@ import {
   ArtistGetAllAggregate,
   ArtistGetAllDto,
   ArtistI,
-} from "@artist";
-import { SlugDto } from "@dtos";
-import { MessageI, PaginatorI } from "@interfaces";
-import { getValuesForPaginator, slugify } from "@utils";
+} from '@artist';
+import { IdDto, SlugDto } from '@dtos';
+import { MessageI, PaginatorI } from '@interfaces';
+import { getValuesForPaginator, slugify } from '@utils';
 
 export class ArtistService {
-
-  async getAll(
-    body?: ArtistGetAllDto
+  getAll(
+    body: ArtistGetAllDto
   ): Promise<{ items: ArtistI[]; paginator: PaginatorI }> {
-    try {
-      const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-      const aggregate = ArtistGetAllAggregate(body, skip, pageSize);
-      const items = await Artist.aggregate(aggregate).exec();
-      const total = await Artist.find({}).countDocuments().exec();
-      const totalPages = Math.ceil(total / pageSize);
-      const paginator: PaginatorI = {
-        pageSize,
-        currentPage,
-        totalPages,
-        total,
-      };
-      return { items, paginator };
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const aggregate = ArtistGetAllAggregate(body, skip, pageSize);
+        const items = await Artist.aggregate(aggregate).exec();
+        const total = await Artist.find({}).countDocuments().exec();
+        const totalPages = Math.ceil(total / pageSize);
+        const paginator: PaginatorI = {
+          pageSize,
+          currentPage,
+          totalPages,
+          total,
+        };
+        resolve({ items, paginator });
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
-  async getOneBySlug(body: SlugDto): Promise<ArtistI> {
-    try {
-      return await Artist.findOne({ slug: body.slug }).exec();
-    } catch (error) {
-      return error;
-    }
+  getOneById(body: IdDto): Promise<ArtistI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        resolve(await Artist.findById(body.id).exec());
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  getOneBySlug(body: SlugDto): Promise<ArtistI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        resolve(await Artist.findOne({ slug: body.slug }).exec());
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   create(body: ArtistI): Promise<MessageI> {
@@ -49,9 +61,9 @@ export class ArtistService {
         if (isExist.length === 0) {
           const item = new Artist(body);
           item.save();
-          resolve({ message: "Artista creado" });
+          resolve({ message: 'Artista creado' });
         } else {
-          reject({ message: "El artista ya existe" });
+          reject({ message: 'El artista ya existe' });
         }
       } catch (error) {
         reject(error);
@@ -59,7 +71,7 @@ export class ArtistService {
     });
   }
 
-  async update(body: ArtistI): Promise<MessageI> {
+  update(body: ArtistI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
         const artistDB = await Artist.findById(body._id).exec();
@@ -70,12 +82,12 @@ export class ArtistService {
           new: true,
         }).exec();
         if (response) {
-          resolve({ message: "Artista actualizado" });
+          resolve({ message: 'Artista actualizado' });
         } else {
-          reject({ message: "Artista no existe" });
+          reject({ message: 'Artista no existe' });
         }
       } catch (error) {
-        return error;
+        reject(error);
       }
     });
   }
@@ -85,12 +97,12 @@ export class ArtistService {
       try {
         const response = await Artist.findByIdAndDelete(id).exec();
         if (response) {
-          resolve({ message: "Artista eliminado" });
+          resolve({ message: 'Artista eliminado' });
         } else {
-          reject({ message: "Artista no existe" });
+          reject({ message: 'Artista no existe' });
         }
       } catch (error) {
-        return error;
+        reject(error);
       }
     });
   }
@@ -104,7 +116,7 @@ export class ArtistService {
       if (items.length > 0) {
         resolve({ message: `${items.length} artistas eliminados` });
       } else {
-        reject({ message: "No hay artistas" });
+        reject({ message: 'No hay artistas' });
       }
     });
   }

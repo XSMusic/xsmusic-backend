@@ -1,8 +1,7 @@
 import { GetAllDto } from "@dtos";
-import { IsArray, IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 export class ArtistGetAllDto extends GetAllDto {
-  @IsOptional() @IsArray() filter: string[];
 }
 
 export class ArtistCreateDto {
