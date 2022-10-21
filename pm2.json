@@ -1,0 +1,15 @@
+{
+    "apps": [
+        {
+            "name": "xsmusic",
+            "script": "npm",
+            "watch": false,
+            "args": "start",
+            "instances": 1,
+            "exec_mode": "fork",
+            "ignore_watch": ["node_modules"],
+            "max_memory_restart": "150M",
+            "autorestart": true
+        }
+    ]
+}
