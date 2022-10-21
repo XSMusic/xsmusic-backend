@@ -1,21 +1,17 @@
-import { UserTokenI } from '@auth';
 import { MessageI, PaginatorI } from '@interfaces';
 import {
   User,
   userGetAllAggregate,
   UserGetAllDto,
-  UserGetResumeResponse,
   UserI,
   userSearchAggregate,
 } from '@user';
 import { randEmail, randFullName } from '@ngneat/falso';
-import { Logger } from '@services';
 import { SearchDto } from '@dtos';
 import { getValuesForPaginator } from '@utils';
 
 export class UserService {
-  private populateDefault: any = [
-  ];
+  private populateDefault: any = [];
 
   async getAll(
     body?: UserGetAllDto
@@ -28,13 +24,8 @@ export class UserService {
             .exec();
           return users;
         } else {
-          const { pageSize, currentPage, skip } =
-            getValuesForPaginator(body);
-          const aggregate = userGetAllAggregate(
-            body,
-            skip,
-            pageSize
-          );
+          const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+          const aggregate = userGetAllAggregate(body, skip, pageSize);
           const items = await User.aggregate(aggregate).exec();
           const total = await User.find({}).countDocuments().exec();
           const totalPages = Math.ceil(total / pageSize);
@@ -55,63 +46,63 @@ export class UserService {
     }
   }
 
-//   async getResume(user: UserTokenI): Promise<UserGetResumeResponse> {
-//     try {
-//       const items: UserGetResumeResponse = {
-//         likes: 0,
-//         votes: 0,
-//         inscriptions: 0,
-//         tournamentsWinners: '',
-//         pairings: 0,
-//         pairingsWinners: 0,
-//       };
+  //   async getResume(user: UserTokenI): Promise<UserGetResumeResponse> {
+  //     try {
+  //       const items: UserGetResumeResponse = {
+  //         likes: 0,
+  //         votes: 0,
+  //         inscriptions: 0,
+  //         tournamentsWinners: '',
+  //         pairings: 0,
+  //         pairingsWinners: 0,
+  //       };
 
-//       const cars = await Car.find({ driver: user._id }).exec();
-//       if (cars.length > 0) {
-//         items.inscriptions = await Inscription.countDocuments({
-//           car: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//         items.likes = await Like.countDocuments({
-//           car: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//         const winners = await Winner.find({}).exec();
-//         items.tournamentsWinners += `${this.getWinnersByType(
-//           'gold',
-//           winners,
-//           cars
-//         )}/`;
-//         items.tournamentsWinners += `${this.getWinnersByType(
-//           'silver',
-//           winners,
-//           cars
-//         )}/`;
-//         items.tournamentsWinners += this.getWinnersByType(
-//           'bronze',
-//           winners,
-//           cars
-//         );
-//         items.votes = await Vote.countDocuments({
-//           car: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//         // pairings
-//         const pairingsC1 = await Pairing.countDocuments({
-//           car1: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//         const pairingsC2 = await Pairing.countDocuments({
-//           car2: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//         items.pairings = pairingsC1 + pairingsC2;
-//         items.pairingsWinners = await Winner.countDocuments({
-//           winner: { $in: cars.map((car: any) => car) },
-//         }).exec();
-//       }
+  //       const cars = await Car.find({ driver: user._id }).exec();
+  //       if (cars.length > 0) {
+  //         items.inscriptions = await Inscription.countDocuments({
+  //           car: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //         items.likes = await Like.countDocuments({
+  //           car: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //         const winners = await Winner.find({}).exec();
+  //         items.tournamentsWinners += `${this.getWinnersByType(
+  //           'gold',
+  //           winners,
+  //           cars
+  //         )}/`;
+  //         items.tournamentsWinners += `${this.getWinnersByType(
+  //           'silver',
+  //           winners,
+  //           cars
+  //         )}/`;
+  //         items.tournamentsWinners += this.getWinnersByType(
+  //           'bronze',
+  //           winners,
+  //           cars
+  //         );
+  //         items.votes = await Vote.countDocuments({
+  //           car: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //         // pairings
+  //         const pairingsC1 = await Pairing.countDocuments({
+  //           car1: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //         const pairingsC2 = await Pairing.countDocuments({
+  //           car2: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //         items.pairings = pairingsC1 + pairingsC2;
+  //         items.pairingsWinners = await Winner.countDocuments({
+  //           winner: { $in: cars.map((car: any) => car) },
+  //         }).exec();
+  //       }
 
-//       return items;
-//     } catch (error) {
-//       Logger.error(error);
-//       return error;
-//     }
-//   }
+  //       return items;
+  //     } catch (error) {
+  //       Logger.error(error);
+  //       return error;
+  //     }
+  //   }
 
   async search(data: SearchDto) {
     try {
