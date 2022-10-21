@@ -7,6 +7,7 @@
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "NODE_ENV=test jest --verbose  --silent",
     "test:watch": "NODE_ENV=test jest --coverage --watchAll --detectOpenHandles",
+    "update": "sh ./scripts/update.sh",
     "prettier:write": "prettier --write \"./{e2e,src}/**/*.{scss,ts}\""
   },
   "author": "",
