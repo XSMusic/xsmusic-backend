@@ -2,16 +2,13 @@ import {
   Artist,
   ArtistGetAllAggregate,
   ArtistGetAllDto,
-  ArtistHelper,
   ArtistI,
 } from "@artist";
+import { SlugDto } from "@dtos";
 import { MessageI, PaginatorI } from "@interfaces";
-import { getValuesForPaginator } from "@utils";
-import { slugify } from "src/shared/utils/util";
-import { SlugDto } from "../../shared/dtos/generic.dto";
+import { getValuesForPaginator, slugify } from "@utils";
 
 export class ArtistService {
-  private artistHelper = new ArtistHelper();
 
   async getAll(
     body?: ArtistGetAllDto

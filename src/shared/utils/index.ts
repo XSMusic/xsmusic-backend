@@ -1,1 +1,1 @@
-export { getOrderForGetAllAggregate, getValuesForPaginator } from './util';
+export * from './util';
