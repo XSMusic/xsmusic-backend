@@ -2812,5 +2812,24 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "12d2eec1-b1e0-4934-877f-fbd9c1ed851a",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d73a6366-60ba-4281-81e5-18120ab9c67d",
+    "name": "Stats: getForAdmin",
+    "url": "{{URL}}/stats/getForAdmin",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-10-22T00:40:56.104Z",
+    "modified": "2022-10-22T00:41:57.773Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

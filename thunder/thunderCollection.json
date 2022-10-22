@@ -28,10 +28,17 @@
       },
       {
         "_id": "15c6f4be-806c-4969-93c6-7b8821203727",
-        "name": "Stye",
+        "name": "Style",
         "containerId": "",
         "created": "2022-10-21T19:40:14.505Z",
         "sortNum": 40000
+      },
+      {
+        "_id": "d73a6366-60ba-4281-81e5-18120ab9c67d",
+        "name": "Stats",
+        "containerId": "",
+        "created": "2022-10-22T00:40:44.459Z",
+        "sortNum": 50000
       }
     ]
   },
