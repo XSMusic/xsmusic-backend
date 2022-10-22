@@ -1,11 +1,7 @@
 source $(pwd)/scripts/setenv.sh
-source $(pwd)/scripts/utils/utils.sh
 exec 2>$(pwd)/scripts/error.log
 
 clear
-if [ "${NODE_ENV}" = "development" ]; then
-    logo
-fi
 
 echo "🔥  Actualizando backend de produccion"
 
