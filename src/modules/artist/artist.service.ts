@@ -1,6 +1,6 @@
 import {
   Artist,
-  ArtistGetAllAggregate,
+  artistGetAllAggregate,
   ArtistGetAllDto,
   ArtistI,
 } from '@artist';
@@ -17,7 +17,7 @@ export class ArtistService {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = ArtistGetAllAggregate(body, skip, pageSize);
+        const aggregate = artistGetAllAggregate(body, skip, pageSize);
         const items = await Artist.aggregate(aggregate).exec();
         const total = await Artist.find({}).countDocuments().exec();
         const totalPages = Math.ceil(total / pageSize);

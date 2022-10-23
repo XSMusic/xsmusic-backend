@@ -79,8 +79,13 @@
     "method": "DELETE",
     "sortNum": 50000,
     "created": "2022-10-19T21:17:49.502Z",
-    "modified": "2022-10-19T21:18:07.432Z",
-    "headers": [],
+    "modified": "2022-10-23T10:36:39.879Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
     "params": [],
     "tests": []
   },
@@ -2830,6 +2835,44 @@
       }
     ],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "14a72988-d208-460a-bf3a-d54784286bcc",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: search",
+    "url": "{{URL}}/artists/search",
+    "method": "POST",
+    "sortNum": 25000,
+    "created": "2022-10-23T19:26:37.408Z",
+    "modified": "2022-10-23T19:27:06.823Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"value\": \"guetta\", \"limit\": 10}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d14bbacb-21da-484b-b997-bef2bcf5f4f3",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "15c6f4be-806c-4969-93c6-7b8821203727",
+    "name": "Style: search",
+    "url": "{{URL}}/styles/search",
+    "method": "POST",
+    "sortNum": 17500,
+    "created": "2022-10-23T19:27:23.257Z",
+    "modified": "2022-10-23T19:27:42.082Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"value\": \"techno\", \"limit\": 10}",
+      "form": []
+    },
     "tests": []
   }
 ]

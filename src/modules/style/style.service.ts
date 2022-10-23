@@ -1,14 +1,19 @@
-import { GetAllDto, IdDto } from '@dtos';
+import { GetAllDto, IdDto, SearchDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator } from '@utils';
-import { Style, StyleGetAllAggregate, StyleI } from '@style';
+import {
+  Style,
+  styleGetAllAggregate,
+  StyleI,
+  styleSearchAggregate,
+} from '@style';
 
 export class StyleService {
   getAll(body: GetAllDto): Promise<{ items: StyleI[]; paginator: PaginatorI }> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = StyleGetAllAggregate(body, skip, pageSize);
+        const aggregate = styleGetAllAggregate(body, skip, pageSize);
         const items = await Style.aggregate(aggregate).exec();
         const total = await Style.find({}).countDocuments().exec();
         const totalPages = Math.ceil(total / pageSize);
@@ -33,6 +38,16 @@ export class StyleService {
         reject(error);
       }
     });
+  }
+
+  async search(data: SearchDto) {
+    try {
+      const aggregate: any = styleSearchAggregate(data);
+      const items = await Style.aggregate(aggregate).exec();
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
   create(body: StyleI): Promise<MessageI> {

@@ -2,7 +2,7 @@ import { ArtistGetAllDto } from '@artist';
 import { SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 
-export const ArtistGetAllAggregate = (
+export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
   skip: number,
   pageSize: number

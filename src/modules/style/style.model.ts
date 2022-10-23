@@ -1,7 +1,7 @@
 import { StyleMongoI } from '@style';
 import * as mongoose from 'mongoose';
 
-const schema = new mongoose.Schema(
+export const styleSchema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
   },
@@ -13,4 +13,4 @@ const schema = new mongoose.Schema(
   }
 );
 
-export const Style = mongoose.model<StyleMongoI>('Style', schema);
+export const Style = mongoose.model<StyleMongoI>('Style', styleSchema);

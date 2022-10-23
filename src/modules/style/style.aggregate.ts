@@ -1,7 +1,7 @@
 import { GetAllDto, SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 
-export const StyleGetAllAggregate = (
+export const styleGetAllAggregate = (
   body: GetAllDto,
   skip: number,
   pageSize: number
@@ -30,7 +30,7 @@ export const StyleGetAllAggregate = (
 };
 
 
-export const userSearchAggregate = (data: SearchDto): any => [
+export const styleSearchAggregate = (data: SearchDto): any => [
   {
     $match: {
       $or: [

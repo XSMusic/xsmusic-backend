@@ -1,6 +1,6 @@
-export { StyleController } from './style.controller';
-export { StyleService } from './style.service';
-export { Style } from './style.model';
-export { StyleGetAllAggregate } from './style.aggregate';
+export * from './style.controller';
+export * from './style.service';
+export * from './style.aggregate';
+export * from './style.model';
 export * from './style.interface';
-export * from './style.dto'
+export * from './style.dto';
