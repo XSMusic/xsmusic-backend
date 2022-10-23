@@ -1,6 +1,5 @@
-import axios from "axios";
-import { load } from "cheerio";
-import xpath from "xpath";
+import axios from 'axios';
+import { load } from 'cheerio';
 
 export class ArtistHelper {
   async scrapingArtists() {
@@ -9,11 +8,9 @@ export class ArtistHelper {
     const url = `https://djrankings.org/`;
     try {
       const response = await axios.get(url);
-        const $ = load(response.data);
-        const noOfProperties = $("table>tr>.first")
-        console.log(
-            `${noOfProperties}`
-            );
+      const $ = load(response.data);
+      const noOfProperties = $('table>tr>.first');
+      console.log(`${noOfProperties}`);
     } catch (e) {
       console.error(
         `Error while fetching rental properties for ${postCode} - ${e.message}`

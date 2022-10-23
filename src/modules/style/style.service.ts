@@ -1,15 +1,18 @@
-import { GetAllDto, IdDto, SearchDto } from '@dtos';
+import { IdDto, SearchDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator } from '@utils';
 import {
   Style,
   styleGetAllAggregate,
+  StyleGetAllDto,
   StyleI,
   styleSearchAggregate,
 } from '@style';
 
 export class StyleService {
-  getAll(body: GetAllDto): Promise<{ items: StyleI[]; paginator: PaginatorI }> {
+  getAll(
+    body: StyleGetAllDto
+  ): Promise<{ items: StyleI[]; paginator: PaginatorI }> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);

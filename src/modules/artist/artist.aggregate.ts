@@ -1,6 +1,7 @@
 import { ArtistGetAllDto } from '@artist';
 import { SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
+import mongoose from 'mongoose';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -8,50 +9,101 @@ export const artistGetAllAggregate = (
   pageSize: number
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
-  const data: any = [
+  let data: any = [
     { $sort: sort },
     { $skip: skip },
     { $limit: pageSize },
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        country: 1,
-        birthdate: 1,
-        styles: 1,
-        image: 1,
-        info: 1,
-        slug: 1,
-        created: 1,
-        updated: 1,
-      },
-    },
+    { $unwind: '$styles' },
   ];
+  data = addStylesAndGroup(data);
   if (body.filter && body.filter.length === 2) {
-    // TODO: Con styles no funciona bien, tambien tendremos problemas al popular
-    // TODO: Mira si es mejor cambiar el modelo a style1, style2
-    data.push({ $match: { [body.filter[0]]: body.filter[1] } });
+    const d = {
+      $match: {
+        [body.filter[0] === 'styles' ? 'styles.name' : body.filter[0]]:
+          body.filter[1],
+      },
+    };
+    data.push(d);
   }
 
   return data;
 };
 
+export const artistGetOneAggregate = (type: string, value: string): any => {
+  let data = [];
+  const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
+  data.push({ $match: { [type]: match } });
+  data = addStylesAndGroup(data);
+  return data;
+};
+
 export const artistSearchAggregate = (data: SearchDto): any => [
-  //   lookupCarsCount(),
-  //   lookupLikesCount('user'),
-  //   lookupVotesCount('user'),
-  //   lookupInscriptionsCount('driver'),
-  //   { $unwind: { path: '$cars', preserveNullAndEmptyArrays: true } },
-  //   { $unwind: { path: '$likes', preserveNullAndEmptyArrays: true } },
-  //   { $unwind: { path: '$votes', preserveNullAndEmptyArrays: true } },
-  //   { $unwind: { path: '$inscriptions', preserveNullAndEmptyArrays: true } },
+  { $unwind: '$styles' },
+  {
+    $lookup: {
+      from: 'styles',
+      localField: 'styles',
+      foreignField: '_id',
+      as: 'stylesObj',
+      pipeline: [{ $project: { _id: 1, name: 1 } }],
+    },
+  },
+  { $unwind: '$stylesObj' },
+  {
+    $group: {
+      _id: '$_id',
+      name: { $first: '$name' },
+      country: { $first: '$country' },
+      birthdate: { $first: '$birthdate' },
+      styles: { $push: '$stylesObj' },
+      image: { $first: '$image' },
+      info: { $first: '$info' },
+      slug: { $first: '$slug' },
+      created: { $first: '$created' },
+      updated: { $first: '$updated' },
+    },
+  },
   {
     $match: {
       $or: [
         { name: { $regex: `${data.value}`, $options: 'i' } },
         { birthdate: { $regex: `${data.value}`, $options: 'i' } },
         { country: { $regex: `${data.value}`, $options: 'i' } },
+        {
+          'styles.name': { $regex: `${data.value}`, $options: 'i' },
+        },
       ],
     },
   },
 ];
+
+const addStylesAndGroup = (data: any[]) => {
+  data.push(
+    { $unwind: '$styles' },
+    {
+      $lookup: {
+        from: 'styles',
+        localField: 'styles',
+        foreignField: '_id',
+        as: 'stylesObj',
+        pipeline: [{ $project: { _id: 1, name: 1 } }],
+      },
+    },
+    { $unwind: '$stylesObj' },
+    {
+      $group: {
+        _id: '$_id',
+        name: { $first: '$name' },
+        country: { $first: '$country' },
+        birthdate: { $first: '$birthdate' },
+        styles: { $push: '$stylesObj' },
+        image: { $first: '$image' },
+        info: { $first: '$info' },
+        slug: { $first: '$slug' },
+        created: { $first: '$created' },
+        updated: { $first: '$updated' },
+      },
+    }
+  );
+  return data;
+};

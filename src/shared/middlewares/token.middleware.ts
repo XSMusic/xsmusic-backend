@@ -1,8 +1,8 @@
-import { User } from "@user";
-import { UserTokenI } from "@auth";
-import { config } from "@core/config/app.config";
-import { Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import { User } from '@user';
+import { UserTokenI } from '@auth';
+import { config } from '@core/config/app.config';
+import { Response, NextFunction } from 'express';
+import * as jwt from 'jsonwebtoken';
 
 const seed = config.seed;
 
@@ -11,8 +11,8 @@ export const checkUserToken = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const userToken = req.get("XSToken") || "";
-  if (config.env === "test") {
+  const userToken = req.get('XSToken') || '';
+  if (config.env === 'test') {
     const users = await User.find({}).exec();
     req.user = users[0];
     next();
@@ -25,7 +25,7 @@ export const checkUserToken = async (
       .catch((error: any) =>
         res
           .status(999)
-          .send({ message: "Token incorrecto, no eres usuario", error })
+          .send({ message: 'Token incorrecto, no eres usuario', error })
       );
   }
 };
@@ -35,8 +35,8 @@ export const checkAdminToken = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const userToken = req.get("XSToken") || "";
-  if (config.env === "test") {
+  const userToken = req.get('XSToken') || '';
+  if (config.env === 'test') {
     const users = await User.find({}).exec();
     req.user = users[0];
     next();
@@ -44,18 +44,18 @@ export const checkAdminToken = async (
     checkToken(userToken)
       .then((decoded: any) => {
         req.user = decoded.user;
-        if (req.user.role === "ADMIN") {
+        if (req.user.role === 'ADMIN') {
           next();
         } else {
           return res
             .status(666)
-            .send({ message: "¡Tu no tienes derecho a tocar esto!" });
+            .send({ message: '¡Tu no tienes derecho a tocar esto!' });
         }
       })
       .catch(() =>
         res
           .status(999)
-          .send({ message: "Token incorrecto, no eres administrador" })
+          .send({ message: 'Token incorrecto, no eres administrador' })
       );
   }
 };
@@ -65,8 +65,8 @@ export const checkUserNotObligatory = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const userToken = req.get("XSToken");
-  if (userToken && userToken !== "null") {
+  const userToken = req.get('XSToken');
+  if (userToken && userToken !== 'null') {
     checkToken(userToken)
       .then((decoded: any) => {
         req.user = decoded.user;
@@ -74,7 +74,7 @@ export const checkUserNotObligatory = async (
       })
       .catch(() =>
         res.status(999).send({
-          message: "Token incorrecto, no eres administrador",
+          message: 'Token incorrecto, no eres administrador',
         })
       );
   } else {
@@ -87,21 +87,21 @@ export const checkSameUserOrAdmin = (
   res: Response,
   next: NextFunction
 ): void => {
-  const userToken = req.get("XSToken") || "";
+  const userToken = req.get('XSToken') || '';
 
   checkToken(userToken)
     .then((decoded: any) => {
       req.user = decoded.user;
-      if (req.user.role === "ADMIN") {
+      if (req.user.role === 'ADMIN') {
         next();
       } else {
         return res
           .status(400)
-          .send({ ok: false, message: "El token no es correcto" });
+          .send({ ok: false, message: 'El token no es correcto' });
       }
     })
     .catch(() =>
-      res.status(400).send({ ok: false, message: "El token no es correcto" })
+      res.status(400).send({ ok: false, message: 'El token no es correcto' })
     );
 };
 

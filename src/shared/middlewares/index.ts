@@ -1,2 +1,2 @@
 export * from './validation.middleware';
-export * from "./token.middleware";
+export * from './token.middleware';

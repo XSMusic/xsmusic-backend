@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export interface ArtistMongoI extends Document {
   name: string;
@@ -6,7 +6,7 @@ export interface ArtistMongoI extends Document {
   country: string;
   image: string;
   gender: string;
-  styles: string[];
+  styles: any[];
   info: string;
   slug: string;
 }

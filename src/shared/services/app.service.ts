@@ -1,13 +1,13 @@
-import compression from "compression";
-import cors from "cors";
-import methodOverride from "method-override";
-import express from "express";
-import serveIndex from "serve-index";
-import bodyParser from "body-parser";
-import promBundle from "express-prom-bundle";
-import { config } from "../../core/config/app.config";
-import { Logger } from "@services";
-import * as expressStatusMonitor from "express-status-monitor";
+import compression from 'compression';
+import cors from 'cors';
+import methodOverride from 'method-override';
+import express from 'express';
+import serveIndex from 'serve-index';
+import bodyParser from 'body-parser';
+import promBundle from 'express-prom-bundle';
+import { config } from '../../core/config/app.config';
+import { Logger } from '@services';
+import * as expressStatusMonitor from 'express-status-monitor';
 
 export class AppService {
   private app: express.Application;
@@ -30,11 +30,11 @@ export class AppService {
       },
       formatStatusCode: (res: any) => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          return "2xx";
+          return '2xx';
         } else if (res.statusCode >= 400 && res.statusCode < 500) {
-          return "4xx";
+          return '4xx';
         }
-        return "5xx";
+        return '5xx';
       },
       normalizePath: (req: any, opts: any) => {
         const path = originalNormalize(req, opts);
@@ -45,41 +45,41 @@ export class AppService {
   }
 
   initStaticRoutes(app: express.Application): void {
-    app.use("/uploads", serveIndex(`${this.pathUploads}`));
+    app.use('/uploads', serveIndex(`${this.pathUploads}`));
     app.use(
-      "/uploads",
+      '/uploads',
       express.static(`${this.pathUploads}`, { redirect: true })
     );
     app.use(
-      "/.well-known",
-      express.static(".well-known"),
-      serveIndex(".well-known")
+      '/.well-known',
+      express.static('.well-known'),
+      serveIndex('.well-known')
     );
     this.app.use(expressStatusMonitor.default());
   }
 
   initMiddlewares() {
     const optionsCors = {
-      origin: "*",
+      origin: '*',
       exposedHeaders: [
-        "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method",
+        'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
       ],
       credentials: true,
     };
     this.app.use(cors(optionsCors));
     this.app.use(compression());
-    this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+    this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(methodOverride());
   }
 
   initializeErrorHandling() {
-    process.on("unhandledRejection", (reason: string, p: Promise<any>) => {
-      Logger.error("Unhandled Rejection at: Promise", p, "reason:", reason);
+    process.on('unhandledRejection', (reason: string, p: Promise<any>) => {
+      Logger.error('Unhandled Rejection at: Promise', p, 'reason:', reason);
     });
 
-    process.on("uncaughtException", (error: Error) => {
-      Logger.error("Uncaught Exception thrown:", error);
+    process.on('uncaughtException', (error: Error) => {
+      Logger.error('Uncaught Exception thrown:', error);
     });
   }
 }

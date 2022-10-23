@@ -10,6 +10,7 @@ export const styleSchema = new mongoose.Schema(
     toObject: { virtuals: true },
     timestamps: { createdAt: 'created', updatedAt: 'updated' },
     id: false,
+    versionKey: false,
   }
 );
 

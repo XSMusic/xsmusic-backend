@@ -4,6 +4,11 @@ export class IdDto {
   @IsString() id: string;
 }
 
+export class IdSlugDto {
+  @IsOptional() @IsString() id?: string;
+  @IsOptional() @IsString() slug?: string;
+}
+
 export class IdSiteDto {
   @IsString() id: string;
   @IsOptional() @IsString() site: string;
@@ -16,7 +21,7 @@ export class SlugDto {
 export class GetAllDto {
   @IsNumber() page: number;
   @IsNumber() pageSize: number;
-  @IsArray() order: string[];
+  @IsOptional() @IsArray() order: string[];
   @IsOptional() @IsString() site: string;
   @IsOptional() @IsArray() filter: string[];
 }

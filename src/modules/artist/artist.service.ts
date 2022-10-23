@@ -3,12 +3,12 @@ import {
   artistGetAllAggregate,
   ArtistGetAllDto,
   ArtistI,
+  artistGetOneAggregate,
+  artistSearchAggregate,
 } from '@artist';
-import { IdDto, SlugDto } from '@dtos';
+import { SearchDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
-import { SearchDto } from '../../shared/dtos/generic.dto';
-import { artistSearchAggregate } from './artist.aggregate';
 
 export class ArtistService {
   getAll(
@@ -34,20 +34,20 @@ export class ArtistService {
     });
   }
 
-  getOneById(body: IdDto): Promise<ArtistI> {
+  getOne(body: { id?: string; slug?: string }): Promise<ArtistI> {
     return new Promise(async (resolve, reject) => {
       try {
-        resolve(await Artist.findById(body.id).exec());
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  getOneBySlug(body: SlugDto): Promise<ArtistI> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        resolve(await Artist.findOne({ slug: body.slug }).exec());
+        const type = body.id ? '_id' : 'slug';
+        const value = body.id ? body.id : body.slug;
+        const aggregate = artistGetOneAggregate(type, value);
+        const artists = await Artist.aggregate(aggregate).exec();
+        let artist: ArtistI;
+        if (artists.length > 0) {
+          artist = artists[0];
+        } else {
+          reject({ message: 'El id no existe' });
+        }
+        resolve(artist);
       } catch (error) {
         reject(error);
       }
@@ -72,14 +72,16 @@ export class ArtistService {
         }).exec();
         if (isExist.length === 0) {
           const item = new Artist(body);
-          item.save();
-          resolve({ message: 'Artista creado' });
+          const itemDB = await item.save();
+          if (itemDB) {
+            resolve({ message: 'Artista creado' });
+          } else {
+            reject({ message: 'El artista no ha sido creado' });
+          }
         } else {
           reject({ message: 'El artista ya existe' });
         }
-      } catch (error) {
-        reject(error);
-      }
+      } catch (error) {}
     });
   }
 

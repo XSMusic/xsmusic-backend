@@ -3,7 +3,7 @@
 import requests
 import json
 from bs4 import BeautifulSoup
-from utils import save_db
+from utils import save_artists_db
 
 months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
           'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -23,7 +23,7 @@ def set_wikipedia_atributes(artists):
             artist.image = get_image(soup)
             artist.info = get_desc(soup)
             artist.birthdate = get_birthdate(soup)
-        save_db(artists)
+        save_artists_db(artists)
     except ValueError:
         print('Error set_attr_artists')
 

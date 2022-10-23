@@ -1,9 +1,15 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { StyleCreateDto, StyleI, StyleService, StyleUpdateDto } from '@style';
+import {
+  StyleCreateDto,
+  StyleGetAllDto,
+  StyleI,
+  StyleService,
+  StyleUpdateDto,
+} from '@style';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { validationMiddleware } from '../../shared/middlewares/validation.middleware';
-import { GetAllDto, IdDto, SearchDto } from '@dtos';
+import { IdDto, SearchDto } from '@dtos';
 import { checkAdminToken } from '@middlewares';
 
 export class StyleController implements ControllerI {
@@ -17,7 +23,7 @@ export class StyleController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(GetAllDto),
+      validationMiddleware(StyleGetAllDto),
       this.getAll
     );
     this.router.post(
@@ -51,7 +57,7 @@ export class StyleController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: GetAllDto = request.body;
+      const body: StyleGetAllDto = request.body;
       const items = await this.styleService.getAll(body);
       response.status(200).send(items);
     } catch (error) {

@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     birthdate: { type: String, default: '' },
-    styles: [{ type: styleSchema }],
+    styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
     country: { type: String, default: 'es' },
     image: { type: String, default: '' },
     gender: { type: String, default: 'male' },
@@ -18,6 +18,7 @@ const schema = new mongoose.Schema(
     toObject: { virtuals: true },
     timestamps: { createdAt: 'created', updatedAt: 'updated' },
     id: false,
+    versionKey: false,
   }
 );
 

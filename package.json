@@ -9,7 +9,7 @@
     "test:watch": "NODE_ENV=test jest --coverage --watchAll --detectOpenHandles",
     "update": "sh ./scripts/update.sh",
     "pwa": "sh ./scripts/pwa.sh",
-    "prettier:write": "prettier --write \"./{e2e,src}/**/*.{scss,ts}\""
+    "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,ts}\""
   },
   "author": "",
   "license": "ISC",

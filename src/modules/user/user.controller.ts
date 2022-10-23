@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from 'express';
 import {
   UserCreateDto,
   UserCreateFakeDto,
@@ -6,18 +6,18 @@ import {
   UserI,
   UserService,
   UserUpdateDto,
-} from "@user";
-import { ControllerI } from "@interfaces";
-import { HttpException } from "src/shared/exceptions";
-import { IdDto, SearchDto } from "@dtos";
+} from '@user';
+import { ControllerI } from '@interfaces';
+import { HttpException } from 'src/shared/exceptions';
+import { IdDto, SearchDto } from '@dtos';
 import {
   validationMiddleware,
   checkAdminToken,
   checkUserToken,
-} from "@middlewares";
+} from '@middlewares';
 
 export class UserController implements ControllerI {
-  path = "/users";
+  path = '/users';
   router = Router();
   private userService = new UserService();
 
@@ -39,10 +39,7 @@ export class UserController implements ControllerI {
     );
     this.router.post(
       `${this.path}/one`,
-      [
-        validationMiddleware(IdDto),
-        checkAdminToken,
-      ],
+      [validationMiddleware(IdDto), checkAdminToken],
       this.getOne
     );
     this.router.post(

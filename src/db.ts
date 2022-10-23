@@ -1,4 +1,4 @@
-import { config } from "@core/config";
+import { config } from '@core/config';
 import { Logger } from '@services';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -19,7 +19,7 @@ export const connectToDB = async (): Promise<void> => {
   try {
     const uri = await getUri();
     mongoose.connect(uri, config.mongo.options, () => {
-      Logger.info("[DB] MongoDB iniciado");
+      Logger.info('[DB] MongoDB iniciado');
     });
   } catch (error) {
     Logger.error('No se pudo conectar a MongoDB, revisa .env');

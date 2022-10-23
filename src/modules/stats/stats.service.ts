@@ -1,6 +1,6 @@
 import { Artist } from '@artist';
 import { Style, StyleMongoI } from '@style';
-import { Document, Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { StatsTotalsAdminI } from './stats.interface';
 import { ArtistMongoI } from '../artist/artist.interface';
 
@@ -22,7 +22,7 @@ export class StatsService {
       }
     });
   }
-    
+
   private setTotal<T>(model: Model<T>) {
     return model.countDocuments({}).exec();
   }

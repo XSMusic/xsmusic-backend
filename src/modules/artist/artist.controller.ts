@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from 'express';
 import {
   ArtistCreateDto,
   ArtistGetAllDto,
   ArtistI,
   ArtistService,
   ArtistUpdateDto,
-} from "@artist";
-import { ControllerI } from "@interfaces";
-import { HttpException } from "src/shared/exceptions";
-import { checkAdminToken, validationMiddleware } from "@middlewares";
-import { IdDto, SearchDto, SlugDto } from "@dtos";
+} from '@artist';
+import { ControllerI } from '@interfaces';
+import { HttpException } from 'src/shared/exceptions';
+import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { IdSlugDto, SearchDto } from '@dtos';
 
 export class ArtistController implements ControllerI {
   path = '/artists';
@@ -26,14 +26,9 @@ export class ArtistController implements ControllerI {
       this.getAll
     );
     this.router.post(
-      `${this.path}/getOneById`,
-      validationMiddleware(IdDto),
-      this.getOneById
-    );
-    this.router.post(
-      `${this.path}/getOneBySlug`,
-      validationMiddleware(SlugDto),
-      this.getOneBySlug
+      `${this.path}/getOne`,
+      validationMiddleware(IdSlugDto),
+      this.getOne
     );
     this.router.post(
       `${this.path}/search`,
@@ -69,28 +64,14 @@ export class ArtistController implements ControllerI {
     }
   };
 
-  private getOneById = async (
+  private getOne = async (
     request: Request,
     response: Response,
     next: NextFunction
   ) => {
     try {
-      const body: IdDto = request.body;
-      const result: ArtistI = await this.artistService.getOneById(body);
-      response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private getOneBySlug = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: SlugDto = request.body;
-      const result: ArtistI = await this.artistService.getOneBySlug(body);
+      const body: IdSlugDto = request.body;
+      const result: ArtistI = await this.artistService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
