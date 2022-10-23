@@ -1,4 +1,4 @@
-import { GetAllDto } from '@dtos';
+import { GetAllDto, SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 
 export const StyleGetAllAggregate = (
@@ -28,3 +28,14 @@ export const StyleGetAllAggregate = (
 
   return data;
 };
+
+
+export const userSearchAggregate = (data: SearchDto): any => [
+  {
+    $match: {
+      $or: [
+        { name: { $regex: `${data.value}`, $options: 'i' } },
+      ],
+    },
+  },
+];

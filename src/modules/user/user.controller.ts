@@ -32,13 +32,11 @@ export class UserController implements ControllerI {
       checkAdminToken,
       this.getAll
     );
-
     this.router.post(
       `${this.path}/search`,
       [validationMiddleware(SearchDto)],
       this.search
     );
-
     this.router.post(
       `${this.path}/one`,
       [

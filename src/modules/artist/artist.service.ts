@@ -7,6 +7,8 @@ import {
 import { IdDto, SlugDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
+import { SearchDto } from '../../shared/dtos/generic.dto';
+import { artistSearchAggregate } from './artist.aggregate';
 
 export class ArtistService {
   getAll(
@@ -50,6 +52,16 @@ export class ArtistService {
         reject(error);
       }
     });
+  }
+
+  async search(data: SearchDto) {
+    try {
+      const aggregate: any = artistSearchAggregate(data);
+      const items = await Artist.aggregate(aggregate).exec();
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
   create(body: ArtistI): Promise<MessageI> {

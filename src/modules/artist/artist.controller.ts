@@ -9,10 +9,10 @@ import {
 import { ControllerI } from "@interfaces";
 import { HttpException } from "src/shared/exceptions";
 import { checkAdminToken, validationMiddleware } from "@middlewares";
-import { IdDto, SlugDto } from "@dtos";
+import { IdDto, SearchDto, SlugDto } from "@dtos";
 
 export class ArtistController implements ControllerI {
-  path = "/artists";
+  path = '/artists';
   router = Router();
   private artistService = new ArtistService();
   constructor() {
@@ -36,6 +36,11 @@ export class ArtistController implements ControllerI {
       this.getOneBySlug
     );
     this.router.post(
+      `${this.path}/search`,
+      [validationMiddleware(SearchDto)],
+      this.search
+    );
+    this.router.post(
       `${this.path}/create`,
       validationMiddleware(ArtistCreateDto),
       this.create
@@ -46,16 +51,8 @@ export class ArtistController implements ControllerI {
       checkAdminToken,
       this.update
     );
-    this.router.delete(
-      `${this.path}/one/:id`,
-        checkAdminToken,
-      this.deleteOne
-    );
-    this.router.delete(
-      `${this.path}/all`,
-        checkAdminToken,
-      this.deleteAll
-    );
+    this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
+    this.router.delete(`${this.path}/all`, checkAdminToken, this.deleteAll);
   }
 
   private getAll = async (
@@ -95,6 +92,20 @@ export class ArtistController implements ControllerI {
       const body: SlugDto = request.body;
       const result: ArtistI = await this.artistService.getOneBySlug(body);
       response.status(200).send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private search = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: SearchDto = request.body;
+      const items = await this.artistService.search(body);
+      response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
     }

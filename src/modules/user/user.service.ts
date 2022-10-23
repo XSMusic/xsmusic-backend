@@ -46,64 +46,6 @@ export class UserService {
     }
   }
 
-  //   async getResume(user: UserTokenI): Promise<UserGetResumeResponse> {
-  //     try {
-  //       const items: UserGetResumeResponse = {
-  //         likes: 0,
-  //         votes: 0,
-  //         inscriptions: 0,
-  //         tournamentsWinners: '',
-  //         pairings: 0,
-  //         pairingsWinners: 0,
-  //       };
-
-  //       const cars = await Car.find({ driver: user._id }).exec();
-  //       if (cars.length > 0) {
-  //         items.inscriptions = await Inscription.countDocuments({
-  //           car: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //         items.likes = await Like.countDocuments({
-  //           car: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //         const winners = await Winner.find({}).exec();
-  //         items.tournamentsWinners += `${this.getWinnersByType(
-  //           'gold',
-  //           winners,
-  //           cars
-  //         )}/`;
-  //         items.tournamentsWinners += `${this.getWinnersByType(
-  //           'silver',
-  //           winners,
-  //           cars
-  //         )}/`;
-  //         items.tournamentsWinners += this.getWinnersByType(
-  //           'bronze',
-  //           winners,
-  //           cars
-  //         );
-  //         items.votes = await Vote.countDocuments({
-  //           car: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //         // pairings
-  //         const pairingsC1 = await Pairing.countDocuments({
-  //           car1: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //         const pairingsC2 = await Pairing.countDocuments({
-  //           car2: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //         items.pairings = pairingsC1 + pairingsC2;
-  //         items.pairingsWinners = await Winner.countDocuments({
-  //           winner: { $in: cars.map((car: any) => car) },
-  //         }).exec();
-  //       }
-
-  //       return items;
-  //     } catch (error) {
-  //       Logger.error(error);
-  //       return error;
-  //     }
-  //   }
-
   async search(data: SearchDto) {
     try {
       const aggregate: any = userSearchAggregate(data);
