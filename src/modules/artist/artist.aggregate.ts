@@ -9,12 +9,7 @@ export const artistGetAllAggregate = (
   pageSize: number
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
-  let data: any = [
-    { $sort: sort },
-    { $skip: skip },
-    { $limit: pageSize },
-    { $unwind: '$styles' },
-  ];
+  let data: any = [];
   data = addStylesAndGroup(data);
   if (body.filter && body.filter.length === 2) {
     const d = {
@@ -25,6 +20,7 @@ export const artistGetAllAggregate = (
     };
     data.push(d);
   }
+  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
 
   return data;
 };
@@ -59,6 +55,7 @@ export const artistSearchAggregate = (data: SearchDto): any => [
       image: { $first: '$image' },
       info: { $first: '$info' },
       slug: { $first: '$slug' },
+      gender: { $first: '$gender' },
       created: { $first: '$created' },
       updated: { $first: '$updated' },
     },
@@ -97,6 +94,7 @@ const addStylesAndGroup = (data: any[]) => {
         country: { $first: '$country' },
         birthdate: { $first: '$birthdate' },
         styles: { $push: '$stylesObj' },
+        gender: { $first: '$gender' },
         image: { $first: '$image' },
         info: { $first: '$info' },
         slug: { $first: '$slug' },

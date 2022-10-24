@@ -1,8 +1,8 @@
 import { GetAllDto } from '@dtos';
-import { IsBoolean, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class StyleGetAllDto extends GetAllDto {
-  @IsBoolean() complete: boolean;
+  @IsOptional() @IsBoolean() complete?: boolean;
 }
 
 export class StyleCreateDto {

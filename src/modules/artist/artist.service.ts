@@ -71,6 +71,9 @@ export class ArtistService {
           name: body.name,
         }).exec();
         if (isExist.length === 0) {
+          if (body._id) {
+            delete body._id;
+          }
           const item = new Artist(body);
           const itemDB = await item.save();
           if (itemDB) {
@@ -81,7 +84,10 @@ export class ArtistService {
         } else {
           reject({ message: 'El artista ya existe' });
         }
-      } catch (error) {}
+      } catch (error) {
+        console.error(error);
+        reject(error);
+      }
     });
   }
 
