@@ -1,7 +1,8 @@
 import { countries, get_month, slugify } from '@utils';
 import axios from 'axios';
-import { load } from 'cheerio';
+import { CheerioAPI, load } from 'cheerio';
 import { ScrapingArtist, ScrapingGetInfoArtistDto } from '@scraping';
+import { Style, StyleI } from '@style';
 
 // TODO: Obtener info de wikipedia
 
@@ -9,6 +10,7 @@ export class ScrapingService {
   private url_wikipedia = 'https://es.wikipedia.org/wiki';
   private url_clubbingspain = 'https://www.clubbingspain.com/artistas';
   private url_djrankings = 'https://djrankings.org/DJ-';
+  styles: StyleI[] = [];
   constructor() {
     this.getInfoArtist({ name: 'David Guetta', countryCode: '' });
   }
@@ -16,6 +18,7 @@ export class ScrapingService {
   async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
     try {
       let artist = new ScrapingArtist(body.name);
+      this.styles = await Style.find({}).exec();
       artist = await this.getInfoArtistDJRankings(artist);
       artist = await this.getInfoArtistWikipedia(artist);
       artist = await this.getInfoArtistClubbing(artist, body);
@@ -36,21 +39,40 @@ export class ScrapingService {
         ).toUpperCase()}`;
         const response = await axios.get(url);
         const $ = load(response.data);
-        const tdsInfo = $('#playerBioInfoList').find('td');
-        artist.styles = $(tdsInfo[3]).text().split(', ');
-        $('img').each(function () {
-          if ($(this).attr('src').includes('/tpls/img/flags/24/')) {
-            const countryImg = $(this)
-              .attr('src')
-              .split('/tpls/img/flags/24/')[1];
-            artist.country = countryImg.split('.png')[0];
-          }
-        });
+        artist.styles = this.setStylesForDJRankings($);
+        artist.country = this.setImageForDJRankings($);
         resolve(artist);
       } catch (e) {
         reject(e);
       }
     });
+  }
+
+  private setImageForDJRankings($: CheerioAPI) {
+    let image = '';
+    $('img').each(function (): any {
+      if ($(this).attr('src').includes('/tpls/img/flags/24/')) {
+        const countryImg = $(this).attr('src').split('/tpls/img/flags/24/')[1];
+        image = countryImg.split('.png')[0];
+      }
+    });
+    return image;
+  }
+
+  private setStylesForDJRankings($: CheerioAPI) {
+    const stylesDB: any[] = [];
+    const tdsInfo = $('#playerBioInfoList').find('td');
+    const styles: string[] = $(tdsInfo[3]).text().split(', ');
+    for (const style of styles) {
+      const filter = this.styles.filter((s) => s.name === style);
+      if (filter.length > 0) {
+        stylesDB.push({
+          _id: filter[0]._id,
+          name: filter[0].name,
+        });
+      }
+    }
+    return stylesDB;
   }
 
   private async getInfoArtistClubbing(
@@ -99,6 +121,8 @@ export class ScrapingService {
       return 'usa';
     } else if (country === 'reino-unido') {
       return 'uk';
+    } else if (country === 'paises-bajos') {
+      return 'holanda';
     } else {
       return country;
     }
@@ -124,12 +148,12 @@ export class ScrapingService {
             birthdate_replaced = birthdate_replaced.replace('de ', '');
             const birthdate_array = birthdate_replaced.split(' ');
             if (birthdate_array[0]) {
-              const day = Number(birthdate_array[0].split('\n')[1])
+              const day = Number(birthdate_array[0].split('\n')[1]);
               const month_es = birthdate_array[1];
-                const month = get_month(month_es);
+              const month = get_month(month_es);
               const year = Number(birthdate_array[3]);
               const date =
-                  year.toString() + '-' + month.toString() + '-' + day.toString();
+                year.toString() + '-' + month.toString() + '-' + day.toString();
               artist.birthdate = date;
             }
           }

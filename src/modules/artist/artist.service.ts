@@ -74,6 +74,7 @@ export class ArtistService {
           if (body._id) {
             delete body._id;
           }
+          body.slug = slugify(body.name);
           const item = new Artist(body);
           const itemDB = await item.save();
           if (itemDB) {
@@ -94,10 +95,7 @@ export class ArtistService {
   update(body: ArtistI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const artistDB = await Artist.findById(body._id).exec();
-        if (body.name !== artistDB.name) {
-          body.slug = slugify(body.name);
-        }
+        body.slug = slugify(body.name);
         const response = await Artist.findByIdAndUpdate(body._id, body, {
           new: true,
         }).exec();
