@@ -29,6 +29,7 @@
       "@artist": ["src/modules/artist"],
       "@auth": ["src/modules/auth"],
       "@menu": ["src/modules/menu"],
+      "@scraping": ["src/modules/scraping"],
       "@stats": ["src/modules/stats"],
       "@style": ["src/modules/style"],
       "@user": ["src/modules/user"]

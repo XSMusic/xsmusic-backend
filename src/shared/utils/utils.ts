@@ -1,3 +1,40 @@
+export const months = [
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre',
+];
+export const wiki_codes = [
+  '[1]',
+  '[2]',
+  '[3]',
+  '[4]',
+  '[5]',
+  '[6]',
+  '[7]',
+  '[8]',
+  '[9]',
+  '[10]',
+];
+
+export const get_month = (month_es: string): number => {
+  let monthNumber = 0;
+  months.forEach((month, idx) => {
+    if (month == month_es) {
+      monthNumber = Number(idx + 1);
+    }
+  });
+  return monthNumber;
+};
+
 export const getValuesForPaginator = (body: {
   page: number;
   pageSize: number;
@@ -22,8 +59,7 @@ export const getOrderForGetAllAggregate = (body: any): any => {
   return order;
 };
 
-export const slugify = (str: string, down = false) => {
-  const simbolReplace = down ? '_' : '-';
+export const slugify = (str: string, simbol = '-', toLowerCase = true) => {
   str = str.replace(/^\s+|\s+$/g, '');
   str = str.toLowerCase();
   const from =
@@ -34,10 +70,13 @@ export const slugify = (str: string, down = false) => {
     str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
   }
 
-  str = str
-    .replace(/[^a-z0-9 -]/g, '')
-    .replace(/\s+/g, simbolReplace)
-    .replace(/-+/g, simbolReplace);
+  if (!toLowerCase) {
+    str = str.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  } else {
+    str = str.replace(/[^a-z0-9 -]/g, '');
+  }
+
+  str = str.replace(/\s+/g, simbol).replace(/-+/g, simbol);
 
   return str;
 };

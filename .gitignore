@@ -14,4 +14,4 @@ googleanalytics-credentials.json
 yarn-error.log
 thunder/thunderEnvironment.json
 private.txt
-scripts/__pycache__/
+scripts/python/__pycache__

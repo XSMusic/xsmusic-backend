@@ -9,6 +9,13 @@ export interface ArtistMongoI extends Document {
   styles: any[];
   info: string;
   slug: string;
+  social: {
+    web: string;
+    facebook: string;
+    twitter: string;
+    spotify: string;
+    soundcloud: string;
+  };
 }
 
 export interface ArtistI extends ArtistMongoI {

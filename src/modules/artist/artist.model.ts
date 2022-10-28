@@ -7,7 +7,6 @@ const gendersValid = {
   message: '{VALUE} no es un genero permitido',
 };
 
-
 const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
@@ -17,6 +16,13 @@ const schema = new mongoose.Schema(
     image: { type: String, default: '' },
     gender: { type: String, default: 'male', enum: gendersValid },
     info: { type: String, default: '' },
+    social: {
+      web: { type: String, default: '' },
+      facebook: { type: String, default: '' },
+      twitter: { type: String, default: '' },
+      spotify: { type: String, default: '' },
+      soundcloud: { type: String, default: '' },
+    },
     slug: { type: String, default: '' },
   },
   {

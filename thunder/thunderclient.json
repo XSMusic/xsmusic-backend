@@ -2874,5 +2874,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "40cfed18-c166-44f8-a85e-77e74847c4a6",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: getInfoArtist",
+    "url": "{{URL}}/scraping/getInfoArtist",
+    "method": "POST",
+    "sortNum": 120000,
+    "created": "2022-10-24T21:40:56.486Z",
+    "modified": "2022-10-27T11:35:35.085Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"name\": \"David Guetta\",\n \"countryCode\":\"es\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
