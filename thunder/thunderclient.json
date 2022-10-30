@@ -2922,12 +2922,12 @@
     "method": "POST",
     "sortNum": 140000,
     "created": "2022-10-29T23:49:43.248Z",
-    "modified": "2022-10-30T00:16:02.764Z",
+    "modified": "2022-10-30T11:15:17.807Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"set\",\n  \"filter\": [\"style\", \"Trap\"]\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"set\"\n  \n}",
       "form": []
     },
     "tests": []

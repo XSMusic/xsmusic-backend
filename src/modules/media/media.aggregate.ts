@@ -69,6 +69,7 @@ const addStylesAndGroup = (data: any[]) => {
         image: { $first: '$image' },
         type: { $first: '$type' },
         info: { $first: '$info' },
+        year: { $first: '$year' },
         source: { $first: '$source' },
         created: { $first: '$created' },
         updated: { $first: '$updated' },

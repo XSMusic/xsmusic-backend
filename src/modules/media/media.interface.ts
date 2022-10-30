@@ -8,6 +8,7 @@ export interface MediaMongoI extends Document {
   styles: any[];
   info: string;
   source: string;
+  sourceId: string;
   year: number;
 }
 
