@@ -1,5 +1,5 @@
 import { GetAllDto } from '@dtos';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class MediaGetAllDto extends GetAllDto {
   @IsString() type: string;
@@ -9,6 +9,7 @@ export class MediaCreateDto {
   @IsString() name: string;
   @IsString() type: string;
   @IsString() source: string;
+  @IsNumber() year: number;
   @IsArray() artists: string[];
   @IsArray() styles: string[];
   @IsOptional() @IsString() image: string;

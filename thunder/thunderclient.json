@@ -2893,5 +2893,81 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9ecce202-72f3-44d2-8144-985aae9b8d5f",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "23dff43a-5bbd-46fc-a563-e4f07b568c4a",
+    "name": "Youtube: search",
+    "url": "{{URL}}/youtube/search",
+    "method": "POST",
+    "sortNum": 130000,
+    "created": "2022-10-29T22:50:41.583Z",
+    "modified": "2022-10-29T22:51:24.118Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"query\": \"DJ Nano\"}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "9ea0e6b1-8f0f-4b61-959d-e0fa3c964650",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: getAll",
+    "url": "{{URL}}/media/getAll",
+    "method": "POST",
+    "sortNum": 140000,
+    "created": "2022-10-29T23:49:43.248Z",
+    "modified": "2022-10-30T00:16:02.764Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"set\",\n  \"filter\": [\"style\", \"Trap\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "4d8a51c5-a5d6-498f-b17e-fbdb6b18a4ea",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: create",
+    "url": "{{URL}}/media/create",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-10-29T23:51:06.405Z",
+    "modified": "2022-10-30T00:01:06.368Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Perro\",\n  \"type\": \"set\",\n  \"source\": \"youtube\",\n  \"artists\": [\"6355a7559c3776b22983ffa3\"],\n  \"styles\": [\"63554974e893600179f0cb0e\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "87003327-1081-4450-94e7-8fa66940081a",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: deleteAll",
+    "url": "{{URL}}/media/all",
+    "method": "DELETE",
+    "sortNum": 160000,
+    "created": "2022-10-29T23:52:39.691Z",
+    "modified": "2022-10-29T23:53:05.941Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

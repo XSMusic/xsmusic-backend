@@ -1,14 +1,13 @@
 import { config } from '@core/config';
-import { YoutubeApiRootI } from '@youtube';
+import { YoutubeApiRootI, YoutubeI } from '@youtube';
 import axios from 'axios';
 
 export class YoutubeService {
-  async search(data: { query: string }) {
+  async search(data: { query: string }): Promise<YoutubeI[]> {
     try {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${data.query}&type=video&key=${config.youtubeToken}`;
       const response = await axios.get<YoutubeApiRootI>(url);
-      console.log(response.data);
-      const items = [];
+      const items: YoutubeI[] = [];
       for (const item of response.data.items) {
         items.push({
           name: item.snippet.title,

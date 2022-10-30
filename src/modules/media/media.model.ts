@@ -22,6 +22,7 @@ const schema = new mongoose.Schema(
     styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
     info: { type: String, default: '' },
     source: { type: String, default: 'youtube', enum: sourceValid },
+    year: { type: Number, default: 0 },
   },
   {
     toJSON: { virtuals: true },
