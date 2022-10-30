@@ -40,14 +40,14 @@ export class ArtistService {
         const type = body.id ? '_id' : 'slug';
         const value = body.id ? body.id : body.slug;
         const aggregate = artistGetOneAggregate(type, value);
-        const artists = await Artist.aggregate(aggregate).exec();
-        let artist: ArtistI;
-        if (artists.length > 0) {
-          artist = artists[0];
+        const items = await Artist.aggregate(aggregate).exec();
+        let item: ArtistI;
+        if (items.length > 0) {
+          item = items[0];
         } else {
           reject({ message: 'El id no existe' });
         }
-        resolve(artist);
+        resolve(item);
       } catch (error) {
         reject(error);
       }

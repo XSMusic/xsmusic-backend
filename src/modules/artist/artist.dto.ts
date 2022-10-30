@@ -8,6 +8,7 @@ export class ArtistCreateDto {
   @IsOptional() @IsString() country: string;
   @IsOptional() @IsString() image: string;
   @IsOptional() @IsString() birthdate: string;
+  @IsOptional() @IsString() info: string;
   @IsOptional() styles: string[];
 }
 

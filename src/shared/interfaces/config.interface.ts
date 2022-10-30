@@ -11,6 +11,7 @@ export interface ConfigI {
     server_key: string;
   };
   githubToken: string;
+  youtubeToken: string;
   paths: {
     project: string;
     uploads: string;
