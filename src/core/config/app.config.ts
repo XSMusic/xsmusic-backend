@@ -45,7 +45,7 @@ export const config: ConfigI = {
   fcm: {
     server_key: FCM_SERVER_KEY,
   },
-    githubToken: GITHUB_TOKEN,
+  githubToken: GITHUB_TOKEN,
   youtubeToken: YOUTUBE_TOKEN,
   paths: {
     project: PATH_PROJECT,

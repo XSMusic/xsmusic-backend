@@ -80,3 +80,7 @@ export const slugify = (str: string, simbol = '-', toLowerCase = true) => {
 
   return str;
 };
+
+export const onlyUnique = (value: any, index: number, self: any[]) => {
+  return self.indexOf(value) === index;
+};

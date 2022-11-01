@@ -1,9 +1,15 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { MediaCreateDto, MediaGetAllDto, MediaI, MediaService, MediaUpdateDto } from '@media';
+import {
+  MediaCreateDto,
+  MediaGetAllDto,
+  MediaI,
+  MediaService,
+  MediaUpdateDto,
+} from '@media';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { IdDto, SearchDto } from '@dtos';
+import { IdDto } from '@dtos';
 
 export class MediaController implements ControllerI {
   path = '/media';

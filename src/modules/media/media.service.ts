@@ -1,7 +1,12 @@
-import { SearchDto } from "@dtos";
-import { MessageI, PaginatorI } from "@interfaces";
-import { Media, mediaGetAllAggregate, MediaGetAllDto, mediaGetOneAggregate, MediaI } from "@media";
-import { getValuesForPaginator } from "@utils";
+import { MessageI, PaginatorI } from '@interfaces';
+import {
+  Media,
+  mediaGetAllAggregate,
+  MediaGetAllDto,
+  mediaGetOneAggregate,
+  MediaI,
+} from '@media';
+import { getValuesForPaginator } from '@utils';
 
 export class MediaService {
   getAll(

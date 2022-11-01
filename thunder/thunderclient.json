@@ -2969,5 +2969,24 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "241aef21-31d1-430f-b959-60bda60d03a4",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: getOneById",
+    "url": "{{URL}}/media/getOne",
+    "method": "POST",
+    "sortNum": 145000,
+    "created": "2022-10-31T14:17:55.666Z",
+    "modified": "2022-10-31T15:20:20.839Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"635fe5d1a97e7ac552a5f545\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

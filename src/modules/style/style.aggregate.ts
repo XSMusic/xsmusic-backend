@@ -8,7 +8,7 @@ export const styleGetAllAggregate = (
   pageSize: number
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
-  const data: any = [{ $sort: sort }, { $skip: skip }, { $limit: pageSize }];
+  const data: any = [];
   if (body.complete) {
     data.push(
       {
@@ -20,12 +20,42 @@ export const styleGetAllAggregate = (
           pipeline: [{ $count: 'count' }, { $project: { count: 1, _id: 0 } }],
         },
       },
-      { $unwind: '$artists' },
+      {
+        $lookup: {
+          from: 'media',
+          localField: '_id',
+          foreignField: 'styles',
+          as: 'sets',
+          pipeline: [
+            { $match: { $or: [{ type: 'set' }] } },
+            { $count: 'count' },
+            { $project: { count: 1, _id: 0 } },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: 'media',
+          localField: '_id',
+          foreignField: 'styles',
+          as: 'tracks',
+          pipeline: [
+            { $match: { $or: [{ type: 'track' }] } },
+            { $count: 'count' },
+            { $project: { count: 1, _id: 0 } },
+          ],
+        },
+      },
+      { $unwind: { path: '$artists', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
       {
         $project: {
           _id: 1,
           name: 1,
           artists: 1,
+          sets: 1,
+          tracks: 1,
         },
       }
     );
@@ -40,7 +70,7 @@ export const styleGetAllAggregate = (
   if (body.filter && body.filter.length === 2) {
     data.push({ $match: { [body.filter[0]]: body.filter[1] } });
   }
-
+  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   return data;
 };
 

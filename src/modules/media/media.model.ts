@@ -1,6 +1,4 @@
-import { artistSchema } from '@artist';
 import { MediaMongoI } from '@media';
-import { styleSchema } from '@style';
 import * as mongoose from 'mongoose';
 
 const typeValid = {
@@ -16,10 +14,10 @@ const sourceValid = {
 const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
-    artists: [{ type: mongoose.Types.ObjectId, ref: artistSchema }],
+    artists: [{ type: mongoose.Types.ObjectId, ref: 'Artist' }],
     type: { type: String, default: 'set', enum: typeValid },
     image: { type: String, default: '' },
-    styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
+    styles: [{ type: mongoose.Types.ObjectId, ref: 'Style' }],
     info: { type: String, default: '' },
     source: { type: String, default: 'youtube', enum: sourceValid },
     sourceId: { type: String, default: '' },

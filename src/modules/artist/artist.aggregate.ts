@@ -2,6 +2,7 @@ import { ArtistGetAllDto } from '@artist';
 import { SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
+import util from 'util';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -21,7 +22,23 @@ export const artistGetAllAggregate = (
     data.push(d);
   }
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-
+  data.push({
+    $project: {
+      _id: 1,
+      name: 1,
+      country: 1,
+      birthdate: 1,
+      styles: 1,
+      image: 1,
+      info: 1,
+      slug: 1,
+      gender: 1,
+      social: 1,
+      sets: 1,
+      tracks: 1,
+    },
+  });
+  console.log(util.inspect(data, { showHidden: false, depth: null }));
   return data;
 };
 
@@ -34,33 +51,6 @@ export const artistGetOneAggregate = (type: string, value: string): any => {
 };
 
 export const artistSearchAggregate = (data: SearchDto): any => [
-  { $unwind: '$styles' },
-  {
-    $lookup: {
-      from: 'styles',
-      localField: 'styles',
-      foreignField: '_id',
-      as: 'stylesObj',
-      pipeline: [{ $project: { _id: 1, name: 1 } }],
-    },
-  },
-  { $unwind: '$stylesObj' },
-  {
-    $group: {
-      _id: '$_id',
-      name: { $first: '$name' },
-      country: { $first: '$country' },
-      birthdate: { $first: '$birthdate' },
-      styles: { $push: '$stylesObj' },
-      image: { $first: '$image' },
-      info: { $first: '$info' },
-      slug: { $first: '$slug' },
-      gender: { $first: '$gender' },
-      social: { $first: '$social' },
-      created: { $first: '$created' },
-      updated: { $first: '$updated' },
-    },
-  },
   {
     $match: {
       $or: [
@@ -77,33 +67,47 @@ export const artistSearchAggregate = (data: SearchDto): any => [
 
 const addStylesAndGroup = (data: any[]) => {
   data.push(
-    { $unwind: '$styles' },
     {
       $lookup: {
         from: 'styles',
         localField: 'styles',
         foreignField: '_id',
-        as: 'stylesObj',
+        as: 'styles',
         pipeline: [{ $project: { _id: 1, name: 1 } }],
       },
     },
-    { $unwind: '$stylesObj' },
     {
-      $group: {
-        _id: '$_id',
-        name: { $first: '$name' },
-        country: { $first: '$country' },
-        birthdate: { $first: '$birthdate' },
-        styles: { $push: '$stylesObj' },
-        gender: { $first: '$gender' },
-        image: { $first: '$image' },
-        social: { $first: '$social' },
-        info: { $first: '$info' },
-        slug: { $first: '$slug' },
-        created: { $first: '$created' },
-        updated: { $first: '$updated' },
+      $lookup: {
+        from: 'media',
+        localField: '_id',
+        foreignField: 'artists',
+        as: 'sets',
+        pipeline: [
+          {
+            $match: { $or: [{ type: 'set' }] },
+          },
+          { $count: 'count' },
+          { $project: { count: 1, _id: 0 } },
+        ],
       },
-    }
+    },
+    {
+      $lookup: {
+        from: 'media',
+        localField: '_id',
+        foreignField: 'artists',
+        as: 'tracks',
+        pipeline: [
+          {
+            $match: { $or: [{ type: 'track' }] },
+          },
+          { $count: 'count' },
+          { $project: { count: 1, _id: 0 } },
+        ],
+      },
+    },
+    { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
   );
   return data;
 };
