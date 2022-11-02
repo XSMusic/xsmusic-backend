@@ -8,6 +8,7 @@ import promBundle from 'express-prom-bundle';
 import { config } from '../../core/config/app.config';
 import { Logger } from '@services';
 import * as expressStatusMonitor from 'express-status-monitor';
+import { morganMiddleware } from '@middlewares';
 
 export class AppService {
   private app: express.Application;
@@ -71,6 +72,7 @@ export class AppService {
     this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(methodOverride());
+    this.app.use(morganMiddleware);
   }
 
   initializeErrorHandling() {

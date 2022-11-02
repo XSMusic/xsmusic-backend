@@ -31,11 +31,6 @@ export class ArtistController implements ControllerI {
       this.getOne
     );
     this.router.post(
-      `${this.path}/search`,
-      [validationMiddleware(SearchDto)],
-      this.search
-    );
-    this.router.post(
       `${this.path}/create`,
       validationMiddleware(ArtistCreateDto),
       this.create
@@ -73,20 +68,6 @@ export class ArtistController implements ControllerI {
       const body: IdSlugDto = request.body;
       const result: ArtistI = await this.artistService.getOne(body);
       response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private search = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: SearchDto = request.body;
-      const items = await this.artistService.search(body);
-      response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
     }

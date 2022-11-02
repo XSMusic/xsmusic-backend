@@ -1,3 +1,4 @@
-export { StatsService } from './stats.service';
-export { StatsController } from './stats.controller';
+export * from './stats.service';
+export * from './stats.controller';
 export * from './stats.interface';
+export * from './stats.dto';

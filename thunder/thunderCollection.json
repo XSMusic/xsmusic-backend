@@ -38,7 +38,14 @@
         "name": "Stats",
         "containerId": "",
         "created": "2022-10-22T00:40:44.459Z",
-        "sortNum": 50000
+        "sortNum": 50000,
+        "settings": {
+          "runOptions": {
+            "delay": 0,
+            "iterations": 50,
+            "dataFilePath": ""
+          }
+        }
       },
       {
         "_id": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",

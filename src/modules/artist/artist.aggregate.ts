@@ -1,8 +1,7 @@
 import { ArtistGetAllDto } from '@artist';
-import { SearchDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
-import util from 'util';
+import inspect from 'util';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -11,16 +10,8 @@ export const artistGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addStylesAndGroup(data);
-  if (body.filter && body.filter.length === 2) {
-    const d = {
-      $match: {
-        [body.filter[0] === 'styles' ? 'styles.name' : body.filter[0]]:
-          body.filter[1],
-      },
-    };
-    data.push(d);
-  }
+  data = addStylesAndGroup(data, false);
+  data = setFilter(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data.push({
     $project: {
@@ -38,7 +29,6 @@ export const artistGetAllAggregate = (
       tracks: 1,
     },
   });
-  console.log(util.inspect(data, { showHidden: false, depth: null }));
   return data;
 };
 
@@ -46,26 +36,11 @@ export const artistGetOneAggregate = (type: string, value: string): any => {
   let data = [];
   const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type]: match } });
-  data = addStylesAndGroup(data);
+  data = addStylesAndGroup(data, true);
   return data;
 };
 
-export const artistSearchAggregate = (data: SearchDto): any => [
-  {
-    $match: {
-      $or: [
-        { name: { $regex: `${data.value}`, $options: 'i' } },
-        { birthdate: { $regex: `${data.value}`, $options: 'i' } },
-        { country: { $regex: `${data.value}`, $options: 'i' } },
-        {
-          'styles.name': { $regex: `${data.value}`, $options: 'i' },
-        },
-      ],
-    },
-  },
-];
-
-const addStylesAndGroup = (data: any[]) => {
+const addStylesAndGroup = (data: any[], complete: boolean) => {
   data.push(
     {
       $lookup: {
@@ -82,13 +57,7 @@ const addStylesAndGroup = (data: any[]) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'sets',
-        pipeline: [
-          {
-            $match: { $or: [{ type: 'set' }] },
-          },
-          { $count: 'count' },
-          { $project: { count: 1, _id: 0 } },
-        ],
+        pipeline: getPipeline('set', complete),
       },
     },
     {
@@ -97,17 +66,54 @@ const addStylesAndGroup = (data: any[]) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'tracks',
-        pipeline: [
-          {
-            $match: { $or: [{ type: 'track' }] },
-          },
-          { $count: 'count' },
-          { $project: { count: 1, _id: 0 } },
-        ],
+        pipeline: getPipeline('track', complete),
       },
-    },
-    { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-    { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
+    }
   );
+  if (!complete) {
+    data.push(
+      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
+    );
+  }
   return data;
+};
+
+const setFilter = (body: ArtistGetAllDto, data: any) => {
+  if (body.filter && body.filter.length === 2) {
+    let d = {};
+    if (body.filter[0] === 'name') {
+      d = {
+        $match: {
+          $or: [
+            { name: { $regex: `${body.filter[1]}`, $options: 'i' } },
+            { birthdate: { $regex: `${body.filter[1]}`, $options: 'i' } },
+            { country: { $regex: `${body.filter[1]}`, $options: 'i' } },
+            {
+              'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+            },
+          ],
+        },
+      };
+    } else {
+      d = {
+        $match: {
+          [body.filter[0] === 'styles' ? 'styles.name' : body.filter[0]]:
+            body.filter[1],
+        },
+      };
+    }
+    data.push(d);
+  }
+  return data;
+};
+
+const getPipeline = (type: string, complete: boolean) => {
+  const pipelineCount = [
+    { $match: { $or: [{ type: type }] } },
+    { $count: 'count' },
+    { $project: { count: 1, _id: 0 } },
+  ];
+  const pipelineNotCount = [{ $match: { $or: [{ type: type }] } }];
+  return complete ? pipelineNotCount : pipelineCount;
 };

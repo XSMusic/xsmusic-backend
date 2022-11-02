@@ -1,0 +1,77 @@
+use('XSMusic')
+
+
+const aggregation = [
+  {
+    '$lookup': {
+      from: 'styles',
+      localField: 'styles',
+      foreignField: '_id',
+      as: 'styles',
+      pipeline: [ { '$project': { _id: 1, name: 1 } } ]
+    }
+  },
+  {
+    '$lookup': {
+      from: 'media',
+      localField: '_id',
+      foreignField: 'artists',
+      as: 'sets',
+      pipeline: [
+        {
+          '$match': { '$or': [ { type: 'set' } ] }
+        },
+        { '$count': 'count' },
+        { '$project': { count: 1, _id: 0 } }
+      ]
+    }
+  },
+  {
+    '$lookup': {
+      from: 'media',
+      localField: '_id',
+      foreignField: 'artists',
+      as: 'tracks',
+      pipeline: [
+        {
+          '$match': { '$or': [ { type: 'track' } ] }
+        },
+        { '$count': 'count' },
+        { '$project': { count: 1, _id: 0 } }
+      ]
+    }
+  },
+  { '$unwind': { path: '$sets', preserveNullAndEmptyArrays: true } },
+  { '$unwind': { path: '$tracks', preserveNullAndEmptyArrays: true } },
+  {
+    '$match': {
+      '$or': [
+        { name: { '$regex': 'undefined', '$options': 'i' } },
+        { birthdate: { '$regex': 'undefined', '$options': 'i' } },
+        { country: { '$regex': 'undefined', '$options': 'i' } },
+        { 'styles.name': { '$regex': 'undefined', '$options': 'i' } }
+      ]
+    }
+  },
+  { '$sort': { name: -1 } },
+  { '$skip': 0 },
+  { '$limit': 20 },
+  {
+    '$project': {
+      _id: 1,
+      name: 1,
+      country: 1,
+      birthdate: 1,
+      styles: 1,
+      image: 1,
+      info: 1,
+      slug: 1,
+      gender: 1,
+      social: 1,
+      sets: 1,
+      tracks: 1
+    }
+  }
+]
+
+db.artists.aggregate(aggregation)

@@ -84,3 +84,13 @@ export const slugify = (str: string, simbol = '-', toLowerCase = true) => {
 export const onlyUnique = (value: any, index: number, self: any[]) => {
   return self.indexOf(value) === index;
 };
+
+export const sortByTotal = (a: any, b: any) => {
+  if (a.total > b.total) {
+    return -1;
+  } else if (b.total > a.total) {
+    return 1;
+  } else {
+    return 0;
+  }
+};

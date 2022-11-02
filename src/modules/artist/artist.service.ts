@@ -4,9 +4,7 @@ import {
   ArtistGetAllDto,
   ArtistI,
   artistGetOneAggregate,
-  artistSearchAggregate,
 } from '@artist';
-import { SearchDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 
@@ -52,16 +50,6 @@ export class ArtistService {
         reject(error);
       }
     });
-  }
-
-  async search(data: SearchDto) {
-    try {
-      const aggregate: any = artistSearchAggregate(data);
-      const items = await Artist.aggregate(aggregate).exec();
-      return items;
-    } catch (error) {
-      return error;
-    }
   }
 
   create(body: ArtistI): Promise<MessageI> {

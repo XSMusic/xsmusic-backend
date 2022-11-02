@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { StatsService, StatsTotalsAdminI } from '@stats';
+import { StatsService, StatsTotalsAdminI, StatsGetTopArtistsDto } from '@stats';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
-import { checkAdminToken } from '@middlewares';
+import { checkAdminToken, validationMiddleware } from '@middlewares';
 
 export class StatsController implements ControllerI {
   path = '/stats';
@@ -14,6 +14,11 @@ export class StatsController implements ControllerI {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/getForAdmin`, [checkAdminToken], this.getAll);
+    this.router.post(
+      `${this.path}/getTopArtists`,
+      validationMiddleware(StatsGetTopArtistsDto),
+      this.getTopArtist
+    );
   }
 
   private getAll = async (
@@ -23,6 +28,20 @@ export class StatsController implements ControllerI {
   ) => {
     try {
       const items: StatsTotalsAdminI = await this.statsService.getForAdmin();
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getTopArtist = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: StatsGetTopArtistsDto = request.body;
+      const items = await this.statsService.getTopArtists(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

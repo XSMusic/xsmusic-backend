@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-10-19T20:28:53.830Z",
-    "modified": "2022-10-19T20:28:53.830Z",
+    "modified": "2022-11-02T10:59:48.757Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{ \"page\": 1, \"pageSize\": 20, \"site\":  \"app\", \"order\": [\"name\", \"desc\"]}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"filter\": [\"name\", \"Fatima Hajji\"]\n}",
       "form": []
     },
     "tests": []
@@ -2827,7 +2827,7 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-10-22T00:40:56.104Z",
-    "modified": "2022-10-22T00:41:57.773Z",
+    "modified": "2022-11-02T13:21:20.546Z",
     "headers": [
       {
         "name": "XSToken",
@@ -2835,7 +2835,38 @@
       }
     ],
     "params": [],
-    "tests": []
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "artists"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "clubs"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "styles"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "tracks"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "events"
+      }
+    ]
   },
   {
     "_id": "14a72988-d208-460a-bf3a-d54784286bcc",
@@ -2988,5 +3019,54 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "57a0a087-d5ce-4479-be9a-71833aba6773",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d73a6366-60ba-4281-81e5-18120ab9c67d",
+    "name": "Stats: getTopArtists",
+    "url": "{{URL}}/stats/getTopArtists",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-02T11:48:13.287Z",
+    "modified": "2022-11-02T13:22:51.916Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"country\",\n  \"limit\": 5\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "istype",
+        "value": "array"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "id"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "name"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "total"
+      }
+    ]
   }
 ]

@@ -1,4 +1,4 @@
-export const countries: { id: string; name: string }[] = [
+export const countries: { id: string; name: string, total?: number }[] = [
   {
     id: 'af',
     name: 'Afganistán',
