@@ -1,12 +1,12 @@
-import { IdDto, SearchDto } from '@dtos';
+import { IdDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator } from '@utils';
 import {
   Style,
   styleGetAllAggregate,
   StyleGetAllDto,
+  styleGetOneAggregate,
   StyleI,
-  styleSearchAggregate,
 } from '@style';
 
 export class StyleService {
@@ -36,21 +36,17 @@ export class StyleService {
   getOneById(body: IdDto): Promise<StyleI> {
     return new Promise(async (resolve, reject) => {
       try {
-        resolve(await Style.findById(body.id).exec());
+        const aggregate = styleGetOneAggregate(body.id);
+        const items = await Style.aggregate(aggregate).exec();
+        if (items.length > 0) {
+          resolve(items[0]);
+        } else {
+          reject({ message: 'El id no existe' });
+        }
       } catch (error) {
         reject(error);
       }
     });
-  }
-
-  async search(data: SearchDto) {
-    try {
-      const aggregate: any = styleSearchAggregate(data);
-      const items = await Style.aggregate(aggregate).exec();
-      return items;
-    } catch (error) {
-      return error;
-    }
   }
 
   create(body: StyleI): Promise<MessageI> {

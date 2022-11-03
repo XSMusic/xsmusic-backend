@@ -12,7 +12,7 @@ const level = () => {
   const env = process.env.NODE_ENV || 'development';
   let level = 'error';
   if (env === 'development') {
-      level = 'http';
+    level = 'http';
   } else if (env === 'production') {
     level = 'info';
   }

@@ -1,7 +1,6 @@
 import { ArtistGetAllDto } from '@artist';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
-import inspect from 'util';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -10,7 +9,7 @@ export const artistGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addStylesAndGroup(data, false);
+  data = addLookups(data, false);
   data = setFilter(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data.push({
@@ -27,6 +26,8 @@ export const artistGetAllAggregate = (
       social: 1,
       sets: 1,
       tracks: 1,
+      updated: 1,
+      created: 1,
     },
   });
   return data;
@@ -36,11 +37,11 @@ export const artistGetOneAggregate = (type: string, value: string): any => {
   let data = [];
   const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type]: match } });
-  data = addStylesAndGroup(data, true);
+  data = addLookups(data, true);
   return data;
 };
 
-const addStylesAndGroup = (data: any[], complete: boolean) => {
+const addLookups = (data: any[], complete: boolean) => {
   data.push(
     {
       $lookup: {

@@ -9,7 +9,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { IdSlugDto, SearchDto } from '@dtos';
+import { IdSlugDto } from '@dtos';
 
 export class ArtistController implements ControllerI {
   path = '/artists';

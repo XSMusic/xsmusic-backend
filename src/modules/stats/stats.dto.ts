@@ -1,6 +1,6 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString } from 'class-validator';
 
-export class StatsGetTopArtistsDto  {
+export class StatsGetTopArtistsDto {
   @IsString() type?: string;
   @IsNumber() limit?: number;
 }

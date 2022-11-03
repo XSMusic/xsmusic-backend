@@ -30,7 +30,3 @@ export class SiteDto {
   @IsString() site: string;
 }
 
-export class SearchDto {
-  @IsString() value: string;
-  @IsOptional() @IsNumber() limit: number;
-}

@@ -9,7 +9,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { validationMiddleware } from '../../shared/middlewares/validation.middleware';
-import { IdDto, SearchDto } from '@dtos';
+import { IdDto } from '@dtos';
 import { checkAdminToken } from '@middlewares';
 
 export class StyleController implements ControllerI {
@@ -30,11 +30,6 @@ export class StyleController implements ControllerI {
       `${this.path}/getOneById`,
       validationMiddleware(IdDto),
       this.getOneById
-    );
-    this.router.post(
-      `${this.path}/search`,
-      [validationMiddleware(SearchDto)],
-      this.search
     );
     this.router.post(
       `${this.path}/create`,
@@ -74,20 +69,6 @@ export class StyleController implements ControllerI {
       const body: IdDto = request.body;
       const result: StyleI = await this.styleService.getOneById(body);
       response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private search = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: SearchDto = request.body;
-      const items = await this.styleService.search(body);
-      response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
     }

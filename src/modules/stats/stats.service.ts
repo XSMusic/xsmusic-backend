@@ -6,6 +6,7 @@ import { ArtistMongoI } from '../artist/artist.interface';
 import { Media } from '@media';
 import { StatsGetTopArtistsDto } from '@stats';
 import { countries, sortByTotal } from '@utils';
+import { MediaMongoI } from '../media/media.interface';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -14,8 +15,8 @@ export class StatsService {
         const totals: StatsTotalsAdminI = {
           artists: await this.setTotal<ArtistMongoI>(Artist),
           styles: await this.setTotal<StyleMongoI>(Style),
-          sets: await this.setTotal<StyleMongoI>(Media, 'set'),
-          tracks: await this.setTotal<StyleMongoI>(Media, 'track'),
+          sets: await this.setTotal<MediaMongoI>(Media, 'set'),
+          tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
           clubs: 0,
           events: 0,
         };
