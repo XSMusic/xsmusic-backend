@@ -4,10 +4,8 @@ import {
   userGetAllAggregate,
   UserGetAllDto,
   UserI,
-  userSearchAggregate,
 } from '@user';
 import { randEmail, randFullName } from '@ngneat/falso';
-import { SearchDto } from '@dtos';
 import { getValuesForPaginator } from '@utils';
 
 export class UserService {
@@ -41,16 +39,6 @@ export class UserService {
       } else {
         return User.find({}).populate(this.populateDefault).exec();
       }
-    } catch (error) {
-      return error;
-    }
-  }
-
-  async search(data: SearchDto) {
-    try {
-      const aggregate: any = userSearchAggregate(data);
-      const items = await User.aggregate(aggregate).exec();
-      return items;
     } catch (error) {
       return error;
     }

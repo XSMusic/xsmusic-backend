@@ -9,7 +9,7 @@ import {
 } from '@user';
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
-import { IdDto, SearchDto } from '@dtos';
+import { IdDto } from '@dtos';
 import {
   validationMiddleware,
   checkAdminToken,
@@ -31,11 +31,6 @@ export class UserController implements ControllerI {
       validationMiddleware(UserGetAllDto),
       checkAdminToken,
       this.getAll
-    );
-    this.router.post(
-      `${this.path}/search`,
-      [validationMiddleware(SearchDto)],
-      this.search
     );
     this.router.post(
       `${this.path}/one`,
@@ -75,20 +70,6 @@ export class UserController implements ControllerI {
     try {
       const body: UserGetAllDto = request.body;
       const items = await this.userService.getAll(body);
-      response.status(200).send(items);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private search = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: SearchDto = request.body;
-      const items = await this.userService.search(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
