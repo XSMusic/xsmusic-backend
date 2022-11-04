@@ -6,6 +6,11 @@ const rolsValid = {
   message: '{VALUE} no es un rol permitido',
 };
 
+const darkModeValid = {
+  values: ['on', 'off', 'system'],
+  message: '{VALUE} no es un rol permitido',
+};
+
 const schema = new mongoose.Schema(
   {
     name: { type: String },
@@ -16,6 +21,8 @@ const schema = new mongoose.Schema(
     googleId: { type: String, required: false },
     appleId: { type: String, required: false },
     fcm: { type: String, required: false },
+    image: { type: String, default: '' },
+    darkMode: { type: String, default: 'system', enum: darkModeValid },
   },
   {
     toJSON: { virtuals: true },
@@ -24,24 +31,6 @@ const schema = new mongoose.Schema(
     id: false,
   }
 );
-
-const data: mongoose.VirtualTypeOptions[] = [
-  {
-    ref: 'Car',
-    localField: '_id',
-    foreignField: 'driver',
-    justOne: false,
-  },
-  {
-    ref: 'Image',
-    localField: '_id',
-    foreignField: 'tournament',
-    justOne: true,
-  },
-];
-
-schema.virtual('cars', data[0]);
-schema.virtual('image', data[1]);
 
 schema.set('toJSON', {
   virtuals: true,

@@ -121,6 +121,7 @@ export class AuthService {
       country: 'es',
       role: 'USER',
       googleId: data.uid,
+      darkMode: 'system',
     };
     const userCreated = await this.register(userData, true);
     return { user: userCreated.user, token: userCreated.token, new: true };

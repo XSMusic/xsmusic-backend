@@ -5,4 +5,5 @@ export interface StatsTotalsAdminI {
   tracks: number;
   clubs: number;
   events: number;
+  users: number;
 }

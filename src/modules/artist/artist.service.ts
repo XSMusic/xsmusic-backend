@@ -72,7 +72,6 @@ export class ArtistService {
           reject({ message: 'El artista ya existe' });
         }
       } catch (error) {
-        console.error(error);
         reject(error);
       }
     });

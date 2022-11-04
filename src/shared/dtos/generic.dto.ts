@@ -29,4 +29,3 @@ export class GetAllDto {
 export class SiteDto {
   @IsString() site: string;
 }
-

@@ -85,19 +85,18 @@ const getPipeline = (type: string, complete: boolean) => {
     pipelineCount.push({ $match: { $or: [{ type: type }] } });
   }
   pipelineCount.push({ $count: 'count' }, { $project: { count: 1, _id: 0 } });
+  const styleLookup = {
+    $lookup: {
+      from: 'styles',
+      localField: 'styles',
+      foreignField: '_id',
+      as: 'styles',
+      pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+    },
+  };
   const pipelineNotCount =
     type === 'set' || type === 'track'
-      ? [{ $match: { $or: [{ type: type }] } }]
-      : [
-          {
-            $lookup: {
-              from: 'styles',
-              localField: 'styles',
-              foreignField: '_id',
-              as: 'styles',
-              pipeline: [{ $project: { _id: 1, name: 1 } }],
-            },
-          },
-        ];
+      ? [{ $match: { $or: [{ type: type }] } }, styleLookup]
+      : [styleLookup];
   return complete ? pipelineNotCount : pipelineCount;
 };

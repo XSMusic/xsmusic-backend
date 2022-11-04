@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import {
   UserCreateDto,
-  UserCreateFakeDto,
   UserGetAllDto,
   UserI,
   UserService,
@@ -41,12 +40,6 @@ export class UserController implements ControllerI {
       `${this.path}/create`,
       [validationMiddleware(UserCreateDto), checkAdminToken],
       this.create
-    );
-    this.router.post(
-      `${this.path}/createFake`,
-      validationMiddleware(UserCreateFakeDto),
-      checkAdminToken,
-      this.createFake
     );
     this.router.put(
       `${this.path}/update`,
@@ -96,23 +89,9 @@ export class UserController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: UserCreateDto = request.body;
+      const body = request.body;
       const user = await this.userService.create(body);
       response.status(200).send(user);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private createFake = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: UserCreateFakeDto = request.body;
-      const message = await this.userService.createFakeUsers(body.total);
-      response.status(200).send(message);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
     }
@@ -124,7 +103,7 @@ export class UserController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: UserUpdateDto = request.body;
+      const body = request.body;
       const item = await this.userService.update(body);
       response.status(200).send(item);
     } catch (error) {

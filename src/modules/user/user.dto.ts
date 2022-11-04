@@ -9,6 +9,7 @@ export class UserCreateDto {
   @IsString() email: string;
   @IsString() password?: string;
   @IsString() country: string;
+  @IsString() darkMode: string;
   @IsString() @IsOptional() role: string;
   @IsOptional() @IsString() googleId?: string;
   @IsOptional() @IsString() appleId?: string;

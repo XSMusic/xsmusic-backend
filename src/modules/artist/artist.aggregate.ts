@@ -49,7 +49,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [{ $project: { _id: 1, name: 1 } }],
+        pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
       },
     },
     {

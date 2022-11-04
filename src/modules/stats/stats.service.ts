@@ -7,6 +7,7 @@ import { Media } from '@media';
 import { StatsGetTopArtistsDto } from '@stats';
 import { countries, sortByTotal } from '@utils';
 import { MediaMongoI } from '../media/media.interface';
+import { User, UserMongoI } from '@user';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -19,6 +20,7 @@ export class StatsService {
           tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
           clubs: 0,
           events: 0,
+          users: await this.setTotal<UserMongoI>(User),
         };
         resolve(totals);
       } catch (error) {
