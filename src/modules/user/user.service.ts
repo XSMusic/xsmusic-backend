@@ -8,34 +8,24 @@ export class UserService {
   async getAll(
     body?: UserGetAllDto
   ): Promise<{ items: UserI[]; paginator: PaginatorI } | UserI[]> {
-    try {
-      if (body) {
-        if (body.onlyFCM) {
-          const users = await User.find({ fcm: { $ne: null } })
-            .limit(body.pageSize)
-            .exec();
-          return users;
-        } else {
-          const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-          const aggregate = userGetAllAggregate(body, skip, pageSize);
-          const items = await User.aggregate(aggregate).exec();
-          const total = await User.find({}).countDocuments().exec();
-          const totalPages = Math.ceil(total / pageSize);
-          const paginator: PaginatorI = {
-            pageSize,
-            currentPage,
-            totalPages,
-            total,
-          };
-
-          return { items, paginator };
-        }
-      } else {
-        return User.find({}).populate(this.populateDefault).exec();
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const aggregate = userGetAllAggregate(body, skip, pageSize);
+        const items = await User.aggregate(aggregate).exec();
+        const total = await User.find({}).countDocuments().exec();
+        const totalPages = Math.ceil(total / pageSize);
+        const paginator: PaginatorI = {
+          pageSize,
+          currentPage,
+          totalPages,
+          total,
+        };
+        resolve({ items, paginator });
+      } catch (error) {
+        reject(error);
       }
-    } catch (error) {
-      return error;
-    }
+    });
   }
 
   getOne(id: string): Promise<UserI> {

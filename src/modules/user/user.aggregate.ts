@@ -27,6 +27,8 @@ export const userGetAllAggregate = (
       },
     }
   );
+
+  return data;
 };
 
 const setFilter = (body: GetAllDto, data: any) => {

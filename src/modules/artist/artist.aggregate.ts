@@ -115,6 +115,9 @@ const getPipeline = (type: string, complete: boolean) => {
     { $count: 'count' },
     { $project: { count: 1, _id: 0 } },
   ];
-  const pipelineNotCount = [{ $match: { $or: [{ type: type }] } }];
+  const pipelineNotCount = [
+    { $match: { $or: [{ type: type }] } },
+    { $sort: { created: 1 } },
+  ];
   return complete ? pipelineNotCount : pipelineCount;
 };

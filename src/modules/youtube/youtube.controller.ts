@@ -14,20 +14,20 @@ export class YoutubeController implements ControllerI {
 
   private initializeRoutes() {
     this.router.post(
-      `${this.path}/search`,
+      `${this.path}/searchByText`,
       validationMiddleware(YoutubeSearchDto),
-      this.getAll
+      this.searchByText
     );
   }
 
-  private getAll = async (
+  private searchByText = async (
     request: Request,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: YoutubeSearchDto = request.body;
-      const items = await this.youtubeService.search(body);
+      const items = await this.youtubeService.searchByText(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

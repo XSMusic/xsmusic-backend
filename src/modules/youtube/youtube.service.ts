@@ -3,7 +3,7 @@ import { YoutubeApiRootI, YoutubeI } from '@youtube';
 import axios from 'axios';
 
 export class YoutubeService {
-  async search(data: { query: string }): Promise<YoutubeI[]> {
+  async searchByText(data: { query: string }): Promise<YoutubeI[]> {
     try {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${data.query}&type=video&key=${config.youtubeToken}`;
       const response = await axios.get<YoutubeApiRootI>(url);
