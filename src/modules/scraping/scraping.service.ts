@@ -94,7 +94,7 @@ export class ScrapingService {
         artist.image.push(
           'https://clubbingspain.com' + $('.border-radius-5').attr('src')
         );
-        artist.info.push($('h3:contains("Biografía")').next().text());
+        artist.info.push($('h3:contains("Biografía")').next().html());
         $('a').each(function () {
           const href = $(this).attr('href');
           if (href.includes('facebook')) {

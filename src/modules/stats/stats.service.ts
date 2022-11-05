@@ -4,10 +4,11 @@ import { Model } from 'mongoose';
 import { StatsTotalsAdminI } from './stats.interface';
 import { ArtistMongoI } from '../artist/artist.interface';
 import { Media } from '@media';
-import { StatsGetTopArtistsDto } from '@stats';
+import { StatsGetTopArtistsDto, StatsTotalAdminItemI } from '@stats';
 import { countries, sortByTotal } from '@utils';
 import { MediaMongoI } from '../media/media.interface';
 import { User, UserMongoI } from '@user';
+import moment from 'moment';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -18,10 +19,23 @@ export class StatsService {
           styles: await this.setTotal<StyleMongoI>(Style),
           sets: await this.setTotal<MediaMongoI>(Media, 'set'),
           tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
-          clubs: 0,
-          events: 0,
+          clubs: {
+            total: 0,
+            percentages: [
+              { days: '3', value: 0 },
+              { days: '7', value: 0 },
+            ],
+          },
+          events: {
+            total: 0,
+            percentages: [
+              { days: '3', value: 0 },
+              { days: '7', value: 0 },
+            ],
+          },
           users: await this.setTotal<UserMongoI>(User),
         };
+        console.log(totals);
         resolve(totals);
       } catch (error) {
         reject(error);
@@ -29,9 +43,33 @@ export class StatsService {
     });
   }
 
-  private setTotal<T>(model: Model<T>, type?: string) {
+  private async setTotal<T>(
+    model: Model<T>,
+    type?: string
+  ): Promise<StatsTotalAdminItemI> {
+    const daysComparation = [3, 7];
     const body = type ? { type } : {};
-    return model.countDocuments(body).exec();
+    const total = await model.countDocuments(body).exec();
+    const percentages = [];
+    for (const days of daysComparation) {
+      const dateComparation = moment().add(`-${days}`, 'day');
+      const created = {
+        created: {
+          $gte: dateComparation.toISOString(),
+          $lt: moment().toISOString(),
+        },
+      };
+      const bodyComparation = type ? { $and: [{ type }, created] } : created;
+      const value = await model.countDocuments(bodyComparation).exec();
+      percentages.push({
+        days: days.toString(),
+        value: Number((100 / (total / value)).toFixed(2)),
+      });
+    }
+    return {
+      total,
+      percentages,
+    };
   }
 
   getTopArtists(body: StatsGetTopArtistsDto) {

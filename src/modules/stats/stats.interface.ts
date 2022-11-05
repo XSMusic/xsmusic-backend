@@ -1,9 +1,14 @@
 export interface StatsTotalsAdminI {
-  artists: number;
-  styles: number;
-  sets: number;
-  tracks: number;
-  clubs: number;
-  events: number;
-  users: number;
+  artists: StatsTotalAdminItemI;
+  styles: StatsTotalAdminItemI;
+  sets: StatsTotalAdminItemI;
+  tracks: StatsTotalAdminItemI;
+  clubs: StatsTotalAdminItemI;
+  events: StatsTotalAdminItemI;
+  users: StatsTotalAdminItemI;
+}
+
+export interface StatsTotalAdminItemI {
+  total: number;
+  percentages: { days: string; value: number }[];
 }
