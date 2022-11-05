@@ -3073,5 +3073,152 @@
         "value": "total"
       }
     ]
+  },
+  {
+    "_id": "f50442b8-0193-4cad-a163-f566cee7ed3d",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Club: getAll",
+    "url": "{{URL}}/clubs/getAll",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-11-05T23:07:45.388Z",
+    "modified": "2022-11-05T23:08:19.663Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"filter\": [\"name\", \"Fatima Hajji\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "edfc8ee6-1f03-4823-be10-6e9ef301ff1f",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: getOneBySlug",
+    "url": "{{URL}}/artists/getOneBySlug",
+    "method": "POST",
+    "sortNum": 15000,
+    "created": "2022-11-05T23:07:45.390Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"slug\": \"david-guetta\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c263c7ff-ffb7-4af4-b727-40327153176e",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: getOneById",
+    "url": "{{URL}}/artists/getOneById",
+    "method": "POST",
+    "sortNum": 17500,
+    "created": "2022-11-05T23:07:45.391Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"635084063fe992f3df530405\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "09444f8d-d120-447a-8442-7a2f928b230d",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: create",
+    "url": "{{URL}}/artists/create",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-05T23:07:45.392Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"name\": \"perro\"}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "740ab3bb-e1c9-4209-93c4-7a9059cef331",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: search",
+    "url": "{{URL}}/artists/search",
+    "method": "POST",
+    "sortNum": 25000,
+    "created": "2022-11-05T23:07:45.393Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"value\": \"Techno\", \"limit\": 10}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7fc61738-f9c4-44d1-9eb5-6018c8419d29",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: update",
+    "url": "{{URL}}/artists/update",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2022-11-05T23:07:45.394Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"_id\": \"635067696648da7385a2c699\",\n  \"name\": \"perrako\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f5626072-ce37-447c-a30d-f75dad534877",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: deleteOne",
+    "url": "{{URL}}/artists/one/63505e52d7eb9b354ce86b65",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-11-05T23:07:45.395Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ed27c001-1b2c-46fb-ab74-7839208101cb",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Artist: deleteAll",
+    "url": "{{URL}}/artists/all",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-11-05T23:07:45.396Z",
+    "modified": "2022-11-05T23:07:45.389Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

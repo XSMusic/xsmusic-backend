@@ -7,10 +7,12 @@ import { StatsController } from '@stats';
 import { ScrapingController } from '@scraping';
 import { YoutubeController } from '@youtube';
 import { MediaController } from '@media';
+import { ClubController } from '@club';
 
 const controllers = [
   new ArtistController(),
   new AuthController(),
+  new ClubController(),
   new MediaController(),
   new MenuController(),
   new ScrapingController(),

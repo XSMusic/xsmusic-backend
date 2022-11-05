@@ -28,6 +28,7 @@
       "@utils": ["src/shared/utils"],
       "@artist": ["src/modules/artist"],
       "@auth": ["src/modules/auth"],
+      "@club": ["src/modules/club"],
       "@media": ["src/modules/media"],
       "@menu": ["src/modules/menu"],
       "@scraping": ["src/modules/scraping"],
