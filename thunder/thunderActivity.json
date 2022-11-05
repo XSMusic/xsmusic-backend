@@ -51,5 +51,156 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "4d4ea867-9786-4fdb-9a5a-bcfb776c7820",
+    "colId": "history",
+    "containerId": "",
+    "name": "GET https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "url": "GET https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:18.587Z",
+    "modified": "2022-11-05T17:12:18.596Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "lectures",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e966b209-73cf-48ab-9ff7-3cb18aa55590",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:22.300Z",
+    "modified": "2022-11-05T17:12:22.929Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "lectures",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "5b9ca7af-d033-436f-92d8-117e145f5d15",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate oscar mulero",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate oscar mulero",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:46.595Z",
+    "modified": "2022-11-05T17:13:56.235Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate oscar mulero",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "336a128a-a248-404f-96dc-ca6c170fb2b4",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&q=birthdate oscar mulero",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&q=birthdate oscar mulero",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:13:52.247Z",
+    "modified": "2022-11-05T17:13:52.383Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate oscar mulero",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "7cb9a256-ff3e-4571-ac27-df08393f7ffd",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate david guetta",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate david guetta",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:15:09.899Z",
+    "modified": "2022-11-05T17:15:10.452Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate david guetta",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

@@ -22,6 +22,8 @@ export const artistSchema = new mongoose.Schema(
       twitter: { type: String, default: '' },
       spotify: { type: String, default: '' },
       soundcloud: { type: String, default: '' },
+      tiktok: { type: String, default: '' },
+      instagram: { type: String, default: '' },
     },
     slug: { type: String, default: '' },
   },

@@ -15,6 +15,8 @@ export interface ArtistMongoI extends Document {
     twitter: string;
     spotify: string;
     soundcloud: string;
+    tiktok: string;
+    instagram: string;
   };
 }
 
