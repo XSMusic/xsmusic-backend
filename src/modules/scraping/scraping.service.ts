@@ -11,9 +11,6 @@ export class ScrapingService {
   private url_clubbingspain = 'https://www.clubbingspain.com/artistas';
   private url_djrankings = 'https://djrankings.org/DJ-';
   styles: StyleI[] = [];
-  constructor() {
-    this.getInfoArtist({ name: 'David Guetta', countryCode: '' });
-  }
 
   async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
     try {

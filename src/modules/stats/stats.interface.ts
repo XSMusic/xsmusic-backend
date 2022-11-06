@@ -3,7 +3,8 @@ export interface StatsTotalsAdminI {
   styles: StatsTotalAdminItemI;
   sets: StatsTotalAdminItemI;
   tracks: StatsTotalAdminItemI;
-  sites: StatsTotalAdminItemI;
+  clubs: StatsTotalAdminItemI;
+  festivals: StatsTotalAdminItemI;
   events: StatsTotalAdminItemI;
   users: StatsTotalAdminItemI;
 }
@@ -11,4 +12,10 @@ export interface StatsTotalsAdminI {
 export interface StatsTotalAdminItemI {
   total: number;
   percentages: { days: string; value: number }[];
+}
+
+export interface StatsGetTopArtistsI {
+  id: string;
+  name: string;
+  total: number;
 }

@@ -9,7 +9,7 @@ export const mediaGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addStylesAndGroup(data);
+  data = addLookups(data);
   data.push({
     $match: { type: body.type },
   });
@@ -27,7 +27,7 @@ export const mediaGetAllAggregate = (
     }
   }
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-
+  data = addProject(data);
   return data;
 };
 
@@ -35,11 +35,11 @@ export const mediaGetOneAggregate = (type: string, value: string): any => {
   let data = [];
   const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type]: match } });
-  data = addStylesAndGroup(data);
+  data = addLookups(data);
   return data;
 };
 
-const addStylesAndGroup = (data: any[]) => {
+const addLookups = (data: any[]) => {
   data.push(
     {
       $lookup: {
@@ -58,23 +58,27 @@ const addStylesAndGroup = (data: any[]) => {
         as: 'artists',
         pipeline: [{ $project: { _id: 1, name: 1, image: 1, slug: 1 } }],
       },
-    },
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        artists: 1,
-        styles: 1,
-        source: 1,
-        sourceId: 1,
-        image: 1,
-        info: 1,
-        year: 1,
-        type: 1,
-        created: 1,
-        updated: 1,
-      },
     }
   );
+  return data;
+};
+
+const addProject = (data: any[]) => {
+  data.push({
+    $project: {
+      _id: 1,
+      name: 1,
+      artists: 1,
+      styles: 1,
+      source: 1,
+      sourceId: 1,
+      image: 1,
+      info: 1,
+      year: 1,
+      type: 1,
+      created: 1,
+      updated: 1,
+    },
+  });
   return data;
 };

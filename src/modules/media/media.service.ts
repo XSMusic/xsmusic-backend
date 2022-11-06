@@ -55,22 +55,15 @@ export class MediaService {
   create(body: MediaI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const isExist: MediaI[] = await Media.find({
-          name: body.name,
-        }).exec();
-        if (isExist.length === 0) {
-          if (body._id) {
-            delete body._id;
-          }
-          const item = new Media(body);
-          const itemDB = await item.save();
-          if (itemDB) {
-            resolve({ message: `${body.type} creado` });
-          } else {
-            reject({ message: `El ${body.type} no ha sido creado` });
-          }
+        if (body._id) {
+          delete body._id;
+        }
+        const item = new Media(body);
+        const itemDB = await item.save();
+        if (itemDB) {
+          resolve({ message: `${body.type} creado` });
         } else {
-          reject({ message: `${body.type} ya existe` });
+          reject({ message: `El ${body.type} no ha sido creado` });
         }
       } catch (error) {
         console.error(error);

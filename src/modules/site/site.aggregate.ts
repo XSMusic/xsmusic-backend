@@ -10,22 +10,19 @@ export const siteGetAllAggregate = (
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   data = addLookups(data);
-  data = setFilter(body, data);
-  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data.push({
-    $project: {
-      _id: 1,
-      name: 1,
-      address: 1,
-      styles: 1,
-      image: 1,
-      info: 1,
-      slug: 1,
-      social: 1,
-      updated: 1,
-      created: 1,
-    },
+    $match: { type: body.type },
   });
+  data = setFilter(body, data);
+  if (body.filter && body.filter.length === 2) {
+    if (body.filter[0] === 'styles') {
+      data.push({ $match: { 'styles.name': body.filter[1] } });
+    } else {
+      data.push({ $match: { [body.filter[0]]: body.filter[1] } });
+    }
+  }
+  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
+  data = addProject(data);
   return data;
 };
 
@@ -77,5 +74,24 @@ const setFilter = (body: SiteGetAllDto, data: any) => {
     }
     data.push(d);
   }
+  return data;
+};
+
+const addProject = (data: any[]) => {
+  data.push({
+    $project: {
+      _id: 1,
+      name: 1,
+      address: 1,
+      styles: 1,
+      image: 1,
+      type: 1,
+      info: 1,
+      slug: 1,
+      social: 1,
+      updated: 1,
+      created: 1,
+    },
+  });
   return data;
 };

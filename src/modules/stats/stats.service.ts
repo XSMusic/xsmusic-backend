@@ -1,7 +1,7 @@
 import { Artist } from '@artist';
 import { Style, StyleMongoI } from '@style';
 import { Model } from 'mongoose';
-import { StatsTotalsAdminI } from './stats.interface';
+import { StatsGetTopArtistsI, StatsTotalsAdminI } from './stats.interface';
 import { ArtistMongoI } from '../artist/artist.interface';
 import { Media } from '@media';
 import { StatsGetTopArtistsDto, StatsTotalAdminItemI } from '@stats';
@@ -20,7 +20,8 @@ export class StatsService {
           styles: await this.setTotal<StyleMongoI>(Style),
           sets: await this.setTotal<MediaMongoI>(Media, 'set'),
           tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
-          sites: await this.setTotal<SiteMongoI>(Site),
+          clubs: await this.setTotal<SiteMongoI>(Site, 'club'),
+          festivals: await this.setTotal<SiteMongoI>(Site, 'festival'),
           events: {
             total: 0,
             percentages: [
@@ -67,11 +68,11 @@ export class StatsService {
     };
   }
 
-  getTopArtists(body: StatsGetTopArtistsDto) {
+  getTopArtists(body: StatsGetTopArtistsDto): Promise<StatsGetTopArtistsI[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const artists = await Artist.find({}).exec();
-        let data: any[] = [];
+        let data: StatsGetTopArtistsI[] = [];
         data = this.typeIsCountry(body, artists, data);
         resolve(data);
       } catch (e) {
@@ -83,8 +84,8 @@ export class StatsService {
   private typeIsCountry(
     body: StatsGetTopArtistsDto,
     artists: (ArtistMongoI & { _id: import('mongoose').Types.ObjectId })[],
-    data: any[]
-  ) {
+    data: StatsGetTopArtistsI[]
+  ): StatsGetTopArtistsI[] {
     const allCountries: any[] = [];
     if (body.type === 'country') {
       for (const country of countries) {

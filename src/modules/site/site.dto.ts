@@ -1,7 +1,9 @@
 import { GetAllDto } from '@dtos';
 import { IsOptional, IsString } from 'class-validator';
 
-export class SiteGetAllDto extends GetAllDto {}
+export class SiteGetAllDto extends GetAllDto {
+  @IsString() type: string;
+}
 
 export class SiteCreateDto {
   @IsString() name: string;
