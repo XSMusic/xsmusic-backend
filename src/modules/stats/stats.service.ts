@@ -9,6 +9,7 @@ import { countries, sortByTotal } from '@utils';
 import { MediaMongoI } from '../media/media.interface';
 import { User, UserMongoI } from '@user';
 import moment from 'moment';
+import { Club, ClubMongoI } from '@club';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -19,13 +20,7 @@ export class StatsService {
           styles: await this.setTotal<StyleMongoI>(Style),
           sets: await this.setTotal<MediaMongoI>(Media, 'set'),
           tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
-          clubs: {
-            total: 0,
-            percentages: [
-              { days: '3', value: 0 },
-              { days: '7', value: 0 },
-            ],
-          },
+          clubs: await this.setTotal<ClubMongoI>(Club),
           events: {
             total: 0,
             percentages: [

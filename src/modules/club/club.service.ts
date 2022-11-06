@@ -64,12 +64,12 @@ export class ClubService {
           const item = new Club(body);
           const itemDB = await item.save();
           if (itemDB) {
-            resolve({ message: 'Cluba creado' });
+            resolve({ message: 'Club creado' });
           } else {
-            reject({ message: 'El cluba no ha sido creado' });
+            reject({ message: 'El club no ha sido creado' });
           }
         } else {
-          reject({ message: 'El cluba ya existe' });
+          reject({ message: 'El club ya existe' });
         }
       } catch (error) {
         reject(error);
@@ -85,9 +85,9 @@ export class ClubService {
           new: true,
         }).exec();
         if (response) {
-          resolve({ message: 'Cluba actualizado' });
+          resolve({ message: 'Club actualizado' });
         } else {
-          reject({ message: 'Cluba no existe' });
+          reject({ message: 'Club no existe' });
         }
       } catch (error) {
         reject(error);
@@ -100,9 +100,9 @@ export class ClubService {
       try {
         const response = await Club.findByIdAndDelete(id).exec();
         if (response) {
-          resolve({ message: 'Cluba eliminado' });
+          resolve({ message: 'Club eliminado' });
         } else {
-          reject({ message: 'Cluba no existe' });
+          reject({ message: 'Club no existe' });
         }
       } catch (error) {
         reject(error);
@@ -117,9 +117,9 @@ export class ClubService {
         await this.deleteOne(item._id);
       }
       if (items.length > 0) {
-        resolve({ message: `${items.length} clubas eliminados` });
+        resolve({ message: `${items.length} clubs eliminados` });
       } else {
-        reject({ message: 'No hay clubas' });
+        reject({ message: 'No hay clubs' });
       }
     });
   }

@@ -16,16 +16,12 @@ export const clubGetAllAggregate = (
     $project: {
       _id: 1,
       name: 1,
-      country: 1,
-      birthdate: 1,
+      address: 1,
       styles: 1,
       image: 1,
       info: 1,
       slug: 1,
-      gender: 1,
       social: 1,
-      sets: 1,
-      tracks: 1,
       updated: 1,
       created: 1,
     },
@@ -42,17 +38,15 @@ export const clubGetOneAggregate = (type: string, value: string): any => {
 };
 
 const addLookups = (data: any[]) => {
-  data.push(
-    {
-      $lookup: {
-        from: 'styles',
-        localField: 'styles',
-        foreignField: '_id',
-        as: 'styles',
-        pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
-      },
+  data.push({
+    $lookup: {
+      from: 'styles',
+      localField: 'styles',
+      foreignField: '_id',
+      as: 'styles',
+      pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
     },
-  );
+  });
   return data;
 };
 
@@ -64,7 +58,9 @@ const setFilter = (body: ClubGetAllDto, data: any) => {
         $match: {
           $or: [
             { name: { $regex: `${body.filter[1]}`, $options: 'i' } },
-            { 'address.country': { $regex: `${body.filter[1]}`, $options: 'i' } },
+            {
+              'address.country': { $regex: `${body.filter[1]}`, $options: 'i' },
+            },
             {
               'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
             },
@@ -83,4 +79,3 @@ const setFilter = (body: ClubGetAllDto, data: any) => {
   }
   return data;
 };
-
