@@ -1,12 +1,13 @@
 import { Document } from 'mongoose';
 
-export interface ClubMongoI extends Document {
+export interface SiteMongoI extends Document {
   name: string;
   address: {
     city: string;
     country: string;
     coordinates: number[];
   };
+  type: string;
   image: string;
   styles: any[];
   info: string;
@@ -23,7 +24,7 @@ export interface ClubMongoI extends Document {
   };
 }
 
-export interface ClubI extends ClubMongoI {
+export interface SiteI extends SiteMongoI {
   _id?: string;
   created?: string;
   updated?: string;

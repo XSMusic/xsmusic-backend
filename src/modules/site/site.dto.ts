@@ -1,9 +1,9 @@
 import { GetAllDto } from '@dtos';
 import { IsOptional, IsString } from 'class-validator';
 
-export class ClubGetAllDto extends GetAllDto {}
+export class SiteGetAllDto extends GetAllDto {}
 
-export class ClubCreateDto {
+export class SiteCreateDto {
   @IsString() name: string;
   @IsOptional() @IsString() country: string;
   @IsOptional() @IsString() image: string;
@@ -12,6 +12,6 @@ export class ClubCreateDto {
   @IsOptional() styles: string[];
 }
 
-export class ClubUpdateDto extends ClubCreateDto {
+export class SiteUpdateDto extends SiteCreateDto {
   @IsString() _id: string;
 }

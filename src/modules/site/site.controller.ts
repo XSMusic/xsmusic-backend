@@ -1,20 +1,20 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import {
-  ClubCreateDto,
-  ClubGetAllDto,
-  ClubI,
-  ClubService,
-  ClubUpdateDto,
-} from '@club';
+  SiteCreateDto,
+  SiteGetAllDto,
+  SiteI,
+  SiteService,
+  SiteUpdateDto,
+} from 'src/modules/site';
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
 import { IdSlugDto } from '@dtos';
 
-export class ClubController implements ControllerI {
-  path = '/clubs';
+export class SiteController implements ControllerI {
+  path = '/sites';
   router = Router();
-  private clubService = new ClubService();
+  private siteService = new SiteService();
   constructor() {
     this.initializeRoutes();
   }
@@ -22,7 +22,7 @@ export class ClubController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(ClubGetAllDto),
+      validationMiddleware(SiteGetAllDto),
       this.getAll
     );
     this.router.post(
@@ -32,12 +32,12 @@ export class ClubController implements ControllerI {
     );
     this.router.post(
       `${this.path}/create`,
-      validationMiddleware(ClubCreateDto),
+      validationMiddleware(SiteCreateDto),
       this.create
     );
     this.router.put(
       `${this.path}/update`,
-      validationMiddleware(ClubUpdateDto),
+      validationMiddleware(SiteUpdateDto),
       checkAdminToken,
       this.update
     );
@@ -51,8 +51,8 @@ export class ClubController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: ClubGetAllDto = request.body;
-      const result = await this.clubService.getAll(body);
+      const body: SiteGetAllDto = request.body;
+      const result = await this.siteService.getAll(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -66,7 +66,7 @@ export class ClubController implements ControllerI {
   ) => {
     try {
       const body: IdSlugDto = request.body;
-      const result: ClubI = await this.clubService.getOne(body);
+      const result: SiteI = await this.siteService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -80,7 +80,7 @@ export class ClubController implements ControllerI {
   ) => {
     try {
       const body: any = request.body;
-      const result = await this.clubService.create(body);
+      const result = await this.siteService.create(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -94,7 +94,7 @@ export class ClubController implements ControllerI {
   ) => {
     try {
       const body = request.body;
-      const result = await this.clubService.update(body);
+      const result = await this.siteService.update(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -108,7 +108,7 @@ export class ClubController implements ControllerI {
   ) => {
     try {
       const id = request.params.id;
-      const result = await this.clubService.deleteOne(id);
+      const result = await this.siteService.deleteOne(id);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -121,7 +121,7 @@ export class ClubController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const result = await this.clubService.deleteAll();
+      const result = await this.siteService.deleteAll();
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

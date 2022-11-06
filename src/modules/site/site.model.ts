@@ -1,8 +1,13 @@
-import { ClubMongoI } from '@club';
+import { SiteMongoI } from 'src/modules/site';
 import { styleSchema } from '@style';
 import * as mongoose from 'mongoose';
 
-export const clubSchema = new mongoose.Schema(
+const typesValid = {
+  values: ['club', 'festival'],
+  message: '{VALUE} no es un tipo permitido',
+};
+
+export const siteSchema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     address: {
@@ -11,9 +16,11 @@ export const clubSchema = new mongoose.Schema(
       type: { type: String, default: 'Point' },
       coordinates: { type: [Number], default: [0, 0] },
     },
+    type: { type: String, default: 'club', enum: typesValid },
     styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
     image: { type: String, default: '' },
     info: { type: String, default: '' },
+
     social: {
       web: { type: String, default: '' },
       facebook: { type: String, default: '' },
@@ -35,4 +42,4 @@ export const clubSchema = new mongoose.Schema(
   }
 );
 
-export const Club = mongoose.model<ClubMongoI>('Club', clubSchema);
+export const Site = mongoose.model<SiteMongoI>('Site', siteSchema);

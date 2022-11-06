@@ -3,7 +3,7 @@ export interface StatsTotalsAdminI {
   styles: StatsTotalAdminItemI;
   sets: StatsTotalAdminItemI;
   tracks: StatsTotalAdminItemI;
-  clubs: StatsTotalAdminItemI;
+  sites: StatsTotalAdminItemI;
   events: StatsTotalAdminItemI;
   users: StatsTotalAdminItemI;
 }

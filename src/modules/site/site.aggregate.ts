@@ -1,9 +1,9 @@
-import { ClubGetAllDto } from '@club';
+import { SiteGetAllDto } from 'src/modules/site';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
 
-export const clubGetAllAggregate = (
-  body: ClubGetAllDto,
+export const siteGetAllAggregate = (
+  body: SiteGetAllDto,
   skip: number,
   pageSize: number
 ): any => {
@@ -29,7 +29,7 @@ export const clubGetAllAggregate = (
   return data;
 };
 
-export const clubGetOneAggregate = (type: string, value: string): any => {
+export const siteGetOneAggregate = (type: string, value: string): any => {
   let data = [];
   const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type]: match } });
@@ -50,7 +50,7 @@ const addLookups = (data: any[]) => {
   return data;
 };
 
-const setFilter = (body: ClubGetAllDto, data: any) => {
+const setFilter = (body: SiteGetAllDto, data: any) => {
   if (body.filter && body.filter.length === 2) {
     let d = {};
     if (body.filter[0] === 'name') {
