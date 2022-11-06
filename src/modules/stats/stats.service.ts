@@ -31,7 +31,6 @@ export class StatsService {
           },
           users: await this.setTotal<UserMongoI>(User),
         };
-        console.log(totals);
         resolve(totals);
       } catch (error) {
         reject(error);

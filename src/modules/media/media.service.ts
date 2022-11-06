@@ -1,3 +1,4 @@
+import { Artist } from '@artist';
 import { MessageI, PaginatorI } from '@interfaces';
 import {
   Media,
@@ -6,7 +7,7 @@ import {
   mediaGetOneAggregate,
   MediaI,
 } from '@media';
-import { getValuesForPaginator } from '@utils';
+import { getValuesForPaginator, slugify } from '@utils';
 
 export class MediaService {
   getAll(
@@ -58,6 +59,7 @@ export class MediaService {
         if (body._id) {
           delete body._id;
         }
+        body.slug = await this.generateSlug(body);
         const item = new Media(body);
         const itemDB = await item.save();
         if (itemDB) {
@@ -75,6 +77,7 @@ export class MediaService {
   update(body: MediaI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
+        body.slug = await this.generateSlug(body);
         const response = await Media.findByIdAndUpdate(body._id, body, {
           new: true,
         }).exec();
@@ -87,6 +90,19 @@ export class MediaService {
         reject(error);
       }
     });
+  }
+
+  private async generateSlug(body: MediaI) {
+    let slug = '';
+    for (const artist of body.artists) {
+      const artistDB = await Artist.findById(artist).exec();
+      if (slug !== '') {
+        slug = `${slug}-${slugify(artistDB.name)}`;
+      } else {
+        slug = slugify(artistDB.name);
+      }
+    }
+    return `${slug}-${slugify(body.name)}-${body.year !== 0 ? body.year : ''}`;
   }
 
   deleteOne(id: string): Promise<MessageI> {

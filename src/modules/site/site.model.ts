@@ -20,7 +20,6 @@ export const siteSchema = new mongoose.Schema(
     styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
     image: { type: String, default: '' },
     info: { type: String, default: '' },
-
     social: {
       web: { type: String, default: '' },
       facebook: { type: String, default: '' },

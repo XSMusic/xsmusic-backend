@@ -56,9 +56,32 @@ const addLookups = (data: any[]) => {
         localField: 'artists',
         foreignField: '_id',
         as: 'artists',
-        pipeline: [{ $project: { _id: 1, name: 1, image: 1, slug: 1 } }],
+        pipeline: [
+          { $project: { _id: 1, name: 1, image: 1, country: 1, slug: 1 } },
+        ],
       },
-    }
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+        pipeline: [
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              address: 1,
+              type: 1,
+              image: 1,
+              slug: 1,
+            },
+          },
+        ],
+      },
+    },
+    { $unwind: '$site' }
   );
   return data;
 };
@@ -70,12 +93,14 @@ const addProject = (data: any[]) => {
       name: 1,
       artists: 1,
       styles: 1,
+      site: 1,
       source: 1,
       sourceId: 1,
       image: 1,
       info: 1,
       year: 1,
       type: 1,
+      slug: 1,
       created: 1,
       updated: 1,
     },

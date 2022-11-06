@@ -10,17 +10,10 @@ export const siteGetAllAggregate = (
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   data = addLookups(data);
-  data.push({
-    $match: { type: body.type },
-  });
-  data = setFilter(body, data);
-  if (body.filter && body.filter.length === 2) {
-    if (body.filter[0] === 'styles') {
-      data.push({ $match: { 'styles.name': body.filter[1] } });
-    } else {
-      data.push({ $match: { [body.filter[0]]: body.filter[1] } });
-    }
+  if (body.type !== 'all') {
+    data.push({ $match: { type: body.type } });
   }
+  data = setFilter(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data = addProject(data);
   return data;

@@ -9,7 +9,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { IdDto } from '@dtos';
+import { IdDto, IdSlugDto } from '@dtos';
 
 export class MediaController implements ControllerI {
   path = '/media';
@@ -27,7 +27,7 @@ export class MediaController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getOne`,
-      validationMiddleware(IdDto),
+      validationMiddleware(IdSlugDto),
       this.getOne
     );
     this.router.post(

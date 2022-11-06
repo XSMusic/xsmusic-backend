@@ -3,6 +3,7 @@ import { Document } from 'mongoose';
 export interface MediaMongoI extends Document {
   name: string;
   artists: any[];
+  site: any;
   type: string;
   image: string;
   styles: any[];
@@ -10,6 +11,7 @@ export interface MediaMongoI extends Document {
   source: string;
   sourceId: string;
   year: number;
+  slug: string;
 }
 
 export interface MediaI extends MediaMongoI {

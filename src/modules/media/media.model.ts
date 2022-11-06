@@ -15,6 +15,7 @@ const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     artists: [{ type: mongoose.Types.ObjectId, ref: 'Artist' }],
+    site: { type: mongoose.Types.ObjectId, ref: 'Site' },
     type: { type: String, default: 'set', enum: typeValid },
     image: { type: String, default: '' },
     styles: [{ type: mongoose.Types.ObjectId, ref: 'Style' }],
@@ -22,6 +23,7 @@ const schema = new mongoose.Schema(
     source: { type: String, default: 'youtube', enum: sourceValid },
     sourceId: { type: String, default: '' },
     year: { type: Number, default: 0 },
+    slug: { type: String, default: '' },
   },
   {
     toJSON: { virtuals: true },
