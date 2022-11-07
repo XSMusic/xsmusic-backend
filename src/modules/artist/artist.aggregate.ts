@@ -117,6 +117,15 @@ const getPipeline = (type: string, complete: boolean) => {
   ];
   const pipelineNotCount = [
     { $match: { $or: [{ type: type }] } },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+      },
+    },
+    { $unwind: '$site' },
     { $sort: { created: 1 } },
   ];
   return complete ? pipelineNotCount : pipelineCount;

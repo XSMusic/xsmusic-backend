@@ -64,12 +64,22 @@ export class SiteService {
           const item = new Site(body);
           const itemDB = await item.save();
           if (itemDB) {
-            resolve({ message: 'Site creado' });
+            resolve({
+              message: `${body.type === 'club' ? 'Club' : 'Festival'} creado`,
+            });
           } else {
-            reject({ message: 'El site no ha sido creado' });
+            reject({
+              message: `El ${
+                body.type === 'club' ? 'Club' : 'Festival'
+              } no ha sido actualizado`,
+            });
           }
         } else {
-          reject({ message: 'El site ya existe' });
+          reject({
+            message: `El ${
+              body.type === 'club' ? 'Club' : 'Festival'
+            } ya existe`,
+          });
         }
       } catch (error) {
         reject(error);
@@ -85,9 +95,15 @@ export class SiteService {
           new: true,
         }).exec();
         if (response) {
-          resolve({ message: 'Site actualizado' });
+          resolve({
+            message: `${
+              body.type === 'club' ? 'Club' : 'Festival'
+            } actualizado`,
+          });
         } else {
-          reject({ message: 'Site no existe' });
+          reject({
+            message: `${body.type === 'club' ? 'Club' : 'Festival'} no existe`,
+          });
         }
       } catch (error) {
         reject(error);
@@ -100,9 +116,9 @@ export class SiteService {
       try {
         const response = await Site.findByIdAndDelete(id).exec();
         if (response) {
-          resolve({ message: 'Site eliminado' });
+          resolve({ message: 'Sitio eliminado' });
         } else {
-          reject({ message: 'Site no existe' });
+          reject({ message: 'Sitio no existe' });
         }
       } catch (error) {
         reject(error);
@@ -117,9 +133,9 @@ export class SiteService {
         await this.deleteOne(item._id);
       }
       if (items.length > 0) {
-        resolve({ message: `${items.length} sites eliminados` });
+        resolve({ message: `${items.length} sitios eliminados` });
       } else {
-        reject({ message: 'No hay sites' });
+        reject({ message: 'No hay sitios' });
       }
     });
   }
