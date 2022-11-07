@@ -4,8 +4,6 @@ import { CheerioAPI, load } from 'cheerio';
 import { ScrapingArtist, ScrapingGetInfoArtistDto } from '@scraping';
 import { Style, StyleI } from '@style';
 
-// TODO: Obtener info de wikipedia
-
 export class ScrapingService {
   private url_wikipedia = 'https://es.wikipedia.org/wiki';
   private url_clubbingspain = 'https://www.clubbingspain.com/artistas';
@@ -136,30 +134,61 @@ export class ScrapingService {
         const image = $('img').attr('src');
         const image_split = image.split('//');
         artist.image.push('https://' + image_split[1]);
-
-        $('th').each(function () {
-          const th = $(this).text();
-          if (th.includes('Nacimiento')) {
-            const birthdate: any = $(this).next().text();
-            let birthdate_replaced = birthdate.split('(')[0];
-            birthdate_replaced = birthdate_replaced.replace('de ', '');
-            const birthdate_array = birthdate_replaced.split(' ');
-            if (birthdate_array[0]) {
-              const day = Number(birthdate_array[0].split('\n')[1]);
-              const month_es = birthdate_array[1];
-              const month = get_month(month_es);
-              const year = Number(birthdate_array[3]);
-              const date =
-                year.toString() + '-' + month.toString() + '-' + day.toString();
-              artist.birthdate = date;
-            }
-          }
-        });
+        artist = this.setInfoForWikipedia($, artist);
+        artist = this.setBirthdateForWikipedia($, artist);
         resolve(artist);
       } catch (error) {
         resolve(artist);
       }
     });
+  }
+
+  private setBirthdateForWikipedia($: CheerioAPI, artist: ScrapingArtist) {
+    $('th').each(function () {
+      const th = $(this).text();
+      if (th.includes('Nacimiento')) {
+        const birthdate: any = $(this).next().text();
+        let birthdate_replaced = birthdate.split('(')[0];
+        birthdate_replaced = birthdate_replaced.replace('de ', '');
+        const birthdate_array = birthdate_replaced.split(' ');
+        if (birthdate_array[0]) {
+          const day = Number(birthdate_array[0].split('\n')[1]);
+          const month_es = birthdate_array[1];
+          const month = get_month(month_es);
+          const year = Number(birthdate_array[3]);
+          const date =
+            year.toString() + '-' + month.toString() + '-' + day.toString();
+          artist.birthdate = date;
+        }
+      }
+    });
+    return artist;
+  }
+
+  private setInfoForWikipedia($: CheerioAPI, artist: ScrapingArtist) {
+    const wikiCodes = this.getWikiCodes();
+    let info = '';
+    $('.mw-parser-output')
+      .find('p')
+      .each(function () {
+        let infoLine = $(this).text() + '<br><br>';
+        let infoLineItem = '';
+        for (const i of wikiCodes) {
+          if (infoLine.includes(i)) {
+            console.log({ i });
+            console.log({ infoLine: infoLine.replace(i, '') });
+            infoLine = infoLine.replace(i, '');
+            infoLineItem = infoLine;
+          }
+        }
+        if (info === '') {
+          info = infoLineItem;
+        } else {
+          info = `${info} ${infoLineItem}`;
+        }
+      });
+    artist.info.push(info);
+    return artist;
   }
 
   private getCountryFromCode(countryCode: string): string {
@@ -170,4 +199,14 @@ export class ScrapingService {
       return '';
     }
   }
+
+  private getWikiCodes = (): string[] => {
+    const items = [];
+    let i = 0;
+    while (i < 20) {
+      i++;
+      items.push(`[${i}]`);
+    }
+    return items;
+  };
 }
