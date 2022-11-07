@@ -53,6 +53,7 @@ export class SiteService {
   create(body: SiteI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
+        const type = body.type === 'club' ? 'Club' : 'Festival';
         const isExist: SiteI[] = await Site.find({
           name: body.name,
         }).exec();
@@ -65,20 +66,16 @@ export class SiteService {
           const itemDB = await item.save();
           if (itemDB) {
             resolve({
-              message: `${body.type === 'club' ? 'Club' : 'Festival'} creado`,
+              message: `${type} creado`,
             });
           } else {
             reject({
-              message: `El ${
-                body.type === 'club' ? 'Club' : 'Festival'
-              } no ha sido actualizado`,
+              message: `El ${type} no ha sido actualizado`,
             });
           }
         } else {
           reject({
-            message: `El ${
-              body.type === 'club' ? 'Club' : 'Festival'
-            } ya existe`,
+            message: `El ${type} ya existe`,
           });
         }
       } catch (error) {
