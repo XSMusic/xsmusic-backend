@@ -7,6 +7,7 @@ import {
   mediaGetOneAggregate,
   MediaI,
 } from '@media';
+import { Site } from '@site';
 import { getValuesForPaginator, slugify } from '@utils';
 
 export class MediaService {
@@ -59,6 +60,7 @@ export class MediaService {
         if (body._id) {
           delete body._id;
         }
+        body = await this.setAnonymousSite(body);
         body.slug = await this.generateSlug(body);
         const item = new Media(body);
         const itemDB = await item.save();
@@ -76,7 +78,8 @@ export class MediaService {
 
   update(body: MediaI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
-      try {
+        try {
+        body = await this.setAnonymousSite(body);
         body.slug = await this.generateSlug(body);
         const response = await Media.findByIdAndUpdate(body._id, body, {
           new: true,
@@ -90,6 +93,14 @@ export class MediaService {
         reject(error);
       }
     });
+  }
+
+  private async setAnonymousSite(body: MediaI) {
+    if (body.site === '') {
+      const anonymousSite = await Site.findOne({}).exec();
+      body.site = anonymousSite._id;
+    }
+    return body;
   }
 
   private async generateSlug(body: MediaI) {

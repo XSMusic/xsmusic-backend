@@ -28,15 +28,36 @@ export const siteGetOneAggregate = (type: string, value: string): any => {
 };
 
 const addLookups = (data: any[]) => {
-  data.push({
-    $lookup: {
-      from: 'styles',
-      localField: 'styles',
-      foreignField: '_id',
-      as: 'styles',
-      pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+  data.push(
+    {
+      $lookup: {
+        from: 'styles',
+        localField: 'styles',
+        foreignField: '_id',
+        as: 'styles',
+        pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+      },
     },
-  });
+    {
+      $lookup: {
+        from: 'media',
+        localField: '_id',
+        foreignField: 'site',
+        as: 'sets',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'artists',
+              localField: 'artists',
+              foreignField: '_id',
+              as: 'artists',
+              pipeline: [{ $project: { _id: 1, name: 1 } }],
+            },
+          },
+        ],
+      },
+    }
+  );
   return data;
 };
 

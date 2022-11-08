@@ -202,5 +202,49 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "1514c2c3-425b-4609-8423-0c4afcc1b906",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://ra.co/graphql",
+    "url": "https://ra.co/graphql",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-07T23:25:11.364Z",
+    "modified": "2022-11-07T23:25:23.062Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"operationName\":\"GET_POPULAR_EVENTS\",\"variables\":{\"count\":10,\"areaId\":\"41\",\"dateFrom\":\"2022-11-08\",\"dateTo\":\"2022-11-14\"},\"query\":\"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n    __typename\\n  }\\n}\\n\\nfragment eventFields on Event {\\n  id\\n  title\\n  attending\\n  date\\n  contentUrl\\n  flyerFront\\n  queueItEnabled\\n  newEventForm\\n  images {\\n    id\\n    filename\\n    alt\\n    type\\n    crop\\n    __typename\\n  }\\n  venue {\\n    id\\n    name\\n    contentUrl\\n    live\\n    __typename\\n  }\\n  __typename\\n}\\n\"}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "872984eb-176e-4701-9f2b-d7a3dba117c1",
+    "colId": "history",
+    "containerId": "",
+    "name": "Eventos Resident Advidsor",
+    "url": "https://ra.co/graphql",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-07T23:25:51.018Z",
+    "modified": "2022-11-07T23:27:11.010Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n    __typename\\n  }\\n}\\n\\nfragment eventFields on Event {\\n  id\\n  title\\n  attending\\n  date\\n  contentUrl\\n  flyerFront\\n  queueItEnabled\\n  newEventForm\\n  images {\\n    id\\n    filename\\n    alt\\n    type\\n    crop\\n    __typename\\n  }\\n  venue {\\n    id\\n    name\\n    contentUrl\\n    live\\n    __typename\\n  }\\n  __typename\\n}\\n\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
