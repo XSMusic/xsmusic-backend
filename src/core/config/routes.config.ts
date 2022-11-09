@@ -8,15 +8,17 @@ import { ScrapingController } from '@scraping';
 import { YoutubeController } from '@youtube';
 import { MediaController } from '@media';
 import { SiteController } from '@site';
+import { GeoController } from '@geo';
 
 const controllers = [
   new ArtistController(),
   new AuthController(),
-  new SiteController(),
+  new GeoController(),
   new MediaController(),
   new MenuController(),
   new ScrapingController(),
   new StatsController(),
+  new SiteController(),
   new StyleController(),
   new UserController(),
   new YoutubeController(),

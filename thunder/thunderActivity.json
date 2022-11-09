@@ -231,7 +231,7 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-11-07T23:25:51.018Z",
-    "modified": "2022-11-07T23:27:11.010Z",
+    "modified": "2022-11-09T15:38:42.435Z",
     "headers": [
       {
         "name": "User-Agent",
@@ -242,9 +242,64 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n    __typename\\n  }\\n}\\n\\nfragment eventFields on Event {\\n  id\\n  title\\n  attending\\n  date\\n  contentUrl\\n  flyerFront\\n  queueItEnabled\\n  newEventForm\\n  images {\\n    id\\n    filename\\n    alt\\n    type\\n    crop\\n    __typename\\n  }\\n  venue {\\n    id\\n    name\\n    contentUrl\\n    live\\n    __typename\\n  }\\n  __typename\\n}\\n\"\n}",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "e7b22d09-77a6-4849-8447-3bfd1a60aa50",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108",
+    "url": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-09T17:25:53.142Z",
+    "modified": "2022-11-09T17:25:53.408Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "lat",
+        "value": "40.3053858",
+        "isPath": false
+      },
+      {
+        "name": "lon",
+        "value": "-3.8712108",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a22a9dd5-e0b9-4fa9-89fe-38fdec6d9971",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108&format=json",
+    "url": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108&format=json",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-09T17:26:26.165Z",
+    "modified": "2022-11-09T17:27:03.534Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "lat",
+        "value": "40.3053858",
+        "isPath": false
+      },
+      {
+        "name": "lon",
+        "value": "-3.8712108",
+        "isPath": false
+      },
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

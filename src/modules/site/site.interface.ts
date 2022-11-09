@@ -3,6 +3,7 @@ import { Document } from 'mongoose';
 export interface SiteMongoI extends Document {
   name: string;
   address: {
+    street: string;
     city: string;
     country: string;
     coordinates: number[];

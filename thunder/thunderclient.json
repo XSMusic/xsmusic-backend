@@ -835,5 +835,138 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "95aac750-084d-42c9-b9cd-d8b84f895291",
+    "colId": "43731489-f4b3-46ca-b82f-356b3106068a",
+    "containerId": "",
+    "name": "Coordinates to Address",
+    "url": "https://nominatim.openstreetmap.org/reverse?lat=40.3060354&lon=-3.8719509&format=json&addressdetails=1&namedetails=0&accept-language=es",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-11-09T17:27:26.907Z",
+    "modified": "2022-11-09T18:00:28.195Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "lat",
+        "value": "40.3060354",
+        "isPath": false
+      },
+      {
+        "name": "lon",
+        "value": "-3.8719509",
+        "isPath": false
+      },
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      },
+      {
+        "name": "addressdetails",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "namedetails",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "accept-language",
+        "value": "es",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "466e887d-3767-43a6-83fa-616677003943",
+    "colId": "43731489-f4b3-46ca-b82f-356b3106068a",
+    "containerId": "",
+    "name": "Eventos Resident Advidsor",
+    "url": "https://ra.co/graphql",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-09T17:27:41.771Z",
+    "modified": "2022-11-09T17:27:41.771Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "85067a00-fecd-41f4-a12e-fe6971426174",
+    "colId": "43731489-f4b3-46ca-b82f-356b3106068a",
+    "containerId": "",
+    "name": "Address to Coordinates",
+    "url": "https://nominatim.openstreetmap.org/search/Aldebaran, 17, mostoles?format=json&addressdetails=0&limit=0&polygon_svg=0",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2022-11-09T17:31:29.609Z",
+    "modified": "2022-11-09T21:42:39.446Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      },
+      {
+        "name": "addressdetails",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "polygon_svg",
+        "value": "0",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4edce6ca-4d4c-4874-b126-7706ea34761f",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "ba27532e-d873-43c9-b4ea-36e39b35970b",
+    "name": "Geo: CoordinatesToAddress",
+    "url": "{{URL}}/geo/coordinatesToAddress/40.4167047/-3.7035825",
+    "method": "GET",
+    "sortNum": 170000,
+    "created": "2022-11-09T21:54:13.194Z",
+    "modified": "2022-11-09T22:00:35.572Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ce9bb3ce-1197-46af-a324-6bfd87634295",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "ba27532e-d873-43c9-b4ea-36e39b35970b",
+    "name": "Geo: AddressToCoordinates",
+    "url": "{{URL}}/geo/addressToCoordinates/camarga getafe madrid",
+    "method": "GET",
+    "sortNum": 180000,
+    "created": "2022-11-09T21:54:16.561Z",
+    "modified": "2022-11-09T22:08:30.804Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
