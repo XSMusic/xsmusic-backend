@@ -1,4 +1,8 @@
-import { GeoAddressToCoordinatesI, GeoCoordinatesToAddressI } from '@geo';
+import {
+  GeoAddressToCoordinatesI,
+  GeoCoordinatesToAddressI,
+  GeoCoordinatesToAddressResponseI,
+} from '@geo';
 import axios from 'axios';
 
 export class GeoService {
@@ -6,7 +10,8 @@ export class GeoService {
     return new Promise(async (resolve, reject) => {
       const url =
         'https://nominatim.openstreetmap.org/search/:address?format=json&addressdetails=0&limit=0&polygon_svg=0'.replace(
-          ':address', address
+          ':address',
+          address
         );
       const response = await axios.get<GeoAddressToCoordinatesI[]>(url);
       console.log(address, url);
@@ -22,7 +27,10 @@ export class GeoService {
     });
   }
 
-  coordinatesToAddress(lat: string, lng: string) {
+  coordinatesToAddress(
+    lat: string,
+    lng: string
+  ): Promise<GeoCoordinatesToAddressResponseI> {
     return new Promise(async (resolve, reject) => {
       try {
         const url =
@@ -30,14 +38,12 @@ export class GeoService {
         const response = await axios.get<GeoCoordinatesToAddressI>(
           url.replace(':lat', lat).replace(':lng', lng)
         );
-        console.log(response.data);
-        const data = {
+        const data: GeoCoordinatesToAddressResponseI = {
           street: response.data.address.railway,
           city: response.data.address.city,
           postcode: response.data.address.postcode,
           country: response.data.address.country_code,
         };
-
         resolve(data);
       } catch (error) {
         reject(error);
