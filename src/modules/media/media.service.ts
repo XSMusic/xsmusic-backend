@@ -78,7 +78,7 @@ export class MediaService {
 
   update(body: MediaI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
-        try {
+      try {
         body = await this.setAnonymousSite(body);
         body.slug = await this.generateSlug(body);
         const response = await Media.findByIdAndUpdate(body._id, body, {
