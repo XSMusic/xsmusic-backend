@@ -47,15 +47,17 @@ export class GeoService {
             .replace(':lat', body.coordinates[0].toString())
             .replace(':lng', body.coordinates[1].toString())
         );
-        console.log(response.data);
         const data: GeoCoordinatesToAddressResponseI = {
           street: `${response.data.address.road}${
             response.data.address.house_number
               ? `, ${response.data.address.house_number}`
               : ''
           }`,
-          city: response.data.address.city,
-          postcode: response.data.address.postcode,
+          town:
+            response.data.address.city != null
+              ? response.data.address.city
+              : response.data.address.town,
+          state: response.data.address.state,
           country: response.data.address.country_code,
         };
         resolve(data);

@@ -16,7 +16,6 @@ interface GeoMapsResponseLocationI {
   lng: number;
 }
 
-
 export interface GeoCoordinatesToAddressI {
   place_id: number;
   licence: string;
@@ -41,11 +40,12 @@ export interface GeoCoordinatesToAddressItemAddressI {
   country: string;
   country_code: string;
   house_number?: string;
+  town?: string;
 }
 
 export interface GeoCoordinatesToAddressResponseI {
   street: string;
-  city: string;
-  postcode: string;
+  town: string;
+  state: string;
   country: string;
 }

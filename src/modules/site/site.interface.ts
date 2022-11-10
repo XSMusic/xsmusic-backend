@@ -4,8 +4,8 @@ export interface SiteMongoI extends Document {
   name: string;
   address: {
     street: string;
-    city: string;
-    poblation: string;
+    town: string;
+    state: string;
     country: string;
     coordinates: number[];
   };

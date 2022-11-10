@@ -1,0 +1,2386 @@
+[
+  {
+    "_id": "ba08172a-d07b-4cf9-ae12-f2b61fe68ae6",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.thunderclient.com/welcome?url=http://localhost:6969",
+    "url": "https://www.thunderclient.com/welcome?url=http://localhost:6969",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-17T09:47:13.202Z",
+    "modified": "2022-10-17T09:47:13.203Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "url",
+        "value": "http://localhost:6969",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "391c2ee4-c813-40bc-9c21-8bbe426c8a24",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{URL}}/artists/getAll",
+    "url": "{{URL}}/artists/getAll",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-17T09:50:29.654Z",
+    "modified": "2022-10-19T19:56:51.073Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "97d49809-03b7-4eec-8592-20fedbc7b28d",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{URL}}/artists/getAll",
+    "url": "{{URL}}/artists/getAll",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-19T19:57:31.623Z",
+    "modified": "2022-10-19T20:28:36.994Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"page\": 1, \"pageSize\": 20, \"site\":  \"app\", \"order\": [\"name\", \"desc\"]}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "4d4ea867-9786-4fdb-9a5a-bcfb776c7820",
+    "colId": "history",
+    "containerId": "",
+    "name": "GET https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "url": "GET https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:18.587Z",
+    "modified": "2022-11-05T17:12:18.596Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "lectures",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e966b209-73cf-48ab-9ff7-3cb18aa55590",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=lectures",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:22.300Z",
+    "modified": "2022-11-05T17:12:22.929Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "lectures",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "5b9ca7af-d033-436f-92d8-117e145f5d15",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate oscar mulero",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate oscar mulero",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:12:46.595Z",
+    "modified": "2022-11-05T17:13:56.235Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate oscar mulero",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "336a128a-a248-404f-96dc-ca6c170fb2b4",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&q=birthdate oscar mulero",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&q=birthdate oscar mulero",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:13:52.247Z",
+    "modified": "2022-11-05T17:13:52.383Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate oscar mulero",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "7cb9a256-ff3e-4571-ac27-df08393f7ffd",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate david guetta",
+    "url": "https://www.googleapis.com/customsearch/v1?key=AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE&cx=009963749453298043974:rjkyv8_0edq&q=birthdate david guetta",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-05T17:15:09.899Z",
+    "modified": "2022-11-05T17:15:10.452Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "key",
+        "value": "AIzaSyDrf9Bf1PXqbbRBYfxU5HmQIWrGv47kZXE",
+        "isPath": false
+      },
+      {
+        "name": "cx",
+        "value": "009963749453298043974:rjkyv8_0edq",
+        "isPath": false
+      },
+      {
+        "name": "q",
+        "value": "birthdate david guetta",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "1514c2c3-425b-4609-8423-0c4afcc1b906",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://ra.co/graphql",
+    "url": "https://ra.co/graphql",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-07T23:25:11.364Z",
+    "modified": "2022-11-07T23:25:23.062Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"operationName\":\"GET_POPULAR_EVENTS\",\"variables\":{\"count\":10,\"areaId\":\"41\",\"dateFrom\":\"2022-11-08\",\"dateTo\":\"2022-11-14\"},\"query\":\"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n    __typename\\n  }\\n}\\n\\nfragment eventFields on Event {\\n  id\\n  title\\n  attending\\n  date\\n  contentUrl\\n  flyerFront\\n  queueItEnabled\\n  newEventForm\\n  images {\\n    id\\n    filename\\n    alt\\n    type\\n    crop\\n    __typename\\n  }\\n  venue {\\n    id\\n    name\\n    contentUrl\\n    live\\n    __typename\\n  }\\n  __typename\\n}\\n\"}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "872984eb-176e-4701-9f2b-d7a3dba117c1",
+    "colId": "history",
+    "containerId": "",
+    "name": "Eventos Resident Advidsor",
+    "url": "https://ra.co/graphql",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-07T23:25:51.018Z",
+    "modified": "2022-11-09T15:38:42.435Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e7b22d09-77a6-4849-8447-3bfd1a60aa50",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108",
+    "url": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-09T17:25:53.142Z",
+    "modified": "2022-11-09T17:25:53.408Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "lat",
+        "value": "40.3053858",
+        "isPath": false
+      },
+      {
+        "name": "lon",
+        "value": "-3.8712108",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a22a9dd5-e0b9-4fa9-89fe-38fdec6d9971",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108&format=json",
+    "url": "https://nominatim.openstreetmap.org/reverse?lat=40.3053858&lon=-3.8712108&format=json",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-09T17:26:26.165Z",
+    "modified": "2022-11-09T17:27:03.534Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "lat",
+        "value": "40.3053858",
+        "isPath": false
+      },
+      {
+        "name": "lon",
+        "value": "-3.8712108",
+        "isPath": false
+      },
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "8e6cc627-e1b5-4883-b8c3-45d026721400",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false ",
+    "url": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false ",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:05:26.966Z",
+    "modified": "2022-11-10T15:05:27.064Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "5707%20dogwood%20ave.%20Rosamond,%20CA",
+        "isPath": false
+      },
+      {
+        "name": "sensor",
+        "value": "false",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "473b240a-bf92-41c5-84ca-e7f753a9a644",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&apiKey=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&apiKey=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:06:45.480Z",
+    "modified": "2022-11-10T15:06:45.560Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "5707%20dogwood%20ave.%20Rosamond,%20CA",
+        "isPath": false
+      },
+      {
+        "name": "sensor",
+        "value": "false",
+        "isPath": false
+      },
+      {
+        "name": "apiKey",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "b2f89066-eee9-4e8d-a256-d33612eb48fd",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "http://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:06:57.491Z",
+    "modified": "2022-11-10T15:06:57.556Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "5707%20dogwood%20ave.%20Rosamond,%20CA",
+        "isPath": false
+      },
+      {
+        "name": "sensor",
+        "value": "false",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e0c70490-cf4e-4733-bb9f-989ee2439cbf",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "https://maps.google.com/maps/api/geocode/json?address=5707%20dogwood%20ave.%20Rosamond,%20CA&sensor=false&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:07:02.943Z",
+    "modified": "2022-11-10T15:07:03.100Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "5707%20dogwood%20ave.%20Rosamond,%20CA",
+        "isPath": false
+      },
+      {
+        "name": "sensor",
+        "value": "false",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "c07d66c5-c2fe-4e08-8dbf-a01c88884fd1",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/geocode/json?place_id=ChIJeRpOeF67j4AR9ydy_PIzPuM&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "https://maps.googleapis.com/maps/api/geocode/json?place_id=ChIJeRpOeF67j4AR9ydy_PIzPuM&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:08:27.995Z",
+    "modified": "2022-11-10T15:09:58.581Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJeRpOeF67j4AR9ydy_PIzPuM",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "88909bec-e216-413c-9b6f-ac62e4520dc1",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/geocode/json?address=Fabrik&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Fabrik&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:10:55.845Z",
+    "modified": "2022-11-10T15:10:56.023Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "60a7c9d1-f413-4be7-a320-54af8aacc5fa",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/geocode/json?address=Avenida de la industria, 82, Humanes de Madrid&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Avenida de la industria, 82, Humanes de Madrid&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T15:11:06.224Z",
+    "modified": "2022-11-10T15:27:31.368Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "address",
+        "value": "Avenida de la industria, 82, Humanes de Madrid",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "8452de6f-0aa2-41a5-ac51-c596e068999a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters ",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters ",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:00:37.261Z",
+    "modified": "2022-11-10T16:00:37.384Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "parameters",
+        "value": "",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "740ea3bf-3eaa-4935-8f67-2357346c7857",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters ",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/output?parameters ",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-10T16:00:59.532Z",
+    "modified": "2022-11-10T16:00:59.639Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "parameters",
+        "value": "",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4280d09c-3081-4ddc-9bff-66eec79c2e33",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry &input=Museum%20of%20Contemporary%20Art%20Australia &inputtype=textquery &key=YOUR_API_KEY",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry &input=Museum%20of%20Contemporary%20Art%20Australia &inputtype=textquery &key=YOUR_API_KEY",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-10T16:01:26.618Z",
+    "modified": "2022-11-10T16:01:26.833Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "input",
+        "value": "Museum%20of%20Contemporary%20Art%20Australia",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "YOUR_API_KEY",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "514ffdcb-b53b-4cdd-8782-b7443333ccf6",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-10T16:01:42.759Z",
+    "modified": "2022-11-10T16:01:42.888Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "input",
+        "value": "Museum%20of%20Contemporary%20Art%20Australia",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "574c12b1-b6cd-4031-adce-96acaf23767a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json ?fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:01:48.136Z",
+    "modified": "2022-11-10T16:01:48.213Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "input",
+        "value": "Museum%20of%20Contemporary%20Art%20Australia",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "ed85822d-77b4-46f4-87e6-1d0892be3100",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:02:20.707Z",
+    "modified": "2022-11-10T16:02:21.360Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Museum%20of%20Contemporary%20Art%20Australia",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0e31a441-a528-4c43-84b8-19cf44d4b59b",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:02:28.314Z",
+    "modified": "2022-11-10T16:02:28.949Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0a57df05-4270-4590-a166-8403b5f6e33d",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:02:41.088Z",
+    "modified": "2022-11-10T16:18:55.437Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "504f1f1c-e992-4a1b-a843-35fae51f2ec3",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=address_components%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=address_components%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:16:16.407Z",
+    "modified": "2022-11-10T16:16:16.682Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "address_components%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "da06e819-98a8-4a33-82d1-8666c0b31b80",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=adr_address%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=adr_address%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:18:40.605Z",
+    "modified": "2022-11-10T16:18:40.789Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "adr_address%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "42656492-04bf-48db-9a24-66529d60557c",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cadr_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cadr_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:18:50.911Z",
+    "modified": "2022-11-10T16:18:51.111Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cadr_address%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "6b0fd786-a95e-4a6e-a36c-b4b3019cb835",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cicon%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cicon%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:20:46.818Z",
+    "modified": "2022-11-10T16:20:47.386Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cicon%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "067bcd3b-fd54-4b9d-a363-899bf62fc659",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Lab theclub&inputtype=textquery&fields=formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:21:09.386Z",
+    "modified": "2022-11-10T16:21:09.528Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Lab theclub",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e080db5b-6412-46f8-83be-279b4a893198",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:21:38.951Z",
+    "modified": "2022-11-10T16:21:39.566Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cphotos%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f9b3800d-ebee-433d-b442-89a08f28b2ec",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Clogo%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Clogo%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:22:28.465Z",
+    "modified": "2022-11-10T16:22:28.616Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Clogo%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f162130a-d61c-49be-94e7-09bc473ab94f",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cwebsite%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=formatted_address%2Cwebsite%2Cname%2Crating%2Copening_hours%2Cgeometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:23:05.326Z",
+    "modified": "2022-11-10T16:24:01.090Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cwebsite%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e61aa603-5fa2-412b-9d56-d29b092be567",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:23:47.732Z",
+    "modified": "2022-11-10T16:23:57.344Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "formatted_address%2Cwebsite%2Cname%2Crating%2Copening_hours%2Cgeometry",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0f6011d0-f89c-4595-a82f-f5f81b674937",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:25:00.116Z",
+    "modified": "2022-11-10T16:25:00.827Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "c6d502fa-66e0-4f1f-a7fd-790001008fc3",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:25:15.320Z",
+    "modified": "2022-11-10T16:25:15.447Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "ff3ba667-ddf6-4514-aef0-90e7a5a7dd71",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:25:29.628Z",
+    "modified": "2022-11-10T16:28:22.392Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a7e085f0-c0d6-486f-9816-a6b377ef55f7",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,business_status&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,business_status&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:27:38.244Z",
+    "modified": "2022-11-10T16:27:38.710Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,business_status",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f98342ef-d004-4bbe-86cb-2195e9143706",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,business_status,curbside_pickup&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,business_status,curbside_pickup&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:27:55.883Z",
+    "modified": "2022-11-10T16:27:56.016Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,business_status,curbside_pickup",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4193002a-175e-4287-b8b3-9365c4d7e575",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,dine_in&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,dine_in&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:28:19.686Z",
+    "modified": "2022-11-10T16:28:19.986Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,dine_in",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "10b00f46-dbcd-4453-ad4a-1e30ecc1bd7a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:28:36.168Z",
+    "modified": "2022-11-10T16:28:36.293Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a029c293-8715-4de0-ab33-c5277d6b4a0a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:28:56.968Z",
+    "modified": "2022-11-10T16:28:57.379Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "ce033f24-a81b-499a-ba4d-bd98876a54f2",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:29:36.448Z",
+    "modified": "2022-11-10T16:30:53.630Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "7eb26e2c-b07e-49c0-97b8-c6da870407fb",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,reviews&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,reviews&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:30:08.608Z",
+    "modified": "2022-11-10T16:30:08.733Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,reviews",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "5fbb3de5-fd8b-4355-9daa-f9bc39d73620",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:30:13.425Z",
+    "modified": "2022-11-10T16:30:13.529Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "7fee6034-8d14-487a-a367-1882fc00830c",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:30:47.363Z",
+    "modified": "2022-11-10T16:30:47.476Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "387a0705-8941-4703-a8ea-f18533114780",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json ?fields=name%2Crating%2Cformatted_phone_number&place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json ?fields=name%2Crating%2Cformatted_phone_number&place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:36:41.686Z",
+    "modified": "2022-11-10T16:36:42.054Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "fields",
+        "value": "name%2Crating%2Cformatted_phone_number",
+        "isPath": false
+      },
+      {
+        "name": "place_id",
+        "value": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "5aaf3d6a-e8bc-4fea-9e54-e3843227339a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json ?fields=name,rating,formatted_phone_number &place_id=ChIJQ4_eEb6MQQ0RJS&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json ?fields=name,rating,formatted_phone_number &place_id=ChIJQ4_eEb6MQQ0RJS&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:37:09.552Z",
+    "modified": "2022-11-10T16:37:09.639Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "fields",
+        "value": "name,rating,formatted_phone_number ",
+        "isPath": false
+      },
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "832ffa94-29de-4334-8fdf-1fed4516c6b0",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:37:54.831Z",
+    "modified": "2022-11-10T16:37:54.943Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "name%2Crating%2Cformatted_phone_number",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "YOUR_API_KEY",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "19e884ad-06bc-4487-b0f1-fd115adb6013",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:38:15.962Z",
+    "modified": "2022-11-10T16:38:16.121Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "name%2Crating%2Cformatted_phone_number",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "ad25e4a5-ac8c-446d-8a59-fe92cbbd68ba",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=name%2Crating%2Cformatted_phone_number&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=name%2Crating%2Cformatted_phone_number&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:38:30.966Z",
+    "modified": "2022-11-10T16:38:31.105Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "name%2Crating%2Cformatted_phone_number",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4791f6ca-a46b-494c-98a2-52b331b171cc",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:39:13.762Z",
+    "modified": "2022-11-10T16:39:13.915Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "49a34cce-7af2-46da-b21b-7f2ccafd60c5",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:39:22.197Z",
+    "modified": "2022-11-10T16:39:22.341Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,icon_mask_base_uri,place_id,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "59a0c77b-700a-4e57-b1d3-cb5534777f19",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,place_id,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,place_id,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:39:49.017Z",
+    "modified": "2022-11-10T16:40:10.104Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,photos,place_id,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "cefe0de2-70da-424f-90ba-7e6f28cdcef4",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,adr_address,opening_hours,rating,photos,place_id,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,adr_address,opening_hours,rating,photos,place_id,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:40:06.215Z",
+    "modified": "2022-11-10T16:40:06.330Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,adr_address,opening_hours,rating,photos,place_id,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "8b0202e7-16a8-4fa9-b311-81fca18cbcaf",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,place_id,website,reviews&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,place_id,website,reviews&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:40:55.231Z",
+    "modified": "2022-11-10T16:40:55.385Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,photos,place_id,website,reviews",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e4bfc34b-a38a-4c15-a9d3-b66df22a7057",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,formatted_address,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:41:11.926Z",
+    "modified": "2022-11-10T16:41:12.075Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,photos,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "3a87da16-6c27-461d-b050-ad47841a6b1b",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:41:53.658Z",
+    "modified": "2022-11-10T17:09:36.573Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,address_components,opening_hours,rating,photos,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "dd4113e4-310b-411d-8824-b3df22f7a6a4",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components[short_name],opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components[short_name],opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:43:08.292Z",
+    "modified": "2022-11-10T16:43:08.437Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,address_components[short_name],opening_hours,rating,photos,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "2ee37d99-10fe-4c16-9be8-b82e903a4bc5",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components,short_name,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components,short_name,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:43:15.532Z",
+    "modified": "2022-11-10T16:43:15.657Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,address_components,short_name,opening_hours,rating,photos,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "d74ac232-7c9c-4042-abc4-7f4b3a544792",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components.short_name,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJQ4_eEb6MQQ0RJS-Nguh0T9A&fields=geometry,address_components.short_name,opening_hours,rating,photos,website&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:43:19.333Z",
+    "modified": "2022-11-10T16:43:19.422Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "place_id",
+        "value": "ChIJQ4_eEb6MQQ0RJS-Nguh0T9A",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,address_components.short_name,opening_hours,rating,photos,website",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "af73e0e7-423c-4e15-91c1-e0a463223ef8",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Fabrik&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:44:08.274Z",
+    "modified": "2022-11-10T16:44:08.829Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Fabrik",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "79b870a9-4c3c-4e3e-8942-1b53cce1e113",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:48:34.103Z",
+    "modified": "2022-11-10T16:51:59.558Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Sala Coco",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4ea3bc4a-eebe-45ad-a430-33033abf8b8f",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Siroco&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Siroco&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:49:21.964Z",
+    "modified": "2022-11-10T16:49:22.742Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Siroco",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0138c3a5-5ad7-4277-bc99-1fdb84d3e105",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Nicolette&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Nicolette&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:49:42.125Z",
+    "modified": "2022-11-10T16:49:42.755Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Nicolette",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "74d3b41c-a9c4-4a6a-97e7-0db63a9726cf",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Dabadaba&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Dabadaba&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:49:48.856Z",
+    "modified": "2022-11-10T16:49:49.400Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Dabadaba",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "37d0afae-36eb-4cad-b2ae-90882b8bd104",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Input&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Input&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:50:03.834Z",
+    "modified": "2022-11-10T16:50:04.571Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Input",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "4d3d162d-fef5-4e97-a4f1-049232e7e726",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Kremlin&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Kremlin&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:50:16.327Z",
+    "modified": "2022-11-10T16:50:17.063Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Kremlin",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "046fc1db-abaf-4022-a0ff-3952319f2896",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Kremlin Bilbao&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Kremlin Bilbao&inputtype=textquery&fields=geometry,formatted_address,opening_hours,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:50:22.555Z",
+    "modified": "2022-11-10T16:50:23.293Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Kremlin Bilbao",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,formatted_address,opening_hours,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f548d324-ded9-4cfe-b035-30d995612f36",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:53:04.063Z",
+    "modified": "2022-11-10T16:53:04.189Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Sala Coco",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "20f4e6a3-4274-4868-aff5-6d7cf56771be",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,rating,place_id&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry,rating,place_id&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:53:06.920Z",
+    "modified": "2022-11-10T16:53:07.557Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Sala Coco",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry,rating,place_id",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "1531feb8-98a5-4700-a65a-3223f5ccee3c",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Sala Coco&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:54:47.321Z",
+    "modified": "2022-11-10T16:54:47.916Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Sala Coco",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a0fea21e-2fac-4a87-b868-fd1fcdb5b2a9",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Pacha&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Pacha&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:54:59.960Z",
+    "modified": "2022-11-10T16:55:00.609Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Pacha",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "ba2a609d-19e6-45b3-af6f-45868b422408",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Pacha Ibiza&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "url": "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Mondo&inputtype=textquery&fields=geometry&key={{MAPS_TOKEN}}",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-10T16:55:05.473Z",
+    "modified": "2022-11-10T17:44:27.025Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "input",
+        "value": "Mondo",
+        "isPath": false
+      },
+      {
+        "name": "inputtype",
+        "value": "textquery",
+        "isPath": false
+      },
+      {
+        "name": "fields",
+        "value": "geometry",
+        "isPath": false
+      },
+      {
+        "name": "key",
+        "value": "{{MAPS_TOKEN}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  }
+]

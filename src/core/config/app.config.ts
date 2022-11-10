@@ -17,7 +17,7 @@ const {
   GOOGLE_APPLICATION_CREDENTIALS,
   GITHUB_TOKEN,
   YOUTUBE_TOKEN,
-  MAP_TOKEN,
+  MAPS_TOKEN,
 } = process.env;
 
 const getMongoUri = (): string => {
@@ -49,7 +49,7 @@ export const config: ConfigI = {
   tokens: {
     github: GITHUB_TOKEN,
     youtube: YOUTUBE_TOKEN,
-    map: MAP_TOKEN,
+    map: MAPS_TOKEN,
   },
   paths: {
     project: PATH_PROJECT,

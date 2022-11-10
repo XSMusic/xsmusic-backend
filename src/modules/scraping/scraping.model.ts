@@ -21,10 +21,12 @@ export class ScrapingArtist {
 export class ScrapingSite {
   name = '';
   image = '';
-  address = {
+  address: any = {
     street: '',
-    poblation: '',
+    town: '',
+    state: '',
     country: '',
+    coordinates: [],
   };
   constructor(name: string, poblation: string) {
     this.name = name;

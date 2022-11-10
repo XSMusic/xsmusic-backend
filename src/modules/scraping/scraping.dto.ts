@@ -7,5 +7,5 @@ export class ScrapingGetInfoArtistDto {
 
 export class ScrapingGetInfoClubDto {
   @IsString() name: string;
-  @IsString() poblation: string;
+  @IsOptional() @IsString() poblation: string;
 }
