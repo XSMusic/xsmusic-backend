@@ -1,51 +1,66 @@
 import {
-  GeoAddressToCoordinatesI,
+  GeoAddressToCoordinatesDto,
+  GeoCoordinatesToAddressDto,
   GeoCoordinatesToAddressI,
   GeoCoordinatesToAddressResponseI,
+  GeoMapsResponseI,
 } from '@geo';
+import { slugify } from '@utils';
 import axios from 'axios';
 
 export class GeoService {
-  addressToCoordinates(address: string): Promise<{ coordinates: number[] }> {
+  addressToCoordinates(
+    body: GeoAddressToCoordinatesDto
+  ): Promise<{ coordinates: number[] }> {
     return new Promise(async (resolve, reject) => {
-      const url =
-        'https://nominatim.openstreetmap.org/search/:address?format=json&addressdetails=0&limit=0&polygon_svg=0'.replace(
-          ':address',
-          address
-        );
-      const response = await axios.get<GeoAddressToCoordinatesI[]>(url);
-      console.log(address, url);
-      if (response.data.length > 0) {
-        const coordinates = [
-          Number(response.data[0].lat),
-          Number(response.data[0].lon),
-        ];
-        resolve({ coordinates });
-      } else {
-        reject({ message: 'La direccion no es valida' });
+      try {
+        const url =
+          'https://maps.googleapis.com/maps/api/geocode/json?address=:address&key=AIzaSyBlCjDvXrwiNheH3t4YS8JGPc6iu7YfHzs'.replace(
+            ':address',
+            slugify(body.address)
+          );
+        const response = await axios.get<GeoMapsResponseI>(url);
+        if (response.data.results.length > 0) {
+          const coordinates = [
+            Number(response.data.results[0].geometry.location.lat),
+            Number(response.data.results[0].geometry.location.lng),
+          ];
+          resolve({ coordinates });
+        } else {
+          reject({ message: 'La direccion no es valida' });
+        }
+      } catch (error) {
+        reject(error);
       }
     });
   }
 
   coordinatesToAddress(
-    lat: string,
-    lng: string
+    body: GeoCoordinatesToAddressDto
   ): Promise<GeoCoordinatesToAddressResponseI> {
     return new Promise(async (resolve, reject) => {
       try {
         const url =
           'https://nominatim.openstreetmap.org/reverse?lat=:lat&lon=:lng&format=json&addressdetails=1&namedetails=0&accept-language=es';
         const response = await axios.get<GeoCoordinatesToAddressI>(
-          url.replace(':lat', lat).replace(':lng', lng)
+          url
+            .replace(':lat', body.coordinates[0].toString())
+            .replace(':lng', body.coordinates[1].toString())
         );
+        console.log(response.data);
         const data: GeoCoordinatesToAddressResponseI = {
-          street: response.data.address.railway,
+          street: `${response.data.address.road}${
+            response.data.address.house_number
+              ? `, ${response.data.address.house_number}`
+              : ''
+          }`,
           city: response.data.address.city,
           postcode: response.data.address.postcode,
           country: response.data.address.country_code,
         };
         resolve(data);
       } catch (error) {
+        console.log(error);
         reject(error);
       }
     });

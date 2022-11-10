@@ -17,3 +17,17 @@ export class ScrapingArtist {
     this.name = name;
   }
 }
+
+export class ScrapingSite {
+  name = '';
+  image = '';
+  address = {
+    street: '',
+    poblation: '',
+    country: '',
+  };
+  constructor(name: string, poblation: string) {
+    this.name = name;
+    this.address.poblation = poblation;
+  }
+}

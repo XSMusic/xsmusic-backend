@@ -17,6 +17,7 @@ const {
   GOOGLE_APPLICATION_CREDENTIALS,
   GITHUB_TOKEN,
   YOUTUBE_TOKEN,
+  MAP_TOKEN,
 } = process.env;
 
 const getMongoUri = (): string => {
@@ -45,8 +46,11 @@ export const config: ConfigI = {
   fcm: {
     server_key: FCM_SERVER_KEY,
   },
-  githubToken: GITHUB_TOKEN,
-  youtubeToken: YOUTUBE_TOKEN,
+  tokens: {
+    github: GITHUB_TOKEN,
+    youtube: YOUTUBE_TOKEN,
+    map: MAP_TOKEN,
+  },
   paths: {
     project: PATH_PROJECT,
     uploads: PATH_UPLOADS,

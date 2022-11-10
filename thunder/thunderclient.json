@@ -911,11 +911,11 @@
     "colId": "43731489-f4b3-46ca-b82f-356b3106068a",
     "containerId": "",
     "name": "Address to Coordinates",
-    "url": "https://nominatim.openstreetmap.org/search/Aldebaran, 17, mostoles?format=json&addressdetails=0&limit=0&polygon_svg=0",
+    "url": "https://nominatim.openstreetmap.org/search/calle de san dimas 3, madrid?format=json&addressdetails=0&limit=0&polygon_svg=0",
     "method": "GET",
     "sortNum": 40000,
     "created": "2022-11-09T17:31:29.609Z",
-    "modified": "2022-11-09T21:42:39.446Z",
+    "modified": "2022-11-10T00:21:16.359Z",
     "headers": [],
     "params": [
       {
@@ -946,13 +946,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "ba27532e-d873-43c9-b4ea-36e39b35970b",
     "name": "Geo: CoordinatesToAddress",
-    "url": "{{URL}}/geo/coordinatesToAddress/40.4167047/-3.7035825",
-    "method": "GET",
+    "url": "{{URL}}/geo/coordinatesToAddress",
+    "method": "POST",
     "sortNum": 170000,
     "created": "2022-11-09T21:54:13.194Z",
-    "modified": "2022-11-09T22:00:35.572Z",
+    "modified": "2022-11-10T00:22:01.199Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"coordinates\": [\n    40.41762175,\n    -3.6989692917634684\n  ]\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -960,13 +965,37 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "ba27532e-d873-43c9-b4ea-36e39b35970b",
     "name": "Geo: AddressToCoordinates",
-    "url": "{{URL}}/geo/addressToCoordinates/camarga getafe madrid",
-    "method": "GET",
+    "url": "{{URL}}/geo/addressToCoordinates/",
+    "method": "POST",
     "sortNum": 180000,
     "created": "2022-11-09T21:54:16.561Z",
-    "modified": "2022-11-09T22:08:30.804Z",
+    "modified": "2022-11-10T00:22:49.846Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"address\": \"alcala 20, madrid\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6ec2dda9-b49e-4fa9-814d-7202bd4c0087",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: getInfoClub",
+    "url": "{{URL}}/scraping/getInfoClub",
+    "method": "POST",
+    "sortNum": 130000,
+    "created": "2022-11-09T23:53:07.068Z",
+    "modified": "2022-11-09T23:53:52.943Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"name\": \"lab madrid\",\n \"poblation\":\"Madrid\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

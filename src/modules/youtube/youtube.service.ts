@@ -5,7 +5,7 @@ import axios from 'axios';
 export class YoutubeService {
   async searchByText(data: { query: string }): Promise<YoutubeI[]> {
     try {
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${data.query}&type=video&key=${config.youtubeToken}`;
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${data.query}&type=video&key=${config.tokens.youtube}`;
       const response = await axios.get<YoutubeApiRootI>(url);
       const items: YoutubeI[] = [];
       for (const item of response.data.items) {

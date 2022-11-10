@@ -1,16 +1,21 @@
-export interface GeoAddressToCoordinatesI {
-  place_id: number;
-  licence: string;
-  osm_type: string;
-  osm_id: number;
-  boundingbox: string[];
-  lat: string;
-  lon: string;
-  display_name: string;
-  class: string;
-  type: string;
-  importance: number;
+export interface GeoMapsResponseI {
+  results: GeoMapsResponseResultI[];
+  status: string;
 }
+
+interface GeoMapsResponseResultI {
+  geometry: GeoMapsResponseGeometryI;
+}
+
+interface GeoMapsResponseGeometryI {
+  location: GeoMapsResponseLocationI;
+}
+
+interface GeoMapsResponseLocationI {
+  lat: number;
+  lng: number;
+}
+
 
 export interface GeoCoordinatesToAddressI {
   place_id: number;
@@ -35,6 +40,7 @@ export interface GeoCoordinatesToAddressItemAddressI {
   postcode: string;
   country: string;
   country_code: string;
+  house_number?: string;
 }
 
 export interface GeoCoordinatesToAddressResponseI {

@@ -10,8 +10,11 @@ export interface ConfigI {
   fcm: {
     server_key: string;
   };
-  githubToken: string;
-  youtubeToken: string;
+  tokens: {
+    github: string;
+    youtube: string;
+    map: string;
+  };
   paths: {
     project: string;
     uploads: string;

@@ -1,7 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { GeoService } from '@geo';
+import {
+  GeoAddressToCoordinatesDto,
+  GeoCoordinatesToAddressDto,
+  GeoService,
+} from '@geo';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
+import { validationMiddleware } from '@middlewares';
 
 export class GeoController implements ControllerI {
   path = '/geo';
@@ -12,12 +17,14 @@ export class GeoController implements ControllerI {
   }
 
   private initializeRoutes() {
-    this.router.get(
-      `${this.path}/addressToCoordinates/:address`,
+    this.router.post(
+      `${this.path}/addressToCoordinates`,
+      validationMiddleware(GeoAddressToCoordinatesDto),
       this.addressToCoordinates
     );
-    this.router.get(
-      `${this.path}/coordinatesToAddress/:lat/:lng`,
+    this.router.post(
+      `${this.path}/coordinatesToAddress`,
+      validationMiddleware(GeoCoordinatesToAddressDto),
       this.coordinatesToAddress
     );
   }
@@ -28,8 +35,8 @@ export class GeoController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const address = request.params.address;
-      const items = await this.geoService.addressToCoordinates(address);
+      const body: GeoAddressToCoordinatesDto = request.body;
+      const items = await this.geoService.addressToCoordinates(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -42,9 +49,8 @@ export class GeoController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const lat = request.params.lat;
-      const lng = request.params.lng;
-      const items = await this.geoService.coordinatesToAddress(lat, lng);
+      const body: GeoCoordinatesToAddressDto = request.body;
+      const items = await this.geoService.coordinatesToAddress(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

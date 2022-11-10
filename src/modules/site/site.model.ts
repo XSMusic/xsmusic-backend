@@ -12,6 +12,7 @@ export const siteSchema = new mongoose.Schema(
     name: { type: String, default: '' },
     address: {
       street: { type: String, default: '' },
+      poblation: { type: String, default: '' },
       city: { type: String, default: '' },
       country: { type: String, default: '' },
       type: { type: String, default: 'Point' },
