@@ -38,6 +38,7 @@ const addLookups = (data: any[]) => {
         pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
       },
     },
+    { $sort: { name: -1 } },
     {
       $lookup: {
         from: 'media',
@@ -54,6 +55,7 @@ const addLookups = (data: any[]) => {
               pipeline: [{ $project: { _id: 1, name: 1 } }],
             },
           },
+          { $sort: { created: -1 } },
         ],
       },
     }

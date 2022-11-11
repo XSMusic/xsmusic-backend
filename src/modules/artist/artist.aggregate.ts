@@ -126,7 +126,7 @@ const getPipeline = (type: string, complete: boolean) => {
       },
     },
     { $unwind: '$site' },
-    { $sort: { created: 1 } },
+    { $sort: { created: -1 } },
   ];
   return complete ? pipelineNotCount : pipelineCount;
 };
