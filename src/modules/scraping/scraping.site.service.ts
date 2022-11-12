@@ -14,7 +14,6 @@ export class ScrapingSiteService {
     return new Promise(async (resolve, reject) => {
       try {
         const urlGoogle = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${site.name}&inputtype=textquery&fields=geometry&key=${config.tokens.map}`;
-        console.log(urlGoogle);
         const googleResponse = await axios.get(urlGoogle);
         site.address.coordinates = [
           googleResponse.data['candidates'][0].geometry.location['lat'],
@@ -41,7 +40,6 @@ export class ScrapingSiteService {
       const url = `${this.url_clubbingspain
         .replace(':poblation', slugify(site.address.town))
         .replace(':name', slugify(site.name))}`;
-      console.log(url);
       const response = await axios.get(url);
       const $ = load(response.data);
       site.image = `https://www.clubbingspain.com${$('img')[3].attribs.src}`;

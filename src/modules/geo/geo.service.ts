@@ -62,7 +62,6 @@ export class GeoService {
         };
         resolve(data);
       } catch (error) {
-        console.log(error);
         reject(error);
       }
     });

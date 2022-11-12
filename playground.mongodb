@@ -4,52 +4,69 @@ use('XSMusic')
 const aggregation = [
   {
     '$lookup': {
+      from: 'styles',
+      localField: 'styles',
+      foreignField: '_id',
+      as: 'styles',
+      pipeline: [ { '$project': { _id: 1, name: 1, colors: 1 } } ]
+    }
+  },
+  {
+    '$lookup': {
       from: 'artists',
-      localField: '_id',
-      foreignField: 'styles',
+      localField: 'artists',
+      foreignField: '_id',
       as: 'artists',
-      pipeline: [ { '$count': 'count' }, { '$project': { count: 1, _id: 0 } } ]
-    }
-  },
-  {
-    '$lookup': {
-      from: 'media',
-      localField: '_id',
-      foreignField: 'styles',
-      as: 'sets',
       pipeline: [
         {
-          '$match': { '$or': [ { type: 'set' } ] }
-        },
-        { '$count': 'count' },
-        { '$project': { count: 1, _id: 0 } }
+          '$project': { _id: 1, name: 1, image: 1, country: 1, slug: 1 }
+        }
       ]
     }
   },
   {
     '$lookup': {
-      from: 'media',
-      localField: '_id',
-      foreignField: 'styles',
-      as: 'tracks',
+      from: 'sites',
+      localField: 'site',
+      foreignField: '_id',
+      as: 'site',
       pipeline: [
         {
-          '$match': { '$or': [ { type: 'track' } ] }
-        },
-        { '$count': 'count' },
-        { '$project': { count: 1, _id: 0 } }
+          '$project': { _id: 1, name: 1, address: 1, type: 1, image: 1, slug: 1 }
+        }
       ]
     }
   },
-//   { '$unwind': { path: '$artists', preserveNullAndEmptyArrays: true } },
-//   { '$unwind': { path: '$sets', preserveNullAndEmptyArrays: true } },
-//   { '$unwind': { path: '$tracks', preserveNullAndEmptyArrays: true } },
-  { '$sort': { name: 1 } },
+  { '$unwind': '$site' },
+  { '$match': { type: 'set' } },
+  {
+    '$match': {
+        '$or': [
+            { 'artists.name': { '$regex': 'DJ Marta', '$options': 'i' } }
+        ] 
+      }
+  },
+  { '$sort': { created: -1 } },
   { '$skip': 0 },
   { '$limit': 20 },
   {
-    '$project': { _id: 1, name: 1, artists: 1, sets: 1, tracks: 1, colors: 1 }
+    '$project': {
+      _id: 1,
+      name: 1,
+      artists: 1,
+      styles: 1,
+      site: 1,
+      source: 1,
+      sourceId: 1,
+      image: 1,
+      info: 1,
+      year: 1,
+      type: 1,
+      slug: 1,
+      created: 1,
+      updated: 1
+    }
   }
 ]
 
-db.styles.aggregate(aggregation)
+db.media.aggregate(aggregation)

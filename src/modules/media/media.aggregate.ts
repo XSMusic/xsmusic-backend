@@ -13,19 +13,7 @@ export const mediaGetAllAggregate = (
   data.push({
     $match: { type: body.type },
   });
-  if (body.filter && body.filter.length === 2) {
-    switch (body.filter[0]) {
-      case 'styles':
-        data.push({ $match: { 'styles.name': body.filter[1] } });
-        break;
-      case 'artists':
-        data.push({ $match: { 'artist.name': body.filter[1] } });
-        break;
-      default:
-        data.push({ $match: { [body.filter[0]]: body.filter[1] } });
-        break;
-    }
-  }
+  data = addFilters(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data = addProject(data);
   return data;
@@ -36,6 +24,51 @@ export const mediaGetOneAggregate = (type: string, value: string): any => {
   const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type]: match } });
   data = addLookups(data);
+  return data;
+};
+
+const addFilters = (body: MediaGetAllDto, data: any) => {
+  if (body.filter && body.filter.length === 2) {
+    switch (body.filter[0]) {
+      case 'styles':
+        data.push({
+          $match: {
+            'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+          },
+        });
+        break;
+      case 'artists':
+        data.push({
+          $match: {
+            'artist.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+          },
+        });
+        break;
+      default:
+        data.push({
+          $match: {
+            $or: [
+              {
+                name: { $regex: `${body.filter[1]}`, $options: 'i' },
+              },
+              {
+                'artists.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+              },
+              {
+                'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+              },
+              {
+                'site.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+              },
+              {
+                year: { $regex: `${body.filter[1]}`, $options: 'i' },
+              },
+            ],
+          },
+        });
+        break;
+    }
+  }
   return data;
 };
 

@@ -161,8 +161,6 @@ export class ScrapingArtistService {
         let infoLineItem = '';
         for (const i of wikiCodes) {
           if (infoLine.includes(i)) {
-            console.log({ i });
-            console.log({ infoLine: infoLine.replace(i, '') });
             infoLine = infoLine.replace(i, '');
             infoLineItem = infoLine;
           }
