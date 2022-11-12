@@ -2,7 +2,10 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { ScrapingService } from '@scraping';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
-import { ScrapingGetInfoArtistDto, ScrapingGetInfoClubDto } from './scraping.dto';
+import {
+  ScrapingGetInfoArtistDto,
+  ScrapingGetInfoClubDto,
+} from './scraping.dto';
 import { validationMiddleware } from '@middlewares';
 
 export class ScrapingController implements ControllerI {
@@ -39,8 +42,8 @@ export class ScrapingController implements ControllerI {
       next(new HttpException(400, error.message, request, response));
     }
   };
- 
-    private getInfoClub = async (
+
+  private getInfoClub = async (
     request: Request,
     response: Response,
     next: NextFunction

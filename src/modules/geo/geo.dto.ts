@@ -4,6 +4,6 @@ export class GeoAddressToCoordinatesDto {
   @IsString() address: string;
 }
 
-export class GeoCoordinatesToAddressDto { 
-    @IsArray() coordinates: number[]
+export class GeoCoordinatesToAddressDto {
+  @IsArray() coordinates: number[];
 }
