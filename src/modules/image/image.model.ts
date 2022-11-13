@@ -1,4 +1,4 @@
-import { ImageI } from '@image';
+import { ImageI, ImageMongoI } from '@image';
 import * as mongoose from 'mongoose';
 
 const schema = new mongoose.Schema(
@@ -44,4 +44,4 @@ const schema = new mongoose.Schema(
   }
 );
 
-export const Image = mongoose.model<ImageI>('Image', schema);
+export const Image = mongoose.model<ImageMongoI>('Image', schema);

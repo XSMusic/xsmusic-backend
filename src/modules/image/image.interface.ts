@@ -1,11 +1,10 @@
-import mongoose from 'mongoose';
+import { Document } from 'mongoose';
 
-export interface ImageI {
-  _id?: string;
-  type: any; // car | tournament
-  car?: any; // TournamentI
-  tournament?: any; // TournamentI
-  brand?: any;
+export interface ImageMongoI extends Document {
+  type: any;
+  artist?: any;
+  media?: any;
+  site?: any;
   url: string;
   firstImage?: boolean;
   position?: number;
@@ -14,15 +13,16 @@ export interface ImageI {
   updated?: string;
 }
 
-export interface ImageMongoI extends mongoose.Document {
+export interface ImageI {
   _id?: string;
-  type: any; // car | tournament
-  car?: any; // TournamentI
-  tournament?: any; // TournamentI
-  brand?: any;
+  type: any;
+  artist?: any;
+  media?: any;
+  site?: any;
   url: string;
   firstImage?: boolean;
   position?: number;
+  size?: string;
   created?: string;
   updated?: string;
 }

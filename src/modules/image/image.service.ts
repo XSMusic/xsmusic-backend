@@ -55,17 +55,8 @@ export class ImageService {
             size = fs.statSync(imagePath).size;
           }
           const i: ImageI = {
-            _id: item._id,
-            type: item.type,
-            url: item.url,
+            ...item,
             size: size ? bytesToSize(size, 2) : 'N/D',
-            tournament: item.tournament,
-            car: item.car,
-            brand: item.brand,
-            firstImage: item.firstImage,
-            position: item.position,
-            created: item.created,
-            updated: item.updated,
           };
           itemsWithSize.push(i);
         }

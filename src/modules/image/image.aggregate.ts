@@ -8,7 +8,7 @@ export const imageGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addLookups(data);
+  //   data = addLookups(data);
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
   }
