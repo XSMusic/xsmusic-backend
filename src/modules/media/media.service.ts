@@ -19,7 +19,9 @@ export class MediaService {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
         const aggregate = mediaGetAllAggregate(body, skip, pageSize);
         const items = await Media.aggregate(aggregate).exec();
-        const total = await Media.find({}).countDocuments().exec();
+        const total = await Media.find({ type: body.type })
+          .countDocuments()
+          .exec();
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,

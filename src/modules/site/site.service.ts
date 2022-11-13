@@ -17,7 +17,9 @@ export class SiteService {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
         const aggregate = siteGetAllAggregate(body, skip, pageSize);
         const items = await Site.aggregate(aggregate).exec();
-        const total = await Site.find({}).countDocuments().exec();
+        const total = await Site.find({ type: body.type })
+          .countDocuments()
+          .exec();
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,

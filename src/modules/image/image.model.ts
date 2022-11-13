@@ -1,4 +1,4 @@
-import { ImageI, ImageMongoI } from '@image';
+import { ImageMongoI } from '@image';
 import * as mongoose from 'mongoose';
 
 const schema = new mongoose.Schema(
