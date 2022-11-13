@@ -7,7 +7,7 @@ const gendersValid = {
   message: '{VALUE} no es un genero permitido',
 };
 
-export const artistSchema = new mongoose.Schema(
+export const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     birthdate: { type: String, default: '' },
@@ -36,4 +36,4 @@ export const artistSchema = new mongoose.Schema(
   }
 );
 
-export const Artist = mongoose.model<ArtistMongoI>('Artist', artistSchema);
+export const Artist = mongoose.model<ArtistMongoI>('Artist', schema);

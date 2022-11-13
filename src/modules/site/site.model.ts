@@ -7,7 +7,7 @@ const typesValid = {
   message: '{VALUE} no es un tipo permitido',
 };
 
-export const siteSchema = new mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     address: {
@@ -43,4 +43,4 @@ export const siteSchema = new mongoose.Schema(
   }
 );
 
-export const Site = mongoose.model<SiteMongoI>('Site', siteSchema);
+export const Site = mongoose.model<SiteMongoI>('Site', schema);

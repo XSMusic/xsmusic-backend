@@ -9,6 +9,7 @@ import { YoutubeController } from '@youtube';
 import { MediaController } from '@media';
 import { SiteController } from '@site';
 import { GeoController } from '@geo';
+import { ImageController } from '@image';
 
 const controllers = [
   new ArtistController(),
@@ -16,6 +17,7 @@ const controllers = [
   new GeoController(),
   new MediaController(),
   new MenuController(),
+  new ImageController(),
   new ScrapingController(),
   new StatsController(),
   new SiteController(),

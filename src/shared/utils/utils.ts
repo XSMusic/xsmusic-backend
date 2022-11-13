@@ -1,65 +1,8 @@
-export const months = [
-  'enero',
-  'febrero',
-  'marzo',
-  'abril',
-  'mayo',
-  'junio',
-  'julio',
-  'agosto',
-  'septiembre',
-  'octubre',
-  'noviembre',
-  'diciembre',
-];
-export const wiki_codes = [
-  '[1]',
-  '[2]',
-  '[3]',
-  '[4]',
-  '[5]',
-  '[6]',
-  '[7]',
-  '[8]',
-  '[9]',
-  '[10]',
-];
-
-export const get_month = (month_es: string): number => {
-  let monthNumber = 0;
-  months.forEach((month, idx) => {
-    if (month == month_es) {
-      monthNumber = Number(idx + 1);
-    }
-  });
-  return monthNumber;
-};
-
-export const getValuesForPaginator = (body: {
-  page: number;
-  pageSize: number;
-}): {
-  pageSize: number;
-  currentPage: number;
-  skip: number;
-} => {
-  const pageSize = body.pageSize ? body.pageSize : 20;
-  const currentPage = body.page ? body.page : 1;
-  const skip = (currentPage - 1) * pageSize;
-  return { pageSize, currentPage, skip };
-};
-
-export const getOrderForGetAllAggregate = (body: any): any => {
-  let order: any = {};
-  if (body.order && body.order.length > 1) {
-    order = { [body.order[0]]: body.order[1] === 'desc' ? -1 : 1 };
-  } else {
-    order = { created: 1 };
-  }
-  return order;
-};
-
-export const slugify = (str: string, simbol = '-', toLowerCase = true) => {
+export const slugify = (
+  str: string,
+  simbol = '-',
+  toLowerCase = true
+): string => {
   str = str.replace(/^\s+|\s+$/g, '');
   str = str.toLowerCase();
   const from =
@@ -69,28 +12,46 @@ export const slugify = (str: string, simbol = '-', toLowerCase = true) => {
   for (let i = 0, l = from.length; i < l; i++) {
     str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
   }
-
   if (!toLowerCase) {
     str = str.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
   } else {
     str = str.replace(/[^a-z0-9 -]/g, '');
   }
-
   str = str.replace(/\s+/g, simbol).replace(/-+/g, simbol);
-
   return str;
 };
 
-export const onlyUnique = (value: any, index: number, self: any[]) => {
+export const onlyUnique = (value: any, index: number, self: any[]): boolean => {
   return self.indexOf(value) === index;
 };
 
-export const sortByTotal = (a: any, b: any) => {
+export const sortByTotal = (a: any, b: any): 0 | -1 | 1 => {
   if (a.total > b.total) {
     return -1;
   } else if (b.total > a.total) {
     return 1;
   } else {
     return 0;
+  }
+};
+
+export const randomNumber = (
+  max: number,
+  min = 1,
+  decimal = false
+): string | undefined => {
+  if (!decimal) {
+    if (min > 1) {
+      return (Math.random() * (max - min) + min).toFixed(0);
+    }
+    return (Math.random() * (max - min)).toFixed(0);
+  } else if (decimal) {
+    const maxArray = max.toString().split('.');
+    const maxOk = [Number(maxArray[0]), Number(maxArray[1])];
+    const minArray = min.toString().split('.');
+    const minOk = [Number(minArray[0]), Number(minArray[1])];
+    const dataOk = Math.random() * (max - min) + min;
+    const dataSubOk: any = randomNumber(maxOk[1], minOk[1]);
+    return dataOk.toFixed(0) + '.' + dataSubOk;
   }
 };

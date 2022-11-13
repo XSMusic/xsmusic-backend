@@ -1,3 +1,4 @@
 export * from './validation.middleware';
 export * from './token.middleware';
-export { morganMiddleware } from './morgan.middleware';
+export * from './morgan.middleware';
+export * from './multer.middleware';
