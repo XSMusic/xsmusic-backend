@@ -32,11 +32,9 @@ export class ArtistService {
     });
   }
 
-  getOne(body: { id?: string; slug?: string }): Promise<ArtistI> {
+  getOne(type: 'id' | 'slug', value: string): Promise<ArtistI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const type = body.id ? '_id' : 'slug';
-        const value = body.id ? body.id : body.slug;
         const aggregate = artistGetOneAggregate(type, value);
         const items = await Artist.aggregate(aggregate).exec();
         if (items.length > 0) {

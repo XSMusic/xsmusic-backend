@@ -34,11 +34,9 @@ export class MediaService {
     });
   }
 
-  getOne(body: { id?: string; slug?: string }): Promise<MediaI> {
+  getOne(type: 'id' | 'slug', value: string): Promise<MediaI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const type = body.id ? '_id' : 'slug';
-        const value = body.id ? body.id : body.slug;
         const aggregate = mediaGetOneAggregate(type, value);
         const items = await Media.aggregate(aggregate).exec();
         let item: MediaI;

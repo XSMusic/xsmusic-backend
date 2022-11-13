@@ -32,11 +32,9 @@ export class SiteService {
     });
   }
 
-  getOne(body: { id?: string; slug?: string }): Promise<SiteI> {
+  getOne(type: 'id' | 'slug', value: string): Promise<SiteI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const type = body.id ? '_id' : 'slug';
-        const value = body.id ? body.id : body.slug;
         const aggregate = siteGetOneAggregate(type, value);
         const items = await Site.aggregate(aggregate).exec();
         if (items.length > 0) {

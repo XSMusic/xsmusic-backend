@@ -33,10 +33,13 @@ export const artistGetAllAggregate = (
   return data;
 };
 
-export const artistGetOneAggregate = (type: string, value: string): any => {
+export const artistGetOneAggregate = (
+  type: 'id' | 'slug',
+  value: string
+): any => {
   let data = [];
-  const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
-  data.push({ $match: { [type]: match } });
+  const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
+  data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
   data = addLookups(data, true);
   return data;
 };

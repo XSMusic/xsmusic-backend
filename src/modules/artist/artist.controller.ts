@@ -9,7 +9,6 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { IdSlugDto } from '@dtos';
 
 export class ArtistController implements ControllerI {
   path = '/artists';
@@ -25,11 +24,7 @@ export class ArtistController implements ControllerI {
       validationMiddleware(ArtistGetAllDto),
       this.getAll
     );
-    this.router.post(
-      `${this.path}/getOne`,
-      validationMiddleware(IdSlugDto),
-      this.getOne
-    );
+    this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
     this.router.post(
       `${this.path}/create`,
       validationMiddleware(ArtistCreateDto),
@@ -65,8 +60,9 @@ export class ArtistController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: IdSlugDto = request.body;
-      const result: ArtistI = await this.artistService.getOne(body);
+      const type = request.params.type as 'id' | 'slug';
+      const value = request.params.value;
+      const result: ArtistI = await this.artistService.getOne(type, value);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

@@ -19,10 +19,13 @@ export const siteGetAllAggregate = (
   return data;
 };
 
-export const siteGetOneAggregate = (type: string, value: string): any => {
+export const siteGetOneAggregate = (
+  type: 'id' | 'slug',
+  value: string
+): any => {
   let data = [];
-  const match = type === '_id' ? new mongoose.Types.ObjectId(value) : value;
-  data.push({ $match: { [type]: match } });
+  const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
+  data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
   data = addLookups(data);
   return data;
 };
