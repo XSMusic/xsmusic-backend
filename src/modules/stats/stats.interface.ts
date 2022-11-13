@@ -1,11 +1,12 @@
 export interface StatsTotalsAdminI {
   artists: StatsTotalAdminItemI;
-  styles: StatsTotalAdminItemI;
-  sets: StatsTotalAdminItemI;
-  tracks: StatsTotalAdminItemI;
   clubs: StatsTotalAdminItemI;
-  festivals: StatsTotalAdminItemI;
   events: StatsTotalAdminItemI;
+  festivals: StatsTotalAdminItemI;
+  images: StatsTotalAdminItemI;
+  sets: StatsTotalAdminItemI;
+  styles: StatsTotalAdminItemI;
+  tracks: StatsTotalAdminItemI;
   users: StatsTotalAdminItemI;
 }
 

@@ -10,6 +10,7 @@ import { MediaMongoI } from '../media/media.interface';
 import { User, UserMongoI } from '@user';
 import moment from 'moment';
 import { Site, SiteMongoI } from 'src/modules/site';
+import { Image, ImageMongoI } from '@image';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -22,6 +23,7 @@ export class StatsService {
           tracks: await this.setTotal<MediaMongoI>(Media, 'track'),
           clubs: await this.setTotal<SiteMongoI>(Site, 'club'),
           festivals: await this.setTotal<SiteMongoI>(Site, 'festival'),
+          images: await this.setTotal<ImageMongoI>(Image),
           events: {
             total: 0,
             percentages: [
