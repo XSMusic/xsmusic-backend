@@ -15,3 +15,4 @@ yarn-error.log
 thunder/thunderEnvironment.json
 private.txt
 scripts/python/__pycache__
+playground.mongodb
