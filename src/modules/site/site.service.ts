@@ -53,7 +53,7 @@ export class SiteService {
     });
   }
 
-  create(body: SiteI): Promise<MessageI> {
+  create(body: SiteI): Promise<SiteI> {
     return new Promise(async (resolve, reject) => {
       try {
         const type = body.type === 'club' ? 'Club' : 'Festival';
@@ -68,9 +68,7 @@ export class SiteService {
           const item = new Site(body);
           const itemDB = await item.save();
           if (itemDB) {
-            resolve({
-              message: `${type} creado`,
-            });
+            resolve(itemDB);
           } else {
             reject({
               message: `El ${type} no ha sido actualizado`,

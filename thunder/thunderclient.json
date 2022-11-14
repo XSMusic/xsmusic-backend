@@ -1099,11 +1099,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "e93483c1-2fda-4eec-95fc-20b40d7ef08b",
     "name": "Image: deleteOne",
-    "url": "{{URL}}/images/one/637267a8b23b083eb3362ab2",
+    "url": "{{URL}}/images/one/63728779122f31c43f8c6f6d",
     "method": "DELETE",
     "sortNum": 50000,
     "created": "2022-11-14T17:08:36.573Z",
-    "modified": "2022-11-14T17:10:28.655Z",
+    "modified": "2022-11-14T18:24:38.230Z",
     "headers": [
       {
         "name": "XSToken",

@@ -42,7 +42,9 @@ export class ScrapingSiteService {
         .replace(':name', slugify(site.name))}`;
       const response = await axios.get(url);
       const $ = load(response.data);
-      site.image = `https://www.clubbingspain.com${$('img')[3].attribs.src}`;
+      site.images.push(
+        `https://www.clubbingspain.com${$('img')[3].attribs.src}`
+      );
       return site;
     } catch (error) {
       return site;

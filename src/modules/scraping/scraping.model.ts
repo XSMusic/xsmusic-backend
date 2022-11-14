@@ -20,7 +20,7 @@ export class ScrapingArtist {
 
 export class ScrapingSite {
   name = '';
-  image = '';
+  images: string[] = [];
   address: any = {
     street: '',
     town: '',

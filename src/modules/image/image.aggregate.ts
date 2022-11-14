@@ -39,7 +39,7 @@ const addLookups = (data: any[]) => {
         as: 'media',
         pipeline: [
           {
-            $project: { _id: 1, name: 1, slug: 1 },
+            $project: { _id: 1, name: 1, slug: 1, type: 1 },
           },
         ],
       },
@@ -52,7 +52,7 @@ const addLookups = (data: any[]) => {
         as: 'site',
         pipeline: [
           {
-            $project: { _id: 1, name: 1, slug: 1 },
+            $project: { _id: 1, name: 1, slug: 1, type: 1 },
           },
         ],
       },
