@@ -2,7 +2,7 @@
 
 source $(pwd)/scripts/setenv.sh
 
-TYPE=${1} # proToUat / proToTest / uatToPro / uatToTest
+TYPE=${1} # proToUat  / uatToPro
 
 COLLECTIONS=('artists' 'images' 'media' 'menus' 'sites' 'styles' 'users')
 
@@ -14,23 +14,9 @@ proToUat() {
 
 uatToPro() {
     echo "uatToPro CUIDADO"
-    mongodump --uri=${MONGO_URI_UAT} -o ${PATH_DB}
-    deleteAll "uatToPro"
-    mongorestore --uri=${MONGO_URI_PRO} ${PATH_DB}/XSMusic
-}
-
-uatToTest() {
-    echo "uatToTest"
-    mongodump --uri=${MONGO_URI_UAT} -o ${PATH_DB}
-    deleteAll "uatToTest"
-    mongorestore --uri=${MONGO_URI_TEST} ${PATH_DB}/XSMusic
-}
-
-proToTest() {
-    echo "proToTest"
-    mongodump --uri=${MONGO_URI_PRO} -o ${PATH_DB}
-    deleteAll ${MONGO_URI_UAT}
-    mongorestore --uri=${MONGO_URI_TEST} ${PATH_DB}/XSMusic
+    mongoD ${MONGO_URI_UAT}
+    deleteAll ${MONGO_URI_PRO}
+    mongoR ${MONGO_URI_PRO}
 }
 
 mongoD() {
@@ -71,12 +57,8 @@ init() {
     echo "🔥  Iniciando backup de la base de datos"
     if [ "$TYPE" = "proToUat" ]; then
         proToUat
-    elif [ "$TYPE" = "proToTest" ]; then
-        proToTest
     elif [ "$TYPE" = "uatToPro" ]; then
         uatToPro
-    elif [ "$TYPE" = "uatToTest" ]; then
-        uatToTest
     else
         echo "❌  No se ha especificado el tipo"
         exit 1
@@ -85,5 +67,3 @@ init() {
 
 clear
 init
-
-#TODO: Añadir borrado de cache segun env
