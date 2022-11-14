@@ -57,7 +57,7 @@ export class MediaService {
     });
   }
 
-  create(body: MediaI): Promise<MessageI> {
+  create(body: MediaI): Promise<MediaI> {
     return new Promise(async (resolve, reject) => {
       try {
         if (body._id) {
@@ -68,7 +68,7 @@ export class MediaService {
         const item = new Media(body);
         const itemDB = await item.save();
         if (itemDB) {
-          resolve({ message: `${body.type} creado` });
+          resolve(itemDB);
         } else {
           reject({ message: `El ${body.type} no ha sido creado` });
         }

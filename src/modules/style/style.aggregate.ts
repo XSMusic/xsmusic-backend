@@ -26,7 +26,8 @@ export const styleGetAllAggregate = (
       artists: 1,
       sets: 1,
       tracks: 1,
-      colors: 1,
+      clubs: 1,
+      festivals: 1,
     },
   });
   return data;
@@ -67,13 +68,33 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'tracks',
         pipeline: getPipeline('track', complete),
       },
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: '_id',
+        foreignField: 'styles',
+        as: 'clubs',
+        pipeline: getPipeline('club', complete),
+      },
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: '_id',
+        foreignField: 'styles',
+        as: 'festivals',
+        pipeline: getPipeline('festival', complete),
+      },
     }
   );
   if (!complete) {
     data.push(
       { $unwind: { path: '$artists', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
+      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$clubs', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$festivals', preserveNullAndEmptyArrays: true } }
     );
   }
   return data;
@@ -95,7 +116,7 @@ const getPipeline = (type: string, complete: boolean) => {
     },
   };
   const pipelineNotCount =
-    type === 'set' || type === 'track'
+    type === 'set' || type === 'track' || type === 'club' || type === 'festival'
       ? [{ $match: { $or: [{ type: type }] } }, styleLookup]
       : [styleLookup];
   return complete ? pipelineNotCount : pipelineCount;
