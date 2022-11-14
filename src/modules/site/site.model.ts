@@ -20,7 +20,6 @@ const schema = new mongoose.Schema(
     },
     type: { type: String, default: 'club', enum: typesValid },
     styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
-    image: { type: String, default: '' },
     info: { type: String, default: '' },
     social: {
       web: { type: String, default: '' },

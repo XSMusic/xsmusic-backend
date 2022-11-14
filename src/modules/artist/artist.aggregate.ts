@@ -19,7 +19,7 @@ export const artistGetAllAggregate = (
       country: 1,
       birthdate: 1,
       styles: 1,
-      image: 1,
+      images: 1,
       info: 1,
       slug: 1,
       gender: 1,
@@ -53,6 +53,18 @@ const addLookups = (data: any[], complete: boolean) => {
         foreignField: '_id',
         as: 'styles',
         pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'artist',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, position: 1 } },
+          { $sort: { position: 1 } },
+        ],
       },
     },
     {
@@ -118,7 +130,7 @@ const getPipeline = (type: string, complete: boolean) => {
     { $count: 'count' },
     { $project: { count: 1, _id: 0 } },
   ];
-  const pipelineNotCount = [
+  const pipelineComplete = [
     { $match: { $or: [{ type: type }] } },
     {
       $lookup: {
@@ -128,8 +140,20 @@ const getPipeline = (type: string, complete: boolean) => {
         as: 'site',
       },
     },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'media',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, position: 1 } },
+          { $sort: { position: 1 } },
+        ],
+      },
+    },
     { $unwind: '$site' },
     { $sort: { created: -1 } },
   ];
-  return complete ? pipelineNotCount : pipelineCount;
+  return complete ? pipelineComplete : pipelineCount;
 };

@@ -1,25 +1,24 @@
-import https from 'https';
+import axios from 'axios';
 import fs from 'fs';
 
-export const downloadImageFromUrl = (
+export const downloadImageFromUrl = async (
   url: string,
   filePath: string
-): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode === 200) {
-        res
-          .pipe(fs.createWriteStream(filePath))
-          .on('error', reject)
-          .once('close', () => resolve(filePath));
-      } else {
-        res.resume();
-        reject(
-          new Error(`Request Failed With a Status Code: ${res.statusCode}`)
-        );
-      }
+): Promise<string> => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: url,
+      responseType: 'stream',
+      headers: {
+        'User-Agent':
+          'XSB/0.0 (https://JoseXS.github.io/; prueba@prueba.es) generic-library/0.0',
+      },
     });
-  });
+    return response.data.pipe(fs.createWriteStream(filePath));
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 export const bytesToSize = (bytes: number, decimals: number): string => {

@@ -85,12 +85,36 @@ const addLookups = (data: any[]) => {
     },
     {
       $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'media',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, position: 1 } },
+          { $sort: { position: 1 } },
+        ],
+      },
+    },
+    {
+      $lookup: {
         from: 'artists',
         localField: 'artists',
         foreignField: '_id',
         as: 'artists',
         pipeline: [
-          { $project: { _id: 1, name: 1, image: 1, country: 1, slug: 1 } },
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'artist',
+              as: 'images',
+              pipeline: [
+                { $project: { _id: 1, url: 1, position: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          { $project: { _id: 1, name: 1, images: 1, country: 1, slug: 1 } },
         ],
       },
     },
@@ -102,12 +126,24 @@ const addLookups = (data: any[]) => {
         as: 'site',
         pipeline: [
           {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'site',
+              as: 'images',
+              pipeline: [
+                { $project: { _id: 1, url: 1, position: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          {
             $project: {
               _id: 1,
               name: 1,
               address: 1,
               type: 1,
-              image: 1,
+              images: 1,
               slug: 1,
             },
           },
@@ -129,7 +165,7 @@ const addProject = (data: any[]) => {
       site: 1,
       source: 1,
       sourceId: 1,
-      image: 1,
+      images: 1,
       info: 1,
       year: 1,
       type: 1,

@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-10-19T20:28:53.830Z",
-    "modified": "2022-11-02T10:59:48.757Z",
+    "modified": "2022-11-13T20:38:26.602Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"filter\": [\"name\", \"Fatima Hajji\"]\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ]\n  \n}",
       "form": []
     },
     "tests": []
@@ -1030,7 +1030,7 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-13T14:36:38.755Z",
-    "modified": "2022-11-13T14:37:41.188Z",
+    "modified": "2022-11-13T22:52:57.372Z",
     "headers": [
       {
         "name": "XSToken",
@@ -1045,7 +1045,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"filter\": [\"name\", \"Fatima Hajji\"]\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"order\": [\n    \"created\",\n    \"desc\"\n  ]\n}",
       "form": []
     },
     "tests": []
@@ -1073,6 +1073,25 @@
       "form": [],
       "binary": "../../../Downloads/Captura de pantalla 2022-03-05 a las 1.20.50.png"
     },
+    "tests": []
+  },
+  {
+    "_id": "1b81c49f-cf91-4360-9d8c-de6fa955319f",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "e93483c1-2fda-4eec-95fc-20b40d7ef08b",
+    "name": "Image: deleteAll",
+    "url": "{{URL}}/images/all",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-11-13T17:53:16.854Z",
+    "modified": "2022-11-13T17:53:23.457Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
     "tests": []
   }
 ]

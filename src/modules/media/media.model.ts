@@ -17,7 +17,6 @@ const schema = new mongoose.Schema(
     artists: [{ type: mongoose.Types.ObjectId, ref: 'Artist' }],
     site: { type: mongoose.Types.ObjectId, ref: 'Site' },
     type: { type: String, default: 'set', enum: typeValid },
-    image: { type: String, default: '' },
     styles: [{ type: mongoose.Types.ObjectId, ref: 'Style' }],
     info: { type: String, default: '' },
     source: { type: String, default: 'youtube', enum: sourceValid },

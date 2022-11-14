@@ -13,6 +13,7 @@ import {
   ImageService,
   ImageSetFirstImageDto,
   ImageUpdateDto,
+  ImageUploadByUrlDto,
   ImageUploadDto,
 } from '@image';
 
@@ -42,6 +43,12 @@ export class ImageController implements ControllerI {
       `${this.path}/upload`,
       [multerMiddleware.single('image'), checkUserToken],
       this.upload
+    );
+    this.router.post(
+      `${this.path}/uploadByUrl`,
+      validationMiddleware(ImageUploadByUrlDto),
+      checkUserToken,
+      this.uploadByUrl
     );
     this.router.put(
       `${this.path}/update`,
@@ -95,6 +102,20 @@ export class ImageController implements ControllerI {
     try {
       const body: ImageUploadDto = request.body;
       const result = await this.imageService.upload(body, request.file);
+      response.status(200).json(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private uploadByUrl = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: ImageUploadByUrlDto = request.body;
+      const result = await this.imageService.uploadByUrl(body);
       response.status(200).json(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

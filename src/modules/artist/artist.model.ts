@@ -13,7 +13,6 @@ export const schema = new mongoose.Schema(
     birthdate: { type: String, default: '' },
     styles: [{ type: mongoose.Types.ObjectId, ref: styleSchema }],
     country: { type: String, default: 'es' },
-    image: { type: String, default: '' },
     gender: { type: String, default: 'male', enum: gendersValid },
     info: { type: String, default: '' },
     social: {

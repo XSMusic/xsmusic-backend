@@ -9,6 +9,7 @@ import {
   ImageUpdateDto,
   ImageSetFirstImageDto,
   imageGetAllAggregate,
+  ImageUploadByUrlDto,
 } from '@image';
 import fs from 'fs';
 import {
@@ -18,24 +19,15 @@ import {
   randomNumber,
 } from '@utils';
 import { config } from '@config';
+import { Media } from '@media';
 
 export class ImageService {
-  private populateDefault = [
-    { path: 'tournament', select: 'name' },
-    {
-      path: 'car',
-      select: 'model',
-      populate: { path: 'brand', select: 'name' },
-    },
-    { path: 'brand', select: 'name' },
-    { path: 'user', select: 'name' },
-  ];
-
   async getAll(
     body?: ImageGetAllDto
   ): Promise<{ items: ImageI[]; paginator: PaginatorI } | ImageI[]> {
     try {
       if (body) {
+        body.type = body.type! ? 'all' : body.type;
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
         const aggregate = imageGetAllAggregate(body, skip, pageSize);
         const items: ImageI[] = await Image.aggregate(aggregate).exec();
@@ -86,14 +78,6 @@ export class ImageService {
     }
   }
 
-  getOneByBrandId(id: string): Promise<ImageMongoI> {
-    try {
-      return Image.findOne({ brand: id }).exec();
-    } catch (error) {
-      return error;
-    }
-  }
-
   upload(data: ImageUploadDto, file: any): Promise<ImageI> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -113,12 +97,39 @@ export class ImageService {
     });
   }
 
+  uploadByUrl(data: ImageUploadByUrlDto) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const images = await this.imagesSameTypeId(data);
+        data.position = images.length;
+        const url = await this.downloadAndUploadImageFromUrl(data);
+        if (url) {
+          const imageCreated = await this.create(
+            {
+              type: `${data.type}`,
+              id: data.id,
+            },
+            `${data.type}s/${data.id}_${data.position}.png`
+          );
+          resolve(imageCreated);
+        } else {
+          reject({ message: 'La imagen no ha sido añadida' });
+        }
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
   async create(data: ImageUploadDto, url: string): Promise<ImageMongoI> {
     try {
-      // check image
       let body = {};
-      if (data.type === 'car') {
-        body = await this.createCarImage(data, url);
+      if (
+        data.type === 'artist' ||
+        data.type === 'site' ||
+        data.type === 'media'
+      ) {
+        body = await this.createForMultiImage(data, url);
       } else {
         body = {
           type: data.type,
@@ -134,19 +145,19 @@ export class ImageService {
     }
   }
 
-  private async createCarImage(
+  private async createForMultiImage(
     data: ImageUploadDto,
     url: string
   ): Promise<any> {
     let body;
     const imagesSameTypeId = await Image.find({
       type: data.type,
-      car: data.id,
+      [data.type]: data.id,
     }).exec();
     if (imagesSameTypeId.length > 0) {
       body = {
         type: data.type,
-        car: data.id,
+        [data.type]: data.id,
         url,
         firstImage: false,
         position: imagesSameTypeId.length,
@@ -154,7 +165,7 @@ export class ImageService {
     } else {
       body = {
         type: data.type,
-        car: data.id,
+        [data.type]: data.id,
         url,
         firstImage: true,
         position: 0,
@@ -171,60 +182,85 @@ export class ImageService {
     }
   }
 
-  async setFirstImage(data: ImageSetFirstImageDto) {
+  async setFirstImage(data: ImageSetFirstImageDto): Promise<ImageI[]> {
     try {
-      let imagesCar = await Image.find({ car: data.carId })
+      let images = await Image.find({ [data.type]: data.typeId })
         .sort({ position: 1 })
         .exec();
-      imagesCar = imagesCar.filter(
-        (image) => image._id.toString() !== data.imageId
-      );
-      imagesCar.forEach(async (image, index) => {
+      images = images.filter((image) => image._id.toString() !== data.imageId);
+      images.forEach(async (image, index) => {
         image.firstImage = false;
         image.position = index + 1;
         await image.save();
       });
-      return Image.findByIdAndUpdate(data.imageId, {
+      await Image.findByIdAndUpdate(data.imageId, {
         firstImage: true,
         position: 0,
       }).exec();
+      return await Image.find({ [data.type]: data.typeId })
+        .sort({ position: 1 })
+        .exec();
     } catch (error) {
       return error;
     }
   }
 
-  async deleteOne(id: string): Promise<MessageI> {
-    try {
-      const item = await this.getOne(id);
-      await Image.findByIdAndDelete(id).exec();
-      fs.unlinkSync(`${config.paths.uploads}/${item.url}`);
-      return { message: 'Imagen eliminada' };
-    } catch (error) {
-      return error;
-    }
+  async deleteOne(id: string, force = false): Promise<MessageI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const item = await this.getOne(id);
+        const response = await Image.findByIdAndDelete(id).exec();
+        if (response) {
+          fs.unlinkSync(`${config.paths.uploads}/${item.url}`);
+          if (response) {
+            resolve({ message: 'Imagen eliminada' });
+          } else {
+            reject({ message: 'Imagen no existe en la BD' });
+          }
+        }
+      } catch (error) {
+        if (force) {
+          resolve({ message: 'Imagen no existe' });
+        } else {
+          reject({ message: 'Imagen no existe' });
+        }
+      }
+    });
   }
 
   async deleteAll(): Promise<MessageI> {
-    try {
-      const items: any = await this.getAll();
-      if (items)
-        for (const item of items) {
-          await this.deleteOne(item);
-        }
-    } catch (error) {
-      return error;
-    }
-  }
-
-  downloadAndUploadImageFromUrl(url: string, id: string): Promise<MessageI> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const filePath = `${config.paths.uploads}/brand/${id}.png`;
-        await downloadImageFromUrl(url, filePath);
-        resolve({ message: 'Imagen descargada' });
-      } catch (error) {
-        reject(error);
+    return new Promise(async (resolve) => {
+      const items: any = await Image.find({}).exec();
+      for (const item of items) {
+        await this.deleteOne(item._id, true);
+      }
+      if (items.length > 0) {
+        resolve({ message: `${items.length} imagenes eliminadas` });
+      } else {
+        resolve({ message: 'No hay imagenes' });
       }
     });
+  }
+
+  private downloadAndUploadImageFromUrl(
+    data: ImageUploadByUrlDto
+  ): Promise<string> {
+    return new Promise(async (resolve) => {
+      try {
+        const filePath = `${config.paths.uploads}/${data.type}s/${data.id}_${data.position}.png`;
+        const urlNew = await downloadImageFromUrl(data.url, filePath);
+        resolve(urlNew);
+      } catch (error) {
+        console.error(error);
+        resolve(null);
+      }
+    });
+  }
+
+  private async imagesSameTypeId(data: { type: string; id: string }) {
+    return await Image.find({
+      type: data.type,
+      [data.type]: data.id,
+    }).exec();
   }
 }

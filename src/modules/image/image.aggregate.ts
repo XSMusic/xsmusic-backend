@@ -8,26 +8,66 @@ export const imageGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  //   data = addLookups(data);
-  if (body.type !== 'all') {
-    data.push({ $match: { type: body.type } });
-  }
-  data = setFilter(body, data);
+  data = addLookups(data);
+  //   data = setFilter(body, data);
+
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   //   data = addProject(data);
   return data;
 };
 
 const addLookups = (data: any[]) => {
-  data.push({
-    $lookup: {
-      from: 'styles',
-      localField: 'styles',
-      foreignField: '_id',
-      as: 'styles',
-      pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+  data.push(
+    {
+      $lookup: {
+        from: 'artists',
+        localField: 'artist',
+        foreignField: '_id',
+        as: 'artist',
+        pipeline: [
+          {
+            $project: { _id: 1, name: 1, country: 1, slug: 1 },
+          },
+        ],
+      },
     },
-  });
+    {
+      $lookup: {
+        from: 'media',
+        localField: 'media',
+        foreignField: '_id',
+        as: 'media',
+        pipeline: [
+          {
+            $project: { _id: 1, name: 1, slug: 1 },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+        pipeline: [
+          {
+            $project: { _id: 1, name: 1, slug: 1 },
+          },
+        ],
+      },
+    },
+    {
+      $unwind: { path: '$artist', preserveNullAndEmptyArrays: true },
+    },
+    {
+      $unwind: { path: '$media', preserveNullAndEmptyArrays: true },
+    },
+    {
+      $unwind: { path: '$site', preserveNullAndEmptyArrays: true },
+    }
+  );
+  return data;
 };
 
 const setFilter = (body: ImageGetAllDto, data: any) => {

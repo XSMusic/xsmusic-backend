@@ -5,7 +5,6 @@ export interface MediaMongoI extends Document {
   artists: any[];
   site: any;
   type: string;
-  image: string;
   styles: any[];
   info: string;
   source: string;

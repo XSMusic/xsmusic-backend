@@ -16,7 +16,15 @@ export class ImageUpdateDto {
   @IsNumber() position: number;
 }
 
+export class ImageUploadByUrlDto {
+  @IsString() id: string;
+  @IsString() url: string;
+  @IsString() type: 'artist' | 'media' | 'site' | 'user';
+  @IsOptional() @IsNumber() position?: number;
+}
+
 export class ImageSetFirstImageDto {
+  @IsString() type: string;
+  @IsString() typeId: string;
   @IsString() imageId: string;
-  @IsString() carId: string;
 }

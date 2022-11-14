@@ -9,7 +9,7 @@ export const siteGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addLookups(data);
+  data = addLookups(data, false);
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
   }
@@ -26,11 +26,11 @@ export const siteGetOneAggregate = (
   let data = [];
   const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data);
+  data = addLookups(data, true);
   return data;
 };
 
-const addLookups = (data: any[]) => {
+const addLookups = (data: any[], complete: boolean) => {
   data.push(
     {
       $lookup: {
@@ -38,28 +38,32 @@ const addLookups = (data: any[]) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [{ $project: { _id: 1, name: 1, colors: 1 } }],
+        pipeline: [
+          { $project: { _id: 1, name: 1, colors: 1 } },
+          { $sort: { name: -1 } },
+        ],
       },
     },
-    { $sort: { name: -1 } },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'site',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, position: 1 } },
+          { $sort: { position: 1 } },
+        ],
+      },
+    },
+
     {
       $lookup: {
         from: 'media',
         localField: '_id',
         foreignField: 'site',
         as: 'sets',
-        pipeline: [
-          {
-            $lookup: {
-              from: 'artists',
-              localField: 'artists',
-              foreignField: '_id',
-              as: 'artists',
-              pipeline: [{ $project: { _id: 1, name: 1 } }],
-            },
-          },
-          { $sort: { created: -1 } },
-        ],
+        pipeline: getPipeline(complete),
       },
     }
   );
@@ -103,7 +107,7 @@ const addProject = (data: any[]) => {
       name: 1,
       address: 1,
       styles: 1,
-      image: 1,
+      images: 1,
       type: 1,
       info: 1,
       slug: 1,
@@ -113,4 +117,36 @@ const addProject = (data: any[]) => {
     },
   });
   return data;
+};
+
+const getPipeline = (complete: boolean) => {
+  const pipelineCount = [
+    { $count: 'count' },
+    { $project: { count: 1, _id: 0 } },
+  ];
+  const pipelineComplete = [
+    {
+      $lookup: {
+        from: 'artists',
+        localField: 'artists',
+        foreignField: '_id',
+        as: 'artists',
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'media',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, position: 1 } },
+          { $sort: { position: 1 } },
+        ],
+      },
+    },
+    { $unwind: '$site' },
+    { $sort: { created: -1 } },
+  ];
+  return complete ? pipelineComplete : pipelineCount;
 };
