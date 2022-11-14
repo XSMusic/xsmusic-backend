@@ -5,3 +5,4 @@ export * from './image.interface';
 export * from './image.model';
 export * from './image.service';
 export * from './image.aggregate';
+export * from './image.helper';

@@ -74,7 +74,7 @@ export class ScrapingArtistService {
         )}.html`;
         const response = await axios.get(url);
         const $ = load(response.data);
-        artist.image.push(
+        artist.images.push(
           'https://clubbingspain.com' + $('.border-radius-5').attr('src')
         );
         artist.info.push($('h3:contains("Biografía")').next().html());
@@ -119,7 +119,7 @@ export class ScrapingArtistService {
         const $ = load(response.data);
         const image = $('img').attr('src');
         const image_split = image.split('//');
-        artist.image.push('https://' + image_split[1]);
+        artist.images.push('https://' + image_split[1]);
         artist = this.setInfoForWikipedia($, artist);
         artist = this.setBirthdateForWikipedia($, artist);
         resolve(artist);

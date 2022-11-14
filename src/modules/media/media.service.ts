@@ -1,4 +1,5 @@
 import { Artist } from '@artist';
+import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
 import {
   Media,
@@ -11,6 +12,8 @@ import { Site } from '@site';
 import { getValuesForPaginator, slugify } from '@utils';
 
 export class MediaService {
+  private imageHelper = new ImageHelper();
+
   getAll(
     body: MediaGetAllDto
   ): Promise<{ items: MediaI[]; paginator: PaginatorI }> {
@@ -121,6 +124,7 @@ export class MediaService {
       try {
         const response = await Media.findByIdAndDelete(id).exec();
         if (response) {
+          await this.imageHelper.deleteByTypeId({ type: 'media', id });
           resolve({ message: 'Set/track eliminado' });
         } else {
           reject({ message: 'Set/track no existe' });

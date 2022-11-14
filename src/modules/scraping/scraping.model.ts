@@ -1,6 +1,6 @@
 export class ScrapingArtist {
   name = '';
-  image: string[] = [];
+  images: string[] = [];
   birthdate = '';
   styles: any[] = [];
   country = '';

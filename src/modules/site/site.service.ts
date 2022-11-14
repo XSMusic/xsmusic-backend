@@ -7,8 +7,11 @@ import {
 } from 'src/modules/site';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
+import { ImageHelper } from '@image';
 
 export class SiteService {
+  private imageHelper = new ImageHelper();
+
   getAll(
     body: SiteGetAllDto
   ): Promise<{ items: SiteI[]; paginator: PaginatorI }> {
@@ -113,6 +116,7 @@ export class SiteService {
       try {
         const response = await Site.findByIdAndDelete(id).exec();
         if (response) {
+          await this.imageHelper.deleteByTypeId({ type: 'site', id });
           resolve({ message: 'Sitio eliminado' });
         } else {
           reject({ message: 'Sitio no existe' });

@@ -5,10 +5,13 @@ import {
   ArtistI,
   artistGetOneAggregate,
 } from '@artist';
+import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 
 export class ArtistService {
+  private imageHelper = new ImageHelper();
+
   getAll(
     body: ArtistGetAllDto
   ): Promise<{ items: ArtistI[]; paginator: PaginatorI }> {
@@ -48,7 +51,7 @@ export class ArtistService {
     });
   }
 
-  create(body: ArtistI): Promise<MessageI> {
+  create(body: ArtistI): Promise<ArtistI> {
     return new Promise(async (resolve, reject) => {
       try {
         const isExist: ArtistI[] = await Artist.find({
@@ -62,7 +65,7 @@ export class ArtistService {
           const item = new Artist(body);
           const itemDB = await item.save();
           if (itemDB) {
-            resolve({ message: 'Artista creado' });
+            resolve(itemDB);
           } else {
             reject({ message: 'El artista no ha sido creado' });
           }
@@ -96,8 +99,10 @@ export class ArtistService {
   deleteOne(id: string): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
+        // TODO: Eliminar media del artista
         const response = await Artist.findByIdAndDelete(id).exec();
         if (response) {
+          await this.imageHelper.deleteByTypeId({ type: 'artist', id });
           resolve({ message: 'Artista eliminado' });
         } else {
           reject({ message: 'Artista no existe' });

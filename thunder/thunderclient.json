@@ -1093,5 +1093,24 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "aad59914-1986-454b-8ba6-562990a7f504",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "e93483c1-2fda-4eec-95fc-20b40d7ef08b",
+    "name": "Image: deleteOne",
+    "url": "{{URL}}/images/one/637267a8b23b083eb3362ab2",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-11-14T17:08:36.573Z",
+    "modified": "2022-11-14T17:10:28.655Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

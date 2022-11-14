@@ -19,7 +19,6 @@ import {
   randomNumber,
 } from '@utils';
 import { config } from '@config';
-import { Media } from '@media';
 
 export class ImageService {
   async getAll(
