@@ -10,7 +10,10 @@
     "update": "sh ./scripts/update.sh",
     "pwa": "sh ./scripts/pwa.sh",
     "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,ts}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "optimize-images": "optimize-images /Users/jgomepav/apps/uploads/xsmusic",
+    "images:localPro": "sh scripts/images.sh localToPro",
+    "images:proLocal": "sh scripts/images.sh proToLocal"
   },
   "author": "",
   "license": "ISC",
