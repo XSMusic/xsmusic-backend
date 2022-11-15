@@ -33,7 +33,7 @@ const addFilters = (body: MediaGetAllDto, data: any) => {
       case 'styles':
         data.push({
           $match: {
-            'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
+            'styles.name': `${body.filter[1]}`,
           },
         });
         break;

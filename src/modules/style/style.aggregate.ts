@@ -117,7 +117,49 @@ const getPipeline = (type: string, complete: boolean) => {
   };
   const pipelineNotCount =
     type === 'set' || type === 'track' || type === 'club' || type === 'festival'
-      ? [{ $match: { $or: [{ type: type }] } }, styleLookup]
-      : [styleLookup];
+      ? [
+          { $match: { $or: [{ type: type }] } },
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField:
+                type === 'set' || type === 'track' ? 'media' : 'site',
+              as: 'images',
+              pipeline: [
+                { $project: { _id: 1, url: 1, position: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          {
+            $lookup: {
+              from: 'artists',
+              localField: '_id',
+              foreignField: 'artists',
+              as: 'artists',
+              pipeline: [
+                { $project: { _id: 1, name: 1, country: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          styleLookup,
+        ]
+      : [
+          styleLookup,
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'artist',
+              as: 'images',
+              pipeline: [
+                { $project: { _id: 1, url: 1, position: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+        ];
   return complete ? pipelineNotCount : pipelineCount;
 };
