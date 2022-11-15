@@ -90,8 +90,11 @@ const setFilter = (body: SiteGetAllDto, data: any) => {
     } else {
       d = {
         $match: {
-          [body.filter[0] === 'styles' ? 'styles.name' : body.filter[0]]:
-            body.filter[1],
+          [body.filter[0] === 'styles'
+            ? 'styles.name'
+            : body.filter[0] === 'country'
+            ? 'address.country'
+            : body.filter[0]]: body.filter[1],
         },
       };
     }
