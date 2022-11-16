@@ -12,6 +12,8 @@
     "prettier": "prettier --write \"./{e2e,src}/**/*.{scss,ts}\"",
     "prepare": "husky install",
     "optimize-images": "optimize-images /Users/jgomepav/apps/uploads/xsmusic",
+    "db:uatToPro": "sh scripts/database.sh uatToPro",
+    "db:proToUat": "sh scripts/database.sh proToUat",
     "images:localPro": "sh scripts/images.sh localToPro",
     "images:proLocal": "sh scripts/images.sh proToLocal"
   },
