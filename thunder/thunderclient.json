@@ -1112,5 +1112,33 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "4003dedc-9196-4669-90f9-cf25a3027ae3",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "570a71e5-0400-4506-9554-2cca5e6dd3f5",
+    "name": "Auth: sendPasswordResetEmail",
+    "url": "{{URL}}/auth/sendPasswordResetEmail/xskunk@gmail.com",
+    "method": "POST",
+    "sortNum": 190000,
+    "created": "2022-11-16T22:42:03.042Z",
+    "modified": "2022-11-16T22:44:01.898Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "2857ff1b-ccf6-4c2a-bc1a-5cb8b99574eb",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "570a71e5-0400-4506-9554-2cca5e6dd3f5",
+    "name": "Auth: sendPasswordResetEmail Copy",
+    "url": "{{URL}}/auth/resetPassword/635120f54a9a95fe40061a5c/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjM1MTIwZjU0YTlhOTVmZTQwMDYxYTVjIiwiaWF0IjoxNjY4NjcyODAwLCJleHAiOjE2Njg2NzY0MDB9.6PyErYrvR5XeAR9dGpmtANk4AIC_HoBsTZ8shcsxbQc",
+    "method": "POST",
+    "sortNum": 200000,
+    "created": "2022-11-17T08:15:14.460Z",
+    "modified": "2022-11-17T08:16:28.391Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

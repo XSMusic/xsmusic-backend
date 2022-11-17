@@ -10,6 +10,10 @@ export interface ConfigI {
   fcm: {
     server_key: string;
   };
+  mailing: {
+    email: string;
+    password: string;
+  };
   tokens: {
     github: string;
     youtube: string;

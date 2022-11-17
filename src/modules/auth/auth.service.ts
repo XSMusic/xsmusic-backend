@@ -12,12 +12,14 @@ import {
   AuthLogInDto,
   AuthRegisterDto,
   GoogleUserDto,
+  AuthHelper,
 } from '@auth';
 import { config } from '@core/config/app.config';
 import { Logger } from '@services';
 import { UserMongoI } from '../user/user.interface';
 
 export class AuthService {
+  private authHelper = new AuthHelper();
   user = User;
 
   async register(
@@ -155,4 +157,70 @@ export class AuthService {
       }
     });
   }
+
+  sendPasswordResetEmail(email: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user = await User.findOne({ email }).exec();
+        if (user) {
+          const token = this.authHelper.usePasswordHashToMakeToken(user);
+          const url = `https://xsmusic.carstournaments.com/auth/resetPassword/${user._id}/${token}`;
+          const emailTemplate = this.authHelper.resetPasswordTemplate(
+            user,
+            url
+          );
+          this.sendEmail(emailTemplate);
+          resolve({ message: 'Email enviado, revisa tu bandeja de entrada' });
+        } else {
+          reject({ message: 'No hay usuarios con ese email' });
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  private sendEmail(emailTemplate: any) {
+    return new Promise((resolve, reject) => {
+      this.authHelper.transporter.sendMail(emailTemplate, (err, info) => {
+        if (err) {
+          console.log(err);
+          reject({ message: 'Error sending email' });
+        }
+        resolve({ message: info.response });
+      });
+    });
+  }
+
+  resetPassword = (userId: string, token: string, password: string) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user: UserI = await User.findOne({ _id: userId }).exec();
+        if (user) {
+          const jwtResponse: any = jwt.decode(token, { complete: true });
+          if (jwtResponse.payload.user.toString() === user._id.toString()) {
+            console.log('bcrypt');
+            bcrypt.genSalt(10, (err, salt) => {
+              console.log('bcrypt 2');
+              if (err) {
+                reject(err);
+              }
+              bcrypt.hash(password, salt, async (err, hash) => {
+                if (err) return;
+                await User.findOneAndUpdate(
+                  { _id: userId },
+                  { password: hash }
+                ).exec();
+                resolve({ message: 'Contraseña modificada' });
+              });
+            });
+          }
+        } else {
+          reject({ message: 'Usuario invalido' });
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
 }

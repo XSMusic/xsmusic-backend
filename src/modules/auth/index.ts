@@ -1,9 +1,5 @@
-export { GoogleUserDto, AuthRegisterDto, AuthLogInDto } from './auth.dto';
-export { AuthController } from './auth.controller';
-export { AuthService } from './auth.service';
-export {
-  UserTokenI,
-  UserWithTokenI,
-  GoogleUserI,
-  GoogleAuthenticationI,
-} from './auth.interface';
+export * from './auth.dto';
+export * from './auth.controller';
+export * from './auth.service';
+export * from './auth.interface';
+export * from './auth.helper';

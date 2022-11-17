@@ -32,6 +32,14 @@ export class AuthController implements ControllerI {
       validationMiddleware(GoogleUserDto),
       this.loginGoogle
     );
+    this.router.post(
+      `${this.path}/sendPasswordResetEmail/:email`,
+      this.sendPasswordResetEmail
+    );
+    this.router.post(
+      `${this.path}/resetPassword/:userId/:token`,
+      this.resetPassword
+    );
     this.router.post(`${this.path}/me`, checkUserToken, this.me);
   }
 
@@ -78,6 +86,40 @@ export class AuthController implements ControllerI {
     try {
       const body: GoogleUserDto = request.body;
       const result: UserWithTokenI = await this.authService.loginGoogle(body);
+      response.send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private sendPasswordResetEmail = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const email = request.params.email;
+      const result = await this.authService.sendPasswordResetEmail(email);
+      response.send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private resetPassword = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userId = request.params.userId;
+      const token = request.params.token;
+      const password = request.body.password;
+      const result = await this.authService.resetPassword(
+        userId,
+        token,
+        password
+      );
       response.send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

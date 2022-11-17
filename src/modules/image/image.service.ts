@@ -26,7 +26,7 @@ export class ImageService {
   ): Promise<{ items: ImageI[]; paginator: PaginatorI } | ImageI[]> {
     try {
       if (body) {
-        body.type = body.type! ? 'all' : body.type;
+        body.type = body.type ? 'all' : body.type;
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
         const aggregate = imageGetAllAggregate(body, skip, pageSize);
         const items: ImageI[] = await Image.aggregate(aggregate).exec();
@@ -211,11 +211,9 @@ export class ImageService {
         const response = await Image.findByIdAndDelete(id).exec();
         if (response) {
           fs.unlinkSync(`${config.paths.uploads}/${item.url}`);
-          if (response) {
-            resolve({ message: 'Imagen eliminada' });
-          } else {
-            reject({ message: 'Imagen no existe en la BD' });
-          }
+          resolve({ message: 'Imagen eliminada' });
+        } else {
+          reject({ message: 'Imagen no existe en la BD' });
         }
       } catch (error) {
         if (force) {

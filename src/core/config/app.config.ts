@@ -18,6 +18,8 @@ const {
   GITHUB_TOKEN,
   YOUTUBE_TOKEN,
   MAPS_TOKEN,
+  EMAIL_LOGIN,
+  EMAIL_PASSWORD,
 } = process.env;
 
 const getMongoUri = (): string => {
@@ -45,6 +47,10 @@ export const config: ConfigI = {
   seed: JWT_SECRET,
   fcm: {
     server_key: FCM_SERVER_KEY,
+  },
+  mailing: {
+    email: EMAIL_LOGIN,
+    password: EMAIL_PASSWORD,
   },
   tokens: {
     github: GITHUB_TOKEN,
