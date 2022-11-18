@@ -60,7 +60,7 @@ export class StatsService {
       const value = await model.countDocuments(bodyComparation).exec();
       percentages.push({
         days: days.toString(),
-        value: Number((100 / (total / value)).toFixed(2)),
+        value: Number((100 / (total / value)).toFixed(1)),
       });
     }
     return {
