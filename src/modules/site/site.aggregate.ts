@@ -113,8 +113,11 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
         _id: 1,
         name: 1,
         address: {
+          street: 1,
+          town: 1,
           state: 1,
           country: 1,
+          coordinates: 1,
         },
         styles: { name: 1 },
         images: { url: 1 },
