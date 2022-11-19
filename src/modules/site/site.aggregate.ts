@@ -15,7 +15,7 @@ export const siteGetAllAggregate = (
   }
   data = setFilter(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-  data = addProject(data);
+  data = addProject(body, data);
   return data;
 };
 
@@ -67,6 +67,9 @@ const addLookups = (data: any[], complete: boolean) => {
       },
     }
   );
+  if (!complete) {
+    data.push({ $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } });
+  }
   return data;
 };
 
@@ -103,22 +106,42 @@ const setFilter = (body: SiteGetAllDto, data: any) => {
   return data;
 };
 
-const addProject = (data: any[]) => {
-  data.push({
-    $project: {
-      _id: 1,
-      name: 1,
-      address: 1,
-      styles: 1,
-      images: 1,
-      type: 1,
-      info: 1,
-      slug: 1,
-      social: 1,
-      updated: 1,
-      created: 1,
-    },
-  });
+const addProject = (body: SiteGetAllDto, data: any[]) => {
+  if (!body.map) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        address: {
+          state: 1,
+          country: 1,
+        },
+        styles: { name: 1 },
+        images: { url: 1 },
+        sets: 1,
+        slug: 1,
+        updated: 1,
+        created: 1,
+      },
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        address: {
+          street: 1,
+          town: 1,
+          coordinates: 1,
+        },
+        images: {
+          url: 1,
+        },
+        slug: 1,
+      },
+    });
+  }
+  console.log(data);
   return data;
 };
 

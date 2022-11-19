@@ -587,12 +587,12 @@
     "method": "POST",
     "sortNum": 130000,
     "created": "2022-10-29T22:50:41.583Z",
-    "modified": "2022-11-05T00:00:01.575Z",
+    "modified": "2022-11-18T16:14:22.594Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{ \"query\": \"Xq0d81xOSAs\"}",
+      "raw": "{ \"query\": \"Xq0d81xOSAs\", \"maxResults\": \"20\"}",
       "form": []
     },
     "tests": []
@@ -726,7 +726,7 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-05T23:07:45.388Z",
-    "modified": "2022-11-13T14:32:52.460Z",
+    "modified": "2022-11-19T00:18:57.967Z",
     "headers": [],
     "params": [],
     "body": {
@@ -1139,6 +1139,25 @@
     "modified": "2022-11-17T08:16:28.391Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b33b2b0d-d680-458d-b95b-1ed3792eaa0b",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Site: getAll clubs for map",
+    "url": "{{URL}}/sites/getAll/club",
+    "method": "POST",
+    "sortNum": 11875,
+    "created": "2022-11-18T23:58:48.921Z",
+    "modified": "2022-11-19T00:18:47.527Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 2000,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"club\",\n  \"map\":true\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
