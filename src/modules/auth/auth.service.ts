@@ -184,7 +184,6 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.authHelper.transporter.sendMail(emailTemplate, (err, info) => {
         if (err) {
-          console.log(err);
           reject({ message: 'Error sending email' });
         }
         resolve({ message: info.response });
@@ -199,9 +198,7 @@ export class AuthService {
         if (user) {
           const jwtResponse: any = jwt.decode(token, { complete: true });
           if (jwtResponse.payload.user.toString() === user._id.toString()) {
-            console.log('bcrypt');
             bcrypt.genSalt(10, (err, salt) => {
-              console.log('bcrypt 2');
               if (err) {
                 reject(err);
               }

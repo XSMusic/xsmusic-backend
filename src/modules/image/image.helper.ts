@@ -13,12 +13,10 @@ export class ImageHelper {
       }).exec();
 
       for (const image of images) {
-        console.log(image.url);
         fs.unlink(`${config.paths.uploads}/${image.url}`, async () => {
-          await Image.findByIdAndDelete(image._id);
+          await Image.findByIdAndDelete(image._id).exec();
         });
       }
-      console.log({ message: `${images.length} Imagenes eliminadas` });
       return { message: `${images.length} Imagenes eliminadas` };
     } catch (error) {
       return error;

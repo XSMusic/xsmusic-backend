@@ -144,7 +144,6 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
       },
     });
   }
-  console.log(data);
   return data;
 };
 
