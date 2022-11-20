@@ -16,16 +16,13 @@ export const eventGetAllAggregate = (
     $project: {
       _id: 1,
       name: 1,
-      country: 1,
-      birthdate: 1,
+      date: 1,
+      site: 1,
       styles: 1,
+      artists: 1,
       images: 1,
       info: 1,
       slug: 1,
-      gender: 1,
-      social: 1,
-      sets: 1,
-      tracks: 1,
       updated: 1,
       created: 1,
     },
@@ -57,34 +54,74 @@ const addLookups = (data: any[], complete: boolean) => {
     },
     {
       $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: 'event',
-        as: 'images',
+        from: 'artists',
+        localField: 'artists',
+        foreignField: '_id',
+        as: 'artists',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
-          { $sort: { position: 1 } },
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'artist',
+              as: 'images',
+              pipeline: [
+                { $sort: { position: 1 } },
+                { $project: { _id: 1, url: 1, position: 1 } },
+              ],
+            },
+          },
+          {
+            $project: { _id: 1, name: 1, images: { url: 1 }, slug: 1 },
+          },
         ],
       },
     },
     {
       $lookup: {
-        from: 'media',
+        from: 'images',
         localField: '_id',
-        foreignField: 'artists',
-        as: 'sets',
-        pipeline: getPipeline('set', complete),
+        foreignField: 'event',
+        as: 'images',
+        pipeline: [
+          { $sort: { position: 1 } },
+          { $project: { _id: 1, url: 1, position: 1 } },
+        ],
       },
     },
     {
       $lookup: {
-        from: 'media',
-        localField: '_id',
-        foreignField: 'artists',
-        as: 'tracks',
-        pipeline: getPipeline('track', complete),
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'site',
+              as: 'images',
+              pipeline: [
+                { $project: { _id: 1, url: 1, position: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              address: 1,
+              type: 1,
+              images: 1,
+              slug: 1,
+            },
+          },
+        ],
       },
-    }
+    },
+    { $unwind: '$site' }
   );
   if (!complete) {
     data.push(

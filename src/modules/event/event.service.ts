@@ -64,10 +64,10 @@ export class EventService {
           if (itemDB) {
             resolve(itemDB);
           } else {
-            reject({ message: 'El Eventa no ha sido creado' });
+            reject({ message: 'El evento no ha sido creado' });
           }
         } else {
-          reject({ message: 'El Eventa ya existe' });
+          reject({ message: 'El evento ya existe' });
         }
       } catch (error) {
         reject(error);
@@ -78,7 +78,9 @@ export class EventService {
   update(body: EventI): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
-        body.slug = slugify(body.name);
+        if (body.name) {
+          body.slug = slugify(body.name);
+        }
         const response = await Event.findByIdAndUpdate(body._id, body, {
           new: true,
         }).exec();
@@ -96,7 +98,6 @@ export class EventService {
   deleteOne(id: string): Promise<MessageI> {
     return new Promise(async (resolve, reject) => {
       try {
-        // TODO: Eliminar media del artista
         const response = await Event.findByIdAndDelete(id).exec();
         if (response) {
           await this.imageHelper.deleteByTypeId({ type: 'event', id });

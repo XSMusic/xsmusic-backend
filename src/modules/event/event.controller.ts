@@ -4,6 +4,7 @@ import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
 import { GetAllDto } from '@dtos';
+import { EventCreateDto, EventUpdateDto } from './event.dto';
 
 export class EventController implements ControllerI {
   path = '/events';
@@ -14,7 +15,7 @@ export class EventController implements ControllerI {
   }
 
   private initializeRoutes() {
-    this.router.get(
+    this.router.post(
       `${this.path}/getAll`,
       validationMiddleware(GetAllDto),
       this.getAll

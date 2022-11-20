@@ -1159,5 +1159,119 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "17ba5d81-2ca0-4d88-9bae-1cdbe0906424",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: getAll",
+    "url": "{{URL}}/events/getAll",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-11-20T10:08:06.155Z",
+    "modified": "2022-11-20T10:26:39.777Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c243d8fc-04a7-4df7-b125-5c46bf6c2519",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: getOne",
+    "url": "{{URL}}/events/getOne/id/635ffb27c3deba83ead64486",
+    "method": "GET",
+    "sortNum": 17500,
+    "created": "2022-11-20T10:08:06.156Z",
+    "modified": "2022-11-20T10:11:10.487Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "2827fe9e-5d69-45a8-a61f-913e39cfe9a0",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: create",
+    "url": "{{URL}}/events/create",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-20T10:08:06.157Z",
+    "modified": "2022-11-20T10:14:13.590Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"perro\",\n  \"date\": \"2022-12-31 23:59\",\n  \"styles\": [\"63554974e893600179f0cb29\"],\n  \"site\": \"636d69154705e498c0fdaf39\",\n  \"artists\": [],\n  \"info\": \"\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "fff8a2d6-3d6e-4eb7-b558-e0138ae11dc6",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: update",
+    "url": "{{URL}}/events/update",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2022-11-20T10:08:06.158Z",
+    "modified": "2022-11-20T10:38:10.469Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"_id\": \"637a037e013c794252ecde9e\",\n  \"artists\": [\n    \"6355a7559c3776b22983ffa3\"\n  ]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c25cd9a1-db71-46ca-86ff-d196806954ea",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: deleteOne",
+    "url": "{{URL}}/events/one/6379fdf53bd4071e0b3cece1",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-11-20T10:08:06.159Z",
+    "modified": "2022-11-20T10:37:22.384Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "df3b4c46-3506-4999-b0eb-589505628a2e",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: deleteAll",
+    "url": "{{URL}}/events/all",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-11-20T10:08:06.160Z",
+    "modified": "2022-11-20T10:26:53.762Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]
