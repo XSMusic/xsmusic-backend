@@ -12,6 +12,7 @@ export class MediaCreateDto {
   @IsNumber() year: number;
   @IsArray() artists: string[];
   @IsArray() styles: string[];
+  @IsOptional() site: string;
   @IsOptional() @IsString() image: string;
   @IsOptional() @IsString() info: string;
 }

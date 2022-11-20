@@ -37,8 +37,7 @@
       "@stats": ["src/modules/stats"],
       "@style": ["src/modules/style"],
       "@user": ["src/modules/user"],
-      "@utils": ["src/shared/utils"],
-      "@youtube": ["src/modules/youtube"]
+      "@utils": ["src/shared/utils"]
     }
   },
   "exclude": ["node_modules", "builds/server/node_modules"],

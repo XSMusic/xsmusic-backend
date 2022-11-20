@@ -1,8 +1,12 @@
 import {
   ScrapingArtist,
   ScrapingArtistService,
+  ScrapingEventService,
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,
+  ScrapingGetListMediaDto,
+  ScrapingMediaService,
+  ScrapingMediaYoutubeI,
   ScrapingSite,
   ScrapingSiteService,
 } from '@scraping';
@@ -10,6 +14,8 @@ import {
 export class ScrapingService {
   private scrapingArtist = new ScrapingArtistService();
   private scrapingSite = new ScrapingSiteService();
+  private scrapingEvent = new ScrapingEventService();
+  private scrapingMedia = new ScrapingMediaService();
 
   async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
     try {
@@ -30,6 +36,19 @@ export class ScrapingService {
       return club;
     } catch (error) {
       return error;
+    }
+  }
+
+  async getListMedia(
+    data: ScrapingGetListMediaDto
+  ): Promise<ScrapingMediaYoutubeI[]> {
+    try {
+      if (data.source === 'youtube') {
+        const items = await this.scrapingMedia.getYoutubeList(data);
+        return items;
+      }
+    } catch (e) {
+      return e;
     }
   }
 }

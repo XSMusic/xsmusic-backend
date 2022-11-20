@@ -5,6 +5,8 @@ export interface ImageMongoI extends Document {
   artist?: any;
   media?: any;
   site?: any;
+  event?: any;
+  user?: any;
   url: string;
   firstImage?: boolean;
   position?: number;
@@ -19,6 +21,8 @@ export interface ImageI {
   artist?: any;
   media?: any;
   site?: any;
+  event?: any;
+  user?: any;
   url: string;
   firstImage?: boolean;
   position?: number;

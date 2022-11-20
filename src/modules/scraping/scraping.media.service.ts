@@ -1,16 +1,19 @@
-import { config } from '@core/config';
-import { YoutubeApiRootI, YoutubeI } from '@youtube';
+import { config } from '@config';
+import {
+  ScrapingGetListMediaDto,
+  ScrapingMediaYoutubeI,
+  YoutubeApiRootI,
+} from '@scraping';
 import axios from 'axios';
 
-export class YoutubeService {
-  async searchByText(data: {
-    query: string;
-    maxResults: string;
-  }): Promise<YoutubeI[]> {
+export class ScrapingMediaService {
+  async getYoutubeList(
+    data: ScrapingGetListMediaDto
+  ): Promise<ScrapingMediaYoutubeI[]> {
     try {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${data.maxResults}&q=${data.query}&type=video&key=${config.tokens.youtube}`;
       const response = await axios.get<YoutubeApiRootI>(url);
-      const items: YoutubeI[] = [];
+      const items: ScrapingMediaYoutubeI[] = [];
       for (const item of response.data.items) {
         items.push({
           name: item.snippet.title,

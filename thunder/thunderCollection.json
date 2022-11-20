@@ -55,13 +55,6 @@
         "sortNum": 60000
       },
       {
-        "_id": "23dff43a-5bbd-46fc-a563-e4f07b568c4a",
-        "name": "Youtube",
-        "containerId": "",
-        "created": "2022-10-29T22:50:27.860Z",
-        "sortNum": 70000
-      },
-      {
         "_id": "0d9c9499-b878-4681-9f41-af5096594300",
         "name": "Media",
         "containerId": "",

@@ -581,18 +581,18 @@
   {
     "_id": "9ecce202-72f3-44d2-8144-985aae9b8d5f",
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "23dff43a-5bbd-46fc-a563-e4f07b568c4a",
-    "name": "Youtube: search",
-    "url": "{{URL}}/youtube/searchByText",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: getListMedia",
+    "url": "{{URL}}/scraping/getListMedia",
     "method": "POST",
-    "sortNum": 130000,
+    "sortNum": 140000,
     "created": "2022-10-29T22:50:41.583Z",
-    "modified": "2022-11-18T16:14:22.594Z",
+    "modified": "2022-11-20T20:46:08.911Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{ \"query\": \"Xq0d81xOSAs\", \"maxResults\": \"20\"}",
+      "raw": "{\n  \"query\": \"Xq0d81xOSAs\",\n  \"maxResults\": \"20\",\n  \"source\": \"youtube\"\n}",
       "form": []
     },
     "tests": []

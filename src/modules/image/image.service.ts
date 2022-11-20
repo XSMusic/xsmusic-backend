@@ -61,14 +61,6 @@ export class ImageService {
     }
   }
 
-  getAllImagesCar(id: string): Promise<ImageI[]> {
-    try {
-      return Image.find({ car: id }).sort({ position: 1 }).exec();
-    } catch (error) {
-      return error;
-    }
-  }
-
   getOne(id: string): Promise<ImageMongoI> {
     try {
       return Image.findById(id).exec();
