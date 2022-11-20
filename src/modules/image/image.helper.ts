@@ -4,7 +4,7 @@ import fs from 'fs';
 
 export class ImageHelper {
   async deleteByTypeId(data: {
-    type: 'artist' | 'media' | 'site' | 'user';
+    type: 'artist' | 'event' | 'media' | 'site' | 'user';
     id: string;
   }) {
     try {

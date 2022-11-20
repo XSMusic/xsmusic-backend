@@ -5,7 +5,7 @@ const schema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ['artist', 'media', 'site', 'user'],
+      enum: ['artist', 'event', 'media', 'site', 'user'],
       required: true,
     },
     url: {
@@ -15,6 +15,10 @@ const schema = new mongoose.Schema(
     artist: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Artist',
+    },
+    event: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event',
     },
     media: {
       type: mongoose.Schema.Types.ObjectId,

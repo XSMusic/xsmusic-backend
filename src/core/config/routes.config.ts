@@ -10,10 +10,12 @@ import { MediaController } from '@media';
 import { SiteController } from '@site';
 import { GeoController } from '@geo';
 import { ImageController } from '@image';
+import { EventController } from '@event';
 
 const controllers = [
   new ArtistController(),
   new AuthController(),
+  new EventController(),
   new GeoController(),
   new MediaController(),
   new MenuController(),
