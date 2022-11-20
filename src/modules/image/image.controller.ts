@@ -34,12 +34,6 @@ export class ImageController implements ControllerI {
       this.getAll
     );
     this.router.post(
-      `${this.path}/getAllImagesCar`,
-      validationMiddleware(IdDto),
-      checkAdminToken,
-      this.getAllImagesCar
-    );
-    this.router.post(
       `${this.path}/upload`,
       [multerMiddleware.single('image'), checkUserToken],
       this.upload
@@ -74,20 +68,6 @@ export class ImageController implements ControllerI {
     try {
       const body: ImageGetAllDto = request.body;
       const result = await this.imageService.getAll(body);
-      response.status(200).json(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private getAllImagesCar = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: IdDto = request.body;
-      const result = await this.imageService.getAllImagesCar(body.id);
       response.status(200).json(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
