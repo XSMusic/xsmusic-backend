@@ -1,16 +1,15 @@
-import { Artist } from '@artist';
-import { Style, StyleMongoI } from '@style';
+import moment from 'moment';
 import { Model } from 'mongoose';
 import { StatsGetTopArtistsI, StatsTotalsAdminI } from './stats.interface';
-import { ArtistMongoI } from '../artist/artist.interface';
-import { Media } from '@media';
+import { Artist, ArtistMongoI } from '@artist';
+import { Style, StyleMongoI } from '@style';
+import { Media, MediaMongoI } from '@media';
 import { StatsGetTopArtistsDto, StatsTotalAdminItemI } from '@stats';
 import { countries, sortByTotal } from '@utils';
-import { MediaMongoI } from '../media/media.interface';
 import { User, UserMongoI } from '@user';
-import moment from 'moment';
-import { Site, SiteMongoI } from 'src/modules/site';
+import { Site, SiteMongoI } from '@site';
 import { Image, ImageMongoI } from '@image';
+import { Event, EventMongoI } from '@event';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -24,13 +23,7 @@ export class StatsService {
           clubs: await this.setTotal<SiteMongoI>(Site, 'club'),
           festivals: await this.setTotal<SiteMongoI>(Site, 'festival'),
           images: await this.setTotal<ImageMongoI>(Image),
-          events: {
-            total: 0,
-            percentages: [
-              { days: '3', value: 0 },
-              { days: '7', value: 0 },
-            ],
-          },
+          events: await this.setTotal<EventMongoI>(Event),
           users: await this.setTotal<UserMongoI>(User),
         };
         resolve(totals);
