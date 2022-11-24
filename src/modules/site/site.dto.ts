@@ -3,7 +3,7 @@ import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class SiteGetAllDto extends GetAllDto {
   @IsString() type: string;
-  @IsOptional() @IsBoolean() map: string[];
+  @IsOptional() @IsBoolean() map: boolean;
 }
 
 export class SiteCreateDto {

@@ -21,9 +21,8 @@ export class SlugDto {
 export class GetAllDto {
   @IsNumber() page: number;
   @IsNumber() pageSize: number;
-  @IsOptional() @IsArray() order: string[];
-  @IsOptional() @IsString() site: string;
-  @IsOptional() @IsArray() filter: string[];
+  @IsOptional() @IsArray() order?: string[];
+  @IsOptional() @IsArray() filter?: string[];
 }
 
 export class SiteDto {

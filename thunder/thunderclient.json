@@ -726,12 +726,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-05T23:07:45.388Z",
-    "modified": "2022-11-19T00:18:57.967Z",
+    "modified": "2022-11-23T12:26:03.182Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"club\"\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 200,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"club\"\n}",
       "form": []
     },
     "tests": []
@@ -875,7 +875,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-11-09T17:27:41.771Z",
-    "modified": "2022-11-09T17:27:41.771Z",
+    "modified": "2022-11-21T17:22:25.932Z",
     "headers": [
       {
         "name": "User-Agent",
@@ -886,7 +886,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n content\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
       "form": []
     },
     "tests": []
@@ -1272,6 +1272,25 @@
       }
     ],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a9d1d17f-ee3b-43c9-8832-8d7099830bce",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: getListEvents",
+    "url": "{{URL}}/scraping/getListEvents",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-11-21T17:28:26.239Z",
+    "modified": "2022-11-22T19:34:07.013Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"source\": \"ra\",\n  \"maxResults\": \"10\",\n  \"dateFrom\": \"2022-11-22\",\n  \"dateTo\": \"2022-11-29\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

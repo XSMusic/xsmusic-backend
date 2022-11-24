@@ -2,8 +2,10 @@ import {
   ScrapingArtist,
   ScrapingArtistService,
   ScrapingEventService,
+  ScrapingEventsI,
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,
+  ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
   ScrapingMediaService,
   ScrapingMediaYoutubeI,
@@ -45,6 +47,19 @@ export class ScrapingService {
     try {
       if (data.source === 'youtube') {
         const items = await this.scrapingMedia.getYoutubeList(data);
+        return items;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async getListEvents(
+    data: ScrapingGetListEventsDto
+  ): Promise<ScrapingEventsI> {
+    try {
+      if (data.source === 'ra') {
+        const items = await this.scrapingEvent.getEventsListRA(data);
         return items;
       }
     } catch (e) {

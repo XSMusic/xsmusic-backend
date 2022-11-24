@@ -2382,5 +2382,59 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "c9598bc6-ba59-4f94-8548-40c835b94e21",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-widget.soundcloud.com/resolve?url=https%3A//soundcloud.com/reclaim-your-city/reclaim-your-city-496-ritzi-lee&format=json&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&app_version=1668602874",
+    "url": "https://api-widget.soundcloud.com/resolve?url=https%3A//soundcloud.com/reclaim-your-city/reclaim-your-city-496-ritzi-lee&format=json&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&app_version=1668602874",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-21T17:14:25.036Z",
+    "modified": "2022-11-21T17:14:25.036Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "url",
+        "value": "https%3A//soundcloud.com/reclaim-your-city/reclaim-your-city-496-ritzi-lee",
+        "isPath": false
+      },
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1668602874",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "08c92a0b-8558-4af1-bbb0-383f7cb577d5",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://ra.co/graphql",
+    "url": "https://ra.co/graphql",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-21T17:17:55.683Z",
+    "modified": "2022-11-21T17:21:16.950Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"operationName\": \"GET_EVENT\",\n  \"variables\": {\n    \"id\": \"1554404\",\n    \"isAuthenticated\": false\n  },\n  \"query\": \"query GET_EVENT($id: ID!, $isAuthenticated: Boolean!) {\\n  event(id: $id) {\\n    id\\n    title\\n    flyerFront\\n    flyerBack\\n    content\\n    minimumAge\\n    cost\\n    contentUrl\\n    embargoDate\\n    date\\n    time\\n    startTime\\n    endTime\\n    attending\\n    lineup\\n    isInterested\\n    isTicketed\\n    isFestival\\n    dateUpdated\\n    resaleActive\\n    newEventForm\\n    datePosted\\n    hasSecretVenue\\n    live\\n    images {\\n      id\\n      filename\\n      alt\\n      type\\n      crop\\n      __typename\\n    }\\n    venue {\\n      id\\n      name\\n      address\\n      contentUrl\\n      live\\n      area {\\n        id\\n        name\\n        urlName\\n        country {\\n          id\\n          name\\n          urlCode\\n          isoCode\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    promoters {\\n      id\\n      name\\n      contentUrl\\n      live\\n      hasTicketAccess\\n      tracking(types: [PAGEVIEW]) {\\n        id\\n        code\\n        event\\n        __typename\\n      }\\n      __typename\\n    }\\n    artists {\\n      id\\n      name\\n      contentUrl\\n      urlSafeName\\n      __typename\\n    }\\n    pick {\\n      id\\n      blurb\\n      author {\\n        id\\n        name\\n        imageUrl\\n        username\\n        contributor\\n        __typename\\n      }\\n      __typename\\n    }\\n    promotionalLinks {\\n      title\\n      url\\n      __typename\\n    }\\n    tracking(types: [PAGEVIEW]) {\\n      id\\n      code\\n      event\\n      __typename\\n    }\\n    admin {\\n      id\\n      username\\n      __typename\\n    }\\n    tickets(type: AVAILABLE) {\\n      id\\n      title\\n      validType\\n      onSaleFrom\\n      priceRetail\\n      currency {\\n        id\\n        code\\n        __typename\\n      }\\n      __typename\\n    }\\n    userOrders @include(if: $isAuthenticated) {\\n      id\\n      rAOrderNumber\\n      __typename\\n    }\\n    playerLinks {\\n      id\\n      sourceId\\n      audioService {\\n        id\\n        name\\n        __typename\\n      }\\n      __typename\\n    }\\n    childEvents {\\n      id\\n      date\\n      isTicketed\\n      __typename\\n    }\\n    genres {\\n      id\\n      name\\n      slug\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

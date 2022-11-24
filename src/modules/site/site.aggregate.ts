@@ -65,6 +65,15 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'sets',
         pipeline: getPipeline(complete),
       },
+    },
+    {
+      $lookup: {
+        from: 'events',
+        localField: '_id',
+        foreignField: 'events',
+        as: 'events',
+        pipeline: getPipeline(complete),
+      },
     }
   );
   if (!complete) {
@@ -122,6 +131,7 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
         styles: { name: 1 },
         images: { url: 1 },
         sets: 1,
+        events: 1,
         slug: 1,
         updated: 1,
         created: 1,

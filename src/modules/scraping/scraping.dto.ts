@@ -15,3 +15,10 @@ export class ScrapingGetListMediaDto {
   @IsString() maxResults: string;
   @IsString() source: 'youtube';
 }
+
+export class ScrapingGetListEventsDto {
+  @IsString() source: 'ra';
+  @IsString() maxResults: string;
+  @IsString() dateFrom: string;
+  @IsString() dateTo: string;
+}

@@ -71,3 +71,33 @@ interface YoutubeApiPageInfoI {
   totalResults: number;
   resultsPerPage: number;
 }
+
+export interface ScrapingEventRaI {
+  title: string;
+  date: string;
+  content: string;
+  images: ScrapingEventRaImageI[];
+  venue: ScrapingEventRaVenueI;
+}
+
+interface ScrapingEventRaVenueI {
+  name: string;
+  contentUrl?: any;
+}
+
+interface ScrapingEventRaImageI {
+  filename: string;
+}
+
+export interface ScrapingEventsI {
+  completed: ScrapingEventI[];
+  notCompleted: ScrapingEventI[];
+}
+
+export interface ScrapingEventI {
+  name: string;
+  date: string;
+  info?: string;
+  images: string[];
+  site: any;
+}

@@ -5,6 +5,7 @@ import { HttpException } from '@exceptions';
 import {
   ScrapingGetInfoArtistDto,
   ScrapingGetInfoClubDto,
+  ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
 } from './scraping.dto';
 import { validationMiddleware } from '@middlewares';
@@ -32,6 +33,11 @@ export class ScrapingController implements ControllerI {
       `${this.path}/getListMedia`,
       validationMiddleware(ScrapingGetListMediaDto),
       this.getListMedia
+    );
+    this.router.post(
+      `${this.path}/getListEvents`,
+      validationMiddleware(ScrapingGetListEventsDto),
+      this.getListEvents
     );
   }
 
@@ -71,6 +77,20 @@ export class ScrapingController implements ControllerI {
     try {
       const body: ScrapingGetListMediaDto = request.body;
       const items = await this.scrapingService.getListMedia(body);
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getListEvents = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: ScrapingGetListEventsDto = request.body;
+      const items = await this.scrapingService.getListEvents(body);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
