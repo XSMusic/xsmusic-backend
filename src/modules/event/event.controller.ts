@@ -1,10 +1,14 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { EventI, EventService } from '@event';
+import {
+  EventI,
+  EventService,
+  EventCreateDto,
+  EventGetAllDto,
+  EventUpdateDto,
+} from '@event';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { GetAllDto } from '@dtos';
-import { EventCreateDto, EventUpdateDto } from './event.dto';
 
 export class EventController implements ControllerI {
   path = '/events';
@@ -17,7 +21,7 @@ export class EventController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(GetAllDto),
+      validationMiddleware(EventGetAllDto),
       this.getAll
     );
     this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
@@ -42,7 +46,7 @@ export class EventController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: GetAllDto = request.body;
+      const body: EventGetAllDto = request.body;
       const result = await this.eventService.getAll(body);
       response.status(200).send(result);
     } catch (error) {

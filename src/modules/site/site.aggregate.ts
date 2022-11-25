@@ -70,14 +70,17 @@ const addLookups = (data: any[], complete: boolean) => {
       $lookup: {
         from: 'events',
         localField: '_id',
-        foreignField: 'events',
+        foreignField: 'site',
         as: 'events',
-        pipeline: getPipeline(complete),
+        pipeline: getPipeline(complete, 'event'),
       },
     }
   );
   if (!complete) {
-    data.push({ $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } });
+    data.push(
+      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
+    );
   }
   return data;
 };
@@ -157,34 +160,61 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
   return data;
 };
 
-const getPipeline = (complete: boolean) => {
-  const pipelineCount = [
-    { $count: 'count' },
-    { $project: { count: 1, _id: 0 } },
-  ];
-  const pipelineComplete = [
-    {
-      $lookup: {
-        from: 'artists',
-        localField: 'artists',
-        foreignField: '_id',
-        as: 'artists',
+const getPipeline = (complete: boolean, type?: 'event') => {
+  const pipelineCount = [];
+  if (type === 'event') {
+    pipelineCount.push({
+      $match: {
+        date: { $gte: new Date().toISOString() },
       },
-    },
-    {
-      $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: 'media',
-        as: 'images',
-        pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
-          { $sort: { position: 1 } },
-        ],
+    });
+  }
+
+  pipelineCount.push({ $count: 'count' }, { $project: { count: 1, _id: 0 } });
+  const pipelineComplete = [];
+  if (type === 'event') {
+    pipelineComplete.push(
+      {
+        $match: {
+          date: { $gte: new Date().toISOString() },
+        },
       },
-    },
-    { $unwind: '$site' },
-    { $sort: { created: -1 } },
-  ];
+      {
+        $lookup: {
+          from: 'images',
+          localField: '_id',
+          foreignField: 'event',
+          as: 'images',
+          pipeline: [{ $sort: { position: 1 } }, { $project: { url: 1 } }],
+        },
+      },
+      { $project: { _id: 1, date: 1, images: { url: 1 }, name: 1, slug: 1 } }
+    );
+  } else {
+    pipelineComplete.push(
+      {
+        $lookup: {
+          from: 'artists',
+          localField: 'artists',
+          foreignField: '_id',
+          as: 'artists',
+        },
+      },
+      {
+        $lookup: {
+          from: 'images',
+          localField: '_id',
+          foreignField: 'media',
+          as: 'images',
+          pipeline: [
+            { $project: { _id: 1, url: 1, position: 1 } },
+            { $sort: { position: 1 } },
+          ],
+        },
+      },
+      { $unwind: '$site' },
+      { $sort: { created: -1 } }
+    );
+  }
   return complete ? pipelineComplete : pipelineCount;
 };

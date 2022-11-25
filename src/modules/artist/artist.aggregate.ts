@@ -84,6 +84,23 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'tracks',
         pipeline: getPipeline('track', complete),
       },
+    },
+    {
+      $lookup: {
+        from: 'events',
+        localField: '_id',
+        foreignField: 'artists',
+        as: 'events',
+        pipeline: [
+          {
+            $match: {
+              date: { $gte: new Date().toISOString() },
+            },
+          },
+          { $count: 'count' },
+          { $project: { count: 1, _id: 0 } },
+        ],
+      },
     }
   );
   if (!complete) {

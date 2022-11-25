@@ -1,4 +1,9 @@
+import { GetAllDto } from '@dtos';
 import { IsArray, IsOptional, IsString } from 'class-validator';
+
+export class EventGetAllDto extends GetAllDto {
+  @IsOptional() old: boolean;
+}
 
 export class EventCreateDto {
   @IsString() name: string;

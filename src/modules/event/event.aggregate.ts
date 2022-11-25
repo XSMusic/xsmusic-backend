@@ -1,14 +1,30 @@
-import { GetAllDto } from '@dtos';
-import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
+import { GetAllDto } from '@dtos';
+import { EventGetAllDto } from '@event';
+import { getOrderForGetAllAggregate } from '@utils';
+import { inspect } from 'src/shared/services/logger.service';
 
 export const eventGetAllAggregate = (
-  body: GetAllDto,
+  body: EventGetAllDto,
   skip: number,
   pageSize: number
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
+  if (body.old) {
+    data.push({
+      $match: {
+        date: { $lt: new Date().toISOString() },
+      },
+    });
+  } else {
+    data.push({
+      $match: {
+        date: { $gte: new Date().toISOString() },
+      },
+    });
+  }
+
   data = addLookups(data, false);
   data = setFilter(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
@@ -27,6 +43,7 @@ export const eventGetAllAggregate = (
       created: 1,
     },
   });
+  inspect(data);
   return data;
 };
 

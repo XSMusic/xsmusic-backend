@@ -1,9 +1,9 @@
-import { GetAllDto } from '@dtos';
 import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
 import {
   Event,
   eventGetAllAggregate,
+  EventGetAllDto,
   eventGetOneAggregate,
   EventI,
 } from '@event';
@@ -11,13 +11,21 @@ import { getValuesForPaginator, slugify } from '@utils';
 
 export class EventService {
   private imageHelper = new ImageHelper();
-  getAll(body: GetAllDto): Promise<{ items: Event[]; paginator: PaginatorI }> {
+  getAll(
+    body: EventGetAllDto
+  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
         const aggregate = eventGetAllAggregate(body, skip, pageSize);
         const items = await Event.aggregate(aggregate).exec();
-        const total = await Event.find({}).countDocuments().exec();
+        const total = await Event.find({
+          $match: {
+            date: { $gte: new Date().toISOString() },
+          },
+        })
+          .countDocuments()
+          .exec();
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,

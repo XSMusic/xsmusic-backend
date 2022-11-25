@@ -1,3 +1,4 @@
+import * as util from 'util';
 import winston from 'winston';
 
 const levels = {
@@ -64,3 +65,5 @@ export const Logger = winston.createLogger({
   levels,
   transports,
 });
+
+export const inspect = (data: any) => Logger.info(util.inspect(data, false, 8));
