@@ -74,12 +74,10 @@ export class ScrapingEventService {
   ) {
     if (i.site && i.site.name) {
       if (
-        !events.find((e) => {
-          console.log();
-          return (
+        !events.find(
+          (e) =>
             e.site.toString() === i.site._id!.toString() && e.date === i.date
-          );
-        })
+        )
       ) {
         items.completed.push(i);
       }
