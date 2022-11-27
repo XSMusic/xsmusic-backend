@@ -20,9 +20,7 @@ export class EventService {
         const aggregate = eventGetAllAggregate(body, skip, pageSize);
         const items = await Event.aggregate(aggregate).exec();
         const total = await Event.find({
-          $match: {
-            date: { $gte: new Date().toISOString() },
-          },
+          date: { $gte: new Date().toISOString() },
         })
           .countDocuments()
           .exec();

@@ -60,9 +60,7 @@ const addFilters = (body: MediaGetAllDto, data: any) => {
               {
                 'site.name': { $regex: `${body.filter[1]}`, $options: 'i' },
               },
-              {
-                year: { $regex: `${body.filter[1]}`, $options: 'i' },
-              },
+              { year: Number(body.filter[1]) },
             ],
           },
         });
