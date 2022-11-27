@@ -15,7 +15,8 @@
     "db:uatToPro": "sh scripts/database.sh uatToPro",
     "db:proToUat": "sh scripts/database.sh proToUat",
     "images:localPro": "sh scripts/images.sh localToPro",
-    "images:proLocal": "sh scripts/images.sh proToLocal"
+    "images:proLocal": "sh scripts/images.sh proToLocal",
+    "uatToProComplete": "npm run optimize-images && npm run db:uatToPro && npm run images:localPro"
   },
   "author": "",
   "license": "ISC",

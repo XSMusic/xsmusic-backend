@@ -1292,5 +1292,67 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "b99020c4-2775-4cfb-8c81-eae4614f99e5",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "a140032f-528f-48d5-aa8e-def2030a91d9",
+    "name": "Actions: GetAll",
+    "url": "{{URL}}/github/actions/all",
+    "method": "GET",
+    "sortNum": 210000,
+    "created": "2022-11-27T12:19:17.577Z",
+    "modified": "2022-11-27T12:21:06.506Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "9abe515b-4fae-466c-9044-475182c86ef5",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "03e58d4d-8a01-4a30-8c1e-321044e238ef",
+    "name": "Issues: GetAll",
+    "url": "{{URL}}/github/issues/all",
+    "method": "GET",
+    "sortNum": 220000,
+    "created": "2022-11-27T13:05:48.462Z",
+    "modified": "2022-11-27T13:06:02.022Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "60405641-a03f-43d5-bfe9-54a5e883250e",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "03e58d4d-8a01-4a30-8c1e-321044e238ef",
+    "name": "Issues: Create",
+    "url": "{{URL}}/github/issues",
+    "method": "POST",
+    "sortNum": 230000,
+    "created": "2022-11-27T13:06:31.041Z",
+    "modified": "2022-11-27T13:11:36.287Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"owner\": \"XSMusic\",\n  \"repo\": \"xsmusic-app\",\n  \"title\": \"Found a bug\",\n  \"body\": \"Im having a problem with this.\",\n  \"assignees\": [\n    \"josexs\"\n  ],\n  \"labels\": [\n    \"bug\"\n  ]\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

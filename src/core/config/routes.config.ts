@@ -10,12 +10,14 @@ import { SiteController } from '@site';
 import { GeoController } from '@geo';
 import { ImageController } from '@image';
 import { EventController } from '@event';
+import { GithubController } from '@github';
 
 const controllers = [
   new ArtistController(),
   new AuthController(),
   new EventController(),
   new GeoController(),
+  new GithubController(),
   new MediaController(),
   new MenuController(),
   new ImageController(),

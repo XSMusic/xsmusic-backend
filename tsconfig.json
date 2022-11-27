@@ -26,6 +26,7 @@
       "@exceptions": ["src/shared/exceptions"],
       "@event": ["src/modules/event"],
       "@geo": ["src/modules/geo"],
+      "@github": ["src/modules/github"],
       "@image": ["src/modules/image"],
       "@interfaces": ["src/shared/interfaces"],
       "@media": ["src/modules/media"],
