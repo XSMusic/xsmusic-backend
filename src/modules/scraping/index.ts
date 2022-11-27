@@ -7,3 +7,4 @@ export * from './scraping.site.service';
 export * from './scraping.event.service';
 export * from './scraping.media.service';
 export * from './scraping.interface';
+export * from './scraping-soundcloud.interface';

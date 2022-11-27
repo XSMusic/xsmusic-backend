@@ -40,9 +40,7 @@ export class GithubIssueService {
     return new Promise(async (resolve, reject) => {
       try {
         const url = this.githubUtilsService.getUrl('issues', body.repo);
-        await axios
-          .post(url, body, { headers: this.headers })
-          .catch((reason) => console.log(reason));
+        await axios.post(url, body, { headers: this.headers });
         resolve({ message: 'Issue creada correctamente' });
       } catch (error) {
         Logger.error(error);

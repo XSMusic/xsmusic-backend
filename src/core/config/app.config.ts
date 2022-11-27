@@ -17,6 +17,7 @@ const {
   GOOGLE_APPLICATION_CREDENTIALS,
   GITHUB_TOKEN,
   YOUTUBE_TOKEN,
+  SOUNDCLOUD_TOKEN,
   MAPS_TOKEN,
   EMAIL_LOGIN,
   EMAIL_PASSWORD,
@@ -54,8 +55,9 @@ export const config: ConfigI = {
   },
   tokens: {
     github: GITHUB_TOKEN,
-    youtube: YOUTUBE_TOKEN,
     map: MAPS_TOKEN,
+    soundcloud: SOUNDCLOUD_TOKEN,
+    youtube: YOUTUBE_TOKEN,
   },
   paths: {
     project: PATH_PROJECT,

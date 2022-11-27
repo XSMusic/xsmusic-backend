@@ -18,7 +18,6 @@ export class ScrapingMediaService {
       const media = await Media.find({ source: 'youtube' })
         .select('sourceId')
         .exec();
-      console.log(media.length);
       for (const item of response.data.items) {
         const data = {
           name: item.snippet.title,
@@ -31,7 +30,6 @@ export class ScrapingMediaService {
           image: item.snippet.thumbnails.high.url,
         };
 
-        //   console.log(media.find(''));
         // if (
         console.log(
           media.find((mediaIDB) => {

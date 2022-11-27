@@ -31,6 +31,14 @@ export class ScrapingService {
     }
   }
 
+  searchNameSoundcloud(name: string) {
+    try {
+      return this.scrapingArtist.searchNameSoundcloud(name);
+    } catch (error) {
+      return error;
+    }
+  }
+
   async getInfoClub(body: ScrapingGetInfoClubDto): Promise<ScrapingSite> {
     try {
       let club = new ScrapingSite(body.name, body.poblation);

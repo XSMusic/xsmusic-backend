@@ -1354,5 +1354,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "89bb7f06-4f1a-401a-8f79-bed5fcd241e0",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: searchNameSoundcloud",
+    "url": "{{URL}}/scraping/searchNameSoundcloud",
+    "method": "POST",
+    "sortNum": 125000,
+    "created": "2022-11-27T17:27:19.019Z",
+    "modified": "2022-11-27T17:28:23.936Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"name\": \"Carl Cox\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

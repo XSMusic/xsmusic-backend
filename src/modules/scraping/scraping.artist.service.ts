@@ -1,3 +1,5 @@
+import { config } from '@core/config';
+import { ScrapingSoundcloudI } from '@scraping';
 import { Style } from '@style';
 import { slugify, get_month, countries } from '@utils';
 import axios from 'axios';
@@ -6,16 +8,17 @@ import { ScrapingGetInfoArtistDto } from './scraping.dto';
 import { ScrapingArtist } from './scraping.model';
 
 export class ScrapingArtistService {
-  private url_wikipedia = 'https://es.wikipedia.org/wiki';
-  private url_clubbingspain = 'https://www.clubbingspain.com/artistas';
-  private url_djrankings = 'https://djrankings.org/DJ-';
+  private urlWikipedia = 'https://es.wikipedia.org/wiki';
+  private urlClubbingspain = 'https://www.clubbingspain.com/artistas';
+  private urlDjrankings = 'https://djrankings.org/DJ-';
+  private urlSoundcloudSearch = `https://api-v2.soundcloud.com/search?q=:searchText&client_id=${config.tokens.soundcloud}&limit=20&offset=0'`;
 
   async getInfoArtistDJRankings(
     artist: ScrapingArtist
   ): Promise<ScrapingArtist> {
     return new Promise(async (resolve, reject) => {
       try {
-        const url = `${this.url_djrankings}${slugify(
+        const url = `${this.urlDjrankings}${slugify(
           artist.name,
           '_'
         ).toUpperCase()}`;
@@ -69,7 +72,7 @@ export class ScrapingArtistService {
         }
         let country = this.getCountryFromCode(artist.country);
         country = this.fixCountryClubbing(country);
-        const url = `${this.url_clubbingspain}/${country}/${slugify(
+        const url = `${this.urlClubbingspain}/${country}/${slugify(
           artist.name
         )}.html`;
         const response = await axios.get(url);
@@ -99,7 +102,7 @@ export class ScrapingArtistService {
     });
   }
 
-  fixCountryClubbing(country: string): string {
+  private fixCountryClubbing(country: string): string {
     if (country === 'estados-unidos') {
       return 'usa';
     } else if (country === 'reino-unido') {
@@ -114,7 +117,7 @@ export class ScrapingArtistService {
   getInfoArtistWikipedia(artist: ScrapingArtist): Promise<ScrapingArtist> {
     return new Promise(async (resolve) => {
       try {
-        const url = `${this.url_wikipedia}/${slugify(artist.name, '_', false)}`;
+        const url = `${this.urlWikipedia}/${slugify(artist.name, '_', false)}`;
         const response = await axios.get(url);
         const $ = load(response.data);
         const image = $('img').attr('src');
@@ -193,4 +196,29 @@ export class ScrapingArtistService {
     }
     return items;
   };
+
+  searchNameSoundcloud(name: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.get<ScrapingSoundcloudI>(
+          this.urlSoundcloudSearch.replace(':searchText', name)
+        );
+        const items: any[] = [];
+        for (const item of response.data.collection) {
+          item.full_name;
+          if (item.full_name) {
+            items.push({
+              name: item.full_name,
+              image: item.avatar_url,
+              country: item.country_code,
+              url: item.permalink_url,
+            });
+          }
+        }
+        resolve(items);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 }

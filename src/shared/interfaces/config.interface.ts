@@ -16,8 +16,9 @@ export interface ConfigI {
   };
   tokens: {
     github: string;
-    youtube: string;
     map: string;
+    soundcloud: string;
+    youtube: string;
   };
   paths: {
     project: string;

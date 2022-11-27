@@ -1,5 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
+import { Logger } from '../services/logger.service';
 
 export const downloadImageFromUrl = (
   url: string,
@@ -18,7 +19,7 @@ export const downloadImageFromUrl = (
       });
       resolve(response.data.pipe(fs.createWriteStream(filePath)));
     } catch (err) {
-      console.log(err);
+      Logger.error(err);
       reject(err);
     }
   });

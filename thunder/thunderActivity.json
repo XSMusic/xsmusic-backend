@@ -2436,5 +2436,430 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "1cfd46bd-2678-418d-af4e-b4f85015ac9f",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids=&facet=model&user_id=979131-573567-584039-328141&client_id=M1st288RpSGenY314AaaHwddXSnfh1Xw&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids=&facet=model&user_id=979131-573567-584039-328141&client_id=M1st288RpSGenY314AaaHwddXSnfh1Xw&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:46:02.522Z",
+    "modified": "2022-11-27T15:46:02.522Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "sc_a_id",
+        "value": "e0c44508bfc96542e68f39b154f942f6e470cdba",
+        "isPath": false
+      },
+      {
+        "name": "variant_ids",
+        "value": "",
+        "isPath": false
+      },
+      {
+        "name": "facet",
+        "value": "model",
+        "isPath": false
+      },
+      {
+        "name": "user_id",
+        "value": "979131-573567-584039-328141",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "M1st288RpSGenY314AaaHwddXSnfh1Xw",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1669287518",
+        "isPath": false
+      },
+      {
+        "name": "app_locale",
+        "value": "en",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "dd382895-27ff-40ef-bae4-11484a123802",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids&facet=model&user_id=979131-573567-584039-328141&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids&facet=model&user_id=979131-573567-584039-328141&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:47:44.796Z",
+    "modified": "2022-11-27T15:47:44.796Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "sc_a_id",
+        "value": "e0c44508bfc96542e68f39b154f942f6e470cdba",
+        "isPath": false
+      },
+      {
+        "name": "variant_ids",
+        "value": "",
+        "isPath": false
+      },
+      {
+        "name": "facet",
+        "value": "model",
+        "isPath": false
+      },
+      {
+        "name": "user_id",
+        "value": "979131-573567-584039-328141",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1669287518",
+        "isPath": false
+      },
+      {
+        "name": "app_locale",
+        "value": "en",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f64e70c6-04b5-4e65-8359-75c02c1bfe8f",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids&facet=model&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&sc_a_id=e0c44508bfc96542e68f39b154f942f6e470cdba&variant_ids&facet=model&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:47:51.805Z",
+    "modified": "2022-11-27T15:47:51.805Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "sc_a_id",
+        "value": "e0c44508bfc96542e68f39b154f942f6e470cdba",
+        "isPath": false
+      },
+      {
+        "name": "variant_ids",
+        "value": "",
+        "isPath": false
+      },
+      {
+        "name": "facet",
+        "value": "model",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1669287518",
+        "isPath": false
+      },
+      {
+        "name": "app_locale",
+        "value": "en",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "03400f8c-1288-4c5b-9650-bad40936fca9",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&variant_ids&facet=model&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&variant_ids&facet=model&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:47:57.072Z",
+    "modified": "2022-11-27T15:47:57.072Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "variant_ids",
+        "value": "",
+        "isPath": false
+      },
+      {
+        "name": "facet",
+        "value": "model",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1669287518",
+        "isPath": false
+      },
+      {
+        "name": "app_locale",
+        "value": "en",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "00137a7b-711b-4c0e-bfaf-210775562211",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1&app_version=1669287518&app_locale=en",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:48:04.026Z",
+    "modified": "2022-11-27T15:48:04.026Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "app_version",
+        "value": "1669287518",
+        "isPath": false
+      },
+      {
+        "name": "app_locale",
+        "value": "en",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "e0669afb-2388-42ba-a803-48d3607112c3",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0&linked_partitioning=1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:48:13.791Z",
+    "modified": "2022-11-27T15:48:13.791Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "linked_partitioning",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "22bbbf0b-cbc7-41ec-8f3d-afe9746ec347",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0",
+    "url": "https://api-v2.soundcloud.com/search?q=dj%20nano&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T15:48:16.626Z",
+    "modified": "2022-11-27T15:48:16.626Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "dj%20nano",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "3cf25160-d9fe-4f4d-9a10-94bec7a2a023",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api-v2.soundcloud.com/search?q=carl%20cox&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0",
+    "url": "https://api-v2.soundcloud.com/search?q=carl%20cox&client_id=Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR&limit=20&offset=0",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-27T17:07:51.455Z",
+    "modified": "2022-11-27T17:07:51.455Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "carl%20cox",
+        "isPath": false
+      },
+      {
+        "name": "client_id",
+        "value": "Iy5e1Ri4GTNgrafaXe4mLpmJLXbXEfBR",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "20",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]
