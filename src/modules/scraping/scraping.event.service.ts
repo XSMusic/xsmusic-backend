@@ -5,7 +5,7 @@ import {
   ScrapingEventsI,
   ScrapingGetListEventsDto,
 } from '@scraping';
-import { Site, SiteI, SiteService } from '@site';
+import { SiteI, SiteService } from '@site';
 import axios from 'axios';
 import moment from 'moment';
 import { Event } from '../event/event.model';

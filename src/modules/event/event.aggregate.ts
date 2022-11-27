@@ -177,37 +177,3 @@ const setFilter = (body: GetAllDto, data: any) => {
   }
   return data;
 };
-
-const getPipeline = (type: string, complete: boolean) => {
-  const pipelineCount = [
-    { $match: { $or: [{ type: type }] } },
-    { $count: 'count' },
-    { $project: { count: 1, _id: 0 } },
-  ];
-  const pipelineComplete = [
-    { $match: { $or: [{ type: type }] } },
-    {
-      $lookup: {
-        from: 'sites',
-        localField: 'site',
-        foreignField: '_id',
-        as: 'site',
-      },
-    },
-    {
-      $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: 'media',
-        as: 'images',
-        pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
-          { $sort: { position: 1 } },
-        ],
-      },
-    },
-    { $unwind: '$site' },
-    { $sort: { created: -1 } },
-  ];
-  return complete ? pipelineComplete : pipelineCount;
-};

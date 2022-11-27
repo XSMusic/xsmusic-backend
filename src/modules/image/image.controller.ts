@@ -1,4 +1,3 @@
-import { IdDto } from '@dtos';
 import { NextFunction, Request, Response, Router } from 'express';
 import { HttpException } from '@exceptions';
 import { ControllerI } from '@interfaces';
