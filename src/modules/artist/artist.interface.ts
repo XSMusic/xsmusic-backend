@@ -17,6 +17,8 @@ export interface ArtistMongoI extends Document {
     soundcloud: string;
     tiktok: string;
     instagram: string;
+    mixcloud: string;
+    youtube: string;
   };
 }
 
@@ -38,6 +40,8 @@ export interface ArtistI {
     soundcloud: string;
     tiktok: string;
     instagram: string;
+    mixcloud: string;
+    youtube: string;
   };
   created?: string;
   updated?: string;

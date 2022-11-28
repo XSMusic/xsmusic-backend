@@ -1373,5 +1373,55 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "578e1ac0-1413-42c1-bebc-dabfcebc2657",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d73a6366-60ba-4281-81e5-18120ab9c67d",
+    "name": "Stats: getStatsArtists",
+    "url": "{{URL}}/stats/getStatsArtists",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2022-11-27T19:11:38.976Z",
+    "modified": "2022-11-27T19:12:02.605Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "artists"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "clubs"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "styles"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "tracks"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "events"
+      }
+    ]
   }
 ]

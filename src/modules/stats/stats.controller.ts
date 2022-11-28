@@ -19,6 +19,7 @@ export class StatsController implements ControllerI {
       validationMiddleware(StatsGetTopArtistsDto),
       this.getTopArtist
     );
+    this.router.get(`${this.path}/getStatsArtists`, this.getStatsArtists);
   }
 
   private getAll = async (
@@ -42,6 +43,19 @@ export class StatsController implements ControllerI {
     try {
       const body: StatsGetTopArtistsDto = request.body;
       const items = await this.statsService.getTopArtists(body);
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getStatsArtists = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const items = await this.statsService.getStatsArtists();
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

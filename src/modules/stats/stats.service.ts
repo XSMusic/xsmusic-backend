@@ -1,7 +1,12 @@
 import moment from 'moment';
 import { Model } from 'mongoose';
-import { StatsGetTopArtistsI, StatsTotalsAdminI } from './stats.interface';
-import { Artist, ArtistMongoI } from '@artist';
+import {
+  StatsArtistsI,
+  StatsGetTopArtistsI,
+  StatsTopSocialI,
+  StatsTotalsAdminI,
+} from '@stats';
+import { Artist, ArtistI, ArtistMongoI } from '@artist';
 import { Style, StyleMongoI } from '@style';
 import { Media, MediaMongoI } from '@media';
 import { StatsGetTopArtistsDto, StatsTotalAdminItemI } from '@stats';
@@ -97,5 +102,78 @@ export class StatsService {
       data = data.splice(0, body.limit);
     }
     return data;
+  }
+
+  getStatsArtists(): Promise<StatsArtistsI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const artists = await Artist.find({}).exec();
+        let topSocial: StatsTopSocialI[] = [
+          { name: 'facebook', value: 0, percentage: 0 },
+          { name: 'instagram', value: 0, percentage: 0 },
+          { name: 'mixcloud', value: 0, percentage: 0 },
+          { name: 'soundcloud', value: 0, percentage: 0 },
+          { name: 'spotify', value: 0, percentage: 0 },
+          { name: 'tiktok', value: 0, percentage: 0 },
+          { name: 'twitter', value: 0, percentage: 0 },
+          { name: 'web', value: 0, percentage: 0 },
+          { name: 'youtube', value: 0, percentage: 0 },
+        ];
+        topSocial = this.setTopSocial(artists, topSocial);
+        const data: StatsArtistsI = { topSocial };
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  private setTopSocial(artists: ArtistI[], topSocial: StatsTopSocialI[]) {
+    for (const artist of artists) {
+      for (const social of topSocial) {
+        if (social.name === 'facebook' && artist.social.facebook !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'instagram' && artist.social.instagram !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'mixcloud' && artist.social.mixcloud !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'soundcloud' && artist.social.soundcloud !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'spotify' && artist.social.spotify !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'tiktok' && artist.social.tiktok !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'twitter' && artist.social.twitter !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'web' && artist.social.web !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+        if (social.name === 'youtube' && artist.social.youtube !== '') {
+          social.value++;
+          social.percentage = this.getPercentage(artists.length, social.value);
+        }
+      }
+    }
+    topSocial.sort((a, b) => (a.value > b.value ? -1 : 1));
+    return topSocial;
+  }
+
+  private getPercentage(total: number, value: number) {
+    return Number((100 / (total / value)).toFixed(1));
   }
 }

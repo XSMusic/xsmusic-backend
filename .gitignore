@@ -13,6 +13,7 @@ coverage/coverage-final.json
 googleanalytics-credentials.json
 yarn-error.log
 thunder/thunderEnvironment.json
+thunder/thunderActivity.json
 private.txt
 scripts/python/__pycache__
 playground.mongodb
