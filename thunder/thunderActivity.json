@@ -231,7 +231,7 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-11-07T23:25:51.018Z",
-    "modified": "2022-11-09T15:38:42.435Z",
+    "modified": "2022-11-29T15:34:29.584Z",
     "headers": [
       {
         "name": "User-Agent",
@@ -242,7 +242,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"41\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
+      "raw": "{\n  \"operationName\": \"GET_POPULAR_EVENTS\",\n  \"variables\": {\n    \"count\": 10,\n    \"areaId\": \"168\",\n    \"dateFrom\": \"2022-11-08\",\n    \"dateTo\": \"2022-11-14\"\n  },\n  \"query\": \"query GET_POPULAR_EVENTS($count: Int!, $areaId: ID, $dateFrom: DateTime, $dateTo: DateTime) {\\n  events(limit: $count, type: POPULAR, areaId: $areaId, dateFrom: $dateFrom, dateTo: $dateTo) {\\n    ...eventFields\\n }\\n}\\n\\nfragment eventFields on Event {\\n  title\\n  date\\n  contentUrl\\n images {\\n  filename\\n  }\\n  venue {\\n name\\n    contentUrl\\n  }\\n }\\n\"\n}",
       "form": []
     },
     "tests": []
@@ -2860,6 +2860,57 @@
         "isPath": false
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "23d58a86-ecac-4946-97ab-63b67522954c",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api.github.com/graphql",
+    "url": "https://api.github.com/graphql",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-28T12:55:55.006Z",
+    "modified": "2022-11-28T13:06:40.921Z",
+    "headers": [
+      {
+        "name": "Authorization",
+        "value": "Bearer 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"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "text",
+      "raw": "{\n  \"query\": \"query { viewer { login }}\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "63734d68-5838-47a8-970e-c22e19ca4aab",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://api.github.com/graphql",
+    "url": "https://api.github.com/graphql",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-28T13:06:57.158Z",
+    "modified": "2022-11-28T13:32:32.871Z",
+    "headers": [
+      {
+        "name": "Authorization",
+        "value": "Bearer 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"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "graphql",
+      "raw": "",
+      "form": [],
+      "graphql": {
+        "query": "query { viewer { login } }"
+      }
+    },
     "tests": []
   }
 ]

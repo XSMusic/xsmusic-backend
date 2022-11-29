@@ -21,4 +21,5 @@ export class ScrapingGetListEventsDto {
   @IsString() maxResults: string;
   @IsString() dateFrom: string;
   @IsString() dateTo: string;
+  @IsString() @IsOptional() area: string;
 }

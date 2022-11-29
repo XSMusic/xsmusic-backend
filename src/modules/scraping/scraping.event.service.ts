@@ -21,7 +21,7 @@ export class ScrapingEventService {
           operationName: 'GET_POPULAR_EVENTS',
           variables: {
             count: Number(data.maxResults),
-            areaId: '41',
+            areaId: data.area ?? '41',
             dateFrom: data.dateFrom,
             dateTo: data.dateTo,
           },
