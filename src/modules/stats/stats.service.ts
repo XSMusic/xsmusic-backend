@@ -12,7 +12,7 @@ import { Media, MediaMongoI } from '@media';
 import { StatsGetTopStatsDto, StatsTotalAdminItemI } from '@stats';
 import { countries, sortByValue } from '@utils';
 import { User, UserMongoI } from '@user';
-import { Site, SiteI, SiteMongoI } from '@site';
+import { Site, SiteMongoI } from '@site';
 import { Image, ImageMongoI } from '@image';
 import { Event, EventMongoI } from '@event';
 
