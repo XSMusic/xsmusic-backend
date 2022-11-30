@@ -39,19 +39,6 @@ export class ScrapingMediaService {
             image: item.snippet.thumbnails.high.url,
           };
 
-          // if (
-          // console.log(
-          //   media.find((mediaIDB) => {
-          //     console.log(
-          //       mediaIDB.sourceId.toString(),
-          //       data.videoId.toString(),
-          //       mediaIDB.sourceId.toString() === data.videoId.toString()
-          //     );
-          //     return mediaIDB.sourceId.toString() !== data.videoId.toString();
-          //   })
-          // );
-          // ) {
-          // }
           items.push(data);
         }
       }

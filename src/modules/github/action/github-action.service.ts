@@ -5,6 +5,7 @@ import {
   GithubActionOriginalI,
   GithubUtilsService,
 } from '@github';
+import { Logger } from '@services';
 import axios, { AxiosRequestHeaders } from 'axios';
 
 export class GithubActionService {
@@ -32,7 +33,7 @@ export class GithubActionService {
         }
         resolve(items);
       } catch (error) {
-        console.log(error);
+        Logger.error(error);
         reject(error);
       }
     });

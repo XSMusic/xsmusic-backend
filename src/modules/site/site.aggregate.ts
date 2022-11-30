@@ -97,6 +97,12 @@ const setFilter = (body: SiteGetAllDto, data: any) => {
               'address.country': { $regex: `${body.filter[1]}`, $options: 'i' },
             },
             {
+              'address.town': { $regex: `${body.filter[1]}`, $options: 'i' },
+            },
+            {
+              'address.state': { $regex: `${body.filter[1]}`, $options: 'i' },
+            },
+            {
               'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
             },
           ],
@@ -109,6 +115,10 @@ const setFilter = (body: SiteGetAllDto, data: any) => {
             ? 'styles.name'
             : body.filter[0] === 'country'
             ? 'address.country'
+            : body.filter[0] === 'town'
+            ? 'address.town'
+            : body.filter[0] === 'state'
+            ? 'address.state'
             : body.filter[0]]: body.filter[1],
         },
       };
@@ -135,6 +145,12 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
         images: { url: 1 },
         sets: 1,
         events: 1,
+        social: {
+          facebook: 1,
+          twitter: 1,
+          instagram: 1,
+          youtube: 1,
+        },
         slug: 1,
         updated: 1,
         created: 1,
