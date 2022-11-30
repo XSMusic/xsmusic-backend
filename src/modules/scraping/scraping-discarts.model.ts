@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { ScrapingDiscartsMongoI } from '@scraping';
 
 const typesValid = {
-  values: ['youtube'],
+  values: ['youtube', 'event'],
   message: '{VALUE} no es un tipo permitido',
 };
 

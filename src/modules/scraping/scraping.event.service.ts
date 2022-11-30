@@ -9,6 +9,7 @@ import { SiteI, SiteService } from '@site';
 import axios from 'axios';
 import moment from 'moment';
 import { Event } from '../event/event.model';
+import { ScrapingDiscarts } from './scraping-discarts.model';
 
 export class ScrapingEventService {
   private siteService = new SiteService();
@@ -42,7 +43,6 @@ export class ScrapingEventService {
         });
 
         const sites = responseSites.items;
-        const events: EventI[] = await Event.find({}).exec();
         for (const item of responseEvents) {
           if (!item.venue.name.includes('TBA')) {
             const date = moment(item.date).format('YYYY-MM-DD HH:mm');
@@ -56,7 +56,7 @@ export class ScrapingEventService {
               site,
             };
 
-            this.setCompletedAndNot(i, events, items);
+            await this.setCompletedAndNot(i, items);
           }
         }
         resolve(items);
@@ -67,17 +67,18 @@ export class ScrapingEventService {
     });
   }
 
-  private setCompletedAndNot(
-    i: ScrapingEventI,
-    events: EventI[],
-    items: ScrapingEventsI
-  ) {
+  private async setCompletedAndNot(i: ScrapingEventI, items: ScrapingEventsI) {
+    const events: EventI[] = await Event.find({}).exec();
+    const discarts: string[] = (
+      await ScrapingDiscarts.find({ source: 'event' }).exec()
+    ).map((item) => item.value);
     if (i.site && i.site.name) {
       if (
         !events.find(
           (e) =>
             e.site.toString() === i.site._id!.toString() && e.date === i.date
-        )
+        ) &&
+        !discarts.includes(`${i.site._id!.toString()} ${i.date}`)
       ) {
         items.completed.push(i);
       }
