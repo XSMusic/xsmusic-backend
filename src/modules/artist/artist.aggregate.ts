@@ -26,6 +26,7 @@ export const artistGetAllAggregate = (
       social: 1,
       sets: 1,
       tracks: 1,
+      events: 1,
       updated: 1,
       created: 1,
     },
@@ -98,7 +99,8 @@ const addLookups = (data: any[], complete: boolean) => {
   if (!complete) {
     data.push(
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
+      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
     );
   }
   return data;
