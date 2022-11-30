@@ -8,3 +8,5 @@ export * from './scraping.event.service';
 export * from './scraping.media.service';
 export * from './scraping.interface';
 export * from './scraping-soundcloud.interface';
+export * from './scraping-discarts.model';
+export * from './scraping-discarts.interface';

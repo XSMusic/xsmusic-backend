@@ -43,6 +43,7 @@ export class ScrapingController implements ControllerI {
       validationMiddleware(ScrapingGetListEventsDto),
       this.getListEvents
     );
+    this.router.post(`${this.path}/createDiscart`, this.createDiscart);
   }
 
   private getInfoArtist = async (
@@ -110,6 +111,20 @@ export class ScrapingController implements ControllerI {
       const body: ScrapingGetListEventsDto = request.body;
       const items = await this.scrapingService.getListEvents(body);
       response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private createDiscart = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: any = request.body;
+      const result = await this.scrapingService.createDiscart(body);
+      response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
     }

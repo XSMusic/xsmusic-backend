@@ -91,15 +91,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'events',
-        pipeline: [
-          {
-            $match: {
-              date: { $gte: new Date().toISOString() },
-            },
-          },
-          { $count: 'count' },
-          { $project: { count: 1, _id: 0 } },
-        ],
+        pipeline: getPipeline('event', complete),
       },
     }
   );
@@ -142,13 +134,37 @@ const setFilter = (body: ArtistGetAllDto, data: any) => {
 };
 
 const getPipeline = (type: string, complete: boolean) => {
-  const pipelineCount = [
+  let pipelineCount: any = [
     { $match: { $or: [{ type: type }] } },
     { $count: 'count' },
     { $project: { count: 1, _id: 0 } },
   ];
-  const pipelineComplete = [
-    { $match: { $or: [{ type: type }] } },
+  if (type === 'event') {
+    pipelineCount = [
+      {
+        $match: {
+          date: { $gte: new Date().toISOString() },
+        },
+      },
+      { $count: 'count' },
+      { $project: { count: 1, _id: 0 } },
+    ];
+  }
+  const pipelineComplete = [];
+  if (type !== 'event') {
+    pipelineComplete.push({
+      $match: {
+        $or: [{ type: type }],
+      },
+    });
+  } else {
+    pipelineComplete.push({
+      $match: {
+        date: { $gte: new Date().toISOString() },
+      },
+    });
+  }
+  pipelineComplete.push(
     {
       $lookup: {
         from: 'sites',
@@ -161,7 +177,7 @@ const getPipeline = (type: string, complete: boolean) => {
       $lookup: {
         from: 'images',
         localField: '_id',
-        foreignField: 'media',
+        foreignField: type === 'event' ? 'event' : 'media',
         as: 'images',
         pipeline: [
           { $project: { _id: 1, url: 1, position: 1 } },
@@ -170,7 +186,7 @@ const getPipeline = (type: string, complete: boolean) => {
       },
     },
     { $unwind: '$site' },
-    { $sort: { created: -1 } },
-  ];
+    { $sort: { created: -1 } }
+  );
   return complete ? pipelineComplete : pipelineCount;
 };

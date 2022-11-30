@@ -22,6 +22,7 @@ export class GithubActionService {
           const urlApi = this.githubUtilsService.getUrl('actions', repo);
           const url = this.githubUtilsService.getUrl('actions', repo, false);
           const response = await axios.get(urlApi, { headers: this.headers });
+          console.log({ urlApi, headers: this.headers });
           const data: GithubActionOriginalI = response.data;
           const workflows = data.workflows;
           for (const action of workflows) {
@@ -31,6 +32,7 @@ export class GithubActionService {
         }
         resolve(items);
       } catch (error) {
+        console.log(error);
         reject(error);
       }
     });

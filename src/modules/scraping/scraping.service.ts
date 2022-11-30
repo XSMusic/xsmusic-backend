@@ -1,6 +1,8 @@
 import {
   ScrapingArtist,
   ScrapingArtistService,
+  ScrapingDiscarts,
+  ScrapingDiscartsI,
   ScrapingEventService,
   ScrapingEventsI,
   ScrapingGetInfoArtistDto,
@@ -73,5 +75,21 @@ export class ScrapingService {
     } catch (e) {
       return e;
     }
+  }
+
+  async createDiscart(body: ScrapingDiscartsI): Promise<ScrapingDiscartsI> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const item = new ScrapingDiscarts(body);
+        const itemDB = await item.save();
+        if (itemDB) {
+          resolve(itemDB);
+        } else {
+          reject({ message: 'El descarte no ha sido creado' });
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 }
