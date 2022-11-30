@@ -25,10 +25,10 @@ export const onlyUnique = (value: any, index: number, self: any[]): boolean => {
   return self.indexOf(value) === index;
 };
 
-export const sortByTotal = (a: any, b: any): 0 | -1 | 1 => {
-  if (a.total > b.total) {
+export const sortByValue = (a: any, b: any): 0 | -1 | 1 => {
+  if (a.value > b.value) {
     return -1;
-  } else if (b.total > a.total) {
+  } else if (b.value > a.value) {
     return 1;
   } else {
     return 0;

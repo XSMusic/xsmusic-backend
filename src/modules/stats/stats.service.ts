@@ -2,17 +2,17 @@ import moment from 'moment';
 import { Model } from 'mongoose';
 import {
   StatsArtistsI,
-  StatsGetTopArtistsI,
+  StatsTopCountriesI,
   StatsTopSocialI,
   StatsTotalsAdminI,
 } from '@stats';
 import { Artist, ArtistI, ArtistMongoI } from '@artist';
 import { Style, StyleMongoI } from '@style';
 import { Media, MediaMongoI } from '@media';
-import { StatsGetTopArtistsDto, StatsTotalAdminItemI } from '@stats';
-import { countries, sortByTotal } from '@utils';
+import { StatsGetTopStatsDto, StatsTotalAdminItemI } from '@stats';
+import { countries, sortByValue } from '@utils';
 import { User, UserMongoI } from '@user';
-import { Site, SiteMongoI } from '@site';
+import { Site, SiteI, SiteMongoI } from '@site';
 import { Image, ImageMongoI } from '@image';
 import { Event, EventMongoI } from '@event';
 
@@ -67,12 +67,38 @@ export class StatsService {
     };
   }
 
-  getTopArtists(body: StatsGetTopArtistsDto): Promise<StatsGetTopArtistsI[]> {
+  getTopStats(body: StatsGetTopStatsDto): Promise<StatsArtistsI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const artists = await Artist.find({}).exec();
-        let data: StatsGetTopArtistsI[] = [];
-        data = this.typeIsCountry(body, artists, data);
+        let items: any[];
+        if (body.type === 'artist') {
+          items = await Artist.find({}).exec();
+        } else if (body.type === 'club') {
+          items = await Site.find({ type: 'club' }).exec();
+        } else if (body.type === 'festival') {
+          items = await Site.find({ type: 'festival' }).exec();
+        }
+        const topCountries: StatsTopCountriesI[] = await this.setTopCountries(
+          items,
+          body
+        );
+        const topSocial: StatsTopSocialI[] = this.setTopSocial(items, body);
+        const data: StatsArtistsI = { topSocial, topCountries };
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  setTopCountries(
+    items: any[],
+    body: StatsGetTopStatsDto
+  ): Promise<StatsTopCountriesI[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let data: StatsTopCountriesI[] = [];
+        data = this.typeIsCountry(body, items, data);
         resolve(data);
       } catch (e) {
         reject(e);
@@ -81,56 +107,59 @@ export class StatsService {
   }
 
   private typeIsCountry(
-    body: StatsGetTopArtistsDto,
-    artists: (ArtistMongoI & { _id: import('mongoose').Types.ObjectId })[],
-    data: StatsGetTopArtistsI[]
-  ): StatsGetTopArtistsI[] {
-    const allCountries: any[] = [];
-    if (body.type === 'country') {
-      for (const country of countries) {
-        allCountries.push({ id: country.id, name: country.name, total: 0 });
-      }
-      for (const artist of artists) {
-        for (const country of allCountries) {
-          if (country.id === artist.country) {
-            country.total++;
-          }
+    body: StatsGetTopStatsDto,
+    items: any[],
+    data: StatsTopCountriesI[]
+  ): StatsTopCountriesI[] {
+    const allCountries: StatsTopCountriesI[] = [];
+    for (const country of countries) {
+      allCountries.push({
+        id: country.id,
+        name: country.name,
+        value: 0,
+        percentage: 0,
+      });
+    }
+    for (const item of items) {
+      for (const country of allCountries) {
+        if (body.type === 'artist' && country.id === item.country) {
+          country.value++;
+          country.percentage = this.getPercentage(items.length, country.value);
+        } else if (
+          (body.type === 'club' && country.id === item.address.country) ||
+          (body.type === 'festival' && country.id === item.address.country)
+        ) {
+          country.value++;
+          country.percentage = this.getPercentage(items.length, country.value);
         }
       }
-      data = allCountries;
-      data = data.sort(sortByTotal);
-      data = data.splice(0, body.limit);
     }
+    data = allCountries;
+    data = data.sort(sortByValue);
+    data = data.splice(0, body.limit);
     return data;
   }
 
-  getStatsArtists(): Promise<StatsArtistsI> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const artists = await Artist.find({}).exec();
-        let topSocial: StatsTopSocialI[] = [
-          { name: 'facebook', value: 0, percentage: 0 },
-          { name: 'instagram', value: 0, percentage: 0 },
-          { name: 'mixcloud', value: 0, percentage: 0 },
-          { name: 'soundcloud', value: 0, percentage: 0 },
-          { name: 'spotify', value: 0, percentage: 0 },
-          { name: 'tiktok', value: 0, percentage: 0 },
-          { name: 'twitter', value: 0, percentage: 0 },
-          { name: 'web', value: 0, percentage: 0 },
-          { name: 'youtube', value: 0, percentage: 0 },
-        ];
-        topSocial = this.setTopSocial(artists, topSocial);
-        const data: StatsArtistsI = { topSocial };
-        resolve(data);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
+  private setTopSocial(artists: ArtistI[], body: StatsGetTopStatsDto) {
+    const topSocial: StatsTopSocialI[] = [
+      { name: 'facebook', value: 0, percentage: 0 },
+      { name: 'instagram', value: 0, percentage: 0 },
+      { name: 'twitter', value: 0, percentage: 0 },
+      { name: 'web', value: 0, percentage: 0 },
+      { name: 'youtube', value: 0, percentage: 0 },
+      { name: 'ninguno', value: 0, percentage: 0 },
+    ];
+    if (body.type === 'artist') {
+      topSocial.push(
+        { name: 'soundcloud', value: 0, percentage: 0 },
+        { name: 'mixcloud', value: 0, percentage: 0 },
+        { name: 'spotify', value: 0, percentage: 0 },
+        { name: 'tiktok', value: 0, percentage: 0 }
+      );
+    }
 
-  private setTopSocial(artists: ArtistI[], topSocial: StatsTopSocialI[]) {
     for (const artist of artists) {
-      for (const social of topSocial) {
+      for (let social of topSocial) {
         if (social.name === 'facebook' && artist.social.facebook !== '') {
           social.value++;
           social.percentage = this.getPercentage(artists.length, social.value);
@@ -167,10 +196,49 @@ export class StatsService {
           social.value++;
           social.percentage = this.getPercentage(artists.length, social.value);
         }
+        if (social.name === 'ninguno') {
+          let type: 'artist' | 'site' = 'artist';
+          if (body.type === 'club' || body.type === 'festival') {
+            type = 'site';
+          }
+          social = this.setNothingSocial(social, artist, artists.length, type);
+        }
       }
     }
-    topSocial.sort((a, b) => (a.value > b.value ? -1 : 1));
+    topSocial.sort(sortByValue);
     return topSocial;
+  }
+
+  private setNothingSocial(
+    social: StatsTopSocialI,
+    item: any,
+    totalArtists: number,
+    type: 'artist' | 'site'
+  ) {
+    if (
+      type === 'artist' &&
+      item.social.facebook === '' &&
+      item.social.twitter === '' &&
+      item.social.instagram === '' &&
+      item.social.soundcloud === '' &&
+      item.social.mixcloud === '' &&
+      item.social.spotify === '' &&
+      item.social.tiktok === '' &&
+      item.social.youtube === ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(totalArtists, social.value);
+    } else if (
+      type === 'site' &&
+      item.social.facebook === '' &&
+      item.social.twitter === '' &&
+      item.social.instagram === '' &&
+      item.social.youtube === ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(totalArtists, social.value);
+    }
+    return social;
   }
 
   private getPercentage(total: number, value: number) {

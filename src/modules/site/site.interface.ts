@@ -18,10 +18,8 @@ export interface SiteMongoI extends Document {
     web: string;
     facebook: string;
     twitter: string;
-    spotify: string;
-    soundcloud: string;
-    tiktok: string;
     instagram: string;
+    youtube: string;
     email: string;
   };
 }

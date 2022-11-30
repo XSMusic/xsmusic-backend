@@ -15,18 +15,17 @@ export interface StatsTotalAdminItemI {
   percentages: { days: string; value: number }[];
 }
 
-export interface StatsGetTopArtistsI {
-  id: string;
-  name: string;
-  total: number;
-}
-
 export interface StatsArtistsI {
   topSocial: StatsTopSocialI[];
+  topCountries: StatsTopCountriesI[];
 }
 
 export interface StatsTopSocialI {
   name: string;
   value: number;
   percentage: number;
+}
+
+export interface StatsTopCountriesI extends StatsTopSocialI {
+  id: string;
 }

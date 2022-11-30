@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from 'class-validator';
 
-export class StatsGetTopArtistsDto {
-  @IsString() type?: string;
+export class StatsGetTopStatsDto {
   @IsNumber() limit?: number;
+  @IsString() type: 'artist' | 'club' | 'festival';
 }
