@@ -17,13 +17,10 @@ export class EventService {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = eventGetAllAggregate(body, skip, pageSize);
+        const aggregate = eventGetAllAggregate(body, true, skip, pageSize);
         const items = await Event.aggregate(aggregate).exec();
-        const total = await Event.find({
-          date: { $gte: new Date().toISOString() },
-        })
-          .countDocuments()
-          .exec();
+        const aggregateTotal = eventGetAllAggregate(body, false);
+        const total = (await Event.aggregate(aggregateTotal).exec()).length;
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,
@@ -64,7 +61,7 @@ export class EventService {
           if (body._id) {
             delete body._id;
           }
-          body.slug = slugify(body.name);
+          body.slug = slugify(`${body.name}-${body.site.name!}`);
           const item = new Event(body);
           const itemDB = await item.save();
           if (itemDB) {

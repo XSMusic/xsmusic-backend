@@ -3,3 +3,4 @@ export * from './countries.utils';
 export * from './image.utils';
 export * from './scraping.utils';
 export * from './utils';
+export * from './filters-total.utils';

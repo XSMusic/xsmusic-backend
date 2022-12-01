@@ -4,7 +4,7 @@ export interface EventMongoI extends Document {
   name: string;
   date: string;
   styles: any[];
-  site: string;
+  site: any;
   artists: any[];
   info: string;
   slug: string;
@@ -15,7 +15,7 @@ export interface EventI {
   name: string;
   date: string;
   styles: any[];
-  site: string;
+  site: any;
   artists: any[];
   info: string;
   slug: string;

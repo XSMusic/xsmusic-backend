@@ -1,5 +1,5 @@
 import { ArtistGetAllDto } from '@artist';
-import { getOrderForGetAllAggregate } from '@utils';
+import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
 
 export const artistGetAllAggregate = (
@@ -10,7 +10,10 @@ export const artistGetAllAggregate = (
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   data = addLookups(data, false);
-  data = setFilter(body, data);
+  const filter = getFilter('artist', body);
+  if (filter) {
+    data.push(filter);
+  }
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data.push({
     $project: {
@@ -102,35 +105,6 @@ const addLookups = (data: any[], complete: boolean) => {
       { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
     );
-  }
-  return data;
-};
-
-const setFilter = (body: ArtistGetAllDto, data: any) => {
-  if (body.filter && body.filter.length === 2) {
-    let d = {};
-    if (body.filter[0] === 'name') {
-      d = {
-        $match: {
-          $or: [
-            { name: { $regex: `${body.filter[1]}`, $options: 'i' } },
-            { birthdate: { $regex: `${body.filter[1]}`, $options: 'i' } },
-            { country: { $regex: `${body.filter[1]}`, $options: 'i' } },
-            {
-              'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
-            },
-          ],
-        },
-      };
-    } else {
-      d = {
-        $match: {
-          [body.filter[0] === 'styles' ? 'styles.name' : body.filter[0]]:
-            body.filter[1],
-        },
-      };
-    }
-    data.push(d);
   }
   return data;
 };

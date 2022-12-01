@@ -18,11 +18,10 @@ export class SiteService {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = siteGetAllAggregate(body, skip, pageSize);
+        const aggregate = siteGetAllAggregate(body, true, skip, pageSize);
         const items = await Site.aggregate(aggregate).exec();
-        const total = await Site.find({ type: body.type })
-          .countDocuments()
-          .exec();
+        const aggregateTotal = siteGetAllAggregate(body, false);
+        const total = (await Site.aggregate(aggregateTotal).exec()).length;
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,

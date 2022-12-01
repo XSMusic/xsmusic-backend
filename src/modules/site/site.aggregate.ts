@@ -1,11 +1,12 @@
 import { SiteGetAllDto } from 'src/modules/site';
-import { getOrderForGetAllAggregate } from '@utils';
+import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
 
 export const siteGetAllAggregate = (
   body: SiteGetAllDto,
-  skip: number,
-  pageSize: number
+  paginator = true,
+  skip?: number,
+  pageSize?: number
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
@@ -13,8 +14,13 @@ export const siteGetAllAggregate = (
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
   }
-  data = setFilter(body, data);
-  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
+  const filter = getFilter('site', body);
+  if (filter) {
+    data.push(filter);
+  }
+  if (paginator) {
+    data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
+  }
   data = addProject(body, data);
   return data;
 };
@@ -81,49 +87,6 @@ const addLookups = (data: any[], complete: boolean) => {
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
     );
-  }
-  return data;
-};
-
-const setFilter = (body: SiteGetAllDto, data: any) => {
-  if (body.filter && body.filter.length === 2) {
-    let d = {};
-    if (body.filter[0] === 'name') {
-      d = {
-        $match: {
-          $or: [
-            { name: { $regex: `${body.filter[1]}`, $options: 'i' } },
-            {
-              'address.country': { $regex: `${body.filter[1]}`, $options: 'i' },
-            },
-            {
-              'address.town': { $regex: `${body.filter[1]}`, $options: 'i' },
-            },
-            {
-              'address.state': { $regex: `${body.filter[1]}`, $options: 'i' },
-            },
-            {
-              'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
-            },
-          ],
-        },
-      };
-    } else {
-      d = {
-        $match: {
-          [body.filter[0] === 'styles'
-            ? 'styles.name'
-            : body.filter[0] === 'country'
-            ? 'address.country'
-            : body.filter[0] === 'town'
-            ? 'address.town'
-            : body.filter[0] === 'state'
-            ? 'address.state'
-            : body.filter[0]]: body.filter[1],
-        },
-      };
-    }
-    data.push(d);
   }
   return data;
 };
