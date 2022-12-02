@@ -973,12 +973,12 @@
     "method": "POST",
     "sortNum": 130000,
     "created": "2022-11-09T23:53:07.068Z",
-    "modified": "2022-11-10T17:36:09.343Z",
+    "modified": "2022-12-01T00:42:46.368Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n \"name\": \"Switch Pocket Club\"\n}",
+      "raw": "{\n \"name\": \"Octan Ibiza\"\n}",
       "form": []
     },
     "tests": []
