@@ -43,9 +43,9 @@ copyPWALocalToServer() {
 }
 
 startPM2() {
-    COMMAND="cd /home/josexs/apps/xsmusic && npm run start:ssr"
+    COMMAND="cd /home/josexs/apps/xsmusic && pm2 start pm2-pwa.json && pm2 save"
     COMMANDS="bash -i -c '${COMMAND}'"
-    ssh ${SSH_HOST} -p 69 ${COMMANDS} >/dev/null 2>&1
+    ssh ${SSH_HOST} -p 69 ${COMMANDS} 
 }
 
 # build
