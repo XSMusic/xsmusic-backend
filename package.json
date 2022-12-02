@@ -4,7 +4,7 @@
   "scripts": {
     "start": "NODE_ENV=production nodemon",
     "start:dev": "NODE_ENV=development nodemon",
-    "start:ssr": "node pwa/server/main.js",
+    "start:ssr": "node pwa/server",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "NODE_ENV=test jest --verbose  --silent",
     "test:watch": "NODE_ENV=test jest --coverage --watchAll --detectOpenHandles",

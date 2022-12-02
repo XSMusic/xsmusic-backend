@@ -48,8 +48,8 @@ startPM2() {
     ssh ${SSH_HOST} -p 69 ${COMMANDS} 
 }
 
-# build
-# copyPWAToLocal
-# deletePWAProd
-# copyPWALocalToServer
+build
+copyPWAToLocal
+deletePWAProd
+copyPWALocalToServer
 startPM2
