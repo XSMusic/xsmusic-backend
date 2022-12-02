@@ -4,7 +4,7 @@
       "name": "xsmusic-pwa",
       "script": "npm",
       "watch": false,
-      "args": "start:ssr",
+      "args": "run start:ssr",
       "instances": 1,
       "exec_mode": "fork",
       "ignore_watch": ["node_modules"],
