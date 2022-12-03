@@ -13,6 +13,7 @@ import {
   ScrapingMediaYoutubeI,
   ScrapingSite,
   ScrapingSiteService,
+  ScrapingVariousService,
 } from '@scraping';
 
 export class ScrapingService {
@@ -20,6 +21,7 @@ export class ScrapingService {
   private scrapingSite = new ScrapingSiteService();
   private scrapingEvent = new ScrapingEventService();
   private scrapingMedia = new ScrapingMediaService();
+  private scrapingVarious = new ScrapingVariousService();
 
   async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
     try {
@@ -27,6 +29,9 @@ export class ScrapingService {
       artist = await this.scrapingArtist.getInfoArtistDJRankings(artist);
       artist = await this.scrapingArtist.getInfoArtistWikipedia(artist);
       artist = await this.scrapingArtist.getInfoArtistClubbing(artist, body);
+      if (artist.social.soundcloud === '') {
+        //   await this.searchNameSoundcloud(searchNameSoundcloud);
+      }
       return artist;
     } catch (error) {
       return error;
@@ -36,6 +41,14 @@ export class ScrapingService {
   searchNameSoundcloud(name: string) {
     try {
       return this.scrapingArtist.searchNameSoundcloud(name);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  searchNameYoutube(name: string) {
+    try {
+      return this.scrapingVarious.searchNameYoutube(name);
     } catch (error) {
       return error;
     }

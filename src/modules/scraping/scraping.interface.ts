@@ -64,7 +64,8 @@ interface YoutubeApIItemSnippetThumbnailsDefaultI {
 
 interface YoutubeApiItemIdI {
   kind: string;
-  videoId: string;
+  videoId?: string;
+  channelId?: string;
 }
 
 interface YoutubeApiPageInfoI {
@@ -100,4 +101,10 @@ export interface ScrapingEventI {
   info?: string;
   images: string[];
   site: any;
+}
+
+export interface ScrapingSearchNameYoutubeI {
+  id: string;
+  name: string;
+  image: string;
 }

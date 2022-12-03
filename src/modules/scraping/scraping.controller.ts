@@ -28,6 +28,7 @@ export class ScrapingController implements ControllerI {
       `${this.path}/searchNameSoundcloud`,
       this.searchNameSoundcloud
     );
+    this.router.post(`${this.path}/searchNameYoutube`, this.searchNameYoutube);
     this.router.post(
       `${this.path}/getInfoClub`,
       validationMiddleware(ScrapingGetInfoClubDto),
@@ -68,6 +69,20 @@ export class ScrapingController implements ControllerI {
     try {
       const body: { name: string } = request.body;
       const items = await this.scrapingService.searchNameSoundcloud(body.name);
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private searchNameYoutube = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: { name: string } = request.body;
+      const items = await this.scrapingService.searchNameYoutube(body.name);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

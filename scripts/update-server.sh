@@ -6,11 +6,11 @@ clear
 echo "🔥  Actualizando backend de produccion"
 
 if [ "${NODE_ENV}" = "development" ]; then
-    COMMAND="cd /home/josexs/apps/xsmusic && npm run update"
+    COMMAND="cd /home/josexs/apps/xsmusic && npm run update:server"
     COMMANDS="bash -i -c '${COMMAND}'"
   
     echo "🔥  Actualizando desde local"
-    ssh ${SSH_HOST} ${COMMANDS} >/dev/null 2>&1
+    ssh ${SSH_HOST} ${COMMANDS}
 
     if [ $? -eq 0 ]; then
         echo "✅  Actualizacion de backend desde local finalizada"

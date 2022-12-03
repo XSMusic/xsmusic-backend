@@ -1373,5 +1373,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9ef4870e-917a-44e3-bd11-ccdc297ae953",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: searchNameSoundcloud Copy",
+    "url": "{{URL}}/scraping/searchNameYoutube",
+    "method": "POST",
+    "sortNum": 127500,
+    "created": "2022-12-03T17:32:54.436Z",
+    "modified": "2022-12-03T17:33:00.954Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"name\": \"Carl Cox\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

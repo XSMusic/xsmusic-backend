@@ -4,7 +4,7 @@ TYPE=${1} # proToLocal or localToPro
 
 proToLocal() {
     echo "🔨  Exportando imagenes al servidor local"
-    rsync -avzhe "ssh" ${SSH_HOST}:${PATH_APPS_PRO}/uploads/xsmusic/ $PATH_UPLOADS/ > /dev/null 2>&1
+    rsync -avzhe "ssh -p 69" ${SSH_HOST}:${PATH_APPS_PRO}/uploads/xsmusic/ $PATH_UPLOADS/ > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "✅  Sincronizacion de imagenes Servidor-Localhost completada"
     else

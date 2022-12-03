@@ -10,3 +10,4 @@ export * from './scraping.interface';
 export * from './scraping-soundcloud.interface';
 export * from './scraping-discarts.model';
 export * from './scraping-discarts.interface';
+export * from './scraping-various.service';
