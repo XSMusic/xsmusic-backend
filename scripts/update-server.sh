@@ -10,7 +10,8 @@ if [ "${NODE_ENV}" = "development" ]; then
     COMMANDS="bash -i -c '${COMMAND}'"
   
     echo "🔥  Actualizando desde local"
-    ssh ${SSH_HOST} ${COMMANDS}
+    # echo "ssh -D 69 ${SSH_HOST} ${COMMANDS}"
+    ssh -p 69 ${SSH_HOST} ${COMMANDS} >/dev/null 2>&1
 
     if [ $? -eq 0 ]; then
         echo "✅  Actualizacion de backend desde local finalizada"
