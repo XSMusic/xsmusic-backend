@@ -7,7 +7,7 @@ const rolsValid = {
 };
 
 const darkModeValid = {
-  values: ['on', 'off', 'system'],
+  values: ['active', 'desactive', 'system'],
   message: '{VALUE} no es un rol permitido',
 };
 

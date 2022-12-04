@@ -58,9 +58,6 @@ export class AuthService {
       try {
         const user = await User.findOne({ email: data.email }).exec();
         if (user) {
-          if (data.site === 'admin' && user.role !== 'ADMIN') {
-            reject(new NotAuthorizedException());
-          }
           const isPasswordMatching = await bcrypt.compare(
             data.password,
             user.get('password', null, { getters: false })
@@ -80,17 +77,21 @@ export class AuthService {
     });
   }
 
-  async loginGoogle(data: GoogleUserDto): Promise<UserWithTokenI> {
-    try {
-      const user = await User.findOne({ email: data.email }).exec();
-      if (user) {
-        return await this.onLoginGoogleExistUser(user, data);
-      } else {
-        return await this.onLoginGoogleNotExistUser(data);
+  loginGoogle(data: GoogleUserDto): Promise<UserWithTokenI> {
+    return new Promise(async (resolve, reject) => {
+      console.log(data);
+      try {
+        const user = await User.findOne({ email: data.email }).exec();
+        if (user) {
+          resolve(await this.onLoginGoogleExistUser(user, data));
+        } else {
+          resolve(await this.onLoginGoogleNotExistUser(data));
+        }
+      } catch (error) {
+        Logger.error(error);
+        reject(error);
       }
-    } catch (error) {
-      Logger.error(error);
-    }
+    });
   }
 
   private onLoginGoogleExistUser(
@@ -98,18 +99,23 @@ export class AuthService {
     data: GoogleUserDto
   ): Promise<UserWithTokenI> {
     return new Promise(async (resolve, reject) => {
-      if (user.googleId) {
-        if (data.email === user.email) {
+      console.log('onLoginGoogleExistUser');
+      try {
+        if (user.googleId) {
+          if (data.email === user.email) {
+            const token = this.createToken(user);
+            resolve({ user, token, new: false });
+          } else {
+            reject(new WrongCredentialsException());
+          }
+        } else {
+          user.googleId = data.uid;
+          await user.save();
           const token = this.createToken(user);
           resolve({ user, token, new: false });
-        } else {
-          reject(new WrongCredentialsException());
         }
-      } else {
-        user.googleId = data.uid;
-        await user.save();
-        const token = this.createToken(user);
-        resolve({ user, token, new: false });
+      } catch (error) {
+        reject(error);
       }
     });
   }
@@ -117,6 +123,7 @@ export class AuthService {
   private async onLoginGoogleNotExistUser(
     data: GoogleUserDto
   ): Promise<UserWithTokenI> {
+    console.log('onLoginGoogleNotExistUser');
     const userData: UserCreateDto = {
       name: data.name ?? data.displayName,
       email: data.email,

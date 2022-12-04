@@ -3,7 +3,6 @@ import { IsBoolean, IsOptional, IsString } from 'class-validator';
 export class AuthLogInDto {
   @IsString() email: string;
   @IsString() password: string;
-  @IsOptional() @IsString() site: string;
 }
 
 export class AuthRegisterDto {
