@@ -24,7 +24,7 @@ export const eventGetAllAggregate = (
     });
   }
 
-  data = addLookups(data, false);
+  data = addLookups(data, false, false);
   const filter = getFilter('event', body);
   if (filter) {
     data.push(filter);
@@ -57,11 +57,11 @@ export const eventGetOneAggregate = (
   let data = [];
   const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, true);
+  data = addLookups(data, true, true);
   return data;
 };
 
-const addLookups = (data: any[], complete: boolean) => {
+const addLookups = (data: any[], one: boolean, complete: boolean) => {
   data.push(
     {
       $lookup: {
@@ -134,6 +134,7 @@ const addLookups = (data: any[], complete: boolean) => {
               name: 1,
               address: 1,
               type: 1,
+              social: one ? 1 : -1,
               images: 1,
               slug: 1,
             },

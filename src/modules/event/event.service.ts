@@ -8,6 +8,7 @@ import {
   EventI,
 } from '@event';
 import { getValuesForPaginator, slugify } from '@utils';
+import moment from 'moment';
 
 export class EventService {
   private imageHelper = new ImageHelper();
@@ -61,7 +62,7 @@ export class EventService {
           if (body._id) {
             delete body._id;
           }
-          body.slug = slugify(`${body.name}-${body.site.name!}`);
+          body.slug = this.slugifyEvent(body);
           const item = new Event(body);
           const itemDB = await item.save();
           if (itemDB) {
@@ -82,7 +83,7 @@ export class EventService {
     return new Promise(async (resolve, reject) => {
       try {
         if (body.name) {
-          body.slug = slugify(body.name);
+          body.slug = this.slugifyEvent(body);
         }
         const response = await Event.findByIdAndUpdate(body._id, body, {
           new: true,
@@ -96,6 +97,14 @@ export class EventService {
         reject(error);
       }
     });
+  }
+
+  private slugifyEvent(event: EventI): string {
+    return slugify(
+      `${event.name}-${event.site.name!}-${moment(event.date).format(
+        'DD-MM-YY'
+      )}`
+    );
   }
 
   deleteOne(id: string): Promise<MessageI> {
