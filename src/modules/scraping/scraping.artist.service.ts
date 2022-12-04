@@ -91,7 +91,10 @@ export class ScrapingArtistService {
             artist.social.soundcloud = href;
           } else if (href.includes('spotify')) {
             artist.social.spotify = href;
-          } else if (href.includes('http://www.')) {
+          } else if (
+            href.includes('http://www.') ||
+            href.includes('https://www.')
+          ) {
             artist.social.web = href;
           }
         });

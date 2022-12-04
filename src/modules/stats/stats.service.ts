@@ -97,8 +97,7 @@ export class StatsService {
   ): Promise<StatsTopCountriesI[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let data: StatsTopCountriesI[] = [];
-        data = this.typeIsCountry(body, items, data);
+        const data: StatsTopCountriesI[] = this.typeIsCountry(body, items);
         resolve(data);
       } catch (e) {
         reject(e);
@@ -108,8 +107,7 @@ export class StatsService {
 
   private typeIsCountry(
     body: StatsGetTopStatsDto,
-    items: any[],
-    data: StatsTopCountriesI[]
+    items: any[]
   ): StatsTopCountriesI[] {
     const allCountries: StatsTopCountriesI[] = [];
     for (const country of countries) {
@@ -120,6 +118,7 @@ export class StatsService {
         percentage: 0,
       });
     }
+    let data: StatsTopCountriesI[] = allCountries;
     for (const item of items) {
       for (const country of allCountries) {
         if (body.type === 'artist' && country.id === item.country) {
@@ -134,7 +133,7 @@ export class StatsService {
         }
       }
     }
-    data = allCountries;
+
     data = data.sort(sortByValue);
     data = data.splice(0, body.limit);
     return data;

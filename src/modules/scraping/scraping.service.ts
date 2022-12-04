@@ -38,17 +38,17 @@ export class ScrapingService {
     }
   }
 
-  searchNameSoundcloud(name: string) {
+  async searchNameSoundcloud(name: string) {
     try {
-      return this.scrapingArtist.searchNameSoundcloud(name);
+      return await this.scrapingArtist.searchNameSoundcloud(name);
     } catch (error) {
       return error;
     }
   }
 
-  searchNameYoutube(name: string) {
+  async searchNameYoutube(name: string) {
     try {
-      return this.scrapingVarious.searchNameYoutube(name);
+      return await this.scrapingVarious.searchNameYoutube(name);
     } catch (error) {
       return error;
     }
