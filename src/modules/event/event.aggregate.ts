@@ -87,12 +87,12 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
               as: 'images',
               pipeline: [
                 { $sort: { position: 1 } },
-                { $project: { _id: 1, url: 1, position: 1 } },
+                { $project: { url: 1, type: 1 } },
               ],
             },
           },
           {
-            $project: { _id: 1, name: 1, images: { url: 1 }, slug: 1 },
+            $project: { _id: 1, name: 1, images: { url: 1, type: 1 }, slug: 1 },
           },
         ],
       },
@@ -105,7 +105,7 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
         as: 'images',
         pipeline: [
           { $sort: { position: 1 } },
-          { $project: { _id: 1, url: 1, position: 1 } },
+          { $project: { url: 1, type: 1 } },
         ],
       },
     },
@@ -123,7 +123,7 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
               foreignField: 'site',
               as: 'images',
               pipeline: [
-                { $project: { _id: 1, url: 1, position: 1 } },
+                { $project: { url: 1, type: 1 } },
                 { $sort: { position: 1 } },
               ],
             },

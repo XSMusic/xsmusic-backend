@@ -57,12 +57,11 @@ const addLookups = (data: any[], complete: boolean) => {
         foreignField: 'site',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
+          { $project: { _id: 1, url: 1, position: 1, type: 1 } },
           { $sort: { position: 1 } },
         ],
       },
     },
-
     {
       $lookup: {
         from: 'media',
@@ -105,7 +104,7 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
           coordinates: 1,
         },
         styles: { name: 1 },
-        images: { url: 1 },
+        images: { url: 1, type: 1 },
         sets: 1,
         events: 1,
         social: {
@@ -131,6 +130,7 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
         },
         images: {
           url: 1,
+          type: 1,
         },
         slug: 1,
       },
@@ -186,7 +186,7 @@ const getPipeline = (complete: boolean, type?: 'event') => {
           foreignField: 'media',
           as: 'images',
           pipeline: [
-            { $project: { _id: 1, url: 1, position: 1 } },
+            { $project: { _id: 1, url: 1, type: 1 } },
             { $sort: { position: 1 } },
           ],
         },

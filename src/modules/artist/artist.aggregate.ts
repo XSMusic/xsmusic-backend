@@ -66,7 +66,7 @@ const addLookups = (data: any[], complete: boolean) => {
         foreignField: 'artist',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
+          { $project: { _id: 1, url: 1, position: 1, type: 1 } },
           { $sort: { position: 1 } },
         ],
       },

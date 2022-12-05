@@ -1392,5 +1392,29 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "ef4a267c-145f-4fc9-83cf-3b7d8a67a59c",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "e93483c1-2fda-4eec-95fc-20b40d7ef08b",
+    "name": "Images: resizeAllImages",
+    "url": "{{URL}}/images/resizeAllImages",
+    "method": "POST",
+    "sortNum": 35000,
+    "created": "2022-12-05T18:42:26.152Z",
+    "modified": "2022-12-05T20:20:42.113Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"event\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

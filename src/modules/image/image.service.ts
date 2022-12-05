@@ -10,6 +10,8 @@ import {
   ImageSetFirstImageDto,
   imageGetAllAggregate,
   ImageUploadByUrlDto,
+  ImageHelper,
+  ImageResizeAllDto,
 } from '@image';
 import fs from 'fs';
 import {
@@ -21,6 +23,7 @@ import {
 import { config } from '@config';
 
 export class ImageService {
+  private imageHelper = new ImageHelper();
   async getAll(
     body?: ImageGetAllDto
   ): Promise<{ items: ImageI[]; paginator: PaginatorI } | ImageI[]> {
@@ -194,6 +197,29 @@ export class ImageService {
     } catch (error) {
       return error;
     }
+  }
+
+  resizeAllImages(body: ImageResizeAllDto) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const images: ImageMongoI[] = await Image.find({
+          type: body.type,
+        }).exec();
+        for (const image of images) {
+          await this.imageHelper.resizeImage(image._id);
+          const newUrl = image.url.split(`${image.type}s/`)[1];
+          if (newUrl.length > 0) {
+            image.url = newUrl;
+            await image.save();
+          }
+        }
+        resolve({
+          message: `Todas las imagenes del tipo ${body.type} han sido redimensionadas`,
+        });
+      } catch (error) {
+        reject({ message: error });
+      }
+    });
   }
 
   async deleteOne(id: string, force = false): Promise<MessageI> {

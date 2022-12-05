@@ -9,6 +9,7 @@ import {
 } from '@middlewares';
 import {
   ImageGetAllDto,
+  ImageResizeAllDto,
   ImageService,
   ImageSetFirstImageDto,
   ImageUpdateDto,
@@ -54,6 +55,12 @@ export class ImageController implements ControllerI {
       validationMiddleware(ImageSetFirstImageDto),
       checkUserToken,
       this.setFirstImage
+    );
+    this.router.post(
+      `${this.path}/resizeAllImages`,
+      validationMiddleware(ImageResizeAllDto),
+      checkAdminToken,
+      this.resizeAllImages
     );
     this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
     this.router.delete(`${this.path}/all`, checkAdminToken, this.deleteAll);
@@ -123,6 +130,20 @@ export class ImageController implements ControllerI {
     try {
       const body: ImageSetFirstImageDto = request.body;
       const item = await this.imageService.setFirstImage(body);
+      response.status(200).send(item);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private resizeAllImages = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: ImageResizeAllDto = request.body;
+      const item = await this.imageService.resizeAllImages(body);
       response.status(200).send(item);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

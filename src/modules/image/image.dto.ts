@@ -28,3 +28,7 @@ export class ImageSetFirstImageDto {
   @IsString() typeId: string;
   @IsString() imageId: string;
 }
+
+export class ImageResizeAllDto {
+  @IsString() type: 'artist' | 'event' | 'media' | 'site' | 'user';
+}
