@@ -57,7 +57,7 @@ const addLookups = (data: any[], complete: boolean) => {
         foreignField: 'site',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1, type: 1 } },
+          { $project: { _id: 1, url: 1, type: 1 } },
           { $sort: { position: 1 } },
         ],
       },
@@ -164,10 +164,18 @@ const getPipeline = (complete: boolean, type?: 'event') => {
           localField: '_id',
           foreignField: 'event',
           as: 'images',
-          pipeline: [{ $sort: { position: 1 } }, { $project: { url: 1 } }],
+          pipeline: [{ $sort: { position: 1 } }],
         },
       },
-      { $project: { _id: 1, date: 1, images: { url: 1 }, name: 1, slug: 1 } }
+      {
+        $project: {
+          _id: 1,
+          date: 1,
+          images: { url: 1, type: 1 },
+          name: 1,
+          slug: 1,
+        },
+      }
     );
   } else {
     pipelineComplete.push(

@@ -156,7 +156,7 @@ const getPipeline = (type: string, complete: boolean) => {
         foreignField: type === 'event' ? 'event' : 'media',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1 } },
+          { $project: { url: 1, type: 1 } },
           { $sort: { position: 1 } },
         ],
       },
