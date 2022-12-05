@@ -96,15 +96,17 @@ export class ImageService {
       try {
         const images = await this.imagesSameTypeId(data);
         data.position = images.length;
-        const url = await this.downloadAndUploadImageFromUrl(data);
+        const url = await this.imageHelper.downloadAndUploadImageFromUrl(data);
         if (url) {
           const imageCreated = await this.create(
             {
               type: `${data.type}`,
               id: data.id,
             },
-            `${data.type}s/${data.id}_${data.position}.png`
+            `${data.id}_${data.position}.png`
           );
+          await this.imageHelper.resizeImage(imageCreated._id);
+          fs.unlinkSync(url);
           resolve(imageCreated);
         } else {
           reject({ message: 'La imagen no ha sido añadida' });
@@ -253,21 +255,6 @@ export class ImageService {
         resolve({ message: `${items.length} imagenes eliminadas` });
       } else {
         resolve({ message: 'No hay imagenes' });
-      }
-    });
-  }
-
-  private downloadAndUploadImageFromUrl(
-    data: ImageUploadByUrlDto
-  ): Promise<string> {
-    return new Promise(async (resolve) => {
-      try {
-        const filePath = `${config.paths.uploads}/${data.type}s/${data.id}_${data.position}.png`;
-        const urlNew = await downloadImageFromUrl(data.url, filePath);
-        resolve(urlNew);
-      } catch (error) {
-        console.error(error);
-        resolve(null);
       }
     });
   }

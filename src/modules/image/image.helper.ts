@@ -1,6 +1,7 @@
 import { config } from '@config';
-import { Image, ImageI } from '@image';
+import { Image, ImageI, ImageUploadByUrlDto } from '@image';
 import { MessageI } from '@interfaces';
+import { downloadImageFromUrl } from '@utils';
 import fs from 'fs';
 import sharp from 'sharp';
 
@@ -25,6 +26,19 @@ export class ImageHelper {
     } catch (error) {
       return error;
     }
+  }
+
+  downloadAndUploadImageFromUrl(data: ImageUploadByUrlDto): Promise<string> {
+    return new Promise(async (resolve) => {
+      try {
+        const filePath = `${config.paths.uploads}/${data.type}s/${data.id}_${data.position}.png`;
+        const urlNew = await downloadImageFromUrl(data.url, filePath);
+        resolve(urlNew);
+      } catch (error) {
+        console.error(error);
+        resolve(null);
+      }
+    });
   }
 
   resizeImage(id: string): Promise<MessageI> {
@@ -69,7 +83,6 @@ export class ImageHelper {
   }
 
   private getPath(image: ImageI, type: 'small' | 'medium' | 'big') {
-    const filePath = image.url.split(`${image.type}s/`)[1];
-    return `${config.paths.uploads}/${image.type}s/${type}/${filePath}`;
+    return `${config.paths.uploads}/${image.type}s/${type}/${image.url}`;
   }
 }
