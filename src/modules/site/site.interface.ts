@@ -29,3 +29,11 @@ export interface SiteI extends SiteMongoI {
   created?: string;
   updated?: string;
 }
+
+export interface SiteForMapI {
+  slug: string;
+  name: string;
+  image: any;
+  address: any;
+  type: string;
+}

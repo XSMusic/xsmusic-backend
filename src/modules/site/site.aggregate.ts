@@ -1,6 +1,7 @@
-import { SiteGetAllDto } from 'src/modules/site';
+import { SiteGetAllDto } from '@site';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
+import { inspect } from 'src/shared/services/logger.service';
 
 export const siteGetAllAggregate = (
   body: SiteGetAllDto,
@@ -10,6 +11,22 @@ export const siteGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
+  if (body.map) {
+    data.push({
+      $geoNear: {
+        near: {
+          type: 'Point',
+          coordinates: body.coordinates
+            ? [body.coordinates[0], body.coordinates[1]]
+            : [40.416951668182364, -3.7031989163297667],
+        },
+        distanceField: 'distance',
+        maxDistance: body.maxDistance ? body.maxDistance : 1000 * 1000,
+        query: { type: 'club' },
+        spherical: true,
+      },
+    });
+  }
   data = addLookups(data, false);
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
@@ -18,10 +35,25 @@ export const siteGetAllAggregate = (
   if (filter) {
     data.push(filter);
   }
+
+  //       $nearSphere: {
+  //         $geometry: {
+  //           type: 'Point',
+  //           coordinates: body.coordinates
+  //             ? [body.coordinates[0], body.coordinates[1]]
+  //             : [0, 0],
+  //         },
+  //         $maxDistance: body.maxDistance ? body.maxDistance : 1000 * 1000,
+  //         $minDistance: 0,
+  //       },
+  //     });
+  //   }
+
   if (paginator) {
     data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   }
   data = addProject(body, data);
+  inspect(data);
   return data;
 };
 
@@ -126,12 +158,15 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
         address: {
           street: 1,
           town: 1,
+          state: 1,
+          country: 1,
           coordinates: 1,
         },
         images: {
           url: 1,
           type: 1,
         },
+        distance: 1,
         slug: 1,
       },
     });

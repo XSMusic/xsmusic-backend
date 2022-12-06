@@ -40,4 +40,5 @@ const schema = new mongoose.Schema(
   }
 );
 
+schema.index({ address: '2dsphere' });
 export const Site = mongoose.model<SiteMongoI>('Site', schema);
