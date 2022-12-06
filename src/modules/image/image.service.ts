@@ -106,7 +106,9 @@ export class ImageService {
             `${data.id}_${data.position}.png`
           );
           await this.imageHelper.resizeImage(imageCreated._id);
-          fs.unlinkSync(url);
+          fs.unlinkSync(
+            `${config.paths.uploads}/${imageCreated.type}s/${imageCreated.url}`
+          );
           resolve(imageCreated);
         } else {
           reject({ message: 'La imagen no ha sido añadida' });

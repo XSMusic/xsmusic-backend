@@ -5,8 +5,6 @@ import { downloadImageFromUrl } from '@utils';
 import fs from 'fs';
 import sharp from 'sharp';
 
-// TODO: Al subir imagen, hacer resize
-
 export class ImageHelper {
   async deleteByTypeId(data: {
     type: 'artist' | 'event' | 'media' | 'site' | 'user';
@@ -18,9 +16,10 @@ export class ImageHelper {
       }).exec();
 
       for (const image of images) {
-        fs.unlink(`${config.paths.uploads}/${image.url}`, async () => {
-          await Image.findByIdAndDelete(image._id).exec();
-        });
+        fs.unlinkSync(`${config.paths.uploads}/small/${image.url}`);
+        fs.unlinkSync(`${config.paths.uploads}/medium/${image.url}`);
+        fs.unlinkSync(`${config.paths.uploads}/big/${image.url}`);
+        await Image.findByIdAndDelete(image._id).exec();
       }
       return { message: `${images.length} Imagenes eliminadas` };
     } catch (error) {
@@ -54,7 +53,7 @@ export class ImageHelper {
           reject({ message: 'La imagen no existe' });
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         reject(error);
       }
     });
@@ -76,7 +75,7 @@ export class ImageHelper {
         width = 800;
       }
     }
-    await sharp(`${config.paths.uploads}/${image.url}`)
+    await sharp(`${config.paths.uploads}/${image.type}s/${image.url}`)
       .resize({ width: width, fit: sharp.fit.inside, withoutEnlargement: true })
       .jpeg({ quality: 70 })
       .toFile(this.getPath(image, folder));

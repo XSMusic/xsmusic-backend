@@ -14,7 +14,7 @@ export const downloadImageFromUrl = (
         responseType: 'stream',
         headers: {
           'User-Agent':
-            'XSB/0.0 (https://JoseXS.github.io/; prueba@prueba.es) generic-library/0.0',
+            'XSB/0.0 (https://JoseXS.github.io/; X@X.es) generic-library/0.0',
         },
       });
       resolve(response.data.pipe(fs.createWriteStream(filePath)));
