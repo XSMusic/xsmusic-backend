@@ -44,7 +44,6 @@ const allNoMapAggregate = (
 
 const allMapAggregate = (body: SiteGetAllDto) => {
   const data: any = [];
-  console.log(data);
   data.push(
     {
       $geoNear: {
@@ -56,7 +55,6 @@ const allMapAggregate = (body: SiteGetAllDto) => {
         },
         distanceField: 'distance',
         maxDistance: body.maxDistance ? body.maxDistance * 1000 : 1000 * 1000,
-        query: { type: 'club' },
         spherical: true,
       },
     },
