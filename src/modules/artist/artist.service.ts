@@ -12,27 +12,25 @@ import { getValuesForPaginator, slugify } from '@utils';
 export class ArtistService {
   private imageHelper = new ImageHelper();
 
-  getAll(
+  async getAll(
     body: ArtistGetAllDto
   ): Promise<{ items: ArtistI[]; paginator: PaginatorI }> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = artistGetAllAggregate(body, skip, pageSize);
-        const items = await Artist.aggregate(aggregate).exec();
-        const total = await Artist.find({}).countDocuments().exec();
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
-      } catch (error) {
-        reject(error);
-      }
-    });
+    try {
+      const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+      const aggregate = artistGetAllAggregate(body, skip, pageSize);
+      const items = await Artist.aggregate(aggregate).exec();
+      const total = await Artist.find({}).countDocuments().exec();
+      const totalPages = Math.ceil(total / pageSize);
+      const paginator: PaginatorI = {
+        pageSize,
+        currentPage,
+        totalPages,
+        total,
+      };
+      return { items, paginator };
+    } catch (error) {
+      return error;
+    }
   }
 
   getOne(type: 'id' | 'slug', value: string): Promise<ArtistI> {
