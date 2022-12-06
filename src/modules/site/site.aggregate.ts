@@ -1,7 +1,6 @@
 import { SiteGetAllDto } from '@site';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
-import { inspect } from 'src/shared/services/logger.service';
 
 export const siteGetAllAggregate = (
   body: SiteGetAllDto,
@@ -9,24 +8,25 @@ export const siteGetAllAggregate = (
   skip?: number,
   pageSize?: number
 ): any => {
-  const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   if (body.map) {
-    data.push({
-      $geoNear: {
-        near: {
-          type: 'Point',
-          coordinates: body.coordinates
-            ? [body.coordinates[0], body.coordinates[1]]
-            : [40.416951668182364, -3.7031989163297667],
-        },
-        distanceField: 'distance',
-        maxDistance: body.maxDistance ? body.maxDistance : 1000 * 1000,
-        query: { type: 'club' },
-        spherical: true,
-      },
-    });
+    data = allMapAggregate(body);
+  } else {
+    data = allNoMapAggregate(body, paginator, skip, pageSize);
   }
+
+  data = addProject(body, data);
+  return data;
+};
+
+const allNoMapAggregate = (
+  body: SiteGetAllDto,
+  paginator: boolean,
+  skip: number,
+  pageSize: number
+) => {
+  let data: any = [];
+  const sort = getOrderForGetAllAggregate(body);
   data = addLookups(data, false);
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
@@ -36,24 +36,67 @@ export const siteGetAllAggregate = (
     data.push(filter);
   }
 
-  //       $nearSphere: {
-  //         $geometry: {
-  //           type: 'Point',
-  //           coordinates: body.coordinates
-  //             ? [body.coordinates[0], body.coordinates[1]]
-  //             : [0, 0],
-  //         },
-  //         $maxDistance: body.maxDistance ? body.maxDistance : 1000 * 1000,
-  //         $minDistance: 0,
-  //       },
-  //     });
-  //   }
-
   if (paginator) {
     data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   }
-  data = addProject(body, data);
-  inspect(data);
+  return data;
+};
+
+const allMapAggregate = (body: SiteGetAllDto) => {
+  const data: any = [];
+  console.log(data);
+  data.push(
+    {
+      $geoNear: {
+        near: {
+          type: 'Point',
+          coordinates: body.coordinates
+            ? body.coordinates
+            : [40.416951668182364, -3.7031989163297667],
+        },
+        distanceField: 'distance',
+        maxDistance: body.maxDistance ? body.maxDistance * 1000 : 1000 * 1000,
+        query: { type: 'club' },
+        spherical: true,
+      },
+    },
+    {
+      $match: {
+        $and: [{ type: body.type }, { name: { $ne: 'Desconocido' } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'site',
+        as: 'images',
+        pipeline: [
+          { $project: { _id: 1, url: 1, type: 1 } },
+          { $sort: { position: 1 } },
+          { $limit: 1 },
+        ],
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        address: {
+          town: 1,
+          state: 1,
+          country: 1,
+          coordinates: 1,
+        },
+        images: {
+          url: 1,
+          type: 1,
+        },
+        distance: 1,
+        slug: 1,
+      },
+    }
+  );
   return data;
 };
 
@@ -123,54 +166,32 @@ const addLookups = (data: any[], complete: boolean) => {
 };
 
 const addProject = (body: SiteGetAllDto, data: any[]) => {
-  if (!body.map) {
-    data.push({
-      $project: {
-        _id: 1,
-        name: 1,
-        address: {
-          street: 1,
-          town: 1,
-          state: 1,
-          country: 1,
-          coordinates: 1,
-        },
-        styles: { name: 1 },
-        images: { url: 1, type: 1 },
-        sets: 1,
-        events: 1,
-        social: {
-          facebook: 1,
-          twitter: 1,
-          instagram: 1,
-          youtube: 1,
-        },
-        slug: 1,
-        updated: 1,
-        created: 1,
+  data.push({
+    $project: {
+      _id: 1,
+      name: 1,
+      address: {
+        street: 1,
+        town: 1,
+        state: 1,
+        country: 1,
+        coordinates: 1,
       },
-    });
-  } else {
-    data.push({
-      $project: {
-        _id: 1,
-        name: 1,
-        address: {
-          street: 1,
-          town: 1,
-          state: 1,
-          country: 1,
-          coordinates: 1,
-        },
-        images: {
-          url: 1,
-          type: 1,
-        },
-        distance: 1,
-        slug: 1,
+      styles: { name: 1 },
+      images: { url: 1, type: 1 },
+      sets: 1,
+      events: 1,
+      social: {
+        facebook: 1,
+        twitter: 1,
+        instagram: 1,
+        youtube: 1,
       },
-    });
-  }
+      slug: 1,
+      updated: 1,
+      created: 1,
+    },
+  });
   return data;
 };
 

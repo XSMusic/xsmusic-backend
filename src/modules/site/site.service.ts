@@ -21,7 +21,12 @@ export class SiteService {
         const aggregate = siteGetAllAggregate(body, true, skip, pageSize);
         const items = await Site.aggregate(aggregate).exec();
         const aggregateTotal = siteGetAllAggregate(body, false);
-        const total = (await Site.aggregate(aggregateTotal).exec()).length;
+        let total = 0;
+        if (!body.map) {
+          total = (await Site.aggregate(aggregateTotal).exec()).length;
+        } else {
+          total = items.length;
+        }
         const totalPages = Math.ceil(total / pageSize);
         const paginator: PaginatorI = {
           pageSize,
