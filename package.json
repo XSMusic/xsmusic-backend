@@ -17,7 +17,7 @@
     "db:proToUat": "sh scripts/database.sh proToUat",
     "images:localPro": "sh scripts/images.sh localToPro",
     "images:proLocal": "sh scripts/images.sh proToLocal",
-    "uatToProComplete": "npm run optimize-images && npm run db:uatToPro && npm run images:localPro",
+    "uatToProComplete": "npm run db:uatToPro && npm run images:localPro",
     "release": "standard-version"
   },
   "author": "",

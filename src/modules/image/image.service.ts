@@ -13,13 +13,7 @@ import {
   ImageHelper,
   ImageResizeAllDto,
 } from '@image';
-import fs from 'fs';
-import {
-  bytesToSize,
-  downloadImageFromUrl,
-  getValuesForPaginator,
-  randomNumber,
-} from '@utils';
+import { getValuesForPaginator, randomNumber } from '@utils';
 import { config } from '@config';
 
 export class ImageService {
@@ -41,21 +35,7 @@ export class ImageService {
           totalPages,
           total,
         };
-        const itemsWithSize: ImageI[] = [];
-        for (const item of items) {
-          const imagePath = `${config.paths.uploads}/${item.url}`;
-          let size = 0;
-          if (fs.existsSync(imagePath)) {
-            size = fs.statSync(imagePath).size;
-          }
-          const i: ImageI = {
-            ...item,
-            size: size ? bytesToSize(size, 2) : 'N/D',
-          };
-          itemsWithSize.push(i);
-        }
-
-        return { items: itemsWithSize, paginator };
+        return { items, paginator };
       } else {
         return await Image.find({}).exec();
       }
@@ -103,12 +83,9 @@ export class ImageService {
               type: `${data.type}`,
               id: data.id,
             },
-            `${data.id}_${data.position}.png`
+            `${data.id}_${data.position}.jpg`
           );
           await this.imageHelper.resizeImage(imageCreated._id);
-          fs.unlinkSync(
-            `${config.paths.uploads}/${imageCreated.type}s/${imageCreated.url}`
-          );
           resolve(imageCreated);
         } else {
           reject({ message: 'La imagen no ha sido añadida' });
@@ -227,24 +204,7 @@ export class ImageService {
   }
 
   async deleteOne(id: string, force = false): Promise<MessageI> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const item = await this.getOne(id);
-        const response = await Image.findByIdAndDelete(id).exec();
-        if (response) {
-          fs.unlinkSync(`${config.paths.uploads}/${item.url}`);
-          resolve({ message: 'Imagen eliminada' });
-        } else {
-          reject({ message: 'Imagen no existe en la BD' });
-        }
-      } catch (error) {
-        if (force) {
-          resolve({ message: 'Imagen no existe' });
-        } else {
-          reject({ message: 'Imagen no existe' });
-        }
-      }
-    });
+    return this.imageHelper.deleteOne(id, force);
   }
 
   async deleteAll(): Promise<MessageI> {
