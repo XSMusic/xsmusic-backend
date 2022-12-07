@@ -16,16 +16,15 @@ export interface StatsTotalAdminItemI {
 }
 
 export interface StatsArtistsI {
-  topSocial: StatsTopSocialI[];
-  topCountries: StatsTopCountriesI[];
+  topSocial: StatsTopGenericI[];
+  topCountries: StatsTopGenericI[];
+  topStyles?: StatsTopGenericI[];
+  various?: StatsTopGenericI[];
 }
 
-export interface StatsTopSocialI {
+export interface StatsTopGenericI {
+  id?: string;
   name: string;
   value: number;
   percentage: number;
-}
-
-export interface StatsTopCountriesI extends StatsTopSocialI {
-  id: string;
 }
