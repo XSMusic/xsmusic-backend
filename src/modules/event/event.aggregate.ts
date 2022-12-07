@@ -8,6 +8,19 @@ export const eventGetAllAggregate = (
   skip?: number,
   pageSize?: number
 ): any => {
+  let data: any = [];
+  //   if (!body.map) {
+  data = allNoMapAggregate(body, paginator, skip, pageSize);
+  //   }
+  return data;
+};
+
+const allNoMapAggregate = (
+  body: EventGetAllDto,
+  paginator: boolean,
+  skip: number,
+  pageSize: number
+) => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   if (body.old) {

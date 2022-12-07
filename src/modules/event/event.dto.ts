@@ -1,8 +1,17 @@
 import { GetAllDto } from '@dtos';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class EventGetAllDto extends GetAllDto {
   @IsOptional() old: boolean;
+  @IsOptional() @IsBoolean() map: boolean;
+  @IsOptional() @IsNumber() maxDistance?: number;
+  @IsOptional() @IsArray() coordinates?: number[];
 }
 
 export class EventCreateDto {
