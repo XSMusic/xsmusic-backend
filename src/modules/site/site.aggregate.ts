@@ -70,9 +70,9 @@ const allMapAggregate = (body: SiteGetAllDto) => {
         foreignField: 'site',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, type: 1 } },
           { $sort: { position: 1 } },
           { $limit: 1 },
+          { $project: { url: 1, type: 1 } },
         ],
       },
     },
@@ -130,8 +130,8 @@ const addLookups = (data: any[], complete: boolean) => {
         foreignField: 'site',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, type: 1 } },
           { $sort: { position: 1 } },
+          { $project: { url: 1, type: 1 } },
         ],
       },
     },
@@ -248,8 +248,8 @@ const getPipeline = (complete: boolean, type?: 'event') => {
           foreignField: 'media',
           as: 'images',
           pipeline: [
-            { $project: { _id: 1, url: 1, type: 1 } },
             { $sort: { position: 1 } },
+            { $project: { url: 1, type: 1 } },
           ],
         },
       },
