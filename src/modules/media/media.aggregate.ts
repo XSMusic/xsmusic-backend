@@ -88,8 +88,9 @@ const addLookups = (data: any[]) => {
         foreignField: 'media',
         as: 'images',
         pipeline: [
-          { $project: { _id: 1, url: 1, position: 1, type: 1 } },
           { $sort: { position: 1 } },
+          { $limit: 1 },
+          { $project: { url: 1, type: 1 } },
         ],
       },
     },
@@ -107,8 +108,9 @@ const addLookups = (data: any[]) => {
               foreignField: 'artist',
               as: 'images',
               pipeline: [
-                { $project: { url: 1, type: 1 } },
                 { $sort: { position: 1 } },
+                { $limit: 1 },
+                { $project: { url: 1, type: 1 } },
               ],
             },
           },
@@ -130,8 +132,9 @@ const addLookups = (data: any[]) => {
               foreignField: 'site',
               as: 'images',
               pipeline: [
-                { $project: { _id: 1, url: 1, position: 1, type: 1 } },
                 { $sort: { position: 1 } },
+                { $limit: 1 },
+                { $project: { url: 1, type: 1 } },
               ],
             },
           },

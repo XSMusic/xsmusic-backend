@@ -1150,12 +1150,12 @@
     "method": "POST",
     "sortNum": 11875,
     "created": "2022-11-18T23:58:48.921Z",
-    "modified": "2022-11-19T00:18:47.527Z",
+    "modified": "2022-12-06T22:23:57.511Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 2000,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"club\",\n  \"map\":true\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 1000,\n  \"order\": [\n    \"created\",\n    \"desc\"\n  ],\n  \"type\": \"club\",\n  \"map\": true,\n  \"maxDistance\": 1000,\n  \"coordinates\": [\n    40.305376,\n    -3.871144\n  ]\n}",
       "form": []
     },
     "tests": []
@@ -1413,6 +1413,25 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"type\": \"event\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "1f460b5f-2b63-4fa8-953a-f98aceb5257a",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
+    "name": "Site: getAll festivals for map",
+    "url": "{{URL}}/sites/getAll/club",
+    "method": "POST",
+    "sortNum": 12812.5,
+    "created": "2022-12-06T22:57:40.971Z",
+    "modified": "2022-12-06T22:58:25.994Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 1000,\n  \"order\": [\n    \"created\",\n    \"desc\"\n  ],\n  \"type\": \"festival\",\n  \"map\": true,\n  \"maxDistance\": 1000,\n  \"coordinates\": [\n    40.305376,\n    -3.871144\n  ]\n}",
       "form": []
     },
     "tests": []

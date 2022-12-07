@@ -18,6 +18,7 @@
     "images:localPro": "sh scripts/images.sh localToPro",
     "images:proLocal": "sh scripts/images.sh proToLocal",
     "uatToProComplete": "npm run db:uatToPro && npm run images:localPro",
+    "proToUatComplete": "npm run db:proToUat && npm run images:proLocal",
     "release": "standard-version"
   },
   "author": "",
