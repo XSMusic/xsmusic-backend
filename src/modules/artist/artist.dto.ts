@@ -12,6 +12,10 @@ export class ArtistCreateDto {
   @IsOptional() styles: string[];
 }
 
+export class ArtistGetAllForEventDto extends GetAllDto {
+  @IsString() id: string;
+}
+
 export class ArtistUpdateDto extends ArtistCreateDto {
   @IsString() _id: string;
 }

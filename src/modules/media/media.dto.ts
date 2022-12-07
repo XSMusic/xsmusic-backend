@@ -5,6 +5,12 @@ export class MediaGetAllDto extends GetAllDto {
   @IsString() type: string;
 }
 
+export class MediaGetAllForTypeDto extends MediaGetAllDto {
+  @IsString() id: string;
+  @IsString() type: string;
+  @IsString() typeMedia: string;
+}
+
 export class MediaCreateDto {
   @IsString() name: string;
   @IsString() type: string;

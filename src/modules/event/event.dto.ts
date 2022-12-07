@@ -8,10 +8,15 @@ import {
 } from 'class-validator';
 
 export class EventGetAllDto extends GetAllDto {
-  @IsOptional() old: boolean;
+  @IsOptional() @IsBoolean() old = false;
   @IsOptional() @IsBoolean() map: boolean;
   @IsOptional() @IsNumber() maxDistance?: number;
   @IsOptional() @IsArray() coordinates?: number[];
+}
+
+export class EventGetAllForTypeDto extends EventGetAllDto {
+  @IsString() id: string;
+  @IsString() type: string;
 }
 
 export class EventCreateDto {

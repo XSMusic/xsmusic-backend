@@ -1435,5 +1435,81 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "fa4b5ea4-c042-463f-afeb-a6ed9158f777",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "d75f4899-12b0-405c-96f2-2e2355fef439",
+    "name": "Event: getAllForType",
+    "url": "{{URL}}/events/getAllForType",
+    "method": "POST",
+    "sortNum": 13750,
+    "created": "2022-12-07T11:25:42.159Z",
+    "modified": "2022-12-07T11:28:14.454Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"id\": \"637a4ff360c6c2ee56f1b44d\",\n  \"type\": \"site\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e1d13c41-edd5-4f0b-96a1-e5c90282e2a5",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: getAllForType site sets",
+    "url": "{{URL}}/media/getAllForType",
+    "method": "POST",
+    "sortNum": 141250,
+    "created": "2022-12-07T14:25:37.329Z",
+    "modified": "2022-12-07T15:03:50.159Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"site\",\n  \"typeMedia\": \"set\",\n  \"id\": \"6367dcb2ba565b47c7305424\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d9a88ffb-6797-4e28-a64f-334a162ec822",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
+    "name": "Media: getAllForType artist tracks",
+    "url": "{{URL}}/media/getAllForType",
+    "method": "POST",
+    "sortNum": 141875,
+    "created": "2022-12-07T15:04:12.319Z",
+    "modified": "2022-12-07T15:05:03.218Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"artists\",\n  \"typeMedia\": \"track\",\n  \"id\": \"635ffb27c3deba83ead64486\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8f980f90-9acb-438f-8587-bef20315c4ea",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
+    "name": "Artist: getAllForEvent",
+    "url": "{{URL}}/artists/getAllForEvent",
+    "method": "POST",
+    "sortNum": 13750,
+    "created": "2022-12-07T16:58:57.168Z",
+    "modified": "2022-12-07T16:59:46.688Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"id\": \"638e7e1c6e79e202208bdb80\"\n  \n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

@@ -4,6 +4,8 @@ import {
   Event,
   eventGetAllAggregate,
   EventGetAllDto,
+  eventGetAllForType,
+  EventGetAllForTypeDto,
   eventGetOneAggregate,
   EventI,
 } from '@event';
@@ -28,6 +30,28 @@ export class EventService {
           currentPage,
           totalPages,
           total,
+        };
+        resolve({ items, paginator });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  getAllForType(
+    body: EventGetAllForTypeDto
+  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const aggregate = eventGetAllForType(body, true, skip, pageSize);
+        const items = await Event.aggregate(aggregate).exec();
+        const totalPages = Math.ceil(items.length / pageSize);
+        const paginator: PaginatorI = {
+          pageSize,
+          currentPage,
+          totalPages,
+          total: items.length,
         };
         resolve({ items, paginator });
       } catch (error) {

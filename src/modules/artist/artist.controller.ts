@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import {
   ArtistCreateDto,
   ArtistGetAllDto,
+  ArtistGetAllForEventDto,
   ArtistI,
   ArtistService,
   ArtistUpdateDto,
@@ -23,6 +24,11 @@ export class ArtistController implements ControllerI {
       `${this.path}/getAll`,
       validationMiddleware(ArtistGetAllDto),
       this.getAll
+    );
+    this.router.post(
+      `${this.path}/getAllForEvent`,
+      validationMiddleware(ArtistGetAllForEventDto),
+      this.getAllForEvent
     );
     this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
     this.router.post(
@@ -48,6 +54,20 @@ export class ArtistController implements ControllerI {
     try {
       const body: ArtistGetAllDto = request.body;
       const result = await this.artistService.getAll(body);
+      response.status(200).send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getAllForEvent = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: ArtistGetAllForEventDto = request.body;
+      const result = await this.artistService.getAllForEvent(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

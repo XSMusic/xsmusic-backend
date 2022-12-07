@@ -1,6 +1,7 @@
-import { ArtistGetAllDto } from '@artist';
+import { ArtistGetAllDto, ArtistGetAllForEventDto } from '@artist';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
+import { inspect } from 'src/shared/services/logger.service';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -37,6 +38,28 @@ export const artistGetAllAggregate = (
   return data;
 };
 
+export const artistGetAllForType = (
+  body: ArtistGetAllForEventDto,
+  skip: number,
+  pageSize: number
+) => {
+  const data = [];
+  data.push(
+    {
+      $lookup: {
+        from: 'events',
+        localField: '_id',
+        foreignField: 'artists',
+        as: 'events',
+      },
+    },
+    { $skip: skip },
+    { $limit: pageSize }
+  );
+  inspect(data);
+  return data;
+};
+
 export const artistGetOneAggregate = (
   type: 'id' | 'slug',
   value: string
@@ -44,7 +67,7 @@ export const artistGetOneAggregate = (
   let data = [];
   const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, true);
+  data = addLookups(data, false);
   return data;
 };
 

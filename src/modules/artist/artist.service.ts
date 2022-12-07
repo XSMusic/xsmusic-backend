@@ -4,6 +4,8 @@ import {
   ArtistGetAllDto,
   ArtistI,
   artistGetOneAggregate,
+  ArtistGetAllForEventDto,
+  artistGetAllForType,
 } from '@artist';
 import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
@@ -31,6 +33,28 @@ export class ArtistService {
     } catch (error) {
       return error;
     }
+  }
+
+  getAllForEvent(
+    body: ArtistGetAllForEventDto
+  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const aggregate = artistGetAllForType(body, skip, pageSize);
+        const items = await Artist.aggregate(aggregate).exec();
+        const totalPages = Math.ceil(items.length / pageSize);
+        const paginator: PaginatorI = {
+          pageSize,
+          currentPage,
+          totalPages,
+          total: items.length,
+        };
+        resolve({ items, paginator });
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   getOne(type: 'id' | 'slug', value: string): Promise<ArtistI> {

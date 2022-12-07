@@ -5,6 +5,7 @@ import {
   EventCreateDto,
   EventGetAllDto,
   EventUpdateDto,
+  EventGetAllForTypeDto,
 } from '@event';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
@@ -23,6 +24,11 @@ export class EventController implements ControllerI {
       `${this.path}/getAll`,
       validationMiddleware(EventGetAllDto),
       this.getAll
+    );
+    this.router.post(
+      `${this.path}/getAllForType`,
+      validationMiddleware(EventGetAllForTypeDto),
+      this.getAllForType
     );
     this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
     this.router.post(
@@ -48,6 +54,20 @@ export class EventController implements ControllerI {
     try {
       const body: EventGetAllDto = request.body;
       const result = await this.eventService.getAll(body);
+      response.status(200).send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getAllForType = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: EventGetAllForTypeDto = request.body;
+      const result = await this.eventService.getAllForType(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

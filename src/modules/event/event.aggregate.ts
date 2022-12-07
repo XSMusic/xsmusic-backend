@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { EventGetAllDto } from '@event';
+import { EventGetAllDto, EventGetAllForTypeDto } from '@event';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 
 export const eventGetAllAggregate = (
@@ -166,47 +166,54 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
   return data;
 };
 
-// const setFilter = (body: GetAllDto, data: any) => {
-//   if (body.filter && body.filter.length === 2) {
-//     let d = {};
-//     if (body.filter[0] === 'name') {
-//       d = {
-//         $match: {
-//           $or: [
-//             { name: { $regex: `${body.filter[1]}`, $options: 'i' } },
-//             { birthdate: { $regex: `${body.filter[1]}`, $options: 'i' } },
-//             { country: { $regex: `${body.filter[1]}`, $options: 'i' } },
-//             {
-//               'styles.name': { $regex: `${body.filter[1]}`, $options: 'i' },
-//             },
-//             {
-//               'site.address.country': { $regex: `${body.filter[1]}`, $options: 'i' },
-//             },
-//             {
-//               'site.address.town': { $regex: `${body.filter[1]}`, $options: 'i' },
-//             },
-//             {
-//               'site.address.state': { $regex: `${body.filter[1]}`, $options: 'i' },
-//             },
-//           ],
-//         },
-//       };
-//     } else {
-//       d = {
-//         $match: {
-//           [body.filter[0] === 'styles'
-//             ? 'styles.name'
-//             : body.filter[0] === 'country'
-//             ? 'site.address.country'
-//             : body.filter[0] === 'town'
-//             ? 'site.address.town'
-//             : body.filter[0] === 'state'
-//             ? 'site.address.state'
-//             : body.filter[0]]: body.filter[1],
-//         },
-//       };
-//     }
-//     data.push(d);
-//   }
-//   return data;
-// };
+export const eventGetAllForType = (
+  body: EventGetAllForTypeDto,
+  paginator = true,
+  skip?: number,
+  pageSize?: number
+): any => {
+  const data = [];
+  data.push(
+    {
+      $match: {
+        $and: [
+          { [body.type]: new mongoose.Types.ObjectId(body.id) },
+          {
+            date: body.old
+              ? { $lt: new Date().toISOString() }
+              : { $gte: new Date().toISOString() },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'event',
+        as: 'images',
+        pipeline: [
+          { $sort: { position: 1 } },
+          { $project: { _id: 0, url: 1, type: 1 } },
+        ],
+      },
+    },
+    {
+      $sort: { date: 1 },
+    }
+  );
+  if (paginator) {
+    data.push({ $skip: skip }, { $limit: pageSize });
+  }
+  data.push({
+    $project: {
+      _id: 0,
+      name: 1,
+      date: 1,
+      site: 1,
+      slug: 1,
+      images: 1,
+    },
+  });
+  return data;
+};

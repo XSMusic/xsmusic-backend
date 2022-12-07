@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import {
   MediaCreateDto,
   MediaGetAllDto,
+  MediaGetAllForTypeDto,
   MediaI,
   MediaService,
   MediaUpdateDto,
@@ -23,6 +24,11 @@ export class MediaController implements ControllerI {
       `${this.path}/getAll/:type`,
       validationMiddleware(MediaGetAllDto),
       this.getAll
+    );
+    this.router.post(
+      `${this.path}/getAllForType`,
+      validationMiddleware(MediaGetAllForTypeDto),
+      this.getAllForType
     );
     this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
     this.router.post(
@@ -48,6 +54,20 @@ export class MediaController implements ControllerI {
     try {
       const body: MediaGetAllDto = request.body;
       const result = await this.mediaService.getAll(body);
+      response.status(200).send(result);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getAllForType = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: MediaGetAllForTypeDto = request.body;
+      const result = await this.mediaService.getAllForType(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

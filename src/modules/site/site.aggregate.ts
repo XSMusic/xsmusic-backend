@@ -105,7 +105,7 @@ export const siteGetOneAggregate = (
   let data = [];
   const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
   data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, true);
+  data = addLookups(data, false);
   return data;
 };
 

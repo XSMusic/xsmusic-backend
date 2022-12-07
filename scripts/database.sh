@@ -4,7 +4,7 @@ source $(pwd)/scripts/setenv.sh
 
 TYPE=${1} # proToUat  / uatToPro
 
-COLLECTIONS=('artists' 'images' 'media' 'menus' 'sites' 'styles' 'users')
+COLLECTIONS=('artists' 'events' 'images' 'media' 'menus' 'scrapingdiscarts' 'sites' 'styles' 'users')
 
 proToUat() {
     mongoD ${MONGO_URI_PRO}

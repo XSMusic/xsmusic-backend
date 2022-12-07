@@ -1,6 +1,7 @@
-import { MediaGetAllDto } from '@media';
+import { MediaGetAllDto, MediaGetAllForTypeDto } from '@media';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
+import { inspect } from '../../shared/services/logger.service';
 
 export const mediaGetAllAggregate = (
   body: MediaGetAllDto,
@@ -16,6 +17,90 @@ export const mediaGetAllAggregate = (
   data = addFilters(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   data = addProject(data);
+  return data;
+};
+
+export const mediaGetAllForType = (
+  body: MediaGetAllForTypeDto,
+  skip?: number,
+  pageSize?: number
+): any => {
+  const data = [];
+  data.push(
+    {
+      $match: {
+        $and: [
+          { type: body.typeMedia },
+          { [body.type]: new mongoose.Types.ObjectId(body.id) },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'event',
+        as: 'images',
+        pipeline: [
+          { $sort: { position: 1 } },
+          { $project: { _id: 0, url: 1, type: 1 } },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'artists',
+        localField: 'artists',
+        foreignField: '_id',
+        as: 'artists',
+        pipeline: [{ $project: { _id: 0, name: 1, slug: 1 } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'images',
+        localField: '_id',
+        foreignField: 'media',
+        as: 'images',
+        pipeline: [
+          { $sort: { position: 1 } },
+          { $limit: 1 },
+          { $project: { _id: 0, url: 1, type: 1 } },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+        pipeline: [
+          {
+            $project: { _id: 0, name: 1, slug: 1 },
+          },
+        ],
+      },
+    },
+    {
+      $sort: { date: 1 },
+    },
+    { $skip: skip },
+    { $limit: pageSize },
+    {
+      $project: {
+        _id: 0,
+        name: 1,
+        artists: 1,
+        type: 1,
+        year: 1,
+        slug: 1,
+        images: 1,
+        site: 1,
+      },
+    }
+  );
+  inspect(data);
   return data;
 };
 

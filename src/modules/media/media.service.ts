@@ -5,6 +5,8 @@ import {
   Media,
   mediaGetAllAggregate,
   MediaGetAllDto,
+  mediaGetAllForType,
+  MediaGetAllForTypeDto,
   mediaGetOneAggregate,
   MediaI,
 } from '@media';
@@ -31,6 +33,28 @@ export class MediaService {
           currentPage,
           totalPages,
           total,
+        };
+        resolve({ items, paginator });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  getAllForType(
+    body: MediaGetAllForTypeDto
+  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const aggregate = mediaGetAllForType(body, skip, pageSize);
+        const items = await Media.aggregate(aggregate).exec();
+        const totalPages = Math.ceil(items.length / pageSize);
+        const paginator: PaginatorI = {
+          pageSize,
+          currentPage,
+          totalPages,
+          total: items.length,
         };
         resolve({ items, paginator });
       } catch (error) {
