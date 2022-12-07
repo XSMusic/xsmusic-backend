@@ -199,6 +199,48 @@ export const eventGetAllForType = (
       },
     },
     {
+      $lookup: {
+        from: 'artists',
+        localField: 'artists',
+        foreignField: '_id',
+        as: 'artists',
+        pipeline: [{ $project: { _id: 0, name: 1 } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'sites',
+        localField: 'site',
+        foreignField: '_id',
+        as: 'site',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'site',
+              as: 'images',
+              pipeline: [
+                { $project: { url: 1, type: 1 } },
+                { $sort: { position: 1 } },
+              ],
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              address: 1,
+              type: 1,
+              images: 1,
+              slug: 1,
+            },
+          },
+        ],
+      },
+    },
+    { $unwind: '$site' },
+    {
       $sort: { date: 1 },
     }
   );
@@ -207,12 +249,15 @@ export const eventGetAllForType = (
   }
   data.push({
     $project: {
-      _id: 0,
+      _id: 1,
       name: 1,
       date: 1,
       site: 1,
       slug: 1,
+      artists: 1,
       images: 1,
+      created: 1,
+      updated: 1,
     },
   });
   return data;

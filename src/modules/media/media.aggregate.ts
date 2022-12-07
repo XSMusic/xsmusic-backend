@@ -1,7 +1,6 @@
 import { MediaGetAllDto, MediaGetAllForTypeDto } from '@media';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
-import { inspect } from '../../shared/services/logger.service';
 
 export const mediaGetAllAggregate = (
   body: MediaGetAllDto,
@@ -89,7 +88,7 @@ export const mediaGetAllForType = (
     { $limit: pageSize },
     {
       $project: {
-        _id: 0,
+        _id: 1,
         name: 1,
         artists: 1,
         type: 1,
@@ -100,7 +99,6 @@ export const mediaGetAllForType = (
       },
     }
   );
-  inspect(data);
   return data;
 };
 

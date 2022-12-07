@@ -1,7 +1,6 @@
 import { ArtistGetAllDto, ArtistGetAllForEventDto } from '@artist';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
-import { inspect } from 'src/shared/services/logger.service';
 
 export const artistGetAllAggregate = (
   body: ArtistGetAllDto,
@@ -56,7 +55,6 @@ export const artistGetAllForType = (
     { $skip: skip },
     { $limit: pageSize }
   );
-  inspect(data);
   return data;
 };
 
@@ -90,7 +88,6 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'images',
         pipeline: [
           { $sort: { position: 1 } },
-          { $limit: 1 },
           { $project: { url: 1, type: 1 } },
         ],
       },
