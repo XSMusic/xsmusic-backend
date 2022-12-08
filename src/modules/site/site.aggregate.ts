@@ -177,9 +177,11 @@ const addProject = (body: SiteGetAllDto, data: any[]) => {
       },
       styles: { name: 1 },
       images: { url: 1, type: 1 },
+      type: 1,
       sets: 1,
       events: 1,
       social: {
+        web: 1,
         facebook: 1,
         twitter: 1,
         instagram: 1,
