@@ -208,7 +208,6 @@ export class ScrapingArtistService {
         );
         const items: any[] = [];
         for (const item of response.data.collection) {
-          item.full_name;
           if (item.full_name) {
             items.push({
               name: item.full_name,

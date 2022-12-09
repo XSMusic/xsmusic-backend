@@ -304,7 +304,6 @@ export class StatsService {
               style.value++;
               style.percentage = this.getPercentage(items.length, style.value);
             }
-            item;
           });
         }
       }
