@@ -21,7 +21,6 @@ const schema = new mongoose.Schema(
     googleId: { type: String, required: false },
     appleId: { type: String, required: false },
     fcm: { type: String, required: false },
-    image: { type: String, default: '' },
     darkMode: { type: String, default: 'system', enum: darkModeValid },
   },
   {

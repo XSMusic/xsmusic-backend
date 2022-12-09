@@ -23,6 +23,7 @@ export interface GoogleUserI {
   serverAuthCode: string;
   authentication: GoogleAuthenticationI;
 }
+
 export interface GoogleAuthenticationI {
   accessToken: string;
   idToken: string;

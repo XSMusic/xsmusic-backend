@@ -13,6 +13,7 @@ import {
   AuthRegisterDto,
   GoogleUserDto,
   AuthHelper,
+  authLoginAggregate,
 } from '@auth';
 import { config } from '@core/config/app.config';
 import { Logger } from '@services';
@@ -56,11 +57,14 @@ export class AuthService {
   login(data: AuthLogInDto): Promise<UserWithTokenI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await User.findOne({ email: data.email }).exec();
-        if (user) {
+        const aggregate: any = authLoginAggregate('email', data.email);
+        const users: UserMongoI[] = await User.aggregate(aggregate).exec();
+        let user: UserMongoI;
+        if (users.length > 0) {
+          user = users[0];
           const isPasswordMatching = await bcrypt.compare(
             data.password,
-            user.get('password', null, { getters: false })
+            user.password
           );
           if (isPasswordMatching) {
             const token = this.createToken(user);
@@ -79,10 +83,12 @@ export class AuthService {
 
   loginGoogle(data: GoogleUserDto): Promise<UserWithTokenI> {
     return new Promise(async (resolve, reject) => {
-      console.log(data);
       try {
-        const user = await User.findOne({ email: data.email }).exec();
-        if (user) {
+        const aggregate: any = authLoginAggregate('email', data.email);
+        const users: UserMongoI[] = await User.aggregate(aggregate).exec();
+        let user: UserMongoI;
+        if (users.length > 0) {
+          user = users[0];
           resolve(await this.onLoginGoogleExistUser(user, data));
         } else {
           resolve(await this.onLoginGoogleNotExistUser(data));
@@ -99,7 +105,6 @@ export class AuthService {
     data: GoogleUserDto
   ): Promise<UserWithTokenI> {
     return new Promise(async (resolve, reject) => {
-      console.log('onLoginGoogleExistUser');
       try {
         if (user.googleId) {
           if (data.email === user.email) {
@@ -153,8 +158,11 @@ export class AuthService {
   me(userToken: UserTokenI): Promise<UserI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await User.findById(userToken._id).exec();
-        if (user) {
+        const aggregate: any = authLoginAggregate('id', userToken._id);
+        const users: UserMongoI[] = await User.aggregate(aggregate).exec();
+        let user: UserMongoI;
+        if (users.length > 0) {
+          user = users[0];
           resolve(user);
         } else {
           reject(new NotAuthorizedException());
