@@ -29,9 +29,6 @@ export class ScrapingService {
       artist = await this.scrapingArtist.getInfoArtistDJRankings(artist);
       artist = await this.scrapingArtist.getInfoArtistWikipedia(artist);
       artist = await this.scrapingArtist.getInfoArtistClubbing(artist, body);
-      if (artist.social.soundcloud === '') {
-        //   await this.searchNameSoundcloud(searchNameSoundcloud);
-      }
       return artist;
     } catch (error) {
       return error;

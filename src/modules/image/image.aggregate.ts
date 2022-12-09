@@ -9,10 +9,7 @@ export const imageGetAllAggregate = (
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
   data = addLookups(data);
-  //   data = setFilter(body, data);
-
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-  //   data = addProject(data);
   return data;
 };
 

@@ -9,9 +9,7 @@ export const eventGetAllAggregate = (
   pageSize?: number
 ): any => {
   let data: any = [];
-  //   if (!body.map) {
   data = allNoMapAggregate(body, paginator, skip, pageSize);
-  //   }
   return data;
 };
 

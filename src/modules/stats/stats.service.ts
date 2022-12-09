@@ -6,11 +6,12 @@ import {
   StatsTotalsAdminI,
   statsTopArtistAggregate,
   statsTopSitesAggregate,
+  StatsGetTopStatsDto,
+  StatsTotalAdminItemI,
 } from '@stats';
 import { Artist, ArtistMongoI } from '@artist';
 import { Style, StyleMongoI } from '@style';
 import { Media, MediaMongoI } from '@media';
-import { StatsGetTopStatsDto, StatsTotalAdminItemI } from '@stats';
 import { countries, sortByValue } from '@utils';
 import { User, UserMongoI } from '@user';
 import { Site, SiteMongoI } from '@site';
@@ -126,10 +127,8 @@ export class StatsService {
     let data: StatsTopGenericI[] = allCountries;
     for (const item of items) {
       for (const country of allCountries) {
-        if (body.type === 'artist' && country.id === item.country) {
-          country.value++;
-          country.percentage = this.getPercentage(items.length, country.value);
-        } else if (
+        if (
+          (body.type === 'artist' && country.id === item.country) ||
           (body.type === 'club' && country.id === item.address.country) ||
           (body.type === 'festival' && country.id === item.address.country)
         ) {
