@@ -11,7 +11,6 @@ export class ImageHelper {
       try {
         const filePath = `${config.paths.uploads}/${data.type}s/${data.id}_${data.position}.jpg`;
         const urlNew = await downloadImageFromUrl(data.url, filePath);
-        console.log(urlNew);
         resolve(urlNew);
       } catch (error) {
         console.error(error);

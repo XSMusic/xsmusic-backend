@@ -128,7 +128,6 @@ export class AuthService {
   private async onLoginGoogleNotExistUser(
     data: GoogleUserDto
   ): Promise<UserWithTokenI> {
-    console.log('onLoginGoogleNotExistUser');
     const userData: UserCreateDto = {
       name: data.name ?? data.displayName,
       email: data.email,

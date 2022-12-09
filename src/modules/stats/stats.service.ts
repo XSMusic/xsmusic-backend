@@ -165,7 +165,6 @@ export class StatsService {
 
       for (const artist of items) {
         for (let social of topSocial) {
-          console.log(artist.social);
           if (
             social.name === 'facebook' &&
             artist.social &&
@@ -250,7 +249,6 @@ export class StatsService {
       topSocial.sort(sortByValue);
       return topSocial;
     } catch (error) {
-      console.log(error);
       return error;
     }
   }
