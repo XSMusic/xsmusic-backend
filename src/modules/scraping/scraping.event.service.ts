@@ -6,6 +6,7 @@ import {
   ScrapingGetListEventsDto,
 } from '@scraping';
 import { SiteI, SiteService } from '@site';
+import { capitalize } from '@utils';
 import axios from 'axios';
 import moment from 'moment';
 import { Event } from '../event/event.model';
@@ -49,14 +50,15 @@ export class ScrapingEventService {
             const site = this.getClub(item.venue.name, sites);
 
             const i: ScrapingEventI = {
-              name: item.title,
+              name: capitalize(item.title, true),
               date,
               info: item.content,
               images: item.images.map((item) => item.filename),
               site,
             };
-
-            await this.setCompletedAndNot(i, items);
+            if (i.images.length > 0) {
+              await this.setCompletedAndNot(i, items);
+            }
           }
         }
         resolve(items);

@@ -55,3 +55,8 @@ export const randomNumber = (
     return dataOk.toFixed(0) + '.' + dataSubOk;
   }
 };
+
+export const capitalize = (str: string, lower = false) =>
+  (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
+    match.toUpperCase()
+  );
