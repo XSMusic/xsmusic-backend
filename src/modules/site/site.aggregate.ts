@@ -53,7 +53,7 @@ const allMapAggregate = (body: SiteGetAllDto) => {
             ? body.coordinates
             : [40.416951668182364, -3.7031989163297667],
         },
-        key: 'address.coordinates',
+        key: 'address',
         distanceField: 'distance',
         maxDistance: body.maxDistance ? body.maxDistance * 1000 : 1000 * 1000,
         spherical: true,
