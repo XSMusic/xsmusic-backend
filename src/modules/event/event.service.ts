@@ -11,6 +11,7 @@ import {
 } from '@event';
 import { getValuesForPaginator, slugify } from '@utils';
 import moment from 'moment';
+import { Site } from '@site';
 
 export class EventService {
   private imageHelper = new ImageHelper();
@@ -81,12 +82,13 @@ export class EventService {
       try {
         const isExist: EventI[] = await Event.find({
           name: body.name,
+          date: body.date,
         }).exec();
         if (isExist.length === 0) {
           if (body._id) {
             delete body._id;
           }
-          body.slug = this.slugifyEvent(body);
+          body.slug = await this.slugifyEvent(body);
           const item = new Event(body);
           const itemDB = await item.save();
           if (itemDB) {
@@ -107,7 +109,7 @@ export class EventService {
     return new Promise(async (resolve, reject) => {
       try {
         if (body.name) {
-          body.slug = this.slugifyEvent(body);
+          body.slug = await this.slugifyEvent(body);
         }
         const response = await Event.findByIdAndUpdate(body._id, body, {
           new: true,
@@ -123,12 +125,25 @@ export class EventService {
     });
   }
 
-  private slugifyEvent(event: EventI): string {
-    return slugify(
-      `${event.name}-${event.site.name!}-${moment(event.date).format(
-        'DD-MM-YY'
-      )}`
-    );
+  private async slugifyEvent(event: EventI): Promise<string> {
+    try {
+      console.log(event.site);
+      if (typeof event.site === 'string') {
+        const site = await Site.findById(event.site.toString());
+        event.site.toString();
+        console.log({ site });
+        if (site) {
+          event.site = site;
+        }
+      }
+      return slugify(
+        `${event.name}-${
+          event.site && event.site.name! ? event.site.name : ''
+        }-${moment(event.date).format('DD-MM-YY')}`
+      );
+    } catch (error) {
+      return error;
+    }
   }
 
   deleteOne(id: string): Promise<MessageI> {
