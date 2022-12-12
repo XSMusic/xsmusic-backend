@@ -1,4 +1,5 @@
 source $(pwd)/scripts/setenv.sh
+exec 2>$(pwd)/scripts/error.log
 
 path="${PATH_PROJECT}/app"
 
