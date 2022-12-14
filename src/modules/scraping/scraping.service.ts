@@ -9,11 +9,13 @@ import {
   ScrapingGetInfoClubDto,
   ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
+  ScrapingInstagramService,
   ScrapingMediaService,
   ScrapingMediaYoutubeI,
   ScrapingSite,
   ScrapingSiteService,
-  ScrapingVariousService,
+  ScrapingSoundcloudService,
+  ScrapingYoutubeService,
 } from '@scraping';
 
 export class ScrapingService {
@@ -21,7 +23,9 @@ export class ScrapingService {
   private scrapingSite = new ScrapingSiteService();
   private scrapingEvent = new ScrapingEventService();
   private scrapingMedia = new ScrapingMediaService();
-  private scrapingVarious = new ScrapingVariousService();
+  private scrapingSoundcloud = new ScrapingSoundcloudService();
+  private scrapingInstagram = new ScrapingInstagramService();
+  private scrapingYoutube = new ScrapingYoutubeService();
 
   async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
     try {
@@ -37,7 +41,15 @@ export class ScrapingService {
 
   async searchNameSoundcloud(name: string) {
     try {
-      return await this.scrapingArtist.searchNameSoundcloud(name);
+      return await this.scrapingSoundcloud.searchName(name);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async searchNameInstagram(name: string) {
+    try {
+      return await this.scrapingInstagram.searchName(name);
     } catch (error) {
       return error;
     }
@@ -45,7 +57,7 @@ export class ScrapingService {
 
   async searchNameYoutube(name: string) {
     try {
-      return await this.scrapingVarious.searchNameYoutube(name);
+      return await this.scrapingYoutube.searchName(name);
     } catch (error) {
       return error;
     }

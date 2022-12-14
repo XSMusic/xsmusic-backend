@@ -1,17 +1,14 @@
-import { config } from '@core/config';
-import { ScrapingSoundcloudI } from '@scraping';
 import { Style } from '@style';
 import { slugify, get_month, countries } from '@utils';
-import axios from 'axios';
 import { load, CheerioAPI } from 'cheerio';
 import { ScrapingGetInfoArtistDto } from './scraping.dto';
 import { ScrapingArtist } from './scraping.model';
+import axios from 'axios';
 
 export class ScrapingArtistService {
   private urlWikipedia = 'https://es.wikipedia.org/wiki';
   private urlClubbingspain = 'https://www.clubbingspain.com/artistas';
   private urlDjrankings = 'https://djrankings.org/DJ-';
-  private urlSoundcloudSearch = `https://api-v2.soundcloud.com/search?q=:searchText&client_id=${config.tokens.soundcloud}&limit=20&offset=0'`;
 
   async getInfoArtistDJRankings(
     artist: ScrapingArtist
@@ -36,8 +33,8 @@ export class ScrapingArtistService {
   private setImageForDJRankings($: CheerioAPI) {
     let image = '';
     $('img').each(function (): any {
-      if ($(this).attr('src').includes('/tpls/img/flags/24/')) {
-        const countryImg = $(this).attr('src').split('/tpls/img/flags/24/')[1];
+      if ($(this).attr('src')!.includes('/tpls/img/flags/24/')) {
+        const countryImg = $(this).attr('src')!.split('/tpls/img/flags/24/')[1];
         image = countryImg.split('.png')[0];
       }
     });
@@ -199,28 +196,4 @@ export class ScrapingArtistService {
     }
     return items;
   };
-
-  searchNameSoundcloud(name: string) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await axios.get<ScrapingSoundcloudI>(
-          this.urlSoundcloudSearch.replace(':searchText', name)
-        );
-        const items: any[] = [];
-        for (const item of response.data.collection) {
-          if (item.full_name) {
-            items.push({
-              name: item.full_name,
-              image: item.avatar_url,
-              country: item.country_code,
-              url: item.permalink_url,
-            });
-          }
-        }
-        resolve(items);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
 }

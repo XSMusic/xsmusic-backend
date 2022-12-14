@@ -8,7 +8,7 @@ import {
   ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
 } from './scraping.dto';
-import { validationMiddleware } from '@middlewares';
+import { checkAdminToken, validationMiddleware } from '@middlewares';
 
 export class ScrapingController implements ControllerI {
   path = '/scraping';
@@ -25,10 +25,20 @@ export class ScrapingController implements ControllerI {
       this.getInfoArtist
     );
     this.router.post(
+      `${this.path}/searchNameInstagram`,
+      checkAdminToken,
+      this.searchNameInstagram
+    );
+    this.router.post(
       `${this.path}/searchNameSoundcloud`,
+      checkAdminToken,
       this.searchNameSoundcloud
     );
-    this.router.post(`${this.path}/searchNameYoutube`, this.searchNameYoutube);
+    this.router.post(
+      `${this.path}/searchNameYoutube`,
+      checkAdminToken,
+      this.searchNameYoutube
+    );
     this.router.post(
       `${this.path}/getInfoClub`,
       validationMiddleware(ScrapingGetInfoClubDto),
@@ -55,6 +65,20 @@ export class ScrapingController implements ControllerI {
     try {
       const body: ScrapingGetInfoArtistDto = request.body;
       const items = await this.scrapingService.getInfoArtist(body);
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private searchNameInstagram = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: { name: string } = request.body;
+      const items = await this.scrapingService.searchNameInstagram(body.name);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

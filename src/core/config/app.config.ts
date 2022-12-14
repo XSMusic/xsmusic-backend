@@ -21,6 +21,8 @@ const {
   MAPS_TOKEN,
   EMAIL_LOGIN,
   EMAIL_PASSWORD,
+  IG_USER,
+  IG_PASS,
 } = process.env;
 
 const getMongoUri = (): string => {
@@ -58,6 +60,7 @@ export const config: ConfigI = {
     map: MAPS_TOKEN,
     soundcloud: SOUNDCLOUD_TOKEN,
     youtube: YOUTUBE_TOKEN,
+    instagram: { user: IG_USER, password: IG_PASS },
   },
   paths: {
     project: PATH_PROJECT,

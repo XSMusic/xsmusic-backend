@@ -1364,8 +1364,13 @@
     "method": "POST",
     "sortNum": 125000,
     "created": "2022-11-27T17:27:19.019Z",
-    "modified": "2022-11-27T17:28:23.936Z",
-    "headers": [],
+    "modified": "2022-12-14T15:30:32.056Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
@@ -1378,13 +1383,18 @@
     "_id": "9ef4870e-917a-44e3-bd11-ccdc297ae953",
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
-    "name": "Scraping: searchNameSoundcloud Copy",
+    "name": "Scraping: searchNameYoutube",
     "url": "{{URL}}/scraping/searchNameYoutube",
     "method": "POST",
     "sortNum": 127500,
     "created": "2022-12-03T17:32:54.436Z",
-    "modified": "2022-12-03T17:33:00.954Z",
-    "headers": [],
+    "modified": "2022-12-14T15:30:22.608Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
@@ -1508,6 +1518,35 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"id\": \"638e7e1c6e79e202208bdb80\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b8999589-017c-4a1a-af32-367f5e524fb0",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
+    "name": "Scraping: searchNameInstagram",
+    "url": "{{URL}}/scraping/searchNameInstagram",
+    "method": "POST",
+    "sortNum": 128750,
+    "created": "2022-12-14T15:29:57.211Z",
+    "modified": "2022-12-14T15:43:37.453Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n \"name\": \"Carl Cox\"\n}",
       "form": []
     },
     "tests": []
