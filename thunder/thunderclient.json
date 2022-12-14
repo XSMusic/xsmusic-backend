@@ -1521,34 +1521,5 @@
       "form": []
     },
     "tests": []
-  },
-  {
-    "_id": "b8999589-017c-4a1a-af32-367f5e524fb0",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
-    "name": "Scraping: searchNameInstagram",
-    "url": "{{URL}}/scraping/searchNameInstagram",
-    "method": "POST",
-    "sortNum": 128750,
-    "created": "2022-12-14T15:29:57.211Z",
-    "modified": "2022-12-14T15:43:37.453Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      },
-      {
-        "name": "User-Agent",
-        "value": "Thunder Client (https://www.thunderclient.com)",
-        "isDisabled": true
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n \"name\": \"Carl Cox\"\n}",
-      "form": []
-    },
-    "tests": []
   }
 ]

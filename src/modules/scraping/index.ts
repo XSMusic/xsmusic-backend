@@ -10,6 +10,5 @@ export * from './scraping.interface';
 export * from './scraping-soundcloud.interface';
 export * from './scraping-discarts.model';
 export * from './scraping-discarts.interface';
-export * from './social/scraping-instagram.service';
 export * from './social/scraping-soundcloud.service';
 export * from './social/scraping-youtube.service';
