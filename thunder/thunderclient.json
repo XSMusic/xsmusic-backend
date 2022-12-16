@@ -1521,5 +1521,225 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "a634fa88-7793-4916-a8d3-7a26a1e2f628",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: getAll - form",
+    "url": "{{URL}}/dynamicForm/getAll",
+    "method": "POST",
+    "sortNum": 240000,
+    "created": "2022-12-16T19:22:45.353Z",
+    "modified": "2022-12-16T19:52:15.762Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"form\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "4f3b6c48-2206-40bb-9e7c-aeac4945ba71",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: getAll - item",
+    "url": "{{URL}}/dynamicForm/getAll",
+    "method": "POST",
+    "sortNum": 250000,
+    "created": "2022-12-16T19:52:35.637Z",
+    "modified": "2022-12-16T19:52:41.909Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"item\"\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "259c0e20-51b8-4bb1-8543-1ec0e9547765",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: createForm",
+    "url": "{{URL}}/dynamicForm/createForm",
+    "method": "POST",
+    "sortNum": 260000,
+    "created": "2022-12-16T19:55:59.168Z",
+    "modified": "2022-12-16T20:31:00.319Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"artistAdmin\",\n  \"info\": \"Formulario para login\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "9026b0c9-190f-4e3b-8907-27de14a9aa3e",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: createFormItem",
+    "url": "{{URL}}/dynamicForm/createFormItem",
+    "method": "POST",
+    "sortNum": 270000,
+    "created": "2022-12-16T20:31:35.160Z",
+    "modified": "2022-12-16T20:49:18.576Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"password\",\n  \"label\": \"Contraseña\",\n  \"value\": \"\",\n  \"type\": \"password\",\n  \"form\": \"639cd507f08da3f1a9aaff24\",\n  \"placeholder\": \"Introduce tu contraseña\",\n  \"required\": true,\n  \"position\": 1\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7180a58e-5e20-42aa-9938-656545ebf72c",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: deleteOne - Item",
+    "url": "{{URL}}/dynamicForm/one/item/639cd8d8fa1322ff3102249c",
+    "method": "DELETE",
+    "sortNum": 280000,
+    "created": "2022-12-16T20:46:12.651Z",
+    "modified": "2022-12-16T20:47:10.331Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4a7ec00d-3b38-4e08-8452-000af42a96f0",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: deleteOne - Form",
+    "url": "{{URL}}/dynamicForm/one/form/639cd74eeac9975489b85284",
+    "method": "DELETE",
+    "sortNum": 290000,
+    "created": "2022-12-16T20:47:30.951Z",
+    "modified": "2022-12-16T20:48:28.194Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "9f26b0cb-eb8b-48e6-bb5e-e6597c2a21e6",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: getOne - Form",
+    "url": "{{URL}}/dynamicForm/getOne/form/639cd507f08da3f1a9aaff24",
+    "method": "GET",
+    "sortNum": 245000,
+    "created": "2022-12-16T21:45:56.798Z",
+    "modified": "2022-12-16T21:46:47.998Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "efac542a-59dd-4ea4-86d9-1659635a02a9",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: getOne - Item",
+    "url": "{{URL}}/dynamicForm/getOne/item/639cd9abe4c022049b16383a",
+    "method": "GET",
+    "sortNum": 247500,
+    "created": "2022-12-16T21:47:20.231Z",
+    "modified": "2022-12-16T21:47:32.207Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "507e0ebe-82f4-4ec5-a833-129d1ae3ab4b",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: updateForm",
+    "url": "{{URL}}/dynamicForm/updateForm",
+    "method": "PUT",
+    "sortNum": 275000,
+    "created": "2022-12-16T21:50:39.327Z",
+    "modified": "2022-12-16T21:53:35.209Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"_id\": \"639cd58480ad2240c8c30367\",\n  \"info\": \"Formulario para edicion de artistas\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "59445bf0-8ee7-4339-90c9-811842ca69f5",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
+    "name": "DynamicForm: updateFormItem",
+    "url": "{{URL}}/dynamicForm/updateFormItem",
+    "method": "PUT",
+    "sortNum": 277500,
+    "created": "2022-12-16T21:53:38.743Z",
+    "modified": "2022-12-16T21:54:31.346Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"_id\": \"639cd9abe4c022049b16383a\",\n  \"value\": \"\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
