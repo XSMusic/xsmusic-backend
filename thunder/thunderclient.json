@@ -1569,7 +1569,7 @@
     "method": "POST",
     "sortNum": 260000,
     "created": "2022-12-16T19:55:59.168Z",
-    "modified": "2022-12-16T20:31:00.319Z",
+    "modified": "2022-12-17T12:57:57.609Z",
     "headers": [
       {
         "name": "XSToken",
@@ -1584,7 +1584,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"artistAdmin\",\n  \"info\": \"Formulario para login\"\n}",
+      "raw": "{\n  \"name\": \"dynamicForm\",\n  \"info\": \"Formulario para crear formularios\"\n}",
       "form": []
     },
     "tests": []
@@ -1661,13 +1661,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
     "name": "DynamicForms: getOne - Form",
-    "url": "{{URL}}/dynamicForms/getOne/form/639cd507f08da3f1a9aaff24",
-    "method": "GET",
+    "url": "{{URL}}/dynamicForms/getOne",
+    "method": "POST",
     "sortNum": 245000,
     "created": "2022-12-16T21:45:56.798Z",
-    "modified": "2022-12-17T12:53:18.660Z",
+    "modified": "2022-12-17T13:50:00.543Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"639cd507f08da3f1a9aaff24\",\n  \"subType\": \"\",\n  \"type\":\"form\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -1675,13 +1680,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
     "name": "DynamicForms: getOne - Item",
-    "url": "{{URL}}/dynamicForms/getOne/item/639cd9abe4c022049b16383a",
-    "method": "GET",
+    "url": "{{URL}}/dynamicForms/getOne",
+    "method": "POST",
     "sortNum": 247500,
     "created": "2022-12-16T21:47:20.231Z",
-    "modified": "2022-12-16T21:47:32.207Z",
+    "modified": "2022-12-17T13:48:59.281Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"639cd507f08da3f1a9aaff24\",\n  \"subType\": \"\",\n  \"type\":\"form\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {

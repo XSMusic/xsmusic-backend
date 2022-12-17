@@ -5,6 +5,7 @@ import {
   DynamicFormCreateItemDto,
   dynamicFormGetAllAggregate,
   dynamicFormGetOneAggregate,
+  DynamicFormGetOneDto,
   DynamicFormI,
   DynamicFormItem,
   DynamicFormItemI,
@@ -41,20 +42,20 @@ export class DynamicFormService {
     }
   }
 
-  async getOne(type: string, id: string) {
+  async getOne(data: DynamicFormGetOneDto) {
     return new Promise(async (resolve, reject) => {
       try {
         let item;
-        if (type === 'form') {
-          const aggregate = dynamicFormGetOneAggregate(id);
+        if (data.type === 'form') {
+          const aggregate = dynamicFormGetOneAggregate(data.id);
           item = await DynamicForm.aggregate(aggregate).exec();
         } else {
-          item = await DynamicFormItem.findById(id).exec();
+          item = await DynamicFormItem.findById(data.id).exec();
         }
         if (item) {
           resolve(item);
         } else {
-          reject({ message: `El ${type} no existe` });
+          reject({ message: `El ${data.type} no existe` });
         }
       } catch (error) {
         reject(error);

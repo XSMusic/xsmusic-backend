@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import {
   DynamicFormCreateFormDto,
   DynamicFormCreateItemDto,
+  DynamicFormGetOneDto,
   DynamicFormService,
 } from '@dynamicForm';
 import { ControllerI } from '@interfaces';
@@ -23,7 +24,11 @@ export class DynamicFormController implements ControllerI {
       validationMiddleware(GetAllDto),
       this.getAll
     );
-    this.router.get(`${this.path}/getOne/:type/:id`, this.getOne);
+    this.router.post(
+      `${this.path}/getOne`,
+      validationMiddleware(DynamicFormGetOneDto),
+      this.getOne
+    );
     this.router.post(
       `${this.path}/createForm`,
       validationMiddleware(DynamicFormCreateFormDto),
@@ -75,9 +80,8 @@ export class DynamicFormController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const type = request.params.type;
-      const id = request.params.id;
-      const items = await this.dynamicFormService.getOne(type, id);
+      const data: DynamicFormGetOneDto = request.body;
+      const items = await this.dynamicFormService.getOne(data);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

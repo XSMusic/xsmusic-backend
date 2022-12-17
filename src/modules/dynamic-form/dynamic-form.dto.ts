@@ -6,6 +6,12 @@ export class DynamicFormCreateFormDto {
   @IsOptional() @IsString() info: string;
 }
 
+export class DynamicFormGetOneDto {
+  @IsString() type: string;
+  @IsString() subType: string;
+  @IsString() id: string;
+}
+
 export class DynamicFormCreateItemDto {
   @IsString() name: string;
   @IsString() label: string;
