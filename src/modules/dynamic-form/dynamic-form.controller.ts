@@ -10,7 +10,7 @@ import { checkAdminToken, validationMiddleware } from '@middlewares';
 import { GetAllDto } from '@dtos';
 
 export class DynamicFormController implements ControllerI {
-  path = '/dynamicForm';
+  path = '/dynamicForms';
   router = Router();
   private dynamicFormService = new DynamicFormService();
   constructor() {
