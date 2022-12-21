@@ -1,27 +1,23 @@
 import axios from 'axios';
 import fs from 'fs';
-import { Logger } from '../services/logger.service';
 
-export const downloadImageFromUrl = (
+export const downloadImageFromUrl = async (
   url: string,
-  filePath: string
+  filepath: string
 ): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await axios({
-        method: 'GET',
-        url: url,
-        responseType: 'stream',
-        headers: {
-          'User-Agent':
-            'XSB/0.0 (https://JoseXS.github.io/; X@X.es) generic-library/0.0',
-        },
-      });
-      resolve(response.data.pipe(fs.createWriteStream(filePath)));
-    } catch (err) {
-      Logger.error(err);
-      reject(err);
-    }
+  const response = await axios({
+    method: 'GET',
+    url: url,
+    responseType: 'stream',
+    headers: {
+      'User-Agent': 'XSB/0.0 (https://X.es; X@X.es) generic-library/0.0',
+    },
+  });
+  return new Promise((resolve, reject) => {
+    response.data
+      .pipe(fs.createWriteStream(filepath))
+      .on('error', reject)
+      .once('close', () => resolve(filepath));
   });
 };
 
