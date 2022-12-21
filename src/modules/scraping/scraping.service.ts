@@ -89,6 +89,15 @@ export class ScrapingService {
     }
   }
 
+  async getEventsBySiteId(id: string): Promise<any> {
+    try {
+      const items = await this.scrapingEvent.getEventsBySiteId(id);
+      return items;
+    } catch (e) {
+      return e;
+    }
+  }
+
   async createDiscart(body: ScrapingDiscartsI): Promise<ScrapingDiscartsI> {
     return new Promise(async (resolve, reject) => {
       try {

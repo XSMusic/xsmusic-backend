@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { inspect } from 'src/shared/services/logger.service';
 
 export const authLoginAggregate = (type: 'email' | 'id', value: string) => {
   const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;

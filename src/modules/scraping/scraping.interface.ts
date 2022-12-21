@@ -81,9 +81,10 @@ export interface ScrapingEventRaI {
   venue: ScrapingEventRaVenueI;
 }
 
-interface ScrapingEventRaVenueI {
+export interface ScrapingEventRaVenueI {
   name: string;
   contentUrl?: any;
+  id?: string;
 }
 
 interface ScrapingEventRaImageI {

@@ -171,6 +171,7 @@ export class StatsService {
         { name: 'twitter', value: 0, percentage: 0 },
         { name: 'web', value: 0, percentage: 0 },
         { name: 'youtube', value: 0, percentage: 0 },
+        { name: 'ra', value: 0, percentage: 0 },
         { name: 'ninguno', value: 0, percentage: 0 },
       ];
       if (body.type === 'artist') {
@@ -204,6 +205,14 @@ export class StatsService {
             social.name === 'mixcloud' &&
             artist.social &&
             artist.social.mixcloud !== ''
+          ) {
+            social.value++;
+            social.percentage = this.getPercentage(items.length, social.value);
+          }
+          if (
+            social.name === 'ra' &&
+            artist.social &&
+            artist.social.ra !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
