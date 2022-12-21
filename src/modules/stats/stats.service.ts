@@ -1,18 +1,19 @@
 import moment from 'moment';
 import { Model } from 'mongoose';
 import {
-  StatsArtistsI,
+  StatsGenericI,
   StatsTopGenericI,
   StatsTotalsAdminI,
   statsTopArtistAggregate,
   statsTopSitesAggregate,
   StatsGetTopStatsDto,
   StatsTotalAdminItemI,
+  statsTopEventsAggregate,
 } from '@stats';
 import { Artist, ArtistMongoI } from '@artist';
 import { Style, StyleMongoI } from '@style';
 import { Media, MediaMongoI } from '@media';
-import { countries, sortByValue } from '@utils';
+import { countries, onlyUnique, sortByValue } from '@utils';
 import { User, UserMongoI } from '@user';
 import { Site, SiteMongoI } from '@site';
 import { Image, ImageMongoI } from '@image';
@@ -69,7 +70,7 @@ export class StatsService {
     };
   }
 
-  getTopStats(body: StatsGetTopStatsDto): Promise<StatsArtistsI> {
+  getTopStats(body: StatsGetTopStatsDto): Promise<StatsGenericI> {
     return new Promise(async (resolve, reject) => {
       try {
         let items: any[];
@@ -79,17 +80,36 @@ export class StatsService {
         } else if (body.type === 'club') {
           const aggregate = statsTopSitesAggregate('club');
           items = await Site.aggregate(aggregate).exec();
+        } else if (body.type === 'event') {
+          const aggregate = statsTopEventsAggregate();
+          items = await Event.aggregate(aggregate).exec();
         } else if (body.type === 'festival') {
           const aggregate = statsTopSitesAggregate('festival');
           items = await Site.aggregate(aggregate).exec();
         }
-        const topCountries: StatsTopGenericI[] = await this.setTopCountries(
-          items,
-          body
-        );
-        const topSocial = await this.setTopSocial(items, body);
+        let topCountries: StatsTopGenericI[] = [];
+        let topSocial: StatsTopGenericI[] = [];
+        let topStates: StatsTopGenericI[] = [];
+        if (body.type !== 'event') {
+          topCountries = await this.setTopCountries(items, body);
+          topSocial = await this.setTopSocial(items, body);
+        }
+        if (
+          body.type === 'event' ||
+          body.type === 'club' ||
+          body.type === 'festival'
+        ) {
+          topStates = this.setTopStates(items, body);
+        }
         const topStyles = await this.setTopStyles(items, body);
-        const data: StatsArtistsI = { topSocial, topCountries, topStyles };
+        const topVarious = this.setTopVarious(items, body);
+        const data: StatsGenericI = {
+          topSocial,
+          topCountries,
+          topStyles,
+          topStates,
+          topVarious,
+        };
         resolve(data);
       } catch (error) {
         reject(error);
@@ -312,6 +332,120 @@ export class StatsService {
     } catch (error) {
       return error;
     }
+  }
+
+  private setTopStates(items: any[], body: StatsGetTopStatsDto) {
+    try {
+      let states = [];
+      const topStates: StatsTopGenericI[] = [];
+      if (body.type === 'club' || body.type === 'festival') {
+        for (const item of items) {
+          if (item.address.state !== '') {
+            states.push(item.address.state);
+          }
+        }
+      } else {
+        for (const item of items) {
+          if (
+            item.site &&
+            item.site.address &&
+            item.site.address.state !== ''
+          ) {
+            states.push(item.site.address.state);
+          }
+        }
+      }
+      states = states.filter(onlyUnique);
+      for (const state of states) {
+        topStates.push({
+          name: state,
+          value: 0,
+          percentage: 0,
+        });
+      }
+
+      if (body.type === 'club' || body.type === 'festival') {
+        for (const item of items) {
+          for (const state of topStates) {
+            if (item.address.state === state.name) {
+              state.value++;
+              state.percentage = this.getPercentage(items.length, state.value);
+            }
+          }
+        }
+      } else if (body.type === 'event') {
+        for (const item of items) {
+          for (const state of topStates) {
+            if (
+              item.site &&
+              item.site.address &&
+              item.site.address.state === state.name
+            ) {
+              state.value++;
+              state.percentage = this.getPercentage(items.length, state.value);
+            }
+          }
+        }
+      }
+      topStates.sort(sortByValue);
+      return topStates;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  private setTopVarious(items: any[], body: StatsGetTopStatsDto) {
+    const topVarious: StatsTopGenericI[] = [];
+    if (body.type === 'artist') {
+      topVarious.push(
+        { name: 'Sin info', value: 0, percentage: 0 },
+        { name: 'Sin fecha nacimiento', value: 0, percentage: 0 }
+      );
+    } else if (
+      body.type === 'club' ||
+      body.type === 'festival' ||
+      body.type === 'event'
+    ) {
+      topVarious.push({ name: 'Sin info', value: 0, percentage: 0 });
+      topVarious.push({ name: 'Sin estilos', value: 0, percentage: 0 });
+    }
+
+    if (topVarious.length > 0) {
+      for (const item of items) {
+        for (const various of topVarious) {
+          if (various.name === 'Sin info' && item.info.length === 0) {
+            various.value++;
+            various.percentage = this.getPercentage(
+              items.length,
+              various.value
+            );
+          }
+          if (
+            various.name === 'Sin fecha nacimiento' &&
+            item.birthdate === ''
+          ) {
+            various.value++;
+            various.percentage = this.getPercentage(
+              items.length,
+              various.value
+            );
+          }
+          if (
+            various.name === 'Sin estilos' &&
+            item.styles &&
+            item.styles.length === 0
+          ) {
+            various.value++;
+            various.percentage = this.getPercentage(
+              items.length,
+              various.value
+            );
+          }
+        }
+      }
+    }
+    topVarious.sort(sortByValue);
+    return topVarious;
   }
 
   private getPercentage(total: number, value: number) {

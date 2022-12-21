@@ -33,6 +33,5 @@ export const authLoginAggregate = (type: 'email' | 'id', value: string) => {
       },
     },
   ];
-  inspect(data);
   return data;
 };

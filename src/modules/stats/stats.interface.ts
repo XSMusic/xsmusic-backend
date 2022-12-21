@@ -15,11 +15,12 @@ export interface StatsTotalAdminItemI {
   percentages: { days: string; value: number }[];
 }
 
-export interface StatsArtistsI {
+export interface StatsGenericI {
   topSocial: StatsTopGenericI[];
   topCountries: StatsTopGenericI[];
   topStyles?: StatsTopGenericI[];
-  various?: StatsTopGenericI[];
+  topStates?: StatsTopGenericI[];
+  topVarious?: StatsTopGenericI[];
 }
 
 export interface StatsTopGenericI {
