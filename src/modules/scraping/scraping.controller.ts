@@ -8,7 +8,7 @@ import {
   ScrapingGetListEventsDto,
   ScrapingGetListMediaDto,
 } from './scraping.dto';
-import { validationMiddleware } from '@middlewares';
+import { checkAdminToken, validationMiddleware } from '@middlewares';
 
 export class ScrapingController implements ControllerI {
   path = '/scraping';
@@ -26,9 +26,14 @@ export class ScrapingController implements ControllerI {
     );
     this.router.post(
       `${this.path}/searchNameSoundcloud`,
+      checkAdminToken,
       this.searchNameSoundcloud
     );
-    this.router.post(`${this.path}/searchNameYoutube`, this.searchNameYoutube);
+    this.router.post(
+      `${this.path}/searchNameYoutube`,
+      checkAdminToken,
+      this.searchNameYoutube
+    );
     this.router.post(
       `${this.path}/getInfoClub`,
       validationMiddleware(ScrapingGetInfoClubDto),

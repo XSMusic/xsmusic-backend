@@ -23,6 +23,7 @@
       "@core": ["src/core"],
       "@core/*": ["src/core/*"],
       "@dtos": ["src/shared/dtos"],
+      "@dynamicForm": ["src/modules/dynamic-form"],
       "@exceptions": ["src/shared/exceptions"],
       "@event": ["src/modules/event"],
       "@geo": ["src/modules/geo"],

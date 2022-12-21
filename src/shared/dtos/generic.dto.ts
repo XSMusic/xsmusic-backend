@@ -23,6 +23,7 @@ export class GetAllDto {
   @IsNumber() pageSize: number;
   @IsOptional() @IsArray() order?: string[];
   @IsOptional() @IsArray() filter?: string[];
+  @IsOptional() @IsString() type: string;
 }
 
 export class SiteDto {

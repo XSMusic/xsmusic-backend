@@ -19,6 +19,7 @@ export interface ConfigI {
     map: string;
     soundcloud: string;
     youtube: string;
+    instagram: { user: string; password: string };
   };
   paths: {
     project: string;
