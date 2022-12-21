@@ -57,7 +57,6 @@ export class ImageHelper {
     }
     await sharp(`${config.paths.uploads}/${image.type}s/${image.url}`)
       .resize({ width: width, fit: sharp.fit.inside, withoutEnlargement: true })
-      //   .toFormat('jpeg', { mozjpeg: true })
       .toFile(this.getPath(image, folder));
   }
 
