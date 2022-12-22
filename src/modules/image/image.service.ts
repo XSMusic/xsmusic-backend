@@ -13,7 +13,7 @@ import {
   ImageHelper,
   ImageResizeAllDto,
 } from '@image';
-import { getValuesForPaginator, randomNumber } from '@utils';
+import { getValuesForPaginator } from '@utils';
 import { config } from '@config';
 
 export class ImageService {
