@@ -1,12 +1,12 @@
 import {
   Artist,
   artistGetAllAggregate,
-  ArtistGetAllDto,
   ArtistI,
   artistGetOneAggregate,
   ArtistGetAllForEventDto,
   artistGetAllForType,
 } from '@artist';
+import { GetAllDto, GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
@@ -15,7 +15,7 @@ export class ArtistService {
   private imageHelper = new ImageHelper();
 
   async getAll(
-    body: ArtistGetAllDto
+    body: GetAllDto
   ): Promise<{ items: ArtistI[]; paginator: PaginatorI }> {
     try {
       const { pageSize, currentPage, skip } = getValuesForPaginator(body);
@@ -57,10 +57,10 @@ export class ArtistService {
     });
   }
 
-  getOne(type: 'id' | 'slug', value: string): Promise<ArtistI> {
+  getOne(data: GetOneDto): Promise<ArtistI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = artistGetOneAggregate(type, value);
+        const aggregate = artistGetOneAggregate(data);
         const items = await Artist.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

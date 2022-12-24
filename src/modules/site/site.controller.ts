@@ -9,6 +9,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { GetOneDto } from '@dtos';
 
 export class SiteController implements ControllerI {
   path = '/sites';
@@ -24,7 +25,11 @@ export class SiteController implements ControllerI {
       validationMiddleware(SiteGetAllDto),
       this.getAll
     );
-    this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
+    this.router.post(
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
+      this.getOne
+    );
     this.router.post(
       `${this.path}/create`,
       validationMiddleware(SiteCreateDto),
@@ -60,9 +65,8 @@ export class SiteController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const type = request.params.type as 'id' | 'slug';
-      const value = request.params.value;
-      const result: SiteI = await this.siteService.getOne(type, value);
+      const body: GetOneDto = request.body;
+      const result: SiteI = await this.siteService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

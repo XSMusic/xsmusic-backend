@@ -12,6 +12,7 @@ import {
 import { getValuesForPaginator, slugify } from '@utils';
 import moment from 'moment';
 import { Site } from '@site';
+import { GetOneDto } from '@dtos';
 
 export class EventService {
   private imageHelper = new ImageHelper();
@@ -61,10 +62,10 @@ export class EventService {
     });
   }
 
-  getOne(type: 'id' | 'slug', value: string): Promise<EventI> {
+  getOne(body: GetOneDto): Promise<EventI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = eventGetOneAggregate(type, value);
+        const aggregate = eventGetOneAggregate(body);
         const items = await Event.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

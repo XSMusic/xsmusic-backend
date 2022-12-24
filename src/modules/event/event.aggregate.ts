@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { EventGetAllDto, EventGetAllForTypeDto } from '@event';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
+import { GetOneDto } from '@dtos';
 
 export const eventGetAllAggregate = (
   body: EventGetAllDto,
@@ -61,13 +62,11 @@ const allNoMapAggregate = (
   return data;
 };
 
-export const eventGetOneAggregate = (
-  type: 'id' | 'slug',
-  value: string
-): any => {
+export const eventGetOneAggregate = (body: GetOneDto): any => {
   let data = [];
-  const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
-  data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
+  const match =
+    body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
+  data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
   data = addLookups(data, true, true);
   return data;
 };

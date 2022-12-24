@@ -8,6 +8,7 @@ import {
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 import { ImageHelper } from '@image';
+import { GetOneDto } from '@dtos';
 
 export class SiteService {
   private imageHelper = new ImageHelper();
@@ -41,10 +42,10 @@ export class SiteService {
     });
   }
 
-  getOne(type: 'id' | 'slug', value: string): Promise<SiteI> {
+  getOne(body: GetOneDto): Promise<SiteI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = siteGetOneAggregate(type, value);
+        const aggregate = siteGetOneAggregate(body);
         const items = await Site.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

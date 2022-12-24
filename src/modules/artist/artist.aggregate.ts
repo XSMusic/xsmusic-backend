@@ -1,9 +1,10 @@
-import { ArtistGetAllDto, ArtistGetAllForEventDto } from '@artist';
+import { ArtistGetAllForEventDto } from '@artist';
+import { GetAllDto, GetOneDto } from '@dtos';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
 
 export const artistGetAllAggregate = (
-  body: ArtistGetAllDto,
+  body: GetAllDto,
   skip: number,
   pageSize: number
 ): any => {
@@ -58,13 +59,11 @@ export const artistGetAllForType = (
   return data;
 };
 
-export const artistGetOneAggregate = (
-  type: 'id' | 'slug',
-  value: string
-): any => {
+export const artistGetOneAggregate = (body: GetOneDto): any => {
   let data = [];
-  const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
-  data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
+  const match =
+    body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
+  data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
   data = addLookups(data, false);
   return data;
 };

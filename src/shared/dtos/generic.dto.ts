@@ -1,4 +1,10 @@
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class IdDto {
   @IsString() id: string;
@@ -24,6 +30,16 @@ export class GetAllDto {
   @IsOptional() @IsArray() order?: string[];
   @IsOptional() @IsArray() filter?: string[];
   @IsOptional() @IsString() type: string;
+  @IsOptional() @IsString() typeMedia?: string;
+  @IsOptional() @IsBoolean() map?: boolean;
+  @IsOptional() @IsNumber() maxDistance?: number;
+  @IsOptional() @IsArray() coordinates?: any;
+}
+
+export class GetOneDto {
+  @IsString() type: 'id' | 'slug';
+  @IsString() value: string;
+  @IsOptional() @IsBoolean() admin?: boolean;
 }
 
 export class SiteDto {

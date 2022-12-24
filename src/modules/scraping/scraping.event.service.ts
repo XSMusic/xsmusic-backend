@@ -73,7 +73,10 @@ export class ScrapingEventService {
     return new Promise(async (resolve, reject) => {
       try {
         const events: ScrapingEventI[] = [];
-        const site: SiteI = await this.siteService.getOne('id', id);
+        const site: SiteI = await this.siteService.getOne({
+          type: 'id',
+          value: id,
+        });
         if (site.social && site.social.ra && site.social.ra !== '') {
           const url = 'https://ra.co/graphql';
           const body = {
