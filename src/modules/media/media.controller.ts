@@ -21,7 +21,7 @@ export class MediaController implements ControllerI {
 
   private initializeRoutes() {
     this.router.post(
-      `${this.path}/getAll/:type`,
+      `${this.path}/getAll`,
       validationMiddleware(MediaGetAllDto),
       this.getAll
     );
