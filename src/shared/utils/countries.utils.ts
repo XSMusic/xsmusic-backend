@@ -564,10 +564,6 @@ export const countries: { id: string; name: string; total?: number }[] = [
     name: 'Portugal',
   },
   {
-    id: 'gb',
-    name: 'Reino Unido',
-  },
-  {
     id: 'cf',
     name: 'República Centroafricana',
   },

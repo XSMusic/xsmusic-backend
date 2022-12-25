@@ -183,84 +183,85 @@ export class StatsService {
         );
       }
 
-      for (const artist of items) {
+      for (const item of items) {
         for (let social of topSocial) {
           if (
             social.name === 'facebook' &&
-            artist.social &&
-            artist.social?.facebook !== ''
+            item.social &&
+            item.social?.facebook !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'instagram' &&
-            artist.social &&
-            artist.social.instagram !== ''
+            item.social &&
+            item.social.instagram !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'mixcloud' &&
-            artist.social &&
-            artist.social.mixcloud !== ''
+            item.social &&
+            item.social.mixcloud !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
-            social.name === 'ra' &&
-            artist.social &&
-            artist.social.ra !== ''
+            (social.name === 'ra' &&
+              body.type === 'club' &&
+              item.social &&
+              item.social.ra !== '') ||
+            (social.name === 'ra' &&
+              body.type === 'festival' &&
+              item.social &&
+              item.social.ra !== '')
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'soundcloud' &&
-            artist.social &&
-            artist.social.soundcloud !== ''
+            item.social &&
+            item.social.soundcloud !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'spotify' &&
-            artist.social &&
-            artist.social.spotify !== ''
+            item.social &&
+            item.social.spotify !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'tiktok' &&
-            artist.social &&
-            artist.social.tiktok !== ''
+            item.social &&
+            item.social.tiktok !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'twitter' &&
-            artist.social &&
-            artist.social.twitter !== ''
+            item.social &&
+            item.social.twitter !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
-          if (
-            social.name === 'web' &&
-            artist.social &&
-            artist.social.web !== ''
-          ) {
+          if (social.name === 'web' && item.social && item.social.web !== '') {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
           }
           if (
             social.name === 'youtube' &&
-            artist.social &&
-            artist.social.youtube !== ''
+            item.social &&
+            item.social.youtube !== ''
           ) {
             social.value++;
             social.percentage = this.getPercentage(items.length, social.value);
@@ -270,7 +271,7 @@ export class StatsService {
             if (body.type === 'club' || body.type === 'festival') {
               type = 'site';
             }
-            social = this.setNothingSocial(social, artist, items.length, type);
+            social = this.setNothingSocial(social, item, items.length, type);
           }
         }
       }
@@ -284,33 +285,30 @@ export class StatsService {
   private setNothingSocial(
     social: StatsTopGenericI,
     item: any,
-    totalArtists: number,
+    totalItems: number,
     type: 'artist' | 'site'
   ) {
     if (
-      type === 'artist' &&
-      item.social &&
-      item.social.facebook === '' &&
-      item.social.twitter === '' &&
-      item.social.instagram === '' &&
-      item.social.soundcloud === '' &&
-      item.social.mixcloud === '' &&
-      item.social.spotify === '' &&
-      item.social.tiktok === '' &&
-      item.social.youtube === ''
+      (type === 'artist' &&
+        item.social &&
+        item.social.facebook === '' &&
+        item.social.twitter === '' &&
+        item.social.instagram === '' &&
+        item.social.soundcloud === '' &&
+        item.social.mixcloud === '' &&
+        item.social.spotify === '' &&
+        item.social.tiktok === '' &&
+        item.social.youtube === '') ||
+      (type === 'site' &&
+        item.social &&
+        item.social.facebook === '' &&
+        item.social.twitter === '' &&
+        item.social.instagram === '' &&
+        item.social.youtube === '' &&
+        item.social.ra === '')
     ) {
       social.value++;
-      social.percentage = this.getPercentage(totalArtists, social.value);
-    } else if (
-      type === 'site' &&
-      item.social &&
-      item.social.facebook === '' &&
-      item.social.twitter === '' &&
-      item.social.instagram === '' &&
-      item.social.youtube === ''
-    ) {
-      social.value++;
-      social.percentage = this.getPercentage(totalArtists, social.value);
+      social.percentage = this.getPercentage(totalItems, social.value);
     }
     return social;
   }
@@ -322,7 +320,7 @@ export class StatsService {
     try {
       let styles: StatsTopGenericI[] = [];
       const stylesDB = await Style.find({}).exec();
-      stylesDB.map((item) =>
+      stylesDB.forEach((item) =>
         styles.push({ name: item.name, value: 0, percentage: 0 })
       );
       for (const item of items) {
