@@ -184,94 +184,15 @@ export class StatsService {
       }
 
       for (const item of items) {
-        for (let social of topSocial) {
-          if (
-            social.name === 'facebook' &&
-            item.social &&
-            item.social?.facebook !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'instagram' &&
-            item.social &&
-            item.social.instagram !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'mixcloud' &&
-            item.social &&
-            item.social.mixcloud !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            (social.name === 'ra' &&
-              body.type === 'club' &&
-              item.social &&
-              item.social.ra !== '') ||
-            (social.name === 'ra' &&
-              body.type === 'festival' &&
-              item.social &&
-              item.social.ra !== '')
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'soundcloud' &&
-            item.social &&
-            item.social.soundcloud !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'spotify' &&
-            item.social &&
-            item.social.spotify !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'tiktok' &&
-            item.social &&
-            item.social.tiktok !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'twitter' &&
-            item.social &&
-            item.social.twitter !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (social.name === 'web' && item.social && item.social.web !== '') {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
-          if (
-            social.name === 'youtube' &&
-            item.social &&
-            item.social.youtube !== ''
-          ) {
-            social.value++;
-            social.percentage = this.getPercentage(items.length, social.value);
-          }
+        for (const social of topSocial) {
+          this.setSocialA(social, item, items, body);
+          this.setSocialB(social, item, items);
           if (social.name === 'ninguno') {
             let type: 'artist' | 'site' = 'artist';
             if (body.type === 'club' || body.type === 'festival') {
               type = 'site';
             }
-            social = this.setNothingSocial(social, item, items.length, type);
+            this.setNothingSocial(social, item, items.length, type);
           }
         }
       }
@@ -279,6 +200,99 @@ export class StatsService {
       return topSocial;
     } catch (error) {
       return error;
+    }
+  }
+
+  private setSocialB(social: StatsTopGenericI, item: any, items: any[]) {
+    if (
+      social.name === 'soundcloud' &&
+      item.social &&
+      item.social.soundcloud !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      social.name === 'spotify' &&
+      item.social &&
+      item.social.spotify !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (social.name === 'tiktok' && item.social && item.social.tiktok !== '') {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      social.name === 'twitter' &&
+      item.social &&
+      item.social.twitter !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (social.name === 'web' && item.social && item.social.web !== '') {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      social.name === 'youtube' &&
+      item.social &&
+      item.social.youtube !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+  }
+
+  private setSocialA(
+    social: StatsTopGenericI,
+    item: any,
+    items: any[],
+    body: StatsGetTopStatsDto
+  ) {
+    if (
+      social.name === 'facebook' &&
+      item.social &&
+      item.social.facebook &&
+      item.social.facebook !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      social.name === 'instagram' &&
+      item.social &&
+      item.social.instagram &&
+      item.social.instagram !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      social.name === 'mixcloud' &&
+      item.social &&
+      item.social.mixcloud &&
+      item.social.mixcloud !== ''
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
+    }
+    if (
+      (social.name === 'ra' &&
+        body.type === 'club' &&
+        item.social &&
+        item.social.ra &&
+        item.social.ra !== '') ||
+      (social.name === 'ra' &&
+        body.type === 'festival' &&
+        item.social &&
+        item.social.ra &&
+        item.social.ra !== '')
+    ) {
+      social.value++;
+      social.percentage = this.getPercentage(items.length, social.value);
     }
   }
 
@@ -291,20 +305,35 @@ export class StatsService {
     if (
       (type === 'artist' &&
         item.social &&
+        item.social.facebook &&
         item.social.facebook === '' &&
+        item.social.twitter &&
         item.social.twitter === '' &&
+        item.social.instagram &&
         item.social.instagram === '' &&
+        item.social.soundcloud &&
         item.social.soundcloud === '' &&
+        item.social.mixcloud &&
         item.social.mixcloud === '' &&
+        item.social.spotify &&
         item.social.spotify === '' &&
+        item.social.tiktok &&
         item.social.tiktok === '' &&
+        item.social.youtube &&
         item.social.youtube === '') ||
       (type === 'site' &&
         item.social &&
+        item.social.facebook &&
         item.social.facebook === '' &&
+        item.social.web &&
+        item.social.web === '' &&
+        item.social.twitter &&
         item.social.twitter === '' &&
+        item.social.instagram &&
         item.social.instagram === '' &&
+        item.social.youtube &&
         item.social.youtube === '' &&
+        item.social.ra &&
         item.social.ra === '')
     ) {
       social.value++;
@@ -343,56 +372,14 @@ export class StatsService {
 
   private setTopStates(items: any[], body: StatsGetTopStatsDto) {
     try {
-      let states = [];
+      const states: string[] = [];
       const topStates: StatsTopGenericI[] = [];
-      if (body.type === 'club' || body.type === 'festival') {
-        for (const item of items) {
-          if (item.address.state !== '') {
-            states.push(item.address.state);
-          }
-        }
-      } else {
-        for (const item of items) {
-          if (
-            item.site &&
-            item.site.address &&
-            item.site.address.state !== ''
-          ) {
-            states.push(item.site.address.state);
-          }
-        }
-      }
-      states = states.filter(onlyUnique);
-      for (const state of states) {
-        topStates.push({
-          name: state,
-          value: 0,
-          percentage: 0,
-        });
-      }
+      this.setDefaultValuesForTopStates(body, items, states, topStates);
 
       if (body.type === 'club' || body.type === 'festival') {
-        for (const item of items) {
-          for (const state of topStates) {
-            if (item.address.state === state.name) {
-              state.value++;
-              state.percentage = this.getPercentage(items.length, state.value);
-            }
-          }
-        }
+        this.setTopStatesA(items, topStates);
       } else if (body.type === 'event') {
-        for (const item of items) {
-          for (const state of topStates) {
-            if (
-              item.site &&
-              item.site.address &&
-              item.site.address.state === state.name
-            ) {
-              state.value++;
-              state.percentage = this.getPercentage(items.length, state.value);
-            }
-          }
-        }
+        this.setTopStatesB(items, topStates);
       }
       topStates.sort(sortByValue);
       return topStates;
@@ -401,8 +388,124 @@ export class StatsService {
     }
   }
 
+  private setTopStatesB(items: any[], topStates: StatsTopGenericI[]) {
+    for (const item of items) {
+      for (const state of topStates) {
+        if (
+          item.site &&
+          item.site.address &&
+          item.site.address.state === state.name
+        ) {
+          state.value++;
+          state.percentage = this.getPercentage(items.length, state.value);
+        }
+      }
+    }
+  }
+
+  private setTopStatesA(items: any[], topStates: StatsTopGenericI[]) {
+    for (const item of items) {
+      for (const state of topStates) {
+        if (item.address.state === state.name) {
+          state.value++;
+          state.percentage = this.getPercentage(items.length, state.value);
+        }
+      }
+    }
+  }
+
+  private setDefaultValuesForTopStates(
+    body: StatsGetTopStatsDto,
+    items: any[],
+    states: any[],
+    topStates: StatsTopGenericI[]
+  ) {
+    if (body.type === 'club' || body.type === 'festival') {
+      for (const item of items) {
+        if (item.address.state !== '') {
+          states.push(item.address.state);
+        }
+      }
+    } else {
+      for (const item of items) {
+        if (item.site && item.site.address && item.site.address.state !== '') {
+          states.push(item.site.address.state);
+        }
+      }
+    }
+    states = states.filter(onlyUnique);
+    for (const state of states) {
+      topStates.push({
+        name: state,
+        value: 0,
+        percentage: 0,
+      });
+    }
+    return states;
+  }
+
   private setTopVarious(items: any[], body: StatsGetTopStatsDto) {
     const topVarious: StatsTopGenericI[] = [];
+    this.setTopVariousA(body, topVarious);
+
+    this.setTopVariousB(topVarious, items);
+    topVarious.sort(sortByValue);
+    return topVarious;
+  }
+
+  private setTopVariousB(topVarious: StatsTopGenericI[], items: any[]) {
+    if (topVarious.length > 0) {
+      for (const item of items) {
+        for (const various of topVarious) {
+          this.setTopVariousNoInfo(various, item, items);
+          this.SetTopVariousNoBirthdate(various, item, items);
+          this.setTopVariousNoStyles(various, item, items);
+        }
+      }
+    }
+  }
+
+  private setTopVariousNoStyles(
+    various: StatsTopGenericI,
+    item: any,
+    items: any[]
+  ) {
+    if (
+      various.name === 'Sin estilos' &&
+      item.styles &&
+      item.styles.length === 0
+    ) {
+      various.value++;
+      various.percentage = this.getPercentage(items.length, various.value);
+    }
+  }
+
+  private SetTopVariousNoBirthdate(
+    various: StatsTopGenericI,
+    item: any,
+    items: any[]
+  ) {
+    if (various.name === 'Sin fecha nacimiento' && item.birthdate === '') {
+      various.value++;
+      various.percentage = this.getPercentage(items.length, various.value);
+    }
+  }
+
+  private setTopVariousNoInfo(
+    various: StatsTopGenericI,
+    item: any,
+    items: any[]
+  ) {
+    if (various.name === 'Sin info' && item.info.length === 0) {
+      various.value++;
+      various.percentage = this.getPercentage(items.length, various.value);
+    }
+  }
+
+  private setTopVariousA(
+    body: StatsGetTopStatsDto,
+    topVarious: StatsTopGenericI[]
+  ) {
     if (body.type === 'artist') {
       topVarious.push(
         { name: 'Sin info', value: 0, percentage: 0 },
@@ -416,43 +519,6 @@ export class StatsService {
       topVarious.push({ name: 'Sin info', value: 0, percentage: 0 });
       topVarious.push({ name: 'Sin estilos', value: 0, percentage: 0 });
     }
-
-    if (topVarious.length > 0) {
-      for (const item of items) {
-        for (const various of topVarious) {
-          if (various.name === 'Sin info' && item.info.length === 0) {
-            various.value++;
-            various.percentage = this.getPercentage(
-              items.length,
-              various.value
-            );
-          }
-          if (
-            various.name === 'Sin fecha nacimiento' &&
-            item.birthdate === ''
-          ) {
-            various.value++;
-            various.percentage = this.getPercentage(
-              items.length,
-              various.value
-            );
-          }
-          if (
-            various.name === 'Sin estilos' &&
-            item.styles &&
-            item.styles.length === 0
-          ) {
-            various.value++;
-            various.percentage = this.getPercentage(
-              items.length,
-              various.value
-            );
-          }
-        }
-      }
-    }
-    topVarious.sort(sortByValue);
-    return topVarious;
   }
 
   private getPercentage(total: number, value: number) {

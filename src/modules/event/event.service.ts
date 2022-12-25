@@ -129,8 +129,7 @@ export class EventService {
   private async slugifyEvent(event: EventI): Promise<string> {
     try {
       if (typeof event.site === 'string') {
-        const site = await Site.findById(event.site.toString());
-        event.site.toString();
+        const site = await Site.findById(event.site.toString()).exec();
         if (site) {
           event.site = site;
         }
