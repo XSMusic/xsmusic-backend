@@ -1,4 +1,3 @@
-import { IdDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
 import { getValuesForPaginator } from '@utils';
 import {
@@ -8,6 +7,7 @@ import {
   styleGetOneAggregate,
   StyleI,
 } from '@style';
+import { GetOneDto } from '@dtos';
 
 export class StyleService {
   getAll(
@@ -33,10 +33,10 @@ export class StyleService {
     });
   }
 
-  getOneById(body: IdDto): Promise<StyleI> {
+  getOne(body: GetOneDto): Promise<StyleI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = styleGetOneAggregate(body.id);
+        const aggregate = styleGetOneAggregate(body.value);
         const items = await Style.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

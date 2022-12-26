@@ -8,9 +8,8 @@ import {
 } from '@style';
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
-import { validationMiddleware } from '../../shared/middlewares/validation.middleware';
-import { IdDto } from '@dtos';
-import { checkAdminToken } from '@middlewares';
+import { GetOneDto } from '@dtos';
+import { checkAdminToken, validationMiddleware } from '@middlewares';
 
 export class StyleController implements ControllerI {
   path = '/styles';
@@ -27,9 +26,9 @@ export class StyleController implements ControllerI {
       this.getAll
     );
     this.router.post(
-      `${this.path}/getOneById`,
-      validationMiddleware(IdDto),
-      this.getOneById
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
+      this.getOne
     );
     this.router.post(
       `${this.path}/create`,
@@ -60,14 +59,14 @@ export class StyleController implements ControllerI {
     }
   };
 
-  private getOneById = async (
+  private getOne = async (
     request: Request,
     response: Response,
     next: NextFunction
   ) => {
     try {
-      const body: IdDto = request.body;
-      const result: StyleI = await this.styleService.getOneById(body);
+      const body: GetOneDto = request.body;
+      const result: StyleI = await this.styleService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
