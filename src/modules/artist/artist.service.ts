@@ -65,7 +65,7 @@ export class ArtistService {
         if (items.length > 0) {
           resolve(items[0]);
         } else {
-          reject({ message: 'El id no existe' });
+          reject({ message: 'El artista no existe' });
         }
       } catch (error) {
         reject(error);

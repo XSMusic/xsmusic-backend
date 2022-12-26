@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { UserMongoI } from './user.interface';
 
 const rolsValid = {
-  values: ['ADMIN', 'USER', 'FAKE'],
+  values: ['ADMIN', 'USER'],
   message: '{VALUE} no es un rol permitido',
 };
 

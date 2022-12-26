@@ -68,6 +68,19 @@ const addLookups = (data: any[]) => {
       },
     },
     {
+      $lookup: {
+        from: 'users',
+        localField: 'user',
+        foreignField: '_id',
+        as: 'user',
+        pipeline: [
+          {
+            $project: { _id: 1, name: 1, slug: 1 },
+          },
+        ],
+      },
+    },
+    {
       $unwind: { path: '$artist', preserveNullAndEmptyArrays: true },
     },
     {
@@ -78,6 +91,9 @@ const addLookups = (data: any[]) => {
     },
     {
       $unwind: { path: '$site', preserveNullAndEmptyArrays: true },
+    },
+    {
+      $unwind: { path: '$user', preserveNullAndEmptyArrays: true },
     }
   );
   return data;
