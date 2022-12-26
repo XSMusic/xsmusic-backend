@@ -13,19 +13,23 @@ export class ScrapingArtistService {
   async getInfoArtistDJRankings(
     artist: ScrapingArtist
   ): Promise<ScrapingArtist> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       try {
         const url = `${this.urlDjrankings}${slugify(
           artist.name,
           '_'
         ).toUpperCase()}`;
         const response = await axios.get(url);
-        const $ = load(response.data);
-        artist.styles = await this.setStylesForDJRankings($);
-        artist.country = this.setImageForDJRankings($);
-        resolve(artist);
+        if (response.data) {
+          const $ = load(response.data);
+          artist.styles = await this.setStylesForDJRankings($);
+          artist.country = this.setImageForDJRankings($);
+          resolve(artist);
+        } else {
+          resolve(artist);
+        }
       } catch (e) {
-        reject(e);
+        resolve(artist);
       }
     });
   }
