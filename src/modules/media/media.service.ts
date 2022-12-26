@@ -1,4 +1,5 @@
 import { Artist } from '@artist';
+import { GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
 import { MessageI, PaginatorI } from '@interfaces';
 import {
@@ -63,10 +64,10 @@ export class MediaService {
     });
   }
 
-  getOne(type: 'id' | 'slug', value: string): Promise<MediaI> {
+  getOne(data: GetOneDto): Promise<MediaI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = mediaGetOneAggregate(type, value);
+        const aggregate = mediaGetOneAggregate(data);
         const items = await Media.aggregate(aggregate).exec();
         let item: MediaI;
         if (items.length > 0) {

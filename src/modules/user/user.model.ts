@@ -22,6 +22,7 @@ const schema = new mongoose.Schema(
     appleId: { type: String, required: false },
     fcm: { type: String, required: false },
     darkMode: { type: String, default: 'system', enum: darkModeValid },
+    slug: { type: String, default: '' },
   },
   {
     toJSON: { virtuals: true },
