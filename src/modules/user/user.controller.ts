@@ -8,7 +8,7 @@ import {
 } from '@user';
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
-import { GetOneDto, IdDto } from '@dtos';
+import { GetOneDto } from '@dtos';
 import {
   validationMiddleware,
   checkAdminToken,
