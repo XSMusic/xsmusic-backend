@@ -38,6 +38,7 @@
       "@site": ["src/modules/site"],
       "@stats": ["src/modules/stats"],
       "@style": ["src/modules/style"],
+      "@system": ["src/modules/system"],
       "@user": ["src/modules/user"],
       "@utils": ["src/shared/utils"]
     }

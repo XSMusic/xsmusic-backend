@@ -1770,5 +1770,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "30a8e20a-8f8d-4878-8208-c99424d20520",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c674f2fb-2e42-4eec-a8e4-fcf990c93940",
+    "name": "System: getResume",
+    "url": "{{URL}}/system/getResume",
+    "method": "GET",
+    "sortNum": 310000,
+    "created": "2022-12-27T13:10:11.030Z",
+    "modified": "2022-12-27T13:10:26.087Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "1bcee9f9-e133-4e36-b772-b13096532c03",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "c674f2fb-2e42-4eec-a8e4-fcf990c93940",
+    "name": "System: generateSitemaps",
+    "url": "{{URL}}/system/generateSitemaps",
+    "method": "GET",
+    "sortNum": 320000,
+    "created": "2022-12-27T13:13:11.550Z",
+    "modified": "2022-12-27T13:13:17.694Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

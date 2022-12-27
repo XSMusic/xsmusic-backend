@@ -12,6 +12,7 @@ import { ImageController } from '@image';
 import { EventController } from '@event';
 import { GithubController } from '@github';
 import { DynamicFormController } from '@dynamicForm';
+import { SystemController } from '@system';
 
 const controllers = [
   new ArtistController(),
@@ -27,6 +28,7 @@ const controllers = [
   new StatsController(),
   new SiteController(),
   new StyleController(),
+  new SystemController(),
   new UserController(),
 ];
 
