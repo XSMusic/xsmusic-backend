@@ -9,6 +9,7 @@ import {
   ScrapingGetListMediaDto,
 } from './scraping.dto';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { IdDto, IdSiteDto } from '@dtos';
 
 export class ScrapingController implements ControllerI {
   path = '/scraping';
@@ -48,6 +49,11 @@ export class ScrapingController implements ControllerI {
       `${this.path}/getListEvents`,
       validationMiddleware(ScrapingGetListEventsDto),
       this.getListEvents
+    );
+    this.router.post(
+      `${this.path}/getEventsBySiteId`,
+      validationMiddleware(IdSiteDto),
+      this.getEventsBySiteId
     );
     this.router.post(`${this.path}/createDiscart`, this.createDiscart);
   }
@@ -130,6 +136,20 @@ export class ScrapingController implements ControllerI {
     try {
       const body: ScrapingGetListEventsDto = request.body;
       const items = await this.scrapingService.getListEvents(body);
+      response.status(200).send(items);
+    } catch (error) {
+      next(new HttpException(400, error.message, request, response));
+    }
+  };
+
+  private getEventsBySiteId = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const body: IdDto = request.body;
+      const items = await this.scrapingService.getEventsBySiteId(body.id);
       response.status(200).send(items);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

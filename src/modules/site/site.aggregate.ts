@@ -1,3 +1,4 @@
+import { GetOneDto } from '@dtos';
 import { SiteGetAllDto } from '@site';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
@@ -99,13 +100,11 @@ const allMapAggregate = (body: SiteGetAllDto) => {
   return data;
 };
 
-export const siteGetOneAggregate = (
-  type: 'id' | 'slug',
-  value: string
-): any => {
+export const siteGetOneAggregate = (body: GetOneDto): any => {
   let data = [];
-  const match = type === 'id' ? new mongoose.Types.ObjectId(value) : value;
-  data.push({ $match: { [type === 'id' ? '_id' : 'slug']: match } });
+  const match =
+    body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
+  data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
   data = addLookups(data, false);
   return data;
 };
@@ -118,10 +117,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [
-          { $project: { _id: 1, name: 1, colors: 1 } },
-          { $sort: { name: -1 } },
-        ],
+        pipeline: [{ $project: { name: 1 } }, { $sort: { name: -1 } }],
       },
     },
     {

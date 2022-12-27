@@ -25,16 +25,18 @@ export class ScrapingService {
   private scrapingSoundcloud = new ScrapingSoundcloudService();
   private scrapingYoutube = new ScrapingYoutubeService();
 
-  async getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
-    try {
-      let artist = new ScrapingArtist(body.name);
-      artist = await this.scrapingArtist.getInfoArtistDJRankings(artist);
-      artist = await this.scrapingArtist.getInfoArtistWikipedia(artist);
-      artist = await this.scrapingArtist.getInfoArtistClubbing(artist, body);
-      return artist;
-    } catch (error) {
-      return error;
-    }
+  getInfoArtist(body: ScrapingGetInfoArtistDto): Promise<ScrapingArtist> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let artist = new ScrapingArtist(body.name);
+        artist = await this.scrapingArtist.getInfoArtistDJRankings(artist);
+        artist = await this.scrapingArtist.getInfoArtistWikipedia(artist);
+        artist = await this.scrapingArtist.getInfoArtistClubbing(artist, body);
+        resolve(artist);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   async searchNameSoundcloud(name: string) {
@@ -84,6 +86,15 @@ export class ScrapingService {
         const items = await this.scrapingEvent.getEventsListRA(data);
         return items;
       }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async getEventsBySiteId(id: string): Promise<any> {
+    try {
+      const items = await this.scrapingEvent.getEventsBySiteId(id);
+      return items;
     } catch (e) {
       return e;
     }

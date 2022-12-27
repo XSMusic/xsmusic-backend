@@ -6,8 +6,9 @@ export class ImageGetAllDto extends GetAllDto {
 }
 
 export class ImageUploadDto {
-  @IsString() type: string;
   @IsString() id: string;
+  @IsString() type: 'artist' | 'event' | 'media' | 'site' | 'user';
+  @IsOptional() @IsNumber() position?: number;
 }
 
 export class ImageUpdateDto {

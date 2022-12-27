@@ -13,7 +13,7 @@ import {
   ImageHelper,
   ImageResizeAllDto,
 } from '@image';
-import { getValuesForPaginator, randomNumber } from '@utils';
+import { getValuesForPaginator } from '@utils';
 import { config } from '@config';
 
 export class ImageService {
@@ -55,15 +55,22 @@ export class ImageService {
   upload(data: ImageUploadDto, file: any): Promise<ImageI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const rNumber = randomNumber(0, 10000);
-        const dataImage = `${data.type}/${data.id}_${rNumber}.png`;
-        const imagePath = `${config.paths.uploads}/${dataImage}`;
-        const fileUpload = new Resize(imagePath);
+        const images = await this.imagesSameTypeId(data);
+        data.position = images.length;
+        const filePath = `${config.paths.uploads}/${data.type}s/${data.id}_${data.position}.jpg`;
+        const fileUpload = new Resize(filePath);
         if (!file) {
           reject({ message: 'Falta la imagen' });
         }
         await fileUpload.save(file.buffer);
-        const imageCreated: ImageI = await this.create(data, dataImage);
+        const imageCreated = await this.create(
+          {
+            type: `${data.type}`,
+            id: data.id,
+          },
+          `${data.id}_${data.position}.jpg`
+        );
+        await this.imageHelper.resizeImage(imageCreated._id);
         resolve(imageCreated);
       } catch (error) {
         reject(error);

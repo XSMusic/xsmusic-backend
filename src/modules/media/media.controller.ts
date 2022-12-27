@@ -10,6 +10,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { GetOneDto } from '@dtos';
 
 export class MediaController implements ControllerI {
   path = '/media';
@@ -21,7 +22,7 @@ export class MediaController implements ControllerI {
 
   private initializeRoutes() {
     this.router.post(
-      `${this.path}/getAll/:type`,
+      `${this.path}/getAll`,
       validationMiddleware(MediaGetAllDto),
       this.getAll
     );
@@ -30,7 +31,11 @@ export class MediaController implements ControllerI {
       validationMiddleware(MediaGetAllForTypeDto),
       this.getAllForType
     );
-    this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
+    this.router.post(
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
+      this.getOne
+    );
     this.router.post(
       `${this.path}/create`,
       validationMiddleware(MediaCreateDto),
@@ -80,9 +85,8 @@ export class MediaController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const type = request.params.type as 'id' | 'slug';
-      const value = request.params.value;
-      const result: MediaI = await this.mediaService.getOne(type, value);
+      const body: GetOneDto = request.body;
+      const result: MediaI = await this.mediaService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

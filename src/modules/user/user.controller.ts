@@ -8,7 +8,7 @@ import {
 } from '@user';
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
-import { IdDto } from '@dtos';
+import { GetOneDto } from '@dtos';
 import {
   validationMiddleware,
   checkAdminToken,
@@ -32,8 +32,8 @@ export class UserController implements ControllerI {
       this.getAll
     );
     this.router.post(
-      `${this.path}/one`,
-      [validationMiddleware(IdDto), checkAdminToken],
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
       this.getOne
     );
     this.router.post(
@@ -75,8 +75,8 @@ export class UserController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const id = request.body.id;
-      const item: UserI = await this.userService.getOne(id);
+      const body: GetOneDto = request.body;
+      const item: UserI = await this.userService.getOne(body);
       response.status(200).send(item);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

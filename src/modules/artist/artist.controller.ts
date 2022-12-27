@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import {
   ArtistCreateDto,
-  ArtistGetAllDto,
   ArtistGetAllForEventDto,
   ArtistI,
   ArtistService,
@@ -10,6 +9,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class ArtistController implements ControllerI {
   path = '/artists';
@@ -22,7 +22,7 @@ export class ArtistController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(ArtistGetAllDto),
+      validationMiddleware(GetAllDto),
       this.getAll
     );
     this.router.post(
@@ -30,7 +30,11 @@ export class ArtistController implements ControllerI {
       validationMiddleware(ArtistGetAllForEventDto),
       this.getAllForEvent
     );
-    this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
+    this.router.post(
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
+      this.getOne
+    );
     this.router.post(
       `${this.path}/create`,
       validationMiddleware(ArtistCreateDto),
@@ -52,7 +56,7 @@ export class ArtistController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: ArtistGetAllDto = request.body;
+      const body: GetAllDto = request.body;
       const result = await this.artistService.getAll(body);
       response.status(200).send(result);
     } catch (error) {
@@ -80,9 +84,8 @@ export class ArtistController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const type = request.params.type as 'id' | 'slug';
-      const value = request.params.value;
-      const result: ArtistI = await this.artistService.getOne(type, value);
+      const body: GetOneDto = request.body;
+      const result: ArtistI = await this.artistService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

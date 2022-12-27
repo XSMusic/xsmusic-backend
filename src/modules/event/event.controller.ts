@@ -10,6 +10,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from '@exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class EventController implements ControllerI {
   path = '/events';
@@ -22,7 +23,7 @@ export class EventController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(EventGetAllDto),
+      validationMiddleware(GetAllDto),
       this.getAll
     );
     this.router.post(
@@ -30,7 +31,11 @@ export class EventController implements ControllerI {
       validationMiddleware(EventGetAllForTypeDto),
       this.getAllForType
     );
-    this.router.get(`${this.path}/getOne/:type/:value`, this.getOne);
+    this.router.post(
+      `${this.path}/getOne`,
+      validationMiddleware(GetOneDto),
+      this.getOne
+    );
     this.router.post(
       `${this.path}/create`,
       validationMiddleware(EventCreateDto),
@@ -80,9 +85,8 @@ export class EventController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const type = request.params.type as 'id' | 'slug';
-      const value = request.params.value;
-      const result: EventI = await this.eventService.getOne(type, value);
+      const body: GetOneDto = request.body;
+      const result: EventI = await this.eventService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

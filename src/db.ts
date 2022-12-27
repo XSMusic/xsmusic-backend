@@ -18,6 +18,7 @@ export const getUri = async () => {
 export const connectToDB = async (): Promise<void> => {
   try {
     const uri = await getUri();
+    mongoose.set('strictQuery', false);
     mongoose.connect(uri, config.mongo.options, () => {
       Logger.info('[DB] MongoDB iniciado');
     });

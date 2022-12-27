@@ -1,5 +1,12 @@
+import { GetOneDto } from '@dtos';
 import { MessageI, PaginatorI } from '@interfaces';
-import { User, userGetAllAggregate, UserGetAllDto, UserI } from '@user';
+import {
+  User,
+  userGetAllAggregate,
+  UserGetAllDto,
+  userGetOneAggregate,
+  UserI,
+} from '@user';
 import { getValuesForPaginator } from '@utils';
 
 export class UserService {
@@ -28,16 +35,21 @@ export class UserService {
     });
   }
 
-  getOne(id: string): Promise<UserI> {
+  getOne(data: GetOneDto): Promise<UserI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const item = await User.findById(id).exec();
-        if (item.password) {
-          item.password = undefined;
+        const aggregate = userGetOneAggregate(data);
+        const items = await User.aggregate(aggregate).exec();
+        if (items.length > 0) {
+          if (items[0].password) {
+            items[0].password = undefined;
+          }
+          resolve(items[0]);
+        } else {
+          reject({ message: 'El usuario no existe' });
         }
-        resolve(item);
       } catch (error) {
-        reject({ message: 'Error al obtener el usuario' });
+        reject(error);
       }
     });
   }

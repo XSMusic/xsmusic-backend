@@ -1,6 +1,7 @@
 import { config } from '@core/config';
 import { GeoService } from '@geo';
 import { ScrapingSite } from '@scraping';
+import { Logger } from '@services';
 import { slugify } from '@utils';
 import axios from 'axios';
 import { load } from 'cheerio';
@@ -29,8 +30,9 @@ export class ScrapingSiteService {
         site.address.country = geoData.country;
         site = await this.setImageOfClubbingSpain(site);
         resolve(site);
-      } catch (e) {
-        reject(e);
+      } catch (error) {
+        Logger.error(error);
+        reject(error);
       }
     });
   }
@@ -47,6 +49,7 @@ export class ScrapingSiteService {
       );
       return site;
     } catch (error) {
+      Logger.error(error);
       return site;
     }
   }

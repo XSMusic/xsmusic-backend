@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { UserMongoI } from './user.interface';
 
 const rolsValid = {
-  values: ['ADMIN', 'USER', 'FAKE'],
+  values: ['ADMIN', 'USER'],
   message: '{VALUE} no es un rol permitido',
 };
 
@@ -22,6 +22,7 @@ const schema = new mongoose.Schema(
     appleId: { type: String, required: false },
     fcm: { type: String, required: false },
     darkMode: { type: String, default: 'system', enum: darkModeValid },
+    slug: { type: String, default: '' },
   },
   {
     toJSON: { virtuals: true },

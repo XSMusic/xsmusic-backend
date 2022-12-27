@@ -28,6 +28,7 @@ const schema = new mongoose.Schema(
       instagram: { type: String, default: '' },
       youtube: { type: String, default: '' },
       email: { type: String, default: '' },
+      ra: { type: String, default: '' },
     },
     slug: { type: String, default: '' },
   },

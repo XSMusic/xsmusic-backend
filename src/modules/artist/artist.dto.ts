@@ -1,8 +1,6 @@
 import { GetAllDto } from '@dtos';
 import { IsOptional, IsString } from 'class-validator';
 
-export class ArtistGetAllDto extends GetAllDto {}
-
 export class ArtistCreateDto {
   @IsString() name: string;
   @IsOptional() @IsString() country: string;

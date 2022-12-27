@@ -7,12 +7,12 @@ import {
   GithubUtilsService,
 } from '@github';
 import { Logger } from '@services';
-import axios, { AxiosRequestHeaders } from 'axios';
+import axios from 'axios';
 
 export class GithubIssueService {
   private githubUtilsService = new GithubUtilsService();
   private respositories = ['xsmusic-backend', 'xsmusic-app'];
-  private headers: AxiosRequestHeaders = {
+  private headers = {
     Authorization: `Bearer ${config.tokens.github}`,
   };
 
