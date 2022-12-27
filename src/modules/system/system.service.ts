@@ -80,7 +80,7 @@ export class SystemService {
                 ${builderStatics.build(dinamicUrls)}
             </urlset>
         `;
-      fs.writeFile(`../app/sitemap.xml`, xmlContent, (err) => {
+      fs.writeFile(`../app/src/sitemap.xml`, xmlContent, (err) => {
         if (err) {
           return err;
         }
