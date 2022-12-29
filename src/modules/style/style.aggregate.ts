@@ -28,6 +28,7 @@ export const styleGetAllAggregate = (
       tracks: 1,
       clubs: 1,
       festivals: 1,
+      events: 1,
     },
   });
   return data;
@@ -86,6 +87,15 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'festivals',
         pipeline: getPipeline('festival', complete),
       },
+    },
+    {
+      $lookup: {
+        from: 'events',
+        localField: '_id',
+        foreignField: 'styles',
+        as: 'events',
+        pipeline: getPipeline('event', complete),
+      },
     }
   );
   if (!complete) {
@@ -94,7 +104,8 @@ const addLookups = (data: any[], complete: boolean) => {
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$clubs', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$festivals', preserveNullAndEmptyArrays: true } }
+      { $unwind: { path: '$festivals', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
     );
   }
   return data;
