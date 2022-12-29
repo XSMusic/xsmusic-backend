@@ -24,7 +24,6 @@ export const artistGetAllAggregate = (
       birthdate: 1,
       styles: 1,
       images: 1,
-      info: 1,
       slug: 1,
       gender: 1,
       social: 1,

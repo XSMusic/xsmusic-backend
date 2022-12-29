@@ -102,7 +102,12 @@ const addLookups = (data: any[], complete: boolean) => {
 
 const getPipeline = (type: string, complete: boolean) => {
   const pipelineCount = [];
-  if (type === 'set' || type === 'track') {
+  if (
+    type === 'set' ||
+    type === 'track' ||
+    type === 'club' ||
+    type === 'festival'
+  ) {
     pipelineCount.push({ $match: { $or: [{ type: type }] } });
   }
   pipelineCount.push({ $count: 'count' }, { $project: { count: 1, _id: 0 } });
