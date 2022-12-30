@@ -73,13 +73,13 @@
   {
     "_id": "6803bb06-de4a-49fd-ab64-7a9cba7ed47b",
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
-    "name": "Artist: deleteAll",
-    "url": "{{URL}}/artists/all",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: deleteAll",
+    "url": "{{URL}}/likes/all",
     "method": "DELETE",
-    "sortNum": 50000,
+    "sortNum": 175000,
     "created": "2022-10-19T21:17:49.502Z",
-    "modified": "2022-10-23T10:36:39.879Z",
+    "modified": "2022-12-30T13:05:19.304Z",
     "headers": [
       {
         "name": "XSToken",
@@ -366,12 +366,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-10-21T19:40:19.635Z",
-    "modified": "2022-10-23T21:35:21.594Z",
+    "modified": "2022-12-29T15:51:58.721Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"complete\": true\n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"asc\"\n  ],\n  \"complete\": true\n}",
       "form": []
     },
     "tests": []
@@ -400,13 +400,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "246530a5-cedd-4bb4-a909-b91a023b07a5",
     "name": "Artist: getOne",
-    "url": "{{URL}}/artists/getOne/id/635ffb27c3deba83ead64486",
-    "method": "GET",
+    "url": "{{URL}}/artists/getOne",
+    "method": "POST",
     "sortNum": 17500,
     "created": "2022-10-21T19:48:18.749Z",
-    "modified": "2022-11-13T14:30:56.499Z",
+    "modified": "2022-12-30T13:06:31.923Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"id\",\n  \"value\": \"635ffb27c3deba83ead64486\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -1523,236 +1528,6 @@
     "tests": []
   },
   {
-    "_id": "a634fa88-7793-4916-a8d3-7a26a1e2f628",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: getAll - form",
-    "url": "{{URL}}/dynamicForms/getAll",
-    "method": "POST",
-    "sortNum": 240000,
-    "created": "2022-12-16T19:22:45.353Z",
-    "modified": "2022-12-17T12:53:11.783Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"form\"\n  \n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "4f3b6c48-2206-40bb-9e7c-aeac4945ba71",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: getAll - item",
-    "url": "{{URL}}/dynamicForms/getAll",
-    "method": "POST",
-    "sortNum": 250000,
-    "created": "2022-12-16T19:52:35.637Z",
-    "modified": "2022-12-16T19:52:41.909Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"site\": \"app\",\n  \"order\": [\n    \"name\",\n    \"desc\"\n  ],\n  \"type\": \"item\"\n  \n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "259c0e20-51b8-4bb1-8543-1ec0e9547765",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: createForm",
-    "url": "{{URL}}/dynamicForms/createForm",
-    "method": "POST",
-    "sortNum": 260000,
-    "created": "2022-12-16T19:55:59.168Z",
-    "modified": "2022-12-17T12:57:57.609Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      },
-      {
-        "name": "User-Agent",
-        "value": "Thunder Client (https://www.thunderclient.com)",
-        "isDisabled": true
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"dynamicForm\",\n  \"info\": \"Formulario para crear formularios\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "9026b0c9-190f-4e3b-8907-27de14a9aa3e",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: createFormItem",
-    "url": "{{URL}}/dynamicForms/createFormItem",
-    "method": "POST",
-    "sortNum": 270000,
-    "created": "2022-12-16T20:31:35.160Z",
-    "modified": "2022-12-16T20:49:18.576Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      },
-      {
-        "name": "User-Agent",
-        "value": "Thunder Client (https://www.thunderclient.com)",
-        "isDisabled": true
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"password\",\n  \"label\": \"Contraseña\",\n  \"value\": \"\",\n  \"type\": \"password\",\n  \"form\": \"639cd507f08da3f1a9aaff24\",\n  \"placeholder\": \"Introduce tu contraseña\",\n  \"required\": true,\n  \"position\": 1\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "7180a58e-5e20-42aa-9938-656545ebf72c",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: deleteOne - Item",
-    "url": "{{URL}}/dynamicForms/one/item/639cd8d8fa1322ff3102249c",
-    "method": "DELETE",
-    "sortNum": 280000,
-    "created": "2022-12-16T20:46:12.651Z",
-    "modified": "2022-12-16T20:47:10.331Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      }
-    ],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "4a7ec00d-3b38-4e08-8452-000af42a96f0",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: deleteOne - Form",
-    "url": "{{URL}}/dynamicForms/one/form/639cd74eeac9975489b85284",
-    "method": "DELETE",
-    "sortNum": 290000,
-    "created": "2022-12-16T20:47:30.951Z",
-    "modified": "2022-12-16T20:48:28.194Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      }
-    ],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "9f26b0cb-eb8b-48e6-bb5e-e6597c2a21e6",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: getOne - Form",
-    "url": "{{URL}}/dynamicForms/getOne",
-    "method": "POST",
-    "sortNum": 245000,
-    "created": "2022-12-16T21:45:56.798Z",
-    "modified": "2022-12-17T13:50:00.543Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"id\": \"639cd507f08da3f1a9aaff24\",\n  \"subType\": \"\",\n  \"type\":\"form\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "efac542a-59dd-4ea4-86d9-1659635a02a9",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: getOne - Item",
-    "url": "{{URL}}/dynamicForms/getOne",
-    "method": "POST",
-    "sortNum": 247500,
-    "created": "2022-12-16T21:47:20.231Z",
-    "modified": "2022-12-17T13:48:59.281Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"id\": \"639cd507f08da3f1a9aaff24\",\n  \"subType\": \"\",\n  \"type\":\"form\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "507e0ebe-82f4-4ec5-a833-129d1ae3ab4b",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: updateForm",
-    "url": "{{URL}}/dynamicForms/updateForm",
-    "method": "PUT",
-    "sortNum": 275000,
-    "created": "2022-12-16T21:50:39.327Z",
-    "modified": "2022-12-16T21:53:35.209Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      },
-      {
-        "name": "User-Agent",
-        "value": "Thunder Client (https://www.thunderclient.com)",
-        "isDisabled": true
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"_id\": \"639cd58480ad2240c8c30367\",\n  \"info\": \"Formulario para edicion de artistas\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "59445bf0-8ee7-4339-90c9-811842ca69f5",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "900ec0e8-a0fe-4647-a64b-261d238c2c2d",
-    "name": "DynamicForms: updateFormItem",
-    "url": "{{URL}}/dynamicForms/updateFormItem",
-    "method": "PUT",
-    "sortNum": 277500,
-    "created": "2022-12-16T21:53:38.743Z",
-    "modified": "2022-12-16T21:54:31.346Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{TOKEN_ADMIN}}"
-      },
-      {
-        "name": "User-Agent",
-        "value": "Thunder Client (https://www.thunderclient.com)",
-        "isDisabled": true
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"_id\": \"639cd9abe4c022049b16383a\",\n  \"value\": \"\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
     "_id": "40fc4f2b-5f9a-4146-b23d-e0b991ab1e26",
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "b9eeaecf-a909-4d95-a3c9-934e43ffa2fd",
@@ -1800,6 +1575,131 @@
     "sortNum": 320000,
     "created": "2022-12-27T13:13:11.550Z",
     "modified": "2022-12-27T13:13:17.694Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "952c92c3-4f87-4e69-b52e-f0ba33949552",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: getAll",
+    "url": "{{URL}}/likes/getAll",
+    "method": "POST",
+    "sortNum": 165000,
+    "created": "2022-12-30T12:47:03.318Z",
+    "modified": "2022-12-30T13:29:43.311Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"order\": [\n    \"created\",\n    \"asc\"\n  ]\n  \n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "63c43547-72f1-427d-a2f6-596571282f90",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: getOne",
+    "url": "{{URL}}/likes/getOne",
+    "method": "POST",
+    "sortNum": 170000,
+    "created": "2022-12-30T13:07:32.517Z",
+    "modified": "2022-12-30T13:31:33.257Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"id\",\n  \"value\": \"63aee81f0b664c851acddf53\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "08ece190-bec7-4095-83be-abb835bb4f1c",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: create - artist",
+    "url": "{{URL}}/likes/create",
+    "method": "POST",
+    "sortNum": 172500,
+    "created": "2022-12-30T13:07:50.466Z",
+    "modified": "2022-12-30T13:12:45.225Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_USER}}"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"artist\",\n  \"artist\": \"63adbb2f7e27da7d49e4725b\",\n  \"user\": \"635120f54a9a95fe40061a5c\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f8a239c5-5ef1-4a3a-8d16-8c7559ba215d",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: create - event",
+    "url": "{{URL}}/likes/create",
+    "method": "POST",
+    "sortNum": 173750,
+    "created": "2022-12-30T13:28:25.963Z",
+    "modified": "2022-12-30T13:30:53.522Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_USER}}"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"event\",\n  \"event\": \"63a9664719f771d95b665c46\",\n  \"user\": \"635120f54a9a95fe40061a5c\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e5f11924-cce2-42f7-920e-031dcd66023d",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: deleteOne",
+    "url": "{{URL}}/like/one/6379fdf53bd4071e0b3cece1",
+    "method": "DELETE",
+    "sortNum": 174375,
+    "created": "2022-12-30T13:30:10.839Z",
+    "modified": "2022-12-30T13:30:25.153Z",
     "headers": [
       {
         "name": "XSToken",

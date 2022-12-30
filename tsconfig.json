@@ -30,6 +30,7 @@
       "@github": ["src/modules/github"],
       "@image": ["src/modules/image"],
       "@interfaces": ["src/shared/interfaces"],
+      "@like": ["src/modules/like"],
       "@media": ["src/modules/media"],
       "@menu": ["src/modules/menu"],
       "@middlewares": ["src/shared/middlewares"],

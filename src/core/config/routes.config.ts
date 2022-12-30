@@ -11,19 +11,19 @@ import { GeoController } from '@geo';
 import { ImageController } from '@image';
 import { EventController } from '@event';
 import { GithubController } from '@github';
-import { DynamicFormController } from '@dynamicForm';
 import { SystemController } from '@system';
+import { LikeController } from '@like';
 
 const controllers = [
   new ArtistController(),
   new AuthController(),
   new EventController(),
-  new DynamicFormController(),
   new GeoController(),
   new GithubController(),
   new MediaController(),
   new MenuController(),
   new ImageController(),
+  new LikeController(),
   new ScrapingController(),
   new StatsController(),
   new SiteController(),

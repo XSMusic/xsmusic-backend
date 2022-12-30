@@ -1,7 +1,7 @@
 import { EventMongoI } from '@event';
 import * as mongoose from 'mongoose';
 
-export const schema = new mongoose.Schema(
+export const eventSchema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     date: { type: String, default: '' },
@@ -20,4 +20,4 @@ export const schema = new mongoose.Schema(
   }
 );
 
-export const Event = mongoose.model<EventMongoI>('Event', schema);
+export const Event = mongoose.model<EventMongoI>('Event', eventSchema);

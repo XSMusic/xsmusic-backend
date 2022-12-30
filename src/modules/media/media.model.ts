@@ -11,7 +11,7 @@ const sourceValid = {
   message: '{VALUE} no es un source valido',
 };
 
-const schema = new mongoose.Schema(
+export const mediaSchema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
     artists: [{ type: mongoose.Types.ObjectId, ref: 'Artist' }],
@@ -33,4 +33,4 @@ const schema = new mongoose.Schema(
   }
 );
 
-export const Media = mongoose.model<MediaMongoI>('Media', schema);
+export const Media = mongoose.model<MediaMongoI>('Media', mediaSchema);

@@ -15,7 +15,7 @@ proToLocal() {
 
 localToPro() {
     echo "🔨  Exportando imagenes al servidor de produccion"
-    rsync -avzhe "ssh" $PATH_UPLOADS/ josexs@carstournaments.com:${PATH_APPS_PRO}/uploads/xsmusic/ > /dev/null 2>&1
+    rsync -avzhe "ssh" $PATH_UPLOADS/ josexs@xsmusic.es:${PATH_APPS_PRO}/uploads/xsmusic/ > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "✅  Sincronizacion de imagenes Localhost-Servidor completada"
     else

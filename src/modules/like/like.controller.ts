@@ -1,20 +1,18 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import {
-  ArtistCreateDto,
-  ArtistGetAllForEventDto,
-  ArtistI,
-  ArtistService,
-  ArtistUpdateDto,
-} from '@artist';
+import { LikeCreateDto, LikeService } from '@like';
 import { ControllerI } from '@interfaces';
-import { HttpException } from 'src/shared/exceptions';
-import { checkAdminToken, validationMiddleware } from '@middlewares';
+import { HttpException } from '@exceptions';
+import {
+  checkAdminToken,
+  checkUserToken,
+  validationMiddleware,
+} from '@middlewares';
 import { GetAllDto, GetOneDto } from '@dtos';
 
-export class ArtistController implements ControllerI {
-  path = '/artists';
+export class LikeController implements ControllerI {
+  path = '/likes';
   router = Router();
-  private artistService = new ArtistService();
+  private likeService = new LikeService();
   constructor() {
     this.initializeRoutes();
   }
@@ -26,27 +24,17 @@ export class ArtistController implements ControllerI {
       this.getAll
     );
     this.router.post(
-      `${this.path}/getAllForEvent`,
-      validationMiddleware(ArtistGetAllForEventDto),
-      this.getAllForEvent
-    );
-    this.router.post(
       `${this.path}/getOne`,
       validationMiddleware(GetOneDto),
       this.getOne
     );
     this.router.post(
       `${this.path}/create`,
-      validationMiddleware(ArtistCreateDto),
+      [checkUserToken, validationMiddleware(LikeCreateDto)],
       this.create
     );
-    this.router.put(
-      `${this.path}/update`,
-      validationMiddleware(ArtistUpdateDto),
-      checkAdminToken,
-      this.update
-    );
     this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
+    this.router.delete(`${this.path}/all`, checkAdminToken, this.deleteAll);
   }
 
   private getAll = async (
@@ -56,21 +44,7 @@ export class ArtistController implements ControllerI {
   ) => {
     try {
       const body: GetAllDto = request.body;
-      const result = await this.artistService.getAll(body);
-      response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private getAllForEvent = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: ArtistGetAllForEventDto = request.body;
-      const result = await this.artistService.getAllForEvent(body);
+      const result = await this.likeService.getAll(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -84,7 +58,7 @@ export class ArtistController implements ControllerI {
   ) => {
     try {
       const body: GetOneDto = request.body;
-      const result: ArtistI = await this.artistService.getOne(body);
+      const result = await this.likeService.getOne(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -98,21 +72,7 @@ export class ArtistController implements ControllerI {
   ) => {
     try {
       const body: any = request.body;
-      const result = await this.artistService.create(body);
-      response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private update = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body = request.body;
-      const result = await this.artistService.update(body);
+      const result = await this.likeService.create(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -126,7 +86,7 @@ export class ArtistController implements ControllerI {
   ) => {
     try {
       const id = request.params.id;
-      const result = await this.artistService.deleteOne(id);
+      const result = await this.likeService.deleteOne(id);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -139,7 +99,7 @@ export class ArtistController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const result = await this.artistService.deleteAll();
+      const result = await this.likeService.deleteAll();
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
