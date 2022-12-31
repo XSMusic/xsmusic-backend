@@ -82,7 +82,21 @@ const addLookups = (data: any[]) => {
         localField: 'media',
         foreignField: '_id',
         as: 'media',
-        pipeline: [{ $project: { name: 1 } }],
+        pipeline: [
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'media',
+              as: 'images',
+              pipeline: [
+                { $sort: { position: 1 } },
+                { $project: { url: 1, type: 1 } },
+              ],
+            },
+          },
+          { $project: { name: 1, type: 1, images: 1 } },
+        ],
       },
     },
     {
@@ -91,7 +105,21 @@ const addLookups = (data: any[]) => {
         localField: 'site',
         foreignField: '_id',
         as: 'site',
-        pipeline: [{ $project: { name: 1 } }],
+        pipeline: [
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'site',
+              as: 'images',
+              pipeline: [
+                { $sort: { position: 1 } },
+                { $project: { url: 1, type: 1 } },
+              ],
+            },
+          },
+          { $project: { name: 1, type: 1, images: 1 } },
+        ],
       },
     },
     {

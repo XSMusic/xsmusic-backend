@@ -116,13 +116,23 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'events',
         pipeline: getPipeline('event', complete),
       },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'artist',
+        as: 'followers',
+        pipeline: getPipeline('like', complete),
+      },
     }
   );
   if (!complete) {
     data.push(
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
+      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } },
+      { $unwind: { path: '$followers', preserveNullAndEmptyArrays: true } }
     );
   }
   return data;
