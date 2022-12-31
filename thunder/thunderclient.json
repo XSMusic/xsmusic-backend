@@ -218,11 +218,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "f4dcda24-06d7-4aeb-8b5b-3c354a391f3b",
     "name": "Users: GetOne",
-    "url": "{{url}}/users/one",
+    "url": "{{URL}}/users/getOne",
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-10-20T10:09:55.864Z",
-    "modified": "2022-10-20T10:09:55.864Z",
+    "modified": "2022-12-31T12:35:00.162Z",
     "headers": [
       {
         "name": "XSToken",
@@ -232,7 +232,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{ \"id\": \"{{userId}}\" }",
+      "raw": "{\n  \"type\": \"id\",\n  \"value\": \"635120f54a9a95fe40061a5c\"\n}",
       "form": []
     },
     "tests": []
@@ -319,30 +319,6 @@
     "sortNum": 80000,
     "created": "2022-10-20T10:09:55.900Z",
     "modified": "2022-10-20T10:09:55.900Z",
-    "headers": [
-      {
-        "name": "XSToken",
-        "value": "{{tokenAdmin}}"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n    \"name\": \"Prueba3\",\n    \"email\": \"prueba@prueba.es\",\n    \"role\": \"USER\",\n    \"password\": \"pepe\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "a8ad1c26-66e1-4581-b566-3a4a15f52877",
-    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
-    "containerId": "f4dcda24-06d7-4aeb-8b5b-3c354a391f3b",
-    "name": "Users: DeleteAllFake",
-    "url": "{{url}}/users/allFake",
-    "method": "DELETE",
-    "sortNum": 90000,
-    "created": "2022-10-20T10:09:55.907Z",
-    "modified": "2022-10-20T10:09:55.907Z",
     "headers": [
       {
         "name": "XSToken",
@@ -607,11 +583,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
     "name": "Media: getAll sets",
-    "url": "{{URL}}/media/getAll/set",
+    "url": "{{URL}}/media/getAll",
     "method": "POST",
     "sortNum": 140000,
     "created": "2022-10-29T23:49:43.248Z",
-    "modified": "2022-11-13T14:31:30.410Z",
+    "modified": "2022-12-30T16:04:18.696Z",
     "headers": [],
     "params": [],
     "body": {
@@ -664,13 +640,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "0d9c9499-b878-4681-9f41-af5096594300",
     "name": "Media: getOneById",
-    "url": "{{URL}}/media/getOne/id/636003033e997776606dd88b",
-    "method": "GET",
+    "url": "{{URL}}/media/getOne",
+    "method": "POST",
     "sortNum": 145000,
     "created": "2022-10-31T14:17:55.666Z",
-    "modified": "2022-11-13T14:32:31.720Z",
+    "modified": "2022-12-31T12:30:48.069Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"id\",\n  \"value\": \"638790376b0ac3fd9396bd48\"\n}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -727,11 +708,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
     "name": "Site: getAll clubs",
-    "url": "{{URL}}/sites/getAll/club",
+    "url": "{{URL}}/sites/getAll",
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-05T23:07:45.388Z",
-    "modified": "2022-11-23T12:26:03.182Z",
+    "modified": "2022-12-31T12:32:54.054Z",
     "headers": [],
     "params": [],
     "body": {
@@ -746,13 +727,18 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
     "name": "Site: getOne",
-    "url": "{{URL}}/sites/getOne/id/6367eb5f3fbcefee1a675a89",
-    "method": "GET",
+    "url": "{{URL}}/sites/getOne",
+    "method": "POST",
     "sortNum": 17500,
     "created": "2022-11-05T23:07:45.391Z",
-    "modified": "2022-11-13T14:33:39.075Z",
+    "modified": "2022-12-31T12:33:53.232Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"type\": \"id\", \"value\": \"6367eb5f3fbcefee1a675a89\"}",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -1012,11 +998,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
     "name": "Site: getAll festivals",
-    "url": "{{URL}}/sites/getAll/festival",
+    "url": "{{URL}}/sites/getAll",
     "method": "POST",
     "sortNum": 13750,
     "created": "2022-11-13T14:32:59.704Z",
-    "modified": "2022-11-13T14:33:14.495Z",
+    "modified": "2022-12-31T12:33:15.788Z",
     "headers": [],
     "params": [],
     "body": {
@@ -1151,11 +1137,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
     "name": "Site: getAll clubs for map",
-    "url": "{{URL}}/sites/getAll/club",
+    "url": "{{URL}}/sites/getAll",
     "method": "POST",
     "sortNum": 11875,
     "created": "2022-11-18T23:58:48.921Z",
-    "modified": "2022-12-06T22:23:57.511Z",
+    "modified": "2022-12-31T12:32:59.155Z",
     "headers": [],
     "params": [],
     "body": {
@@ -1437,11 +1423,11 @@
     "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
     "containerId": "c8823dcc-54ba-47ea-b777-56553efe669a",
     "name": "Site: getAll festivals for map",
-    "url": "{{URL}}/sites/getAll/club",
+    "url": "{{URL}}/sites/getAll",
     "method": "POST",
-    "sortNum": 12812.5,
+    "sortNum": 15625,
     "created": "2022-12-06T22:57:40.971Z",
-    "modified": "2022-12-06T22:58:25.994Z",
+    "modified": "2022-12-31T12:33:10.791Z",
     "headers": [],
     "params": [],
     "body": {
@@ -1593,12 +1579,12 @@
     "method": "POST",
     "sortNum": 165000,
     "created": "2022-12-30T12:47:03.318Z",
-    "modified": "2022-12-30T13:29:43.311Z",
+    "modified": "2022-12-31T12:32:09.990Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"order\": [\n    \"created\",\n    \"asc\"\n  ]\n  \n}",
+      "raw": "{\n  \"page\": 1,\n  \"pageSize\": 20,\n  \"order\": [\n    \"created\",\n    \"asc\"\n  ]\n}",
       "form": []
     },
     "tests": []
@@ -1631,11 +1617,11 @@
     "method": "POST",
     "sortNum": 172500,
     "created": "2022-12-30T13:07:50.466Z",
-    "modified": "2022-12-30T13:12:45.225Z",
+    "modified": "2022-12-30T15:46:32.539Z",
     "headers": [
       {
         "name": "XSToken",
-        "value": "{{TOKEN_USER}}"
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzNTEyMGY1NGE5YTk1ZmU0MDA2MWE1YyIsIm5hbWUiOiJKb3NlWFMiLCJyb2xlIjoiQURNSU4iLCJjb3VudHJ5IjoiZXMifSwiaWF0IjoxNjcyMTQwNzIzLCJleHAiOjE2ODA3ODA3MjN9.Ksekx_b_FxZTH8G0pJo2I7vgpFpN47QDpHP7r89L_Y4"
       },
       {
         "name": "Accept",
@@ -1665,11 +1651,11 @@
     "method": "POST",
     "sortNum": 173750,
     "created": "2022-12-30T13:28:25.963Z",
-    "modified": "2022-12-30T13:30:53.522Z",
+    "modified": "2022-12-30T16:01:21.325Z",
     "headers": [
       {
         "name": "XSToken",
-        "value": "{{TOKEN_USER}}"
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzNTEyMGY1NGE5YTk1ZmU0MDA2MWE1YyIsIm5hbWUiOiJKb3NlWFMiLCJyb2xlIjoiQURNSU4iLCJjb3VudHJ5IjoiZXMifSwiaWF0IjoxNjcyMTQwNzIzLCJleHAiOjE2ODA3ODA3MjN9.Ksekx_b_FxZTH8G0pJo2I7vgpFpN47QDpHP7r89L_Y4"
       },
       {
         "name": "Accept",
@@ -1707,6 +1693,74 @@
       }
     ],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "df6c69c6-8b3d-47ce-b0a8-ebc8b47e645f",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: create - media",
+    "url": "{{URL}}/likes/create",
+    "method": "POST",
+    "sortNum": 174062.5,
+    "created": "2022-12-30T16:04:01.129Z",
+    "modified": "2022-12-31T12:29:49.609Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"media\",\n  \"media\": \"638790376b0ac3fd9396bd48\",\n  \"user\": \"635120f54a9a95fe40061a5c\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "72dd9510-2e38-4584-9425-8091909ff25a",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "41939ec5-8158-4960-bd54-383fe2020afd",
+    "name": "Like: create - site",
+    "url": "{{URL}}/likes/create",
+    "method": "POST",
+    "sortNum": 174218.8,
+    "created": "2022-12-31T12:32:17.974Z",
+    "modified": "2022-12-31T12:36:01.521Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"type\": \"site\",\n  \"site\": \"63a9681f19f771d95b665cd5\",\n  \"user\": \"635120f54a9a95fe40061a5c\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
