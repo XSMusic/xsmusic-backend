@@ -48,17 +48,19 @@ export class GeoService {
             .replace(':lng', body.coordinates[1].toString())
         );
         const data: GeoCoordinatesToAddressResponseI = {
-          street: `${response.data.address.road}${
-            response.data.address.house_number
-              ? `, ${response.data.address.house_number}`
+          street: `${response.data.address && response.data.address.road}${
+            response.data.address && response.data.address.house_number
+              ? `, ${
+                  response.data.address && response.data.address.house_number
+                }`
               : ''
           }`,
           town:
-            response.data.address.city != null
-              ? response.data.address.city
-              : response.data.address.town,
-          state: response.data.address.state,
-          country: response.data.address.country_code,
+            response.data.address && response.data.address.city != null
+              ? response.data.address && response.data.address.city
+              : response.data.address && response.data.address.town,
+          state: response.data.address && response.data.address.state,
+          country: response.data.address && response.data.address.country_code,
         };
         resolve(data);
       } catch (error) {
