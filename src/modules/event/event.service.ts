@@ -1,5 +1,5 @@
 import { ImageHelper } from '@image';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import {
   Event,
   eventGetAllAggregate,
@@ -16,46 +16,26 @@ import { GetOneDto } from '@dtos';
 
 export class EventService {
   private imageHelper = new ImageHelper();
-  getAll(
-    body: EventGetAllDto
-  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+  getAll(body: EventGetAllDto): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = eventGetAllAggregate(body, true, skip, pageSize);
         const items = await Event.aggregate(aggregate).exec();
-        const aggregateTotal = eventGetAllAggregate(body, false);
-        const total = (await Event.aggregate(aggregateTotal).exec()).length;
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
+        resolve(items);
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  getAllForType(
-    body: EventGetAllForTypeDto
-  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+  getAllForType(body: EventGetAllForTypeDto): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = eventGetAllForType(body, true, skip, pageSize);
         const items = await Event.aggregate(aggregate).exec();
-        const totalPages = Math.ceil(items.length / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total: items.length,
-        };
-        resolve({ items, paginator });
+        resolve(items);
       } catch (error) {
         reject(error);
       }

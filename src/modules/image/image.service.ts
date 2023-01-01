@@ -1,4 +1,4 @@
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import {
   ImageI,
   ImageMongoI,
@@ -18,24 +18,14 @@ import { config } from '@config';
 
 export class ImageService {
   private imageHelper = new ImageHelper();
-  async getAll(
-    body?: ImageGetAllDto
-  ): Promise<{ items: ImageI[]; paginator: PaginatorI } | ImageI[]> {
+  async getAll(body?: ImageGetAllDto): Promise<ImageI[]> {
     try {
       if (body) {
         body.type = body.type ? 'all' : body.type;
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = imageGetAllAggregate(body, skip, pageSize);
         const items: ImageI[] = await Image.aggregate(aggregate).exec();
-        const total = await Image.find({}).countDocuments().exec();
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        return { items, paginator };
+        return items;
       } else {
         return await Image.find({}).exec();
       }

@@ -1,7 +1,7 @@
 import { Artist } from '@artist';
 import { GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import {
   Media,
   mediaGetAllAggregate,
@@ -17,51 +17,27 @@ import { getValuesForPaginator, slugify } from '@utils';
 export class MediaService {
   private imageHelper = new ImageHelper();
 
-  getAll(
-    body: MediaGetAllDto
-  ): Promise<{ items: MediaI[]; paginator: PaginatorI }> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = mediaGetAllAggregate(body, skip, pageSize);
-        const items = await Media.aggregate(aggregate).exec();
-        const total = await Media.find({ type: body.type })
-          .countDocuments()
-          .exec();
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
-      } catch (error) {
-        reject(error);
-      }
-    });
+  async getAll(body: MediaGetAllDto): Promise<MediaI[]> {
+    try {
+      const { pageSize, skip } = getValuesForPaginator(body);
+      const aggregate = mediaGetAllAggregate(body, skip, pageSize);
+      const items = await Media.aggregate(aggregate).exec();
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
-  getAllForType(
-    body: MediaGetAllForTypeDto
-  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = mediaGetAllForType(body, skip, pageSize);
-        const items = await Media.aggregate(aggregate).exec();
-        const totalPages = Math.ceil(items.length / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total: items.length,
-        };
-        resolve({ items, paginator });
-      } catch (error) {
-        reject(error);
-      }
-    });
+  async getAllForType(body: MediaGetAllForTypeDto): Promise<Event[]> {
+    try {
+      const { pageSize, skip } = getValuesForPaginator(body);
+      const aggregate = mediaGetAllForType(body, skip, pageSize);
+      const items = await Media.aggregate(aggregate).exec();
+
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
   getOne(data: GetOneDto): Promise<MediaI> {

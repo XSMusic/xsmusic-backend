@@ -1,5 +1,5 @@
 import { GetOneDto } from '@dtos';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import {
   User,
   userGetAllAggregate,
@@ -12,27 +12,15 @@ import { getValuesForPaginator } from '@utils';
 export class UserService {
   private populateDefault: any = [];
 
-  async getAll(
-    body?: UserGetAllDto
-  ): Promise<{ items: UserI[]; paginator: PaginatorI } | UserI[]> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
-        const aggregate = userGetAllAggregate(body, skip, pageSize);
-        const items = await User.aggregate(aggregate).exec();
-        const total = await User.find({}).countDocuments().exec();
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
-      } catch (error) {
-        reject(error);
-      }
-    });
+  async getAll(body?: UserGetAllDto): Promise<UserI[]> {
+    try {
+      const { pageSize, skip } = getValuesForPaginator(body);
+      const aggregate = userGetAllAggregate(body, skip, pageSize);
+      const items = await User.aggregate(aggregate).exec();
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
   getOne(data: GetOneDto): Promise<UserI> {

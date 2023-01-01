@@ -44,7 +44,7 @@ export class ScrapingEventService {
           map: false,
         });
 
-        const sites = responseSites.items;
+        const sites = responseSites;
         for (const item of responseEvents) {
           if (!item.venue.name.includes('TBA')) {
             const date = moment(item.date).format('YYYY-MM-DD HH:mm');

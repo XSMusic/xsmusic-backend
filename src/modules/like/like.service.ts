@@ -1,25 +1,15 @@
 import { GetAllDto, GetOneDto } from '@dtos';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { Like, likeGetAllAggregate, likeGetOneAggregate, LikeI } from '@like';
 import { getValuesForPaginator } from '@utils';
 
 export class LikeService {
-  async getAll(
-    body: GetAllDto
-  ): Promise<{ items: LikeI[]; paginator: PaginatorI }> {
+  async getAll(body: GetAllDto): Promise<LikeI[]> {
     try {
-      const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+      const { pageSize, skip } = getValuesForPaginator(body);
       const aggregate = likeGetAllAggregate(body, skip, pageSize);
       const items = await Like.aggregate(aggregate).exec();
-      const total = await Like.find({}).countDocuments().exec();
-      const totalPages = Math.ceil(total / pageSize);
-      const paginator: PaginatorI = {
-        pageSize,
-        currentPage,
-        totalPages,
-        total,
-      };
-      return { items, paginator };
+      return items;
     } catch (error) {
       return error;
     }

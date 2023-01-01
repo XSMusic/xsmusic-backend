@@ -1,4 +1,4 @@
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { getValuesForPaginator } from '@utils';
 import {
   Style,
@@ -10,23 +10,14 @@ import {
 import { GetOneDto } from '@dtos';
 
 export class StyleService {
-  getAll(
-    body: StyleGetAllDto
-  ): Promise<{ items: StyleI[]; paginator: PaginatorI }> {
+  getAll(body: StyleGetAllDto): Promise<StyleI[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = styleGetAllAggregate(body, skip, pageSize);
         const items = await Style.aggregate(aggregate).exec();
-        const total = await Style.find({}).countDocuments().exec();
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
+
+        return items;
       } catch (error) {
         reject(error);
       }

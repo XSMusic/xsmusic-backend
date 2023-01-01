@@ -8,49 +8,30 @@ import {
 } from '@artist';
 import { GetAllDto, GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 
 export class ArtistService {
   private imageHelper = new ImageHelper();
 
-  async getAll(
-    body: GetAllDto
-  ): Promise<{ items: ArtistI[]; paginator: PaginatorI }> {
+  async getAll(body: GetAllDto): Promise<ArtistI[]> {
     try {
-      const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+      const { pageSize, skip } = getValuesForPaginator(body);
       const aggregate = artistGetAllAggregate(body, skip, pageSize);
       const items = await Artist.aggregate(aggregate).exec();
-      const total = await Artist.find({}).countDocuments().exec();
-      const totalPages = Math.ceil(total / pageSize);
-      const paginator: PaginatorI = {
-        pageSize,
-        currentPage,
-        totalPages,
-        total,
-      };
-      return { items, paginator };
+      return items;
     } catch (error) {
       return error;
     }
   }
 
-  getAllForEvent(
-    body: ArtistGetAllForEventDto
-  ): Promise<{ items: Event[]; paginator: PaginatorI }> {
+  getAllForEvent(body: ArtistGetAllForEventDto): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = artistGetAllForType(body, skip, pageSize);
         const items = await Artist.aggregate(aggregate).exec();
-        const totalPages = Math.ceil(items.length / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total: items.length,
-        };
-        resolve({ items, paginator });
+        resolve(items);
       } catch (error) {
         reject(error);
       }

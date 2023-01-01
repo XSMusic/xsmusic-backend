@@ -5,7 +5,7 @@ import {
   SiteI,
   siteGetOneAggregate,
 } from 'src/modules/site';
-import { MessageI, PaginatorI } from '@interfaces';
+import { MessageI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 import { ImageHelper } from '@image';
 import { GetOneDto } from '@dtos';
@@ -13,29 +13,13 @@ import { GetOneDto } from '@dtos';
 export class SiteService {
   private imageHelper = new ImageHelper();
 
-  getAll(
-    body: SiteGetAllDto
-  ): Promise<{ items: SiteI[]; paginator: PaginatorI }> {
+  getAll(body: SiteGetAllDto): Promise<SiteI[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { pageSize, currentPage, skip } = getValuesForPaginator(body);
+        const { pageSize, skip } = getValuesForPaginator(body);
         const aggregate = siteGetAllAggregate(body, true, skip, pageSize);
         const items = await Site.aggregate(aggregate).exec();
-        const aggregateTotal = siteGetAllAggregate(body, false);
-        let total = 0;
-        if (!body.map) {
-          total = (await Site.aggregate(aggregateTotal).exec()).length;
-        } else {
-          total = items.length;
-        }
-        const totalPages = Math.ceil(total / pageSize);
-        const paginator: PaginatorI = {
-          pageSize,
-          currentPage,
-          totalPages,
-          total,
-        };
-        resolve({ items, paginator });
+        resolve(items);
       } catch (error) {
         reject(error);
       }
