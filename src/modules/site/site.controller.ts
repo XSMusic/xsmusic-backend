@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import {
   SiteCreateDto,
-  SiteGetAllDto,
   SiteI,
   SiteService,
   SiteUpdateDto,
@@ -9,7 +8,7 @@ import {
 import { ControllerI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import { checkAdminToken, validationMiddleware } from '@middlewares';
-import { GetOneDto } from '@dtos';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class SiteController implements ControllerI {
   path = '/sites';
@@ -22,7 +21,7 @@ export class SiteController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(SiteGetAllDto),
+      validationMiddleware(GetAllDto),
       this.getAll
     );
     this.router.post(
@@ -51,7 +50,7 @@ export class SiteController implements ControllerI {
     next: NextFunction
   ) => {
     try {
-      const body: SiteGetAllDto = request.body;
+      const body: GetAllDto = request.body;
       const result = await this.siteService.getAll(body);
       response.status(200).send(result);
     } catch (error) {

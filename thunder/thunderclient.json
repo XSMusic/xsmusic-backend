@@ -1762,5 +1762,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "46c49bba-6e52-483f-85ce-068d62732dd4",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "adcddf53-a20d-4bde-a80c-ed1259450ebd",
+    "name": "Resume: getForAll",
+    "url": "{{URL}}/resume/getForAll",
+    "method": "POST",
+    "sortNum": 330000,
+    "created": "2023-01-01T19:14:05.323Z",
+    "modified": "2023-01-01T19:14:17.901Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

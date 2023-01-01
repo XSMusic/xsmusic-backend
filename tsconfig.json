@@ -32,6 +32,7 @@
       "@media": ["src/modules/media"],
       "@menu": ["src/modules/menu"],
       "@middlewares": ["src/shared/middlewares"],
+      "@resume": ["src/modules/resume"],
       "@scraping": ["src/modules/scraping"],
       "@services": ["src/shared/services"],
       "@site": ["src/modules/site"],

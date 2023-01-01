@@ -11,6 +11,7 @@ import { ImageController } from '@image';
 import { EventController } from '@event';
 import { SystemController } from '@system';
 import { LikeController } from '@like';
+import { ResumeController } from '@resume';
 
 const controllers = [
   new ArtistController(),
@@ -20,6 +21,7 @@ const controllers = [
   new MediaController(),
   new ImageController(),
   new LikeController(),
+  new ResumeController(),
   new ScrapingController(),
   new StatsController(),
   new SiteController(),

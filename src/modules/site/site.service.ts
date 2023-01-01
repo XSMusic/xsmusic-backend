@@ -1,19 +1,18 @@
 import {
   Site,
   siteGetAllAggregate,
-  SiteGetAllDto,
   SiteI,
   siteGetOneAggregate,
 } from 'src/modules/site';
 import { MessageI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 import { ImageHelper } from '@image';
-import { GetOneDto } from '@dtos';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class SiteService {
   private imageHelper = new ImageHelper();
 
-  getAll(body: SiteGetAllDto): Promise<SiteI[]> {
+  getAll(body: GetAllDto): Promise<SiteI[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, skip } = getValuesForPaginator(body);

@@ -1,18 +1,4 @@
-import { GetAllDto } from '@dtos';
-import {
-  IsArray,
-  IsBoolean,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
-
-export class SiteGetAllDto extends GetAllDto {
-  @IsString() type: string;
-  @IsOptional() @IsBoolean() map: boolean;
-  @IsOptional() @IsNumber() maxDistance?: number;
-  @IsOptional() @IsArray() coordinates?: number[];
-}
+import { IsOptional, IsString } from 'class-validator';
 
 export class SiteCreateDto {
   @IsString() name: string;

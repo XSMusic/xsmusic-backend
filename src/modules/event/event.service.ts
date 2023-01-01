@@ -3,7 +3,6 @@ import { MessageI } from '@interfaces';
 import {
   Event,
   eventGetAllAggregate,
-  EventGetAllDto,
   eventGetAllForType,
   EventGetAllForTypeDto,
   eventGetOneAggregate,
@@ -12,11 +11,11 @@ import {
 import { getValuesForPaginator, slugify } from '@utils';
 import moment from 'moment';
 import { Site } from '@site';
-import { GetOneDto } from '@dtos';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class EventService {
   private imageHelper = new ImageHelper();
-  getAll(body: EventGetAllDto): Promise<Event[]> {
+  getAll(body: GetAllDto): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, skip } = getValuesForPaginator(body);

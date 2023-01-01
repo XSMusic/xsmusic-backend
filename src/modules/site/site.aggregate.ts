@@ -1,10 +1,9 @@
-import { GetOneDto } from '@dtos';
-import { SiteGetAllDto } from '@site';
+import { GetAllDto, GetOneDto } from '@dtos';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
 
 export const siteGetAllAggregate = (
-  body: SiteGetAllDto,
+  body: GetAllDto,
   paginator = true,
   skip?: number,
   pageSize?: number
@@ -21,7 +20,7 @@ export const siteGetAllAggregate = (
 };
 
 const allNoMapAggregate = (
-  body: SiteGetAllDto,
+  body: GetAllDto,
   paginator: boolean,
   skip: number,
   pageSize: number
@@ -43,7 +42,7 @@ const allNoMapAggregate = (
   return data;
 };
 
-const allMapAggregate = (body: SiteGetAllDto) => {
+const allMapAggregate = (body: GetAllDto) => {
   const data: any = [];
   data.push(
     {
@@ -160,7 +159,7 @@ const addLookups = (data: any[], complete: boolean) => {
   return data;
 };
 
-const addProject = (body: SiteGetAllDto, data: any[]) => {
+const addProject = (body: GetAllDto, data: any[]) => {
   data.push({
     $project: {
       _id: 1,

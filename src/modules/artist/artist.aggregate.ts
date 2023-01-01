@@ -34,6 +34,11 @@ export const artistGetAllAggregate = (
       created: 1,
     },
   });
+  if (body.hiddenSocial && body.hiddenSocial === true) {
+    data.push({
+      $unset: ['social'],
+    });
+  }
   return data;
 };
 
@@ -63,11 +68,11 @@ export const artistGetOneAggregate = (body: GetOneDto): any => {
   const match =
     body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
   data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, false);
+  data = addLookups(data, true);
   return data;
 };
 
-const addLookups = (data: any[], complete: boolean) => {
+const addLookups = (data: any[], one: boolean) => {
   data.push(
     {
       $lookup: {
@@ -75,7 +80,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [{ $project: { name: 1 } }],
+        pipeline: [{ $project: { _id: one ? 1 : 0, name: 1 } }],
       },
     },
     {
@@ -86,7 +91,7 @@ const addLookups = (data: any[], complete: boolean) => {
         as: 'images',
         pipeline: [
           { $sort: { position: 1 } },
-          { $project: { url: 1, type: 1 } },
+          { $project: { _id: 0, url: 1, type: 1 } },
         ],
       },
     },
@@ -96,7 +101,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'sets',
-        pipeline: getPipeline('set', complete),
+        pipeline: getPipeline('set'),
       },
     },
     {
@@ -105,7 +110,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'tracks',
-        pipeline: getPipeline('track', complete),
+        pipeline: getPipeline('track'),
       },
     },
     {
@@ -114,7 +119,7 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'events',
-        pipeline: getPipeline('event', complete),
+        pipeline: getPipeline('event'),
       },
     },
     {
@@ -123,22 +128,20 @@ const addLookups = (data: any[], complete: boolean) => {
         localField: '_id',
         foreignField: 'artist',
         as: 'followers',
-        pipeline: getPipeline('like', complete),
+        pipeline: getPipeline('like'),
       },
     }
   );
-  if (!complete) {
-    data.push(
-      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$followers', preserveNullAndEmptyArrays: true } }
-    );
-  }
+  data.push(
+    { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: '$followers', preserveNullAndEmptyArrays: true } }
+  );
   return data;
 };
 
-const getPipeline = (type: string, complete: boolean) => {
+const getPipeline = (type: string) => {
   let pipelineCount: any = [
     { $match: { $or: [{ type: type }] } },
     { $count: 'count' },
@@ -155,58 +158,5 @@ const getPipeline = (type: string, complete: boolean) => {
       { $project: { count: 1, _id: 0 } },
     ];
   }
-  const pipelineComplete = [];
-  if (type !== 'event') {
-    pipelineComplete.push({
-      $match: {
-        $or: [{ type: type }],
-      },
-    });
-  } else {
-    pipelineComplete.push({
-      $match: {
-        date: { $gte: new Date().toISOString() },
-      },
-    });
-  }
-  pipelineComplete.push(
-    {
-      $lookup: {
-        from: 'sites',
-        localField: 'site',
-        foreignField: '_id',
-        as: 'site',
-        pipeline: [
-          {
-            $lookup: {
-              from: 'images',
-              localField: '_id',
-              foreignField: 'site',
-              as: 'images',
-              pipeline: [
-                { $project: { url: 1, type: 1 } },
-                { $sort: { position: 1 } },
-              ],
-            },
-          },
-          { $project: { _id: 1, name: 1, images: 1, date: 1, address: 1 } },
-        ],
-      },
-    },
-    {
-      $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: type === 'event' ? 'event' : 'media',
-        as: 'images',
-        pipeline: [
-          { $project: { url: 1, type: 1 } },
-          { $sort: { position: 1 } },
-        ],
-      },
-    },
-    { $unwind: '$site' },
-    { $sort: { created: -1 } }
-  );
-  return complete ? pipelineComplete : pipelineCount;
+  return pipelineCount;
 };

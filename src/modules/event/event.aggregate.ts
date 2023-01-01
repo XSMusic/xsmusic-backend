@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import { EventGetAllDto, EventGetAllForTypeDto } from '@event';
+import { EventGetAllForTypeDto } from '@event';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
-import { GetOneDto } from '@dtos';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export const eventGetAllAggregate = (
-  body: EventGetAllDto,
+  body: GetAllDto,
   paginator = true,
   skip?: number,
   pageSize?: number
@@ -15,14 +15,14 @@ export const eventGetAllAggregate = (
 };
 
 const allNoMapAggregate = (
-  body: EventGetAllDto,
+  body: GetAllDto,
   paginator: boolean,
   skip: number,
   pageSize: number
 ) => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  if (body.old) {
+  if (body.old && body.old === true) {
     data.push({
       $match: {
         date: { $lt: new Date().toISOString() },
@@ -59,6 +59,11 @@ const allNoMapAggregate = (
       created: 1,
     },
   });
+  if (body.hiddenSocial && body.hiddenSocial === true) {
+    data.push({
+      $unset: ['site.social'],
+    });
+  }
   return data;
 };
 

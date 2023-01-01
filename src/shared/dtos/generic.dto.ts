@@ -29,11 +29,14 @@ export class GetAllDto {
   @IsNumber() pageSize: number;
   @IsOptional() @IsArray() order?: string[];
   @IsOptional() @IsArray() filter?: string[];
-  @IsOptional() @IsString() type: string;
+  @IsOptional() @IsString() type?: string;
   @IsOptional() @IsString() typeMedia?: string;
   @IsOptional() @IsBoolean() map?: boolean;
+  @IsOptional() @IsBoolean() old?: boolean;
+  @IsOptional() @IsBoolean() complete?: boolean;
   @IsOptional() @IsNumber() maxDistance?: number;
   @IsOptional() @IsArray() coordinates?: any;
+  @IsOptional() @IsBoolean() hiddenSocial?: boolean;
 }
 
 export class GetOneDto {
