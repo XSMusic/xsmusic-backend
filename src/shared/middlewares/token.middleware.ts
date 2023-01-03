@@ -74,7 +74,7 @@ export const checkUserNotObligatory = async (
       })
       .catch(() =>
         res.status(999).send({
-          message: 'Token incorrecto, no eres administrador',
+          message: 'Token incorrecto',
         })
       );
   } else {

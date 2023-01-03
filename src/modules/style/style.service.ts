@@ -3,25 +3,21 @@ import { getValuesForPaginator } from '@utils';
 import {
   Style,
   styleGetAllAggregate,
-  StyleGetAllDto,
   styleGetOneAggregate,
   StyleI,
 } from '@style';
-import { GetOneDto } from '@dtos';
+import { GetAllDto, GetOneDto } from '@dtos';
 
 export class StyleService {
-  getAll(body: StyleGetAllDto): Promise<StyleI[]> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { pageSize, skip } = getValuesForPaginator(body);
-        const aggregate = styleGetAllAggregate(body, skip, pageSize);
-        const items = await Style.aggregate(aggregate).exec();
-
-        return items;
-      } catch (error) {
-        reject(error);
-      }
-    });
+  async getAll(body: GetAllDto): Promise<StyleI[]> {
+    try {
+      const { pageSize, skip } = getValuesForPaginator(body);
+      const aggregate = styleGetAllAggregate(body, skip, pageSize);
+      const items = await Style.aggregate(aggregate).exec();
+      return items;
+    } catch (error) {
+      return error;
+    }
   }
 
   getOne(body: GetOneDto): Promise<StyleI> {

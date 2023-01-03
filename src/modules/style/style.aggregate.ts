@@ -1,9 +1,9 @@
-import { StyleGetAllDto } from '@style';
+import { GetAllDto } from '@dtos';
 import { getOrderForGetAllAggregate } from '@utils';
 import mongoose from 'mongoose';
 
 export const styleGetAllAggregate = (
-  body: StyleGetAllDto,
+  body: GetAllDto,
   skip: number,
   pageSize: number
 ): any => {
