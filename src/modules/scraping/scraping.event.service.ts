@@ -7,7 +7,7 @@ import {
   ScrapingGetListEventsDto,
 } from '@scraping';
 import { Site, SiteI, SiteService } from '@site';
-import { capitalize } from '@utils';
+import { capitalize, deleteTildes } from '@utils';
 import axios from 'axios';
 import moment from 'moment';
 import { Event } from '../event/event.model';
@@ -131,7 +131,10 @@ export class ScrapingEventService {
     ).map((item) => item.value);
     if (
       !events.find(
-        (e) => e.site.toString() === i.site._id!.toString() && e.date === i.date
+        (e) =>
+          e.site.toString() === i.site._id!.toString() &&
+          moment(e.date).format('YYYY-MM-DD') ===
+            moment(i.date).format('YYYY-MM-DD')
       ) &&
       !discarts.includes(`${i.site._id!.toString()} ${i.date}`)
     ) {
@@ -145,10 +148,12 @@ export class ScrapingEventService {
   ): Promise<SiteI | string> {
     try {
       const site = sites.find(
-        (site) => site.name.toLowerCase() === venue.name.toLowerCase()
+        (site) =>
+          deleteTildes(site.name.toLowerCase()) ===
+          deleteTildes(venue.name.toLowerCase())
       );
       if (site) {
-        const siteDB = await Site.findById(site._id.toString());
+        const siteDB = await Site.findById(site._id.toString()).exec();
         if (!siteDB.social.ra || siteDB.social.ra === '') {
           siteDB.social.ra = venue.id;
           await siteDB.save();

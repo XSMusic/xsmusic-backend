@@ -60,3 +60,23 @@ export const capitalize = (str: string, lower = false) =>
   (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
     match.toUpperCase()
   );
+
+export const deleteTildes = (value: string): string => {
+  const letters: any = {
+    á: 'a',
+    é: 'e',
+    í: 'i',
+    ó: 'o',
+    ú: 'u',
+    Á: 'A',
+    É: 'E',
+    Í: 'I',
+    Ó: 'O',
+    Ú: 'U',
+  };
+  return value
+    .split('')
+    .map((letter) => letters[letter] || letter)
+    .join('')
+    .toString();
+};
