@@ -15,7 +15,7 @@ export const siteGetAllAggregate = (
     data = allNoMapAggregate(body, paginator, skip, pageSize);
   }
 
-  data = addProject(body, data);
+  data = addProjectForAll(body, data);
   return data;
 };
 
@@ -27,7 +27,7 @@ const allNoMapAggregate = (
 ) => {
   let data: any = [];
   const sort = getOrderForGetAllAggregate(body);
-  data = addLookups(data, false);
+  data = addLookups(data, body.admin);
   if (body.type !== 'all') {
     data.push({ $match: { type: body.type } });
   }
@@ -108,7 +108,7 @@ export const siteGetOneAggregate = (body: GetOneDto): any => {
   return data;
 };
 
-const addLookups = (data: any[], complete: boolean) => {
+const addLookups = (data: any[], admin: boolean) => {
   data.push(
     {
       $lookup: {
@@ -130,27 +130,30 @@ const addLookups = (data: any[], complete: boolean) => {
           { $project: { url: 1, type: 1 } },
         ],
       },
-    },
-    {
-      $lookup: {
-        from: 'media',
-        localField: '_id',
-        foreignField: 'site',
-        as: 'sets',
-        pipeline: getPipeline(complete),
-      },
-    },
-    {
-      $lookup: {
-        from: 'events',
-        localField: '_id',
-        foreignField: 'site',
-        as: 'events',
-        pipeline: getPipeline(complete, 'event'),
-      },
     }
   );
-  if (!complete) {
+
+  if (admin) {
+    data.push(
+      {
+        $lookup: {
+          from: 'media',
+          localField: '_id',
+          foreignField: 'site',
+          as: 'sets',
+          pipeline: getPipeline(),
+        },
+      },
+      {
+        $lookup: {
+          from: 'events',
+          localField: '_id',
+          foreignField: 'site',
+          as: 'events',
+          pipeline: getPipeline('event'),
+        },
+      }
+    );
     data.push(
       { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
       { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
@@ -159,39 +162,70 @@ const addLookups = (data: any[], complete: boolean) => {
   return data;
 };
 
-const addProject = (body: GetAllDto, data: any[]) => {
-  data.push({
-    $project: {
-      _id: 1,
-      name: 1,
-      address: {
-        street: 1,
-        town: 1,
-        state: 1,
-        country: 1,
-        coordinates: 1,
+const addProjectForAll = (body: GetAllDto, data: any[]) => {
+  if (!body.admin && !body.map) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        styles: { name: 1 },
+        images: { url: 1, type: 1 },
+        type: 1,
+        slug: 1,
       },
-      styles: { name: 1 },
-      images: { url: 1, type: 1 },
-      type: 1,
-      sets: 1,
-      events: 1,
-      social: {
-        web: 1,
-        facebook: 1,
-        twitter: 1,
-        instagram: 1,
-        youtube: 1,
+    });
+  } else if (!body.admin && body.map) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        address: {
+          street: 1,
+          town: 1,
+          state: 1,
+          country: 1,
+          coordinates: 1,
+        },
+        styles: { name: 1 },
+        images: { url: 1, type: 1 },
+        type: 1,
+        slug: 1,
       },
-      slug: 1,
-      updated: 1,
-      created: 1,
-    },
-  });
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        address: {
+          street: 1,
+          town: 1,
+          state: 1,
+          country: 1,
+          coordinates: 1,
+        },
+        styles: { name: 1 },
+        images: { url: 1, type: 1 },
+        type: 1,
+        sets: 1,
+        events: 1,
+        social: {
+          web: 1,
+          facebook: 1,
+          twitter: 1,
+          instagram: 1,
+          youtube: 1,
+        },
+        slug: 1,
+        updated: 1,
+        created: 1,
+      },
+    });
+  }
   return data;
 };
 
-const getPipeline = (complete: boolean, type?: 'event') => {
+const getPipeline = (type?: 'event') => {
   const pipelineCount = [];
   if (type === 'event') {
     pipelineCount.push({
@@ -202,58 +236,6 @@ const getPipeline = (complete: boolean, type?: 'event') => {
   }
 
   pipelineCount.push({ $count: 'count' }, { $project: { count: 1, _id: 0 } });
-  const pipelineComplete = [];
-  if (type === 'event') {
-    pipelineComplete.push(
-      {
-        $match: {
-          date: { $gte: new Date().toISOString() },
-        },
-      },
-      {
-        $lookup: {
-          from: 'images',
-          localField: '_id',
-          foreignField: 'event',
-          as: 'images',
-          pipeline: [{ $sort: { position: 1 } }],
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-          date: 1,
-          images: { url: 1, type: 1 },
-          name: 1,
-          slug: 1,
-        },
-      }
-    );
-  } else {
-    pipelineComplete.push(
-      {
-        $lookup: {
-          from: 'artists',
-          localField: 'artists',
-          foreignField: '_id',
-          as: 'artists',
-        },
-      },
-      {
-        $lookup: {
-          from: 'images',
-          localField: '_id',
-          foreignField: 'media',
-          as: 'images',
-          pipeline: [
-            { $sort: { position: 1 } },
-            { $project: { url: 1, type: 1 } },
-          ],
-        },
-      },
-      { $unwind: '$site' },
-      { $sort: { created: -1 } }
-    );
-  }
-  return complete ? pipelineComplete : pipelineCount;
+
+  return pipelineCount;
 };

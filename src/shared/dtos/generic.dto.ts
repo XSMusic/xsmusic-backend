@@ -27,6 +27,7 @@ export class SlugDto {
 export class GetAllDto {
   @IsNumber() page: number;
   @IsNumber() pageSize: number;
+  @IsOptional() @IsBoolean() admin?: boolean;
   @IsOptional() @IsArray() order?: string[];
   @IsOptional() @IsArray() filter?: string[];
   @IsOptional() @IsString() type?: string;
