@@ -168,6 +168,9 @@ const addProjectForAll = (body: GetAllDto, data: any[]) => {
       $project: {
         _id: 1,
         name: 1,
+        address: {
+          country: 1,
+        },
         styles: { name: 1 },
         images: { url: 1, type: 1 },
         type: 1,
