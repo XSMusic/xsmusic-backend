@@ -7,6 +7,7 @@ export interface UserMongoI extends mongoose.Document {
   country: string;
   image: string;
   darkMode: string;
+  lastLogin: string;
   googleId?: string;
   appleId?: string;
   fcm?: string;

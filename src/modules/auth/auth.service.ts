@@ -18,6 +18,7 @@ import {
 import { config } from '@core/config/app.config';
 import { Logger } from '@services';
 import { UserMongoI } from '../user/user.interface';
+import moment from 'moment';
 
 export class AuthService {
   private authHelper = new AuthHelper();
@@ -161,7 +162,10 @@ export class AuthService {
         const users: UserMongoI[] = await User.aggregate(aggregate).exec();
         let user: UserMongoI;
         if (users.length > 0) {
+          const lastLogin = moment().format('YYYY-MM-DD HH:mm:ss');
           user = users[0];
+          user.lastLogin = lastLogin;
+          await User.findByIdAndUpdate(user._id, { lastLogin }).exec();
           resolve(user);
         } else {
           reject(new NotAuthorizedException());
