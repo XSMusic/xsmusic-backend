@@ -21,6 +21,7 @@ export const authLoginAggregate = (type: 'email' | 'id', value: string) => {
         _id: 1,
         name: 1,
         email: 1,
+        password: 1,
         images: 1,
         country: 1,
         darkMode: 1,
