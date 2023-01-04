@@ -53,7 +53,22 @@ export const mediaGetAllForType = (
         localField: 'artists',
         foreignField: '_id',
         as: 'artists',
-        pipeline: [{ $project: { _id: 0, name: 1, slug: 1 } }],
+        pipeline: [
+          {
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'artist',
+              as: 'images',
+              pipeline: [
+                { $sort: { position: 1 } },
+                { $limit: 1 },
+                { $project: { _id: 0, url: 1, type: 1 } },
+              ],
+            },
+          },
+          { $project: { _id: 0, name: 1, images: 1, slug: 1 } },
+        ],
       },
     },
     {
@@ -77,11 +92,25 @@ export const mediaGetAllForType = (
         as: 'site',
         pipeline: [
           {
-            $project: { _id: 0, name: 1, slug: 1 },
+            $lookup: {
+              from: 'images',
+              localField: '_id',
+              foreignField: 'site',
+              as: 'images',
+              pipeline: [
+                { $sort: { position: 1 } },
+                { $limit: 1 },
+                { $project: { _id: 0, url: 1, type: 1 } },
+              ],
+            },
+          },
+          {
+            $project: { _id: 0, name: 1, images: 1, type: 1, slug: 1 },
           },
         ],
       },
     },
+    { $unwind: '$site' },
     {
       $sort: { date: 1 },
     },

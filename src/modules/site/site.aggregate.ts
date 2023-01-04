@@ -116,7 +116,7 @@ const addLookups = (data: any[], admin: boolean) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [{ $project: { name: 1 } }, { $sort: { name: -1 } }],
+        pipeline: [{ $project: { name: 1 } }, { $sort: { name: 1 } }],
       },
     },
     {
@@ -170,6 +170,8 @@ const addProjectForAll = (body: GetAllDto, data: any[]) => {
         name: 1,
         address: {
           country: 1,
+          state: 1,
+          town: 1,
         },
         styles: { name: 1 },
         images: { url: 1, type: 1 },
