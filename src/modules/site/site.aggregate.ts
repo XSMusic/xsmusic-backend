@@ -104,7 +104,7 @@ export const siteGetOneAggregate = (body: GetOneDto): any => {
   const match =
     body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
   data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, false);
+  data = addLookups(data, true);
   return data;
 };
 
