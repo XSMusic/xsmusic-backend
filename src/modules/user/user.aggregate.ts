@@ -24,6 +24,7 @@ export const userGetAllAggregate = (
         images: 1,
         email: 1,
         role: 1,
+        darkMode: 1,
         lastLogin: 1,
         created: 1,
         updated: 1,
