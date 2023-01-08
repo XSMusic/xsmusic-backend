@@ -1,4 +1,5 @@
 import { ArtistGetAllForEventDto } from '@artist';
+import { UserTokenI } from '@auth';
 import { GetAllDto, GetOneDto } from '@dtos';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import mongoose from 'mongoose';
@@ -6,39 +7,18 @@ import mongoose from 'mongoose';
 export const artistGetAllAggregate = (
   body: GetAllDto,
   skip: number,
-  pageSize: number
+  pageSize: number,
+  user: UserTokenI
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addLookups(data, false);
+  data = addLookupsAll(data, body.admin, user);
   const filter = getFilter('artist', body);
   if (filter) {
     data.push(filter);
   }
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-  data.push({
-    $project: {
-      _id: 1,
-      name: 1,
-      country: 1,
-      birthdate: 1,
-      styles: 1,
-      images: 1,
-      slug: 1,
-      gender: 1,
-      social: 1,
-      sets: 1,
-      tracks: 1,
-      events: 1,
-      updated: 1,
-      created: 1,
-    },
-  });
-  if (body.hiddenSocial && body.hiddenSocial === true) {
-    data.push({
-      $unset: ['social'],
-    });
-  }
+  addProjectAll(data, body.admin, user);
   return data;
 };
 
@@ -63,16 +43,20 @@ export const artistGetAllForType = (
   return data;
 };
 
-export const artistGetOneAggregate = (body: GetOneDto): any => {
+export const artistGetOneAggregate = (
+  body: GetOneDto,
+  user: UserTokenI
+): any => {
   let data = [];
   const match =
     body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
   data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, true);
+  data = addLookupsOne(data, user);
+  data = addProjectOne(data, user);
   return data;
 };
 
-const addLookups = (data: any[], one: boolean) => {
+const addLookupGeneric = (data: any[]) => {
   data.push(
     {
       $lookup: {
@@ -80,7 +64,7 @@ const addLookups = (data: any[], one: boolean) => {
         localField: 'styles',
         foreignField: '_id',
         as: 'styles',
-        pipeline: [{ $project: { _id: one ? 1 : 0, name: 1 } }],
+        pipeline: [{ $project: { name: 1 } }, { $sort: { name: 1 } }],
       },
     },
     {
@@ -91,6 +75,7 @@ const addLookups = (data: any[], one: boolean) => {
         as: 'images',
         pipeline: [
           { $sort: { position: 1 } },
+          { $limit: 1 },
           { $project: { _id: 0, url: 1, type: 1 } },
         ],
       },
@@ -101,7 +86,7 @@ const addLookups = (data: any[], one: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'sets',
-        pipeline: getPipeline('set'),
+        pipeline: [{ $match: { $or: [{ type: 'set' }] } }],
       },
     },
     {
@@ -110,7 +95,7 @@ const addLookups = (data: any[], one: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'tracks',
-        pipeline: getPipeline('track'),
+        pipeline: [{ $match: { $or: [{ type: 'track' }] } }],
       },
     },
     {
@@ -119,7 +104,7 @@ const addLookups = (data: any[], one: boolean) => {
         localField: '_id',
         foreignField: 'artists',
         as: 'events',
-        pipeline: getPipeline('event'),
+        pipeline: [{ $match: { date: { $gte: new Date().toISOString() } } }],
       },
     },
     {
@@ -127,36 +112,203 @@ const addLookups = (data: any[], one: boolean) => {
         from: 'likes',
         localField: '_id',
         foreignField: 'artist',
-        as: 'followers',
-        pipeline: getPipeline('like'),
+        as: 'likes',
       },
     }
-  );
-  data.push(
-    { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-    { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
-    { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } },
-    { $unwind: { path: '$followers', preserveNullAndEmptyArrays: true } }
   );
   return data;
 };
 
-const getPipeline = (type: string) => {
-  let pipelineCount: any = [
-    { $match: { $or: [{ type: type }] } },
-    { $count: 'count' },
-    { $project: { count: 1, _id: 0 } },
-  ];
-  if (type === 'event') {
-    pipelineCount = [
+const addLookupsAll = (data: any[], admin: boolean, user?: UserTokenI) => {
+  if (admin) {
+    data = addLookupGeneric(data);
+  } else if (!admin && user) {
+    data.push(
       {
-        $match: {
-          date: { $gte: new Date().toISOString() },
+        $lookup: {
+          from: 'styles',
+          localField: 'styles',
+          foreignField: '_id',
+          as: 'styles',
+          pipeline: [{ $project: { name: 1 } }, { $sort: { name: 1 } }],
         },
       },
-      { $count: 'count' },
-      { $project: { count: 1, _id: 0 } },
-    ];
+      {
+        $lookup: {
+          from: 'images',
+          localField: '_id',
+          foreignField: 'artist',
+          as: 'images',
+          pipeline: [
+            { $sort: { position: 1 } },
+            { $limit: 1 },
+            { $project: { _id: 0, url: 1, type: 1 } },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: 'likes',
+          localField: '_id',
+          foreignField: 'artist',
+          as: 'userLike',
+          pipeline: [
+            { $match: { user: new mongoose.Types.ObjectId(user._id) } },
+          ],
+        },
+      }
+    );
+  } else if (!admin && !user) {
+    console.log('no Admin no USER');
+    data.push(
+      {
+        $lookup: {
+          from: 'styles',
+          localField: 'styles',
+          foreignField: '_id',
+          as: 'styles',
+          pipeline: [{ $project: { name: 1 } }, { $sort: { name: 1 } }],
+        },
+      },
+      {
+        $lookup: {
+          from: 'images',
+          localField: '_id',
+          foreignField: 'artist',
+          as: 'images',
+          pipeline: [
+            { $sort: { position: 1 } },
+            { $limit: 1 },
+            { $project: { _id: 0, url: 1, type: 1 } },
+          ],
+        },
+      }
+    );
   }
-  return pipelineCount;
+  return data;
+};
+
+const addLookupsOne = (data: any[], user?: UserTokenI) => {
+  data = addLookupGeneric(data);
+  if (user) {
+    data.push({
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'artist',
+        as: 'userLike',
+        pipeline: [{ $match: { user: new mongoose.Types.ObjectId(user._id) } }],
+      },
+    });
+  }
+  return data;
+};
+
+const addProjectAll = (data: any[], admin: boolean, user: UserTokenI) => {
+  if (admin) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        country: 1,
+        birthdate: 1,
+        styles: 1,
+        images: 1,
+        sets: { $size: '$sets' },
+        tracks: { $size: '$tracks' },
+        events: { $size: '$events' },
+        likes: { $size: '$likes' },
+        social: 1,
+        info: 1,
+        gender: 1,
+        updated: 1,
+        created: 1,
+        slug: 1,
+      },
+    });
+  } else if (!admin && user) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        country: 1,
+        birthdate: 1,
+        images: 1,
+        slug: 1,
+        userLike: {
+          $cond: {
+            if: { $eq: [{ $size: '$userLike' }, 1] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        country: 1,
+        birthdate: 1,
+        images: 1,
+        slug: 1,
+      },
+    });
+  }
+  return data;
+};
+
+const addProjectOne = (data: any[], user: UserTokenI) => {
+  if (user) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        country: 1,
+        birthdate: 1,
+        styles: 1,
+        images: 1,
+        sets: { $size: '$sets' },
+        tracks: { $size: '$tracks' },
+        events: { $size: '$events' },
+        likes: { $size: '$likes' },
+        social: 1,
+        info: 1,
+        gender: 1,
+        updated: 1,
+        created: 1,
+        slug: 1,
+        userLike: {
+          $cond: {
+            if: { $eq: [{ $size: '$userLike' }, 1] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        country: 1,
+        birthdate: 1,
+        styles: 1,
+        images: 1,
+        sets: { $size: '$sets' },
+        tracks: { $size: '$tracks' },
+        events: { $size: '$events' },
+        likes: { $size: '$likes' },
+        social: 1,
+        info: 1,
+        gender: 1,
+        updated: 1,
+        created: 1,
+        slug: 1,
+      },
+    });
+  }
+  return data;
 };

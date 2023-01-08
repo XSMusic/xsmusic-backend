@@ -177,5 +177,48 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "0ce3ae4a-46be-42e9-b0c0-332441dd803a",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:6969/likes/create",
+    "url": "http://localhost:6969/likes/create",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-08T11:37:15.935Z",
+    "modified": "2023-01-08T11:37:15.935Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"type\":\"artist\",\"artist\":\"63b9398e0e6145e7684ab62d\",\"user\":{\"_id\":\"635120f54a9a95fe40061a5c\",\"name\":\"JoseXS\",\"email\":\"xskunk@gmail.com\",\"password\":\"$2b$10$6lw9YQzRmwbR4wwjjbPf8e0pZf5mfOUXlh9AeOZABkaN6pUm/nZUC\",\"role\":\"ADMIN\",\"country\":\"es\",\"darkMode\":\"system\",\"googleId\":\"mfVMoUIgnMgSMgsKCruX5eY6cUc2\",\"lastLogin\":\"2023-01-08 11:06:13\",\"images\":[{\"_id\":\"63b930b90e6145e7684ab372\",\"type\":\"user\",\"url\":\"635120f54a9a95fe40061a5c_0.jpg\"}]}}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "de26f1c6-70cb-430c-86fb-55b73fba8ff1",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:6969/likes/create",
+    "url": "http://localhost:6969/likes/create",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-08T11:37:21.053Z",
+    "modified": "2023-01-08T11:37:39.225Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzNTEyMGY1NGE5YTk1ZmU0MDA2MWE1YyIsIm5hbWUiOiJKb3NlWFMiLCJyb2xlIjoiQURNSU4iLCJjb3VudHJ5IjoiZXMifSwiaWF0IjoxNjczMTc3MTY3LCJleHAiOjE2ODE4MTcxNjd9.FPkg9kfuvxCdYXTBUg5kILCV-98H_XqarZZmjVyQHo0"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\"type\":\"artist\",\"artist\":\"63b9398e0e6145e7684ab62d\",\"user\":{\"_id\":\"635120f54a9a95fe40061a5c\",\"name\":\"JoseXS\",\"email\":\"xskunk@gmail.com\",\"password\":\"$2b$10$6lw9YQzRmwbR4wwjjbPf8e0pZf5mfOUXlh9AeOZABkaN6pUm/nZUC\",\"role\":\"ADMIN\",\"country\":\"es\",\"darkMode\":\"system\",\"googleId\":\"mfVMoUIgnMgSMgsKCruX5eY6cUc2\",\"lastLogin\":\"2023-01-08 11:06:13\",\"images\":[{\"_id\":\"63b930b90e6145e7684ab372\",\"type\":\"user\",\"url\":\"635120f54a9a95fe40061a5c_0.jpg\"}]}}",
+      "form": []
+    },
+    "tests": []
   }
 ]

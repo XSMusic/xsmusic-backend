@@ -7,9 +7,13 @@ import {
   MediaService,
   MediaUpdateDto,
 } from '@media';
-import { ControllerI } from '@interfaces';
+import { ControllerI, RequestExtendedI } from '@interfaces';
 import { HttpException } from '@exceptions';
-import { checkAdminToken, validationMiddleware } from '@middlewares';
+import {
+  checkAdminToken,
+  checkUserNotObligatory,
+  validationMiddleware,
+} from '@middlewares';
 import { GetOneDto } from '@dtos';
 
 export class MediaController implements ControllerI {
@@ -23,7 +27,7 @@ export class MediaController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(MediaGetAllDto),
+      [validationMiddleware(MediaGetAllDto), checkUserNotObligatory],
       this.getAll
     );
     this.router.post(
@@ -33,18 +37,17 @@ export class MediaController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getOne`,
-      validationMiddleware(GetOneDto),
+      [validationMiddleware(GetOneDto), checkUserNotObligatory],
       this.getOne
     );
     this.router.post(
       `${this.path}/create`,
-      validationMiddleware(MediaCreateDto),
+      [checkAdminToken, validationMiddleware(MediaCreateDto)],
       this.create
     );
     this.router.put(
       `${this.path}/update`,
-      validationMiddleware(MediaUpdateDto),
-      checkAdminToken,
+      [checkAdminToken, validationMiddleware(MediaUpdateDto)],
       this.update
     );
     this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
@@ -52,13 +55,13 @@ export class MediaController implements ControllerI {
   }
 
   private getAll = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: MediaGetAllDto = request.body;
-      const result = await this.mediaService.getAll(body);
+      const result = await this.mediaService.getAll(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -80,13 +83,13 @@ export class MediaController implements ControllerI {
   };
 
   private getOne = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: GetOneDto = request.body;
-      const result: MediaI = await this.mediaService.getOne(body);
+      const result: MediaI = await this.mediaService.getOne(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

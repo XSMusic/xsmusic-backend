@@ -1,8 +1,7 @@
 import { Document } from 'mongoose';
 
 export interface LikeMongoI extends Document {
-  type: string;
-  subType: string;
+  type: 'artist' | 'event' | 'media' | 'site' | 'user';
   artist?: any;
   event?: any;
   media?: any;
@@ -12,8 +11,7 @@ export interface LikeMongoI extends Document {
 
 export interface LikeI {
   _id?: string;
-  type: string;
-  subType: string;
+  type: 'artist' | 'event' | 'media' | 'site' | 'user';
   artist?: any;
   event?: any;
   media?: any;

@@ -8,15 +8,16 @@ import { MessageI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
 import { ImageHelper } from '@image';
 import { GetAllDto, GetOneDto } from '@dtos';
+import { UserTokenI } from '@auth';
 
 export class SiteService {
   private imageHelper = new ImageHelper();
 
-  getAll(body: GetAllDto): Promise<SiteI[]> {
+  getAll(body: GetAllDto, user?: UserTokenI): Promise<SiteI[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, skip } = getValuesForPaginator(body);
-        const aggregate = siteGetAllAggregate(body, true, skip, pageSize);
+        const aggregate = siteGetAllAggregate(body, skip, pageSize, user);
         const items = await Site.aggregate(aggregate).exec();
         resolve(items);
       } catch (error) {
@@ -25,10 +26,10 @@ export class SiteService {
     });
   }
 
-  getOne(body: GetOneDto): Promise<SiteI> {
+  getOne(body: GetOneDto, user?: UserTokenI): Promise<SiteI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = siteGetOneAggregate(body);
+        const aggregate = siteGetOneAggregate(body, user);
         const items = await Site.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

@@ -2,13 +2,16 @@ import { NextFunction, Request, Response, Router } from 'express';
 import {
   ArtistCreateDto,
   ArtistGetAllForEventDto,
-  ArtistI,
   ArtistService,
   ArtistUpdateDto,
 } from '@artist';
-import { ControllerI } from '@interfaces';
+import { ControllerI, RequestExtendedI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
-import { checkAdminToken, validationMiddleware } from '@middlewares';
+import {
+  checkAdminToken,
+  checkUserNotObligatory,
+  validationMiddleware,
+} from '@middlewares';
 import { GetAllDto, GetOneDto } from '@dtos';
 
 export class ArtistController implements ControllerI {
@@ -22,7 +25,7 @@ export class ArtistController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(GetAllDto),
+      [validationMiddleware(GetAllDto), checkUserNotObligatory],
       this.getAll
     );
     this.router.post(
@@ -32,31 +35,30 @@ export class ArtistController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getOne`,
-      validationMiddleware(GetOneDto),
+      [validationMiddleware(GetOneDto), checkUserNotObligatory],
       this.getOne
     );
     this.router.post(
       `${this.path}/create`,
-      validationMiddleware(ArtistCreateDto),
+      [checkAdminToken, validationMiddleware(ArtistCreateDto)],
       this.create
     );
     this.router.put(
       `${this.path}/update`,
-      validationMiddleware(ArtistUpdateDto),
-      checkAdminToken,
+      [checkAdminToken, validationMiddleware(ArtistUpdateDto)],
       this.update
     );
     this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
   }
 
   private getAll = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: GetAllDto = request.body;
-      const result = await this.artistService.getAll(body);
+      const result = await this.artistService.getAll(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -78,13 +80,13 @@ export class ArtistController implements ControllerI {
   };
 
   private getOne = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: GetOneDto = request.body;
-      const result: ArtistI = await this.artistService.getOne(body);
+      const result = await this.artistService.getOne(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

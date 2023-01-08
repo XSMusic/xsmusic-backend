@@ -1,4 +1,5 @@
 import { Artist } from '@artist';
+import { UserTokenI } from '@auth';
 import { GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
 import { MessageI } from '@interfaces';
@@ -17,10 +18,10 @@ import { getValuesForPaginator, slugify } from '@utils';
 export class MediaService {
   private imageHelper = new ImageHelper();
 
-  async getAll(body: MediaGetAllDto): Promise<MediaI[]> {
+  async getAll(body: MediaGetAllDto, user?: UserTokenI): Promise<MediaI[]> {
     try {
       const { pageSize, skip } = getValuesForPaginator(body);
-      const aggregate = mediaGetAllAggregate(body, skip, pageSize);
+      const aggregate = mediaGetAllAggregate(body, skip, pageSize, user);
       const items = await Media.aggregate(aggregate).exec();
       return items;
     } catch (error) {
@@ -33,17 +34,16 @@ export class MediaService {
       const { pageSize, skip } = getValuesForPaginator(body);
       const aggregate = mediaGetAllForType(body, skip, pageSize);
       const items = await Media.aggregate(aggregate).exec();
-
       return items;
     } catch (error) {
       return error;
     }
   }
 
-  getOne(data: GetOneDto): Promise<MediaI> {
+  getOne(data: GetOneDto, user?: UserTokenI): Promise<MediaI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = mediaGetOneAggregate(data);
+        const aggregate = mediaGetOneAggregate(data, user);
         const items = await Media.aggregate(aggregate).exec();
         let item: MediaI;
         if (items.length > 0) {

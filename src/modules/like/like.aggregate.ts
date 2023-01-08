@@ -78,7 +78,7 @@ const addLookups = (data: any[]) => {
     },
     {
       $lookup: {
-        from: 'medias',
+        from: 'media',
         localField: 'media',
         foreignField: '_id',
         as: 'media',

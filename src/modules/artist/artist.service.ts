@@ -10,19 +10,24 @@ import { GetAllDto, GetOneDto } from '@dtos';
 import { ImageHelper } from '@image';
 import { MessageI } from '@interfaces';
 import { getValuesForPaginator, slugify } from '@utils';
+import { Logger } from 'src/shared/services/logger.service';
+import { UserTokenI } from '../auth/auth.interface';
 
 export class ArtistService {
   private imageHelper = new ImageHelper();
 
-  async getAll(body: GetAllDto): Promise<ArtistI[]> {
-    try {
-      const { pageSize, skip } = getValuesForPaginator(body);
-      const aggregate = artistGetAllAggregate(body, skip, pageSize);
-      const items = await Artist.aggregate(aggregate).exec();
-      return items;
-    } catch (error) {
-      return error;
-    }
+  async getAll(body: GetAllDto, user?: UserTokenI): Promise<ArtistI[]> {
+    return new Promise<ArtistI[]>(async (resolve, reject) => {
+      try {
+        const { pageSize, skip } = getValuesForPaginator(body);
+        const aggregate = artistGetAllAggregate(body, skip, pageSize, user);
+        const items = await Artist.aggregate(aggregate).exec();
+        resolve(items);
+      } catch (error) {
+        Logger.error(error);
+        reject(error);
+      }
+    });
   }
 
   getAllForEvent(body: ArtistGetAllForEventDto): Promise<Event[]> {
@@ -38,10 +43,10 @@ export class ArtistService {
     });
   }
 
-  getOne(data: GetOneDto): Promise<ArtistI> {
+  getOne(data: GetOneDto, user?: UserTokenI): Promise<ArtistI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = artistGetOneAggregate(data);
+        const aggregate = artistGetOneAggregate(data, user);
         const items = await Artist.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);

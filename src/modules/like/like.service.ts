@@ -36,12 +36,9 @@ export class LikeService {
       try {
         const data: any = {
           type: body.type,
-          subType: body.subType,
           user: body.user,
         };
-        if (body.type === 'artist') {
-          data['artist'] = body.artist;
-        }
+        data[body.type] = body[body.type];
         const isExist: LikeI[] = await Like.find(data).exec();
         if (isExist.length === 0) {
           const item = new Like(body);

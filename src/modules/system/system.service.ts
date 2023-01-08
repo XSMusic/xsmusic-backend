@@ -8,6 +8,7 @@ import { Artist } from '@artist';
 import { Site } from '@site';
 import { Media } from '@media';
 import { Event } from '@event';
+import { Logger } from '@services';
 
 export class SystemService {
   url = 'https://xsmusic.es';
@@ -58,7 +59,6 @@ export class SystemService {
         total = Math.ceil((Number(disk_info[1]) * 1024) / Math.pow(1024, 2));
         used = Math.ceil((Number(disk_info[2]) * 1024) / Math.pow(1024, 2));
         free = Math.ceil((Number(disk_info[3]) * 1024) / Math.pow(1024, 2));
-        console.log({ total, free, used });
         resolve({ total, free, used });
       });
     });
@@ -87,7 +87,7 @@ export class SystemService {
       });
       return { message: 'Archivo generado' };
     } catch (error) {
-      console.log({ error });
+      Logger.error(error);
       return error;
     }
   }
