@@ -47,7 +47,7 @@ export class StatsService {
     model: Model<T>,
     type?: string
   ): Promise<StatsTotalAdminItemI> {
-    const daysComparation = [3, 7];
+    const daysComparation = [7, 30];
     const body = type ? { type } : {};
     const total = await model.countDocuments(body).exec();
     const percentages = [];
