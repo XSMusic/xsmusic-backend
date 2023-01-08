@@ -220,5 +220,33 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9872cb0e-d87f-48b1-a287-878607fe1a21",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://analyticsdata.googleapis.com/v1beta/properties/GA4_PROPERTY_ID:runReport ",
+    "url": "https://analyticsdata.googleapis.com/v1beta/properties/GA4_PROPERTY_ID:runReport ",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-08T21:42:36.323Z",
+    "modified": "2023-01-08T21:42:36.323Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d5e08798-0713-45f3-af57-b872d33e6b4a",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://analyticsdata.googleapis.com/v1beta/properties/338535534:runReport ",
+    "url": "https://analyticsdata.googleapis.com/v1beta/properties/338535534:runReport ",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-08T21:42:44.950Z",
+    "modified": "2023-01-08T21:42:44.950Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

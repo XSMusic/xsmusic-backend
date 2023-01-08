@@ -1,3 +1,4 @@
+import { AnalyticsController } from '@analytics';
 import { ArtistController } from '@artist';
 import { AuthController } from '@auth';
 import { UserController } from '@user';
@@ -14,6 +15,7 @@ import { LikeController } from '@like';
 import { ResumeController } from '@resume';
 
 const controllers = [
+  new AnalyticsController(),
   new ArtistController(),
   new AuthController(),
   new EventController(),

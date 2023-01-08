@@ -65,7 +65,6 @@ const allMapAggregate = (body: GetAllDto, user: UserTokenI) => {
     }
   );
   if (user) {
-    console.log('aqui no no?');
     data.push({
       $lookup: {
         from: 'likes',

@@ -17,6 +17,116 @@ export const authLoginAggregate = (type: 'email' | 'id', value: string) => {
       },
     },
     {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeArtists',
+        pipeline: [{ $match: { type: 'artist' } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeEvents',
+        pipeline: [{ $match: { type: 'event' } }],
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeClubs',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'sites',
+              localField: 'site',
+              foreignField: '_id',
+              as: 'site',
+            },
+          },
+          {
+            $match: {
+              $and: [{ type: 'site' }, { 'site.type': 'club' }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeFestivals',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'sites',
+              localField: 'site',
+              foreignField: '_id',
+              as: 'site',
+            },
+          },
+          {
+            $match: {
+              $and: [{ type: 'site' }, { 'site.type': 'festival' }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeSets',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'media',
+              localField: 'media',
+              foreignField: '_id',
+              as: 'media',
+            },
+          },
+          {
+            $match: {
+              $and: [{ type: 'media' }, { 'media.type': 'set' }],
+            },
+          },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'user',
+        as: 'likeTracks',
+        pipeline: [
+          {
+            $lookup: {
+              from: 'media',
+              localField: 'media',
+              foreignField: '_id',
+              as: 'media',
+            },
+          },
+          {
+            $match: {
+              $and: [{ type: 'media' }, { 'media.type': 'track' }],
+            },
+          },
+        ],
+      },
+    },
+    {
       $project: {
         _id: 1,
         name: 1,
@@ -29,6 +139,14 @@ export const authLoginAggregate = (type: 'email' | 'id', value: string) => {
         googleId: 1,
         appleId: 1,
         role: 1,
+        likes: {
+          artists: { $size: '$likeArtists' },
+          clubs: { $size: '$likeClubs' },
+          festivals: { $size: '$likeFestivals' },
+          sets: { $size: '$likeSets' },
+          tracks: { $size: '$likeTracks' },
+          events: { $size: '$likeEvents' },
+        },
       },
     },
   ];

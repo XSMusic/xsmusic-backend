@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@aggregates": ["src/shared/aggregates"],
+      "@analytics": ["src/modules/analytics"],
       "@artist": ["src/modules/artist"],
       "@auth": ["src/modules/auth"],
       "@config": ["src/core/config"],

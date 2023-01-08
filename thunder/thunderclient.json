@@ -1776,5 +1776,96 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "861119a1-8f92-4cd4-8865-121ffd71b0fe",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "937430b5-4677-491b-bfcd-a8be994b7658",
+    "name": "Analytics: getVisits",
+    "url": "{{URL}}/analytics/getVisits",
+    "method": "POST",
+    "sortNum": 340000,
+    "created": "2023-01-08T21:26:21.859Z",
+    "modified": "2023-01-08T21:32:41.037Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"startDate\": \"3daysAgo\",\n    \"endDate\": \"today\",\n    \"order\": \"date\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "fd2da803-ddeb-47cd-8e40-61aa7eea3d8a",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "937430b5-4677-491b-bfcd-a8be994b7658",
+    "name": "Analytics: getDataForVMap",
+    "url": "{{URL}}/analytics/getDataForVMap",
+    "method": "POST",
+    "sortNum": 350000,
+    "created": "2023-01-08T22:14:27.940Z",
+    "modified": "2023-01-08T22:15:01.514Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"startDate\": \"90daysAgo\",\n    \"endDate\": \"today\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "927e0f7e-1e61-48f8-8d4a-49ec7f8d3cd4",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "937430b5-4677-491b-bfcd-a8be994b7658",
+    "name": "Analytics: getEventsWithCategories",
+    "url": "{{URL}}/analytics/getEventsWithCategories",
+    "method": "POST",
+    "sortNum": 360000,
+    "created": "2023-01-08T22:15:37.629Z",
+    "modified": "2023-01-08T22:16:15.594Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"startDate\": \"7daysAgo\",\n    \"endDate\": \"today\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6cfcb0f1-6fc0-456a-97f6-22c447ddf421",
+    "colId": "ff7c257c-7d7b-4c44-b0a9-1bd3472ca78c",
+    "containerId": "937430b5-4677-491b-bfcd-a8be994b7658",
+    "name": "Analytics: getVisitsRealTime",
+    "url": "{{URL}}/analytics/getVisitsRealTime",
+    "method": "POST",
+    "sortNum": 370000,
+    "created": "2023-01-08T22:16:42.507Z",
+    "modified": "2023-01-08T22:17:06.834Z",
+    "headers": [
+      {
+        "name": "XSToken",
+        "value": "{{TOKEN_ADMIN}}"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]
