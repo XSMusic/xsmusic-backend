@@ -7,6 +7,7 @@ export interface StatsTotalsAdminI {
   sets: StatsTotalAdminItemI;
   styles: StatsTotalAdminItemI;
   tracks: StatsTotalAdminItemI;
+  likes: StatsTotalAdminItemI;
   users: StatsTotalAdminItemI;
 }
 

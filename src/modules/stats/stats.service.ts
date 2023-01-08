@@ -18,6 +18,7 @@ import { User, UserMongoI } from '@user';
 import { Site, SiteMongoI } from '@site';
 import { Image, ImageMongoI } from '@image';
 import { Event, EventMongoI } from '@event';
+import { Like, LikeMongoI } from '@like';
 
 export class StatsService {
   getForAdmin(): Promise<StatsTotalsAdminI> {
@@ -32,6 +33,7 @@ export class StatsService {
           festivals: await this.setTotal<SiteMongoI>(Site, 'festival'),
           images: await this.setTotal<ImageMongoI>(Image),
           events: await this.setTotal<EventMongoI>(Event),
+          likes: await this.setTotal<LikeMongoI>(Like),
           users: await this.setTotal<UserMongoI>(User),
         };
         resolve(totals);
