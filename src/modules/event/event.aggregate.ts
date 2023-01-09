@@ -2,23 +2,24 @@ import mongoose from 'mongoose';
 import { EventGetAllForTypeDto } from '@event';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
 import { GetAllDto, GetOneDto } from '@dtos';
+import { UserTokenI } from '@auth';
 
 export const eventGetAllAggregate = (
   body: GetAllDto,
-  paginator = true,
   skip?: number,
-  pageSize?: number
+  pageSize?: number,
+  user?: UserTokenI
 ): any => {
   let data: any = [];
-  data = allNoMapAggregate(body, paginator, skip, pageSize);
+  data = allAggregate(body, skip, pageSize, user);
   return data;
 };
 
-const allNoMapAggregate = (
+const allAggregate = (
   body: GetAllDto,
-  paginator: boolean,
   skip: number,
-  pageSize: number
+  pageSize: number,
+  user: UserTokenI
 ) => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
@@ -36,47 +37,31 @@ const allNoMapAggregate = (
     });
   }
 
-  data = addLookups(data, false, false);
+  data = addLookupsAll(data, body.admin, user);
   const filter = getFilter('event', body);
   if (filter) {
     data.push(filter);
   }
-  if (paginator) {
-    data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
-  }
-  data.push({
-    $project: {
-      _id: 1,
-      name: 1,
-      date: 1,
-      site: 1,
-      styles: 1,
-      artists: 1,
-      images: 1,
-      info: 1,
-      slug: 1,
-      updated: 1,
-      created: 1,
-    },
-  });
-  if (body.hiddenSocial && body.hiddenSocial === true) {
-    data.push({
-      $unset: ['site.social'],
-    });
-  }
+  data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
+
+  addProjectAll(data, body.admin, user);
   return data;
 };
 
-export const eventGetOneAggregate = (body: GetOneDto): any => {
+export const eventGetOneAggregate = (
+  body: GetOneDto,
+  user: UserTokenI
+): any => {
   let data = [];
   const match =
     body.type === 'id' ? new mongoose.Types.ObjectId(body.value) : body.value;
   data.push({ $match: { [body.type === 'id' ? '_id' : 'slug']: match } });
-  data = addLookups(data, true, true);
+  data = addLookupsAll(data, body.admin, user);
+  data = addProjectOne(data, body.admin, user);
   return data;
 };
 
-const addLookups = (data: any[], one: boolean, complete: boolean) => {
+const addLookupGeneric = (data: any[]) => {
   data.push(
     {
       $lookup: {
@@ -149,7 +134,6 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
               name: 1,
               address: 1,
               type: 1,
-              social: one ? 1 : -1,
               images: 1,
               slug: 1,
             },
@@ -157,13 +141,143 @@ const addLookups = (data: any[], one: boolean, complete: boolean) => {
         ],
       },
     },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'event',
+        as: 'likes',
+      },
+    },
     { $unwind: '$site' }
   );
-  if (!complete) {
-    data.push(
-      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } }
-    );
+  return data;
+};
+
+const addLookupsAll = (data: any[], admin: boolean, user?: UserTokenI) => {
+  if (admin) {
+    data = addLookupGeneric(data);
+  } else if (!admin && user) {
+    data = addLookupGeneric(data);
+    data.push({
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'event',
+        as: 'userLike',
+        pipeline: [{ $match: { user: new mongoose.Types.ObjectId(user._id) } }],
+      },
+    });
+  } else {
+    data = addLookupGeneric(data);
+  }
+  data.push();
+  return data;
+};
+
+const addProjectAll = (data: any[], admin: boolean, user?: UserTokenI) => {
+  if (admin) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        styles: 1,
+        artists: 1,
+        images: 1,
+        info: 1,
+        slug: 1,
+        updated: 1,
+        created: 1,
+      },
+    });
+  } else if (!admin && user) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        styles: 1,
+        artists: 1,
+        images: 1,
+        info: 1,
+        slug: 1,
+        updated: 1,
+        created: 1,
+        userLike: {
+          $cond: {
+            if: { $eq: [{ $size: '$userLike' }, 1] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        images: 1,
+        slug: 1,
+      },
+    });
+  }
+  return data;
+};
+
+const addProjectOne = (data: any[], admin: boolean, user?: UserTokenI) => {
+  if (admin) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        styles: 1,
+        artists: 1,
+        images: 1,
+        info: 1,
+        slug: 1,
+        updated: 1,
+        created: 1,
+      },
+    });
+  } else if (!admin && user) {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        styles: 1,
+        artists: 1,
+        images: 1,
+        info: 1,
+        slug: 1,
+        updated: 1,
+        created: 1,
+        userLike: 1,
+      },
+    });
+  } else {
+    data.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        date: 1,
+        site: 1,
+        styles: 1,
+        artists: 1,
+        images: 1,
+        info: 1,
+        slug: 1,
+      },
+    });
   }
   return data;
 };

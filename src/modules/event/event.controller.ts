@@ -7,9 +7,13 @@ import {
   EventUpdateDto,
   EventGetAllForTypeDto,
 } from '@event';
-import { ControllerI } from '@interfaces';
+import { ControllerI, RequestExtendedI } from '@interfaces';
 import { HttpException } from '@exceptions';
-import { checkAdminToken, validationMiddleware } from '@middlewares';
+import {
+  checkAdminToken,
+  checkUserNotObligatory,
+  validationMiddleware,
+} from '@middlewares';
 import { GetAllDto, GetOneDto } from '@dtos';
 
 export class EventController implements ControllerI {
@@ -23,7 +27,7 @@ export class EventController implements ControllerI {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/getAll`,
-      validationMiddleware(GetAllDto),
+      [validationMiddleware(GetAllDto), checkUserNotObligatory],
       this.getAll
     );
     this.router.post(
@@ -33,18 +37,17 @@ export class EventController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getOne`,
-      validationMiddleware(GetOneDto),
+      [validationMiddleware(GetOneDto), checkUserNotObligatory],
       this.getOne
     );
     this.router.post(
       `${this.path}/create`,
-      validationMiddleware(EventCreateDto),
+      [checkAdminToken, validationMiddleware(EventCreateDto)],
       this.create
     );
     this.router.put(
       `${this.path}/update`,
-      validationMiddleware(EventUpdateDto),
-      checkAdminToken,
+      [checkAdminToken, validationMiddleware(EventUpdateDto)],
       this.update
     );
     this.router.delete(`${this.path}/one/:id`, checkAdminToken, this.deleteOne);
@@ -52,13 +55,13 @@ export class EventController implements ControllerI {
   }
 
   private getAll = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: EventGetAllDto = request.body;
-      const result = await this.eventService.getAll(body);
+      const result = await this.eventService.getAll(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));
@@ -80,13 +83,13 @@ export class EventController implements ControllerI {
   };
 
   private getOne = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: GetOneDto = request.body;
-      const result: EventI = await this.eventService.getOne(body);
+      const result: EventI = await this.eventService.getOne(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

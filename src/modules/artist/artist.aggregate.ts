@@ -159,7 +159,6 @@ const addLookupsAll = (data: any[], admin: boolean, user?: UserTokenI) => {
       }
     );
   } else if (!admin && !user) {
-    console.log('no Admin no USER');
     data.push(
       {
         $lookup: {

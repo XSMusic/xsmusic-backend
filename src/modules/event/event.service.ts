@@ -12,14 +12,15 @@ import { getValuesForPaginator, slugify } from '@utils';
 import moment from 'moment';
 import { Site } from '@site';
 import { GetAllDto, GetOneDto } from '@dtos';
+import { UserTokenI } from '@auth';
 
 export class EventService {
   private imageHelper = new ImageHelper();
-  getAll(body: GetAllDto): Promise<Event[]> {
+  getAll(body: GetAllDto, user?: UserTokenI): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, skip } = getValuesForPaginator(body);
-        const aggregate = eventGetAllAggregate(body, true, skip, pageSize);
+        const aggregate = eventGetAllAggregate(body, skip, pageSize, user);
         const items = await Event.aggregate(aggregate).exec();
         resolve(items);
       } catch (error) {
@@ -41,10 +42,10 @@ export class EventService {
     });
   }
 
-  getOne(body: GetOneDto): Promise<EventI> {
+  getOne(body: GetOneDto, user?: UserTokenI): Promise<EventI> {
     return new Promise(async (resolve, reject) => {
       try {
-        const aggregate = eventGetOneAggregate(body);
+        const aggregate = eventGetOneAggregate(body, user);
         const items = await Event.aggregate(aggregate).exec();
         if (items.length > 0) {
           resolve(items[0]);
