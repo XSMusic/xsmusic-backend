@@ -261,7 +261,13 @@ const addProjectOne = (data: any[], admin: boolean, user?: UserTokenI) => {
         slug: 1,
         updated: 1,
         created: 1,
-        userLike: 1,
+        userLike: {
+          $cond: {
+            if: { $eq: [{ $size: '$userLike' }, 1] },
+            then: true,
+            else: false,
+          },
+        },
       },
     });
   } else {
