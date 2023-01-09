@@ -119,21 +119,18 @@ export class AnalyticsService {
   ): Promise<AnalyticsGetEventsWithCategoriesResponse[]> {
     let items: any[] = [];
     const categories = [
-      'car',
-      'cars',
-      'tournament',
-      'tournaments',
-      'dashboard',
-      'myData',
-      'myGarage',
-      'myGarageOne',
-      'myGarageImages',
-      'myInscriptions',
-      'myTrophies',
-      'ranking',
-      'notification',
-      'tabs',
-      'auth',
+      'artist',
+      'artists',
+      'event',
+      'events',
+      'club',
+      'clubs',
+      'festival',
+      'festivals',
+      'set',
+      'sets',
+      'track',
+      'tracks',
       'app',
     ];
     for (const item of categories) {

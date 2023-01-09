@@ -9,7 +9,7 @@ export const styleGetAllAggregate = (
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data = addLookups(data, false);
+  data = addLookups(data, true);
 
   if (body.filter && body.filter.length === 2) {
     data.push({
@@ -23,12 +23,12 @@ export const styleGetAllAggregate = (
     $project: {
       _id: 1,
       name: 1,
-      artists: 1,
-      sets: 1,
-      tracks: 1,
-      clubs: 1,
-      festivals: 1,
-      events: 1,
+      artists: { $size: '$sets' },
+      sets: { $size: '$sets' },
+      tracks: { $size: '$tracks' },
+      clubs: { $size: '$clubs' },
+      festivals: { $size: '$festivals' },
+      events: { $size: '$events' },
     },
   });
   return data;
@@ -98,16 +98,7 @@ const addLookups = (data: any[], complete: boolean) => {
       },
     }
   );
-  if (!complete) {
-    data.push(
-      { $unwind: { path: '$artists', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$sets', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$tracks', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$clubs', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$festivals', preserveNullAndEmptyArrays: true } },
-      { $unwind: { path: '$events', preserveNullAndEmptyArrays: true } }
-    );
-  }
+
   return data;
 };
 
