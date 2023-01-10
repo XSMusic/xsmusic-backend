@@ -8,13 +8,16 @@ export const mediaGetAllAggregate = (
   body: MediaGetAllDto,
   skip: number,
   pageSize: number,
-  user: UserTokenI
+  user: UserTokenI,
+  forType = false
 ): any => {
   const sort = getOrderForGetAllAggregate(body);
   let data: any = [];
-  data.push({
-    $match: { type: body.type },
-  });
+  if (!forType) {
+    data.push({
+      $match: { type: body.type },
+    });
+  }
   addLookupsAll(data, body.admin, user);
   data = addFilters(body, data);
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
@@ -25,10 +28,10 @@ export const mediaGetAllAggregate = (
 export const mediaGetAllForType = (
   body: MediaGetAllForTypeDto,
   skip?: number,
-  pageSize?: number
+  pageSize?: number,
+  user?: UserTokenI
 ): any => {
-  const data = [];
-  data.push(
+  const data = [
     {
       $match: {
         $and: [
@@ -37,100 +40,8 @@ export const mediaGetAllForType = (
         ],
       },
     },
-    {
-      $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: 'event',
-        as: 'images',
-        pipeline: [
-          { $sort: { position: 1 } },
-          { $project: { _id: 0, url: 1, type: 1 } },
-        ],
-      },
-    },
-    {
-      $lookup: {
-        from: 'artists',
-        localField: 'artists',
-        foreignField: '_id',
-        as: 'artists',
-        pipeline: [
-          {
-            $lookup: {
-              from: 'images',
-              localField: '_id',
-              foreignField: 'artist',
-              as: 'images',
-              pipeline: [
-                { $sort: { position: 1 } },
-                { $limit: 1 },
-                { $project: { _id: 0, url: 1, type: 1 } },
-              ],
-            },
-          },
-          { $project: { _id: 0, name: 1, images: 1, slug: 1 } },
-        ],
-      },
-    },
-    {
-      $lookup: {
-        from: 'images',
-        localField: '_id',
-        foreignField: 'media',
-        as: 'images',
-        pipeline: [
-          { $sort: { position: 1 } },
-          { $limit: 1 },
-          { $project: { _id: 0, url: 1, type: 1 } },
-        ],
-      },
-    },
-    {
-      $lookup: {
-        from: 'sites',
-        localField: 'site',
-        foreignField: '_id',
-        as: 'site',
-        pipeline: [
-          {
-            $lookup: {
-              from: 'images',
-              localField: '_id',
-              foreignField: 'site',
-              as: 'images',
-              pipeline: [
-                { $sort: { position: 1 } },
-                { $limit: 1 },
-                { $project: { _id: 0, url: 1, type: 1 } },
-              ],
-            },
-          },
-          {
-            $project: { _id: 0, name: 1, images: 1, type: 1, slug: 1 },
-          },
-        ],
-      },
-    },
-    { $unwind: '$site' },
-    {
-      $sort: { date: 1 },
-    },
-    { $skip: skip },
-    { $limit: pageSize },
-    {
-      $project: {
-        _id: 1,
-        name: 1,
-        artists: 1,
-        type: 1,
-        year: 1,
-        slug: 1,
-        images: 1,
-        site: 1,
-      },
-    }
-  );
+  ];
+  data.push(...mediaGetAllAggregate(body, skip, pageSize, user, true));
   return data;
 };
 
@@ -394,9 +305,7 @@ const addProjectAll = (data: any[], admin: boolean, user: UserTokenI) => {
         styles: 1,
         site: 1,
         source: 1,
-        sourceId: 1,
         images: 1,
-        info: 1,
         year: 1,
         type: 1,
         slug: 1,
@@ -414,9 +323,7 @@ const addProjectAll = (data: any[], admin: boolean, user: UserTokenI) => {
         styles: 1,
         site: 1,
         source: 1,
-        sourceId: 1,
         images: 1,
-        info: 1,
         year: 1,
         type: 1,
         slug: 1,

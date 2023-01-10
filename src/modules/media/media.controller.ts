@@ -32,7 +32,7 @@ export class MediaController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getAllForType`,
-      validationMiddleware(MediaGetAllForTypeDto),
+      [validationMiddleware(MediaGetAllForTypeDto), checkUserNotObligatory],
       this.getAllForType
     );
     this.router.post(
@@ -69,13 +69,13 @@ export class MediaController implements ControllerI {
   };
 
   private getAllForType = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: MediaGetAllForTypeDto = request.body;
-      const result = await this.mediaService.getAllForType(body);
+      const result = await this.mediaService.getAllForType(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

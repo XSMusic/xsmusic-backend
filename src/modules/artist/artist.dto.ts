@@ -1,4 +1,3 @@
-import { GetAllDto } from '@dtos';
 import { IsOptional, IsString } from 'class-validator';
 
 export class ArtistCreateDto {
@@ -8,10 +7,6 @@ export class ArtistCreateDto {
   @IsOptional() @IsString() birthdate: string;
   @IsOptional() @IsString() info: string;
   @IsOptional() styles: string[];
-}
-
-export class ArtistGetAllForEventDto extends GetAllDto {
-  @IsString() id: string;
 }
 
 export class ArtistUpdateDto extends ArtistCreateDto {

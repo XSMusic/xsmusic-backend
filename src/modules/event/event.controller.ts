@@ -32,7 +32,7 @@ export class EventController implements ControllerI {
     );
     this.router.post(
       `${this.path}/getAllForType`,
-      validationMiddleware(EventGetAllForTypeDto),
+      [validationMiddleware(EventGetAllForTypeDto), checkUserNotObligatory],
       this.getAllForType
     );
     this.router.post(
@@ -69,13 +69,13 @@ export class EventController implements ControllerI {
   };
 
   private getAllForType = async (
-    request: Request,
+    request: RequestExtendedI,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const body: EventGetAllForTypeDto = request.body;
-      const result = await this.eventService.getAllForType(body);
+      const result = await this.eventService.getAllForType(body, request.user);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

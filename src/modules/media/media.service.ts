@@ -14,6 +14,7 @@ import {
 } from '@media';
 import { Site } from '@site';
 import { getValuesForPaginator, slugify } from '@utils';
+import { inspect } from 'src/shared/services/logger.service';
 
 export class MediaService {
   private imageHelper = new ImageHelper();
@@ -29,10 +30,14 @@ export class MediaService {
     }
   }
 
-  async getAllForType(body: MediaGetAllForTypeDto): Promise<Event[]> {
+  async getAllForType(
+    body: MediaGetAllForTypeDto,
+    user: UserTokenI
+  ): Promise<Event[]> {
     try {
       const { pageSize, skip } = getValuesForPaginator(body);
-      const aggregate = mediaGetAllForType(body, skip, pageSize);
+      const aggregate = mediaGetAllForType(body, skip, pageSize, user);
+      inspect(aggregate);
       const items = await Media.aggregate(aggregate).exec();
       return items;
     } catch (error) {

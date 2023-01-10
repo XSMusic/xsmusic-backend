@@ -1,4 +1,3 @@
-import { ArtistGetAllForEventDto } from '@artist';
 import { UserTokenI } from '@auth';
 import { GetAllDto, GetOneDto } from '@dtos';
 import { getOrderForGetAllAggregate, getFilter } from '@utils';
@@ -19,27 +18,6 @@ export const artistGetAllAggregate = (
   }
   data.push({ $sort: sort }, { $skip: skip }, { $limit: pageSize });
   addProjectAll(data, body.admin, user);
-  return data;
-};
-
-export const artistGetAllForType = (
-  body: ArtistGetAllForEventDto,
-  skip: number,
-  pageSize: number
-) => {
-  const data = [];
-  data.push(
-    {
-      $lookup: {
-        from: 'events',
-        localField: '_id',
-        foreignField: 'artists',
-        as: 'events',
-      },
-    },
-    { $skip: skip },
-    { $limit: pageSize }
-  );
   return data;
 };
 

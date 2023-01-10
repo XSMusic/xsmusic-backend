@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import {
-  ArtistCreateDto,
-  ArtistGetAllForEventDto,
-  ArtistService,
-  ArtistUpdateDto,
-} from '@artist';
+import { ArtistCreateDto, ArtistService, ArtistUpdateDto } from '@artist';
 import { ControllerI, RequestExtendedI } from '@interfaces';
 import { HttpException } from 'src/shared/exceptions';
 import {
@@ -27,11 +22,6 @@ export class ArtistController implements ControllerI {
       `${this.path}/getAll`,
       [validationMiddleware(GetAllDto), checkUserNotObligatory],
       this.getAll
-    );
-    this.router.post(
-      `${this.path}/getAllForEvent`,
-      validationMiddleware(ArtistGetAllForEventDto),
-      this.getAllForEvent
     );
     this.router.post(
       `${this.path}/getOne`,
@@ -59,20 +49,6 @@ export class ArtistController implements ControllerI {
     try {
       const body: GetAllDto = request.body;
       const result = await this.artistService.getAll(body, request.user);
-      response.status(200).send(result);
-    } catch (error) {
-      next(new HttpException(400, error.message, request, response));
-    }
-  };
-
-  private getAllForEvent = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const body: ArtistGetAllForEventDto = request.body;
-      const result = await this.artistService.getAllForEvent(body);
       response.status(200).send(result);
     } catch (error) {
       next(new HttpException(400, error.message, request, response));

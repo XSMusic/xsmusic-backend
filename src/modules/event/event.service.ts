@@ -29,11 +29,14 @@ export class EventService {
     });
   }
 
-  getAllForType(body: EventGetAllForTypeDto): Promise<Event[]> {
+  getAllForType(
+    body: EventGetAllForTypeDto,
+    user: UserTokenI
+  ): Promise<Event[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const { pageSize, skip } = getValuesForPaginator(body);
-        const aggregate = eventGetAllForType(body, true, skip, pageSize);
+        const aggregate = eventGetAllForType(body, skip, pageSize, user);
         const items = await Event.aggregate(aggregate).exec();
         resolve(items);
       } catch (error) {
